@@ -1,5 +1,4 @@
 import { FC, PropsWithChildren } from "react";
-import classNames from "classnames";
 import { Header } from "@/components/header/Header";
 import { Footer } from "@/components/footer/Footer";
 

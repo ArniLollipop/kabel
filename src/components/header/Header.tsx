@@ -1,5 +1,4 @@
 import { FC } from "react";
-import classNames from "classnames";
 import cls from "./Header.module.scss";
 import {
   IconPhone,
@@ -9,10 +8,6 @@ import {
   IconWhatsApp,
   IconLogo,
 } from "@/assets/icons";
-import Image from "next/image";
-import MobileLogo from "@/assets/images/imageMobileLogo.png";
-
-let cn = classNames.bind(cls);
 
 interface HeaderProps {
   className?: string;
