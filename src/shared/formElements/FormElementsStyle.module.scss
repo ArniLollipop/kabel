@@ -1,0 +1,30 @@
+.inputContainer {
+  display: flex;
+  align-items: center;
+  width: 362px;
+  height: 47px;
+  background: #f8f8f9;
+  border-radius: 15px;
+  padding: 0 15px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.inputInstance {
+  width: 300px;
+  height: 47px;
+  background: transparent;
+  padding-left: 15px;
+  border: none;
+}
+
+.inputInstance::placeholder {
+  color: #c0c0c0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.errorBorder {
+  border: 1px solid #ff6666;
+}
