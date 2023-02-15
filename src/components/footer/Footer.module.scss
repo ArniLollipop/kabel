@@ -1,0 +1,49 @@
+@import "../../styles/globalMixins.scss";
+
+$fz: 18;
+$fz_mob: 14;
+
+$fz_descr: 16;
+$fz_descr_mob: 12;
+
+$margins: 12;
+$margins_mob: 5;
+
+.Footer {
+  background-color: #48565f;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 5px;
+  background-color: #48565f;
+  max-width: 1447px;
+  padding: 0 15px;
+  margin: 0 auto;
+
+  &_logo {
+    margin-right: 20px;
+  }
+
+  &_list {
+    display: flex;
+
+    &_item {
+      @include adaptive-1024($fz, $fz_mob, font-size);
+      color: #fff;
+      font-weight: 400;
+      transition: color 0.3s ease;
+      width: max-content;
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    &_item:not(:last-child) {
+      margin-right: 17px;
+    }
+  }
+}
