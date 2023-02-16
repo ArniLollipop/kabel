@@ -13,12 +13,11 @@ $margins_mob: 5;
   background-color: #48565f;
 }
 
-.nav {
+.footerNav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: 5px;
-  background-color: #48565f;
   max-width: 1447px;
   padding: 0 15px;
   margin: 0 auto;
@@ -29,21 +28,139 @@ $margins_mob: 5;
 
   &_list {
     display: flex;
+  }
 
-    &_item {
-      @include adaptive-1024($fz, $fz_mob, font-size);
-      color: #fff;
-      font-weight: 400;
-      transition: color 0.3s ease;
-      width: max-content;
+  &_listItem {
+    @include adaptive-1024($fz, $fz_mob, font-size);
+    color: #fff;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    width: max-content;
 
-      &:hover {
-        color: var(--color-accent);
-      }
+    &:hover {
+      color: var(--color-accent);
     }
 
-    &_item:not(:last-child) {
+    &:not(:last-child) {
       margin-right: 17px;
     }
+  }
+}
+
+.footerInfo {
+  padding-top: 40px;
+  padding-bottom: 30px;
+  background-color: #37454e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-bg-white);
+
+  span,
+  a {
+    @include adaptive-1024($fz, $fz_mob, font-size);
+  }
+  h4 {
+    @include adaptive-1024($fz, $fz_mob, font-size);
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  &_table {
+    max-width: 1447px;
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &_tableCol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  &_tableColPhones {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 50px;
+    row-gap: 15px;
+    margin-bottom: 5px;
+
+    a {
+      margin-bottom: 0 !important;
+
+      &:last-child {
+        display: block;
+        background-image: url("../../assets/icons/IconWhatsApp.svg");
+        background-repeat: no-repeat;
+        background-position: right top;
+        padding-right: 30px;
+      }
+    }
+  }
+
+  &_tableColRow:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  &_withAdressIcon {
+    background-image: url("../../assets/icons/IconFooterGeoTag.svg");
+    background-repeat: no-repeat;
+    padding-left: 30px;
+  }
+
+  &_withEmailIcon {
+    background-image: url("../../assets/icons/IconFooterMsg.svg");
+    background-repeat: no-repeat;
+    padding-left: 30px;
+  }
+
+  &_payments {
+    @include adaptive-1024(35, 15, gap);
+    display: flex;
+  }
+}
+
+.FooterMobile {
+  width: 100vw;
+  background-color: var(--color-bg-white);
+  position: fixed;
+  bottom: 0;
+  display: none;
+
+  &_navMenu {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 5px 15px;
+    gap: 5px;
+  }
+
+  &_navMenuItem {
+    @include adaptive-1024-mob(14, 10, font-size);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    // font-size: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .Footer {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .FooterMobile {
+    display: block;
   }
 }
