@@ -46,11 +46,12 @@ export const Header: FC<HeaderProps> = (props) => {
             +7 727 355 47 98
           </a>
 
-          <a href="tel:+77003014798" className={(cls["phone"], cls["phone-secondary"])}>
+          <a
+            href="https://wa.me/77003014798"
+            target="_blank"
+            className={(cls["phone"], cls["phone-secondary"])}
+          >
             +7 700 301 47 98
-          </a>
-
-          <a href="tel:+77003014798" className="header__contacts-item-link">
             <IconWhatsApp />
           </a>
         </li>

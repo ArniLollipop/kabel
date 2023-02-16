@@ -67,7 +67,10 @@ $margins_mob: 5;
     }
     .phone-secondary:last-child {
       @include adaptive-1024($margins, $margins_mob, padding-left);
+      @include adaptive-1024($margins, $margins_mob, gap);
       border-left: 1px solid #a4b0bb;
+      display: flex;
+      align-items: center;
     }
 
     .main-phone {
