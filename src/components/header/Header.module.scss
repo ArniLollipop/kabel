@@ -10,6 +10,7 @@ $margins: 12;
 $margins_mob: 5;
 
 .Header {
+  width: 100%;
   max-width: 1447px;
   padding: 0 15px;
   margin: 0 auto;
@@ -130,6 +131,10 @@ $margins_mob: 5;
   align-items: center;
   justify-content: space-between;
   padding-top: 5px;
+
+  &_linkLogo {
+    display: contents;
+  }
 
   &_logo {
     margin-right: 20px;
