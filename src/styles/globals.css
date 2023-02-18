@@ -2,9 +2,10 @@
   --max-width: 1100px;
 
   /* fonts */
-  --font-family-main: "Montserrat", serif;
+  --font-family-main: 'Montserrat', serif;
 
   --font-size-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-button-size-default: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-default: var(--font-size-default) / var(--font-line-default) var(--font-family-main);
 
@@ -21,6 +22,8 @@
 
   --color-font-title: #39424b;
   --color-font-descr: #37454e;
+
+  --input-bg-color: #f8f8f9;
 }
 
 * {
