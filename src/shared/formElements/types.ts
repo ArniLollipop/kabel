@@ -1,8 +1,8 @@
 import { ChangeEvent, FocusEvent } from 'react';
 
 export interface IInput {
-  name: string;
-  id: string;
+  name?: string;
+  id?: string;
   labelText?: string;
   touched?: boolean;
   errors?: string;
