@@ -3,11 +3,11 @@
   align-items: center;
   width: 362px;
   height: 47px;
-  background: #f8f8f9;
+  background: var(--input-bg-color);
   border-radius: 15px;
   padding: 0 15px;
   border: none;
-  margin-bottom: 20px;
+  margin: 20px auto;
 }
 
 .inputInstance {
@@ -16,13 +16,14 @@
   background: transparent;
   padding-left: 15px;
   border: none;
-}
-
-.inputInstance::placeholder {
-  color: #c0c0c0;
-  font-weight: 500;
   font-size: 16px;
-  line-height: 19px;
+
+  &::placeholder {
+    color: #c0c0c0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
 
 .errorBorder {

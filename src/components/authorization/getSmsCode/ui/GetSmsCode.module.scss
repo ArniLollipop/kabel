@@ -1,0 +1,11 @@
+.GetSmsCode {
+  p,
+  span {
+    font-size: 16px;
+  }
+
+  span {
+    color: var(--color-accent);
+    border-bottom: 1px dashed var(--color-accent);
+  }
+}

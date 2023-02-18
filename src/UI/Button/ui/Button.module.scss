@@ -1,0 +1,36 @@
+.yellow {
+  padding: 15px 20px;
+  background: var(--color-accent-secondary);
+  border-radius: 50px;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: var(--font-button-size-default);
+  line-height: 19px;
+  cursor: pointer;
+}
+
+.sendAgain {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  color: var(--color-accent);
+  border-bottom: 1px dashed var(--color-accent);
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.clear {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
