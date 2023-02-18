@@ -1,7 +1,8 @@
-import { InputNameIcon } from "./InputNameIcon";
-import { InputPhoneNumberIcon } from "./InputPhoneNumberIcon";
+import { InputLockIcon } from './InputLockIcon';
+import { InputPhoneNumberIcon } from './InputPhoneNumberIcon';
+import { InputNameIcon } from './InputNameIcon';
 
-export { InputPhoneNumberIcon, InputNameIcon };
+export { InputPhoneNumberIcon, InputLockIcon, InputNameIcon };
 export {
   IconCard,
   IconGeoTag,
@@ -9,4 +10,4 @@ export {
   IconUserCabinet,
   IconWhatsApp,
   IconLogo,
-} from "./headerIcons";
+} from './headerIcons';
