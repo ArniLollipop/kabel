@@ -14,11 +14,11 @@ import classNames from 'classnames';
 let cn = classNames.bind(global);
 
 interface IInputInstanceWithMaskProps extends IInput {
-  mask?: any;
+  mask: Array<string | RegExp> | false;
 }
 
 export const InputInstanceWithMask: FC<IInputInstanceWithMaskProps> = ({ name, id, ...props }) => {
-  const { labelText, mask } = props;
+  const { labelText, mask, touched } = props;
 
   const inputLabel = labelText && (
     <label htmlFor={id} className={''}>
@@ -34,6 +34,8 @@ export const InputInstanceWithMask: FC<IInputInstanceWithMaskProps> = ({ name, i
           <MaskedInput
             {...field}
             {...props}
+            //@ts-ignore
+            touched={touched === true ? 1 : 0}
             mask={mask}
             name={name}
             className={cn(global.inputInstance)}

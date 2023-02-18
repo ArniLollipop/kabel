@@ -1,3 +1,1 @@
-import { InputInstanceWithMask } from './ui/InputInstanceWithMask';
-
-export { InputInstanceWithMask };
+export { InputInstanceWithMask } from './ui/InputInstanceWithMask';
