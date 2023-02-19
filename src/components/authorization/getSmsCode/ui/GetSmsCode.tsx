@@ -15,6 +15,7 @@ import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { getSmsCodeSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
+import { ErrorBorder } from '@/helpers/errorBorder';
 
 let cn = classNames.bind(cls);
 
@@ -64,8 +65,8 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
           <Form>
             <div className={cn(cls.GetSmsCode)}>
               <>
-                <p>
-                  Вы не получили код?{' '}
+                <div>
+                  Вы не получили код? <br />
                   {countdown === 0 ? (
                     <Button
                       theme={ThemeButton.SEND_AGAIN}
@@ -77,12 +78,11 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   ) : (
                     <span>Отправить повторно через {countdown}</span>
                   )}
-                </p>
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.confirmSmsCode && errors.confirmSmsCode ? global.errorBorder : null
-                  )}
+                </div>
+
+                <ErrorBorder
+                  touchedValue={touched.confirmSmsCode}
+                  errorsValue={errors.confirmSmsCode}
                 >
                   <InputInstance
                     type="text"
@@ -95,14 +95,9 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     errors={errors.confirmSmsCode}
                     touched={touched.confirmSmsCode}
                   />
-                </div>
+                </ErrorBorder>
 
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.password && errors.password ? global.errorBorder : null
-                  )}
-                >
+                <ErrorBorder touchedValue={touched.password} errorsValue={errors.password}>
                   <InputLockIcon />
                   <InputInstance
                     type="password"
@@ -115,12 +110,11 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     errors={errors.password}
                     touched={touched.password}
                   />
-                </div>
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.confirmPassword && errors.confirmPassword ? global.errorBorder : null
-                  )}
+                </ErrorBorder>
+
+                <ErrorBorder
+                  touchedValue={touched.confirmPassword}
+                  errorsValue={errors.confirmPassword}
                 >
                   <InputLockIcon />
                   <InputInstance
@@ -134,7 +128,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     errors={errors.confirmPassword}
                     touched={touched.confirmPassword}
                   />
-                </div>
+                </ErrorBorder>
                 <Button type="submit" theme={ThemeButton.YELLOW} onClick={createAccount}>
                   Создать
                 </Button>

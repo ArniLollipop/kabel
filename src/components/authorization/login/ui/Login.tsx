@@ -5,7 +5,6 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 // assets
-import global from '@/shared/formElements/FormElementsStyle.module.scss';
 import cls from './Login.module.scss';
 import { InputPhoneNumberIcon } from '@/assets/icons';
 
@@ -19,6 +18,7 @@ import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { loginSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
+import { ErrorBorder } from '@/helpers/errorBorder';
 
 let cn = classNames.bind(cls);
 
@@ -46,11 +46,9 @@ export const Login: FC<LoginProps> = (props) => {
         return (
           <Form>
             <div className={cn(cls.Login)}>
-              <div
-                className={cn(
-                  global.inputContainer,
-                  touched.phoneNumberLogin && errors.phoneNumberLogin ? global.errorBorder : null
-                )}
+              <ErrorBorder
+                touchedValue={touched.phoneNumberLogin}
+                errorsValue={errors.phoneNumberLogin}
               >
                 <InputPhoneNumberIcon />
                 <InputInstanceWithMask
@@ -65,14 +63,9 @@ export const Login: FC<LoginProps> = (props) => {
                   errors={errors.phoneNumberLogin}
                   touched={touched.phoneNumberLogin}
                 />
-              </div>
+              </ErrorBorder>
 
-              <div
-                className={cn(
-                  global.inputContainer,
-                  touched.passwordLogin && errors.passwordLogin ? global.errorBorder : null
-                )}
-              >
+              <ErrorBorder touchedValue={touched.passwordLogin} errorsValue={errors.passwordLogin}>
                 <InputInstance
                   type="password"
                   id="passwordLogin"
@@ -84,7 +77,7 @@ export const Login: FC<LoginProps> = (props) => {
                   errors={errors.passwordLogin}
                   touched={touched.passwordLogin}
                 />
-              </div>
+              </ErrorBorder>
               <Button theme={ThemeButton.YELLOW} type="submit">
                 Войти
               </Button>

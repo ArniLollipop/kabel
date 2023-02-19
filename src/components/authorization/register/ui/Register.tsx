@@ -5,7 +5,6 @@ import { FC } from 'react';
 import classNames from 'classnames';
 
 // assets
-import global from '@/shared/formElements/FormElementsStyle.module.scss';
 import cls from './Register.module.scss';
 import { InputNameIcon, InputPhoneNumberIcon } from '@/assets/icons';
 
@@ -19,6 +18,7 @@ import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { registerSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
+import { ErrorBorder } from '@/helpers/errorBorder';
 
 let cn = classNames.bind(cls);
 
@@ -54,12 +54,7 @@ export const Register: FC<RegisterProps> = (props) => {
           <Form>
             <div className={cn(cls.Register)}>
               <>
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.name && errors.name ? global.errorBorder : null
-                  )}
-                >
+                <ErrorBorder touchedValue={touched.name} errorsValue={errors.name}>
                   <InputNameIcon />
                   <InputInstance
                     type="text"
@@ -72,14 +67,9 @@ export const Register: FC<RegisterProps> = (props) => {
                     errors={errors.name}
                     touched={touched.name}
                   />
-                </div>
+                </ErrorBorder>
 
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.phoneNumber && errors.phoneNumber ? global.errorBorder : null
-                  )}
-                >
+                <ErrorBorder touchedValue={touched.phoneNumber} errorsValue={errors.phoneNumber}>
                   <InputPhoneNumberIcon />
                   <InputInstanceWithMask
                     mask={maskForPhone}
@@ -93,7 +83,7 @@ export const Register: FC<RegisterProps> = (props) => {
                     errors={errors.phoneNumber}
                     touched={touched.phoneNumber}
                   />
-                </div>
+                </ErrorBorder>
                 <Button
                   type="submit"
                   theme={ThemeButton.YELLOW}
