@@ -1,7 +1,13 @@
 .GetSmsCode {
   div,
+  p,
   span {
     font-size: var(--font-size-getSmsCode);
+  }
+
+  p {
+    color: #ff6666;
+    margin-bottom: 10px;
   }
 
   span {

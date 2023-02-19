@@ -5,7 +5,6 @@ import { FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 // assets
-import global from '@/shared/formElements/FormElementsStyle.module.scss';
 import cls from './GetSmsCode.module.scss';
 import { InputLockIcon } from '@/assets/icons';
 
@@ -25,6 +24,7 @@ interface GetSmsCodeProps {
 
 export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
   const [countdown, setCountdown] = useState(60);
+  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const { className } = props;
 
   const createAccount = () => {
@@ -55,9 +55,15 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
       }}
       validationSchema={getSmsCodeSchema}
       onSubmit={(values) => {
-        console.log('values GetSmsCode is: ', {
-          ...values,
-        });
+        if (values.password !== values.confirmPassword) {
+          setIsPasswordMatch(true);
+          return;
+        } else {
+          setIsPasswordMatch(false);
+          console.log('values GetSmsCode is: ', {
+            ...values,
+          });
+        }
       }}
     >
       {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => {
@@ -129,6 +135,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     touched={touched.confirmPassword}
                   />
                 </ErrorBorder>
+                {isPasswordMatch && <p>Пароли не совподают!</p>}
                 <Button type="submit" theme={ThemeButton.YELLOW} onClick={createAccount}>
                   Создать
                 </Button>
