@@ -1,18 +1,18 @@
 .inputContainer {
   display: flex;
   align-items: center;
-  width: 362px;
-  height: 47px;
+  width: 100%;
+  height: auto;
   background: var(--input-bg-color);
   border-radius: 15px;
-  padding: 0 15px;
+  padding: 3% 5%;
   border: none;
   margin: 20px auto;
 }
 
 .inputInstance {
-  width: 300px;
-  height: 47px;
+  width: 100%;
+  height: auto;
   background: transparent;
   padding-left: 15px;
   border: none;
