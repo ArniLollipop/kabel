@@ -32,7 +32,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
   );
 
   return (
-    <div>
+    <>
       {inputLabel}
       {as ? (
         <Field
@@ -51,6 +51,6 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
           className={cn(global.inputInstance)}
         />
       )}
-    </div>
+    </>
   );
 };

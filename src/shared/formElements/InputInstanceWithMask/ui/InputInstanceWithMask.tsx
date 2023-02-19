@@ -27,7 +27,7 @@ export const InputInstanceWithMask: FC<IInputInstanceWithMaskProps> = ({ name, i
   );
 
   return (
-    <div>
+    <>
       {inputLabel}
       <Field name={name}>
         {({ field }: FieldProps) => (
@@ -42,6 +42,6 @@ export const InputInstanceWithMask: FC<IInputInstanceWithMaskProps> = ({ name, i
           />
         )}
       </Field>
-    </div>
+    </>
   );
 };
