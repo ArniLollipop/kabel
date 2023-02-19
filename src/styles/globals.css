@@ -26,6 +26,7 @@
   --color-font-descr: #37454e;
 
   --input-bg-color: #f8f8f9;
+  --error-border-color: #ff6666;
 }
 
 * {
