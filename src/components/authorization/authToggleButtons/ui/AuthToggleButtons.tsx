@@ -53,8 +53,8 @@ export const AuthToggleButtons: FC<AuthToggleButtonsProps> = (props) => {
   };
 
   return (
-    <>
-      <div className={cn(cls.AuthToggleButtons)}>
+    <div className={cn(cls.AuthToggleButtons)}>
+      <div className={cn(cls.buttons)}>
         {dataTabs.map((item) => (
           <li key={item.id}>
             <Buttons {...item} isActive={buttonActive === item.id} onClick={navigate} />
@@ -62,6 +62,6 @@ export const AuthToggleButtons: FC<AuthToggleButtonsProps> = (props) => {
         ))}
       </div>
       <hr />
-    </>
+    </div>
   );
 };
