@@ -1,5 +1,5 @@
 // hooks
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 // packages
 import classNames from 'classnames';
@@ -19,6 +19,8 @@ import { Form, Formik } from 'formik';
 import { loginSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
 import { ErrorBorder } from '@/helpers/errorBorder';
+import { ShowPassword } from '@/assets/icons/showPassword';
+import { HidePassword } from '@/assets/icons/hidePassword';
 
 let cn = classNames.bind(cls);
 
@@ -27,7 +29,12 @@ interface LoginProps {
 }
 
 export const Login: FC<LoginProps> = (props) => {
+  const [showPassword, setShowPassword] = useState(false);
   const { className } = props;
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <Formik
@@ -66,8 +73,11 @@ export const Login: FC<LoginProps> = (props) => {
               </ErrorBorder>
 
               <ErrorBorder touchedValue={touched.passwordLogin} errorsValue={errors.passwordLogin}>
+                <Button theme={ThemeButton.CLEAR} type="button" onClick={togglePasswordVisibility}>
+                  {showPassword ? <ShowPassword /> : <HidePassword />}
+                </Button>
                 <InputInstance
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="passwordLogin"
                   name="passwordLogin"
                   placeholder="Пароль"

@@ -6,7 +6,8 @@ import classNames from 'classnames';
 
 // assets
 import cls from './GetSmsCode.module.scss';
-import { InputLockIcon } from '@/assets/icons';
+import { ShowPassword } from '@/assets/icons/showPassword';
+import { HidePassword } from '@/assets/icons/hidePassword';
 
 // components
 import { InputInstance } from '@/shared/formElements/InputInstance';
@@ -25,10 +26,20 @@ interface GetSmsCodeProps {
 export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
   const [countdown, setCountdown] = useState(60);
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { className } = props;
 
   const createAccount = () => {
     console.log('createAccount is working!');
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const FuncCountDown = (value?: string) => {
@@ -104,9 +115,15 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                 </ErrorBorder>
 
                 <ErrorBorder touchedValue={touched.password} errorsValue={errors.password}>
-                  <InputLockIcon />
+                  <Button
+                    theme={ThemeButton.CLEAR}
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? <ShowPassword /> : <HidePassword />}
+                  </Button>
                   <InputInstance
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     name="password"
                     placeholder="Новый пароль"
@@ -122,9 +139,15 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   touchedValue={touched.confirmPassword}
                   errorsValue={errors.confirmPassword}
                 >
-                  <InputLockIcon />
+                  <Button
+                    theme={ThemeButton.CLEAR}
+                    type="button"
+                    onClick={toggleConfirmPasswordVisibility}
+                  >
+                    {showConfirmPassword ? <ShowPassword /> : <HidePassword />}
+                  </Button>
                   <InputInstance
-                    type="password"
+                    type={showConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     name="confirmPassword"
                     placeholder="Повторить пароль"
