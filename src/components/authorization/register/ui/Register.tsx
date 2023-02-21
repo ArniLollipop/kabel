@@ -13,8 +13,10 @@ import { maskForPhone } from '@/helpers/masks';
 // components
 import { InputInstance } from '@/shared/formElements/InputInstance';
 import { Button } from '@/UI/Button';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikErrors, FormikTouched } from 'formik';
 import { registerSchema } from '@/helpers/validation';
+
+// themes
 import { ThemeButton } from '@/UI/Button/ui/Button';
 import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
 
@@ -25,10 +27,16 @@ interface RegisterProps {
   setActive: (id: number) => void;
 }
 
+interface GetSmsCodeProps {
+  touched: FormikTouched<{ name: string; phoneNumber: string }>;
+  errors: FormikErrors<{ name: string; phoneNumber: string }>;
+}
+
 export const Register: FC<RegisterProps> = (props) => {
   const { className, setActive } = props;
 
-  const getSmsCode = (touched: any, errors: any) => {
+  const getSmsCode = (props: GetSmsCodeProps) => {
+    const { touched, errors } = props;
     if (touched.name && !errors.name && touched.phoneNumber && !errors.phoneNumber) {
       setActive(2);
     }
@@ -44,6 +52,7 @@ export const Register: FC<RegisterProps> = (props) => {
       onSubmit={(values) => {
         console.log('values Register is: ', {
           ...values,
+          phoneNumber: values.phoneNumber.replace(/\D+/g, ''),
         });
       }}
     >
@@ -83,7 +92,7 @@ export const Register: FC<RegisterProps> = (props) => {
                 <Button
                   type="submit"
                   theme={ThemeButton.YELLOW}
-                  onClick={() => getSmsCode(touched, errors)}
+                  onClick={() => getSmsCode({ touched, errors })}
                 >
                   Получить код
                 </Button>
