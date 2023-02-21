@@ -10,8 +10,19 @@
     margin-bottom: 10px;
   }
 
-  span {
-    color: var(--color-accent);
-    border-bottom: 1px dashed var(--color-accent);
+  .confirmSmsCode {
+    margin-bottom: 20px;
   }
+
+  .password {
+  }
+
+  .confirmPassword {
+  }
+}
+
+.sendAgain {
+  color: var(--color-accent);
+  border-bottom: 1px dashed var(--color-accent);
+  margin-bottom: 12px;
 }

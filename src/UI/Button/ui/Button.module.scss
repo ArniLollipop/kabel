@@ -1,27 +1,22 @@
-.yellow {
-  padding: 3% 5%;
-  background: var(--color-accent-secondary);
-  border-radius: 50px;
-  border: none;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: var(--font-button-size-default);
-  line-height: 19px;
+@import '../../../styles/globalMixins.scss';
+
+.Button {
+  font-family: var(--font-family-main);
+  transition: all 0.3s ease;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
-.sendAgain {
+// Themes
+.blue,
+.yellow,
+.card,
+.buy {
+  color: var(--color-bg-white);
   border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  color: var(--color-accent);
-  border-bottom: 1px dashed var(--color-accent);
-  background: transparent;
-  font: inherit;
-  line-height: normal;
-  cursor: pointer;
 }
 
 .clear {
@@ -33,4 +28,30 @@
   background: transparent;
   color: inherit;
   font: inherit;
+  cursor: pointer;
+}
+
+.blue {
+  @include adaptive-size(18, 10, padding-top);
+  @include adaptive-size(18, 10, padding-bottom);
+  @include adaptive-size(30, 17, padding-left);
+  @include adaptive-size(30, 17, padding-right);
+  @include adaptive-size(30, 17, padding-right);
+  @include adaptive-size(18, 12, font-size);
+
+  background-color: var(--color-accent);
+  color: var(--color-bg-white);
+
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.yellow {
+  background-color: var(--color-accent-secondary);
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
 }

@@ -5,24 +5,12 @@
   height: auto;
   background: var(--input-bg-color);
   border-radius: 15px;
-  padding: 3% 5%;
-  border: none;
-  margin: 20px auto;
-}
-
-.inputInstance {
-  width: 100%;
-  height: auto;
-  background: transparent;
   padding-left: 15px;
   border: none;
-  font-size: 16px;
+  margin-bottom: 25px;
 
-  &::placeholder {
-    color: #c0c0c0;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
+  svg {
+    cursor: pointer;
   }
 }
 

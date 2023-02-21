@@ -1,2 +1,27 @@
-.InputInstance {
+.auth {
+  width: 100%;
+  height: auto;
+  background: var(--input-bg-color);
+  border-radius: 15px;
+  padding: 3% 5%;
+  padding-left: 50px;
+  border: none;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  background-position: calc(15px) 50%;
+
+  &::placeholder {
+    color: #c0c0c0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+
+.forPasswordIcon {
+  padding-left: 10px;
+}
+
+.errorBorder {
+  border: 1px solid var(--error-border-color);
 }
