@@ -1,5 +1,5 @@
-import { FC } from "react";
-import cls from "./Header.module.scss";
+import { FC } from 'react';
+import cls from './Header.module.scss';
 import {
   IconPhone,
   IconCard,
@@ -7,7 +7,7 @@ import {
   IconUserCabinet,
   IconWhatsApp,
   IconLogo,
-} from "@/assets/icons";
+} from '@/assets/icons';
 
 interface HeaderProps {
   className?: string;
@@ -25,28 +25,28 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
 
         <li className={cls.contacts_list_geoTag}>
-          <a href="" className={cls["link"]}>
-            <IconGeoTag className={cls["icon"]} />
-            <span className={cls["city"]}>Алматы</span>
+          <a href="" className={cls['link']}>
+            <IconGeoTag className={cls['icon']} />
+            <span className={cls['city']}>Алматы</span>
           </a>
         </li>
 
         <li className={cls.contacts_list_contacts}>
-          <a href="tel:+78000704798" className={cls["main-phone"]}>
-            <IconPhone className={cls["icon"]} />
-            <span className={cls["phone"]}>8 800 070 47 98</span>
+          <a href="tel:+78000704798" className={cls['main-phone']}>
+            <IconPhone className={cls['icon']} />
+            <span className={cls['phone']}>8 800 070 47 98</span>
           </a>
-          <span className={cls["phone-descr"]}>Бесплатно по РК</span>
+          <span className={cls['phone-descr']}>Бесплатно по РК</span>
 
-          <a href="tel:+77273014798" className={(cls["phone"], cls["phone-secondary"])}>
+          <a href="tel:+77273014798" className={(cls['phone'], cls['phone-secondary'])}>
             +7 727 301 47 98
           </a>
 
-          <a href="tel:+77273554798" className={(cls["phone"], cls["phone-secondary"])}>
+          <a href="tel:+77273554798" className={(cls['phone'], cls['phone-secondary'])}>
             +7 727 355 47 98
           </a>
 
-          <a href="tel:+77003014798" className={(cls["phone"], cls["phone-secondary"])}>
+          <a href="tel:+77003014798" className={(cls['phone'], cls['phone-secondary'])}>
             +7 700 301 47 98
           </a>
 
@@ -56,15 +56,15 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
 
         <li className={cls.contacts_list_card}>
-          <a href="" className={cls["card-link"]}>
-            <IconCard className={cls["icon"]} />
+          <a href="" className={cls['card-link']}>
+            <IconCard className={cls['icon']} />
             <span>1450 ₸</span>
           </a>
         </li>
 
         <li className={cls.contacts_list_user}>
-          <a href="" className={cls["user-link"]}>
-            <IconUserCabinet className={cls["icon"]} />
+          <a href="" className={cls['user-link']}>
+            <IconUserCabinet className={cls['icon']} />
             <span>Личный кабинет</span>
           </a>
         </li>
@@ -83,7 +83,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <a href="#">Продукция</a>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="#">Сервисы</a>
+            <a href="/services">Сервисы</a>
           </li>
           <li className={cls.nav_list_item}>
             <a href="#">Новости</a>
