@@ -6,19 +6,17 @@ import classNames from 'classnames';
 
 // assets
 import cls from './Register.module.scss';
-import { InputNameIcon, InputPhoneNumberIcon } from '@/assets/icons';
 
 // helpers
 import { maskForPhone } from '@/helpers/masks';
 
 // components
-import { InputInstanceWithMask } from '@/shared/formElements/InputInstanceWithMask';
 import { InputInstance } from '@/shared/formElements/InputInstance';
 import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { registerSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
-import { ErrorBorder } from '@/helpers/errorBorder';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
 
 let cn = classNames.bind(cls);
 
@@ -54,36 +52,34 @@ export const Register: FC<RegisterProps> = (props) => {
           <Form>
             <div className={cn(cls.Register)}>
               <>
-                <ErrorBorder touchedValue={touched.name} errorsValue={errors.name}>
-                  <InputNameIcon />
-                  <InputInstance
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Имя"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.name}
-                    errors={errors.name}
-                    touched={touched.name}
-                  />
-                </ErrorBorder>
+                <InputInstance
+                  theme={EInputInstanceTheme.AUTH}
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Имя"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                  errors={errors.name}
+                  touched={touched.name}
+                  className={cls.inputName}
+                />
 
-                <ErrorBorder touchedValue={touched.phoneNumber} errorsValue={errors.phoneNumber}>
-                  <InputPhoneNumberIcon />
-                  <InputInstanceWithMask
-                    mask={maskForPhone}
-                    type="text"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    placeholder="+7 (___) ___-__-__"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.phoneNumber}
-                    errors={errors.phoneNumber}
-                    touched={touched.phoneNumber}
-                  />
-                </ErrorBorder>
+                <InputInstance
+                  theme={EInputInstanceTheme.AUTH}
+                  mask={maskForPhone}
+                  type="text"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  placeholder="+7 (___) ___-__-__"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phoneNumber}
+                  errors={errors.phoneNumber}
+                  touched={touched.phoneNumber}
+                  className={cls.inputPhoneNumber}
+                />
                 <Button
                   type="submit"
                   theme={ThemeButton.YELLOW}

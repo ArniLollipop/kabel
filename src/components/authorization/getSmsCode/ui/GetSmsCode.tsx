@@ -6,8 +6,6 @@ import classNames from 'classnames';
 
 // assets
 import cls from './GetSmsCode.module.scss';
-import { ShowPassword } from '@/assets/icons/showPassword';
-import { HidePassword } from '@/assets/icons/hidePassword';
 
 // components
 import { InputInstance } from '@/shared/formElements/InputInstance';
@@ -15,7 +13,9 @@ import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { getSmsCodeSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
-import { ErrorBorder } from '@/helpers/errorBorder';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { ErrorBorder } from '@/shared/formElements/errorBorder';
+import { HidePassword, ShowPassword } from '@/assets/icons';
 
 let cn = classNames.bind(cls);
 
@@ -32,14 +32,6 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
 
   const createAccount = () => {
     console.log('createAccount is working!');
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const FuncCountDown = (value?: string) => {
@@ -86,43 +78,43 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   Вы не получили код? <br />
                   {countdown === 0 ? (
                     <Button
-                      theme={ThemeButton.SEND_AGAIN}
+                      theme={ThemeButton.CLEAR}
+                      className={cn(cls.sendAgain)}
                       type="button"
                       onClick={() => setCountdown(60)}
                     >
                       Отправить повторно
                     </Button>
                   ) : (
-                    <span>Отправить повторно через {countdown}</span>
+                    <span className={cn(cls.sendAgain)}>Отправить повторно через {countdown}</span>
                   )}
                 </div>
 
-                <ErrorBorder
-                  touchedValue={touched.confirmSmsCode}
-                  errorsValue={errors.confirmSmsCode}
-                >
-                  <InputInstance
-                    type="text"
-                    id="confirmSmsCode"
-                    name="confirmSmsCode"
-                    placeholder="Код SMS"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.confirmSmsCode}
-                    errors={errors.confirmSmsCode}
-                    touched={touched.confirmSmsCode}
-                  />
-                </ErrorBorder>
+                <InputInstance
+                  theme={EInputInstanceTheme.AUTH}
+                  type="text"
+                  id="confirmSmsCode"
+                  name="confirmSmsCode"
+                  placeholder="Код SMS"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmSmsCode}
+                  errors={errors.confirmSmsCode}
+                  touched={touched.confirmSmsCode}
+                  className={cls.confirmSmsCode}
+                />
 
                 <ErrorBorder touchedValue={touched.password} errorsValue={errors.password}>
                   <Button
                     theme={ThemeButton.CLEAR}
                     type="button"
-                    onClick={togglePasswordVisibility}
+                    onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <ShowPassword /> : <HidePassword />}
                   </Button>
                   <InputInstance
+                    password={'password'}
+                    theme={EInputInstanceTheme.AUTH}
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     name="password"
@@ -132,6 +124,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     value={values.password}
                     errors={errors.password}
                     touched={touched.password}
+                    className={cls.password}
                   />
                 </ErrorBorder>
 
@@ -142,11 +135,13 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   <Button
                     theme={ThemeButton.CLEAR}
                     type="button"
-                    onClick={toggleConfirmPasswordVisibility}
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? <ShowPassword /> : <HidePassword />}
                   </Button>
                   <InputInstance
+                    password={'password'}
+                    theme={EInputInstanceTheme.AUTH}
                     type={showConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     name="confirmPassword"
@@ -156,6 +151,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     value={values.confirmPassword}
                     errors={errors.confirmPassword}
                     touched={touched.confirmPassword}
+                    className={cls.confirmPassword}
                   />
                 </ErrorBorder>
                 {isPasswordMatch && <p>Пароли не совподают!</p>}

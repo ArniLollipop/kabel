@@ -6,21 +6,19 @@ import classNames from 'classnames';
 
 // assets
 import cls from './Login.module.scss';
-import { InputPhoneNumberIcon } from '@/assets/icons';
 
 // helpers
 import { maskForPhone } from '@/helpers/masks';
 
 // components
-import { InputInstanceWithMask } from '@/shared/formElements/InputInstanceWithMask';
 import { InputInstance } from '@/shared/formElements/InputInstance';
 import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { loginSchema } from '@/helpers/validation';
 import { ThemeButton } from '@/UI/Button/ui/Button';
-import { ErrorBorder } from '@/helpers/errorBorder';
-import { ShowPassword } from '@/assets/icons/showPassword';
-import { HidePassword } from '@/assets/icons/hidePassword';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { ErrorBorder } from '@/shared/formElements/errorBorder';
+import { HidePassword, ShowPassword } from '@/assets/icons';
 
 let cn = classNames.bind(cls);
 
@@ -29,12 +27,8 @@ interface LoginProps {
 }
 
 export const Login: FC<LoginProps> = (props) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordLogin, setShowPasswordLogin] = useState(false);
   const { className } = props;
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   return (
     <Formik
@@ -53,31 +47,33 @@ export const Login: FC<LoginProps> = (props) => {
         return (
           <Form>
             <div className={cn(cls.Login)}>
-              <ErrorBorder
-                touchedValue={touched.phoneNumberLogin}
-                errorsValue={errors.phoneNumberLogin}
-              >
-                <InputPhoneNumberIcon />
-                <InputInstanceWithMask
-                  mask={maskForPhone}
-                  type="text"
-                  id="phoneNumberLogin"
-                  name="phoneNumberLogin"
-                  placeholder="+7 (___) ___-__-__"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.phoneNumberLogin}
-                  errors={errors.phoneNumberLogin}
-                  touched={touched.phoneNumberLogin}
-                />
-              </ErrorBorder>
+              <InputInstance
+                theme={EInputInstanceTheme.AUTH}
+                mask={maskForPhone}
+                type="text"
+                id="phoneNumberLogin"
+                name="phoneNumberLogin"
+                placeholder="+7 (___) ___-__-__"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.phoneNumberLogin}
+                errors={errors.phoneNumberLogin}
+                touched={touched.phoneNumberLogin}
+                className={cls.phoneNumberLogin}
+              />
 
               <ErrorBorder touchedValue={touched.passwordLogin} errorsValue={errors.passwordLogin}>
-                <Button theme={ThemeButton.CLEAR} type="button" onClick={togglePasswordVisibility}>
-                  {showPassword ? <ShowPassword /> : <HidePassword />}
+                <Button
+                  theme={ThemeButton.CLEAR}
+                  type="button"
+                  onClick={() => setShowPasswordLogin(!showPasswordLogin)}
+                >
+                  {showPasswordLogin ? <ShowPassword /> : <HidePassword />}
                 </Button>
                 <InputInstance
-                  type={showPassword ? 'text' : 'password'}
+                  password={'password'}
+                  theme={EInputInstanceTheme.AUTH}
+                  type={showPasswordLogin ? 'text' : 'password'}
                   id="passwordLogin"
                   name="passwordLogin"
                   placeholder="Пароль"
@@ -86,6 +82,7 @@ export const Login: FC<LoginProps> = (props) => {
                   value={values.passwordLogin}
                   errors={errors.passwordLogin}
                   touched={touched.passwordLogin}
+                  className={cls.passwordLogin}
                 />
               </ErrorBorder>
               <Button theme={ThemeButton.YELLOW} type="submit">
