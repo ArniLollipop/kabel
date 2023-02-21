@@ -9,6 +9,7 @@
   --font-auth-toggle-button-size: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-default: var(--font-size-default) / var(--font-line-default) var(--font-family-main);
+  --font-services-title: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
 
   --font-size-getSmsCode: calc(12px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-size-title: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
@@ -21,6 +22,7 @@
 
   --color-bg-grey: #bfbfbf;
   --color-bg-white: #ffffff;
+  --services-bg-color: #f0f7fb;
 
   --color-font-title: #39424b;
   --color-font-descr: #37454e;
