@@ -1,4 +1,4 @@
-@import "@/styles/globalMixins.scss";
+@import '@/styles/globalMixins.scss';
 
 $fz: 18;
 $fz_mob: 14;
@@ -165,7 +165,7 @@ $margins_mob: 5;
     outline: transparent;
     min-width: max-content;
     font: 12px / 12px var(--font-family-main);
-    background-image: url("../../assets/icons/IconSearch.svg");
+    background-image: url('../../assets/icons/IconSearch.svg');
     background-repeat: no-repeat;
     background-position: calc(100% - 18px) 50%;
 

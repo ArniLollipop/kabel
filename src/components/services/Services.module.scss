@@ -1,0 +1,97 @@
+.Services {
+  width: 100%;
+  display: grid;
+  justify-content: center; /* new */
+  align-items: center; /* new */
+
+  .container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 30px;
+    width: 100%;
+    max-width: 1455px;
+    height: auto;
+    margin: 0 auto;
+    padding: 90px 39px;
+    background: var(--services-bg-color);
+    border-radius: 20px;
+    margin-top: 77px;
+    margin-bottom: 120px;
+
+    h2 {
+      font-weight: 600;
+      font-size: var(--font-services-title);
+      text-transform: uppercase;
+      color: #37454e;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      color: rgba(55, 69, 78, 0.7);
+      margin: 27px 0;
+    }
+  }
+
+  .CableCalculation {
+    width: 100%;
+    max-width: 544px;
+    height: auto;
+    position: relative;
+    padding: 40px 22px 27px 22px;
+    background-color: var(--color-bg-white);
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) 8%;
+
+    a {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--color-accent);
+    }
+
+    svg {
+      margin-left: 10px;
+    }
+  }
+
+  .firstCalculation {
+    background-image: url('../../assets/icons/servicesIcons/servicesCableCalculationIcon1.svg');
+  }
+
+  .secondCalculation {
+    background-image: url('../../assets/icons/servicesIcons/servicesCableCalculationIcon2.svg');
+  }
+
+  .decoding {
+    background-image: url('../../assets/icons/servicesIcons/servicesCableCalculationIcon3.svg');
+  }
+
+  @media (max-width: 950px) {
+    .container {
+      grid-template-columns: 1fr;
+      padding: 20px 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .CableCalculation {
+      h2 {
+        margin-left: 50px;
+      }
+
+      width: 100%;
+      max-width: 100%;
+      background-position: 15px 8%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .container {
+      padding: 15px 10px;
+    }
+  }
+}
