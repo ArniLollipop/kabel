@@ -15,10 +15,12 @@ import { InputInstance } from '@/shared/formElements/InputInstance';
 import { Button } from '@/UI/Button';
 import { Form, Formik } from 'formik';
 import { loginSchema } from '@/helpers/validation';
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
 import { ErrorBorder } from '@/shared/formElements/errorBorder';
 import { HidePassword, ShowPassword } from '@/assets/icons';
+
+// themes
+import { ThemeButton } from '@/UI/Button/ui/Button';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
 
 let cn = classNames.bind(cls);
 
@@ -40,6 +42,7 @@ export const Login: FC<LoginProps> = (props) => {
       onSubmit={(values) => {
         console.log('values Login is: ', {
           ...values,
+          phoneNumberLogin: values.phoneNumberLogin.replace(/\D+/g, ''),
         });
       }}
     >
