@@ -1,8 +1,5 @@
-import { InputLockIcon } from './InputLockIcon';
-import { InputPhoneNumberIcon } from './InputPhoneNumberIcon';
-import { InputNameIcon } from './InputNameIcon';
+export { HidePassword, ShowPassword } from './authIcons/authIcons';
 
-export { InputPhoneNumberIcon, InputLockIcon, InputNameIcon };
 export {
   IconCard,
   IconGeoTag,
