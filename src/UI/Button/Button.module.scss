@@ -1,3 +1,4 @@
+@import "../../styles/globalMixins.scss";
 .Button {
   font-family: var(--font-family-main);
   transition: all 0.3s ease;
@@ -13,8 +14,6 @@
 .yellow,
 .card,
 .buy {
-  color: var(--color-bg-white);
-  border: none;
 }
 
 .blue {
@@ -24,6 +23,9 @@
   @include adaptive-size(30, 17, padding-right);
   @include adaptive-size(30, 17, padding-right);
   @include adaptive-size(18, 12, font-size);
+
+  color: var(--color-bg-white);
+  border: none;
 
   background-color: var(--color-accent);
   color: var(--color-bg-white);
@@ -35,6 +37,9 @@
 }
 
 .yellow {
+  color: var(--color-bg-white);
+  border: none;
+
   background-color: var(--color-accent-secondary);
   padding: 15px 30px;
   font-size: 16px;
@@ -45,6 +50,9 @@
 .card {
   background-color: var(--color-accent);
   background-image: url("../../assets/icons/IconButtonCard.svg");
+
+  color: var(--color-bg-white);
+  border: none;
 
   padding: 20px 68px 20px 38px;
 
@@ -63,7 +71,15 @@
   background-position: right calc((100% - 190px) / 2) top 50%;
   padding: 20px 40px 20px 10px;
 
+  color: var(--color-bg-white);
+  border: none;
+
   font-size: 24px;
   font-weight: 400;
   border-radius: 15px;
+}
+
+.clear {
+  border: none;
+  background-color: transparent;
 }

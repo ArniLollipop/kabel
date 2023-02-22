@@ -19,3 +19,21 @@ export {
   IconMobileMenuProduct,
   IconMobileMenuServices,
 } from "./mobileMenuIcons";
+
+export {
+  IconShare,
+  IconTrash,
+  IconCardDelivery,
+  IconCardGarant,
+  IconCardInsurance,
+  IconCardReturn,
+  IconCardGeoTag,
+  IconSideBarCard,
+  IconSideBarKaspi,
+  IconSidebarPaymentMethods,
+  IconCardItemDelivery,
+  IconCardItemInStock,
+  IconCardItemOutOfStock,
+  IconCardCounterMinus,
+  IconCardCounterPlus,
+} from "./cardIcons";

@@ -1,0 +1,161 @@
+@import "/src/styles/globalMixins.scss";
+
+.GoodsListItem {
+  padding-top: 15px;
+  @include adaptive-size(33, 8, padding-right);
+  @include adaptive-size(33, 8, padding-bottom);
+  @include adaptive-size(75, 8, padding-left);
+
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background-color: var(--color-bg-white);
+  border-radius: 20px;
+  padding: 35px;
+  margin-right: 45px;
+  position: relative;
+}
+
+.GoodsDescr {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
+
+  &_title {
+    @include adaptive-size(22, 15, font-size);
+    color: var(--color-font-title);
+    font-weight: 600;
+    line-height: 22px;
+  }
+
+  &_counter {
+    display: flex;
+    align-items: center;
+    width: 140px;
+    height: 35px;
+
+    input {
+      padding: 7px 7px;
+      width: 35px;
+      height: 35px;
+      color: #5c5f65;
+      border: 1px solid #5c5f65;
+      border-radius: 3px;
+      font-size: 18px;
+      text-align: center;
+      padding-left: 5px;
+      margin-right: 10px;
+    }
+  }
+
+  &_counterBtn {
+    cursor: pointer;
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+
+  &_props {
+    @include adaptive-size(16, 12, font-size);
+
+    span {
+      font-weight: 600;
+      &:first-child {
+        margin-right: 5px;
+      }
+    }
+
+    &_color {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    &_colorImg {
+      margin-left: 10px;
+    }
+  }
+}
+
+.GoodsPrice {
+  color: var(--color-font-title);
+  align-self: center;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+
+  &_mobile {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+    margin-top: 15px;
+
+    color: #000000;
+    display: none;
+  }
+}
+
+.GoodsBtns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  &_shareBtn {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-font-title);
+  }
+
+  &_shareIcon {
+    margin-right: 10px;
+  }
+}
+
+.img {
+  @include adaptive-size(180, 100, max-width);
+  @include adaptive-size(180, 100, max-height);
+}
+
+@media (max-width: 1024px) {
+  .GoodsListItem {
+    width: 100%;
+  }
+
+  .GoodsDescr {
+    &_title {
+      margin-bottom: 15px;
+    }
+
+    &_counter {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+    }
+  }
+
+  .GoodsPrice {
+    display: none;
+  }
+
+  .GoodsPrice_mobile {
+    display: block;
+  }
+
+  .GoodsBtns {
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+
+    position: absolute;
+    bottom: 14px;
+    right: 8px;
+
+    span {
+      display: none;
+    }
+  }
+}

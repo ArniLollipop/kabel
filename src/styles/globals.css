@@ -8,7 +8,7 @@
   --color-accent: #00abc2;
   --color-accent-secondary: #f6bf0c;
 
-  --color-bg-grey: #bfbfbf;
+  --color-bg-grey: #f8f8f8;
   --color-bg-white: #ffffff;
 
   --color-font-title: #39424b;
@@ -61,4 +61,10 @@ span {
 
 ul {
   list-style-type: none;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    margin-bottom: 57px;
+  }
 }
