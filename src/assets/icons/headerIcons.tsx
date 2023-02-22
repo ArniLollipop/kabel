@@ -6,6 +6,7 @@ interface IconProps extends SVGProps<SVGSVGElement> {
   className?: string;
   textColor?: string;
 }
+
 export const IconCard: FC<IconProps> = (props) => {
   const { className } = props;
 
