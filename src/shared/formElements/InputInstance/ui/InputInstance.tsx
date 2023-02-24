@@ -31,6 +31,7 @@ interface IInputInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export enum EInputInstanceTheme {
   AUTH = 'auth',
+  SERVICES = 'services',
 }
 
 export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) => {
@@ -51,7 +52,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
           {...props}
           touched={touched === true ? 1 : 0}
           className={cn(
-            cls.auth,
+            cls.InputInstanceClass,
             className,
             touched && errors ? cls.errorBorder : null,
             theme && cls[theme]
@@ -71,7 +72,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
           name={name}
           touched={touched === true ? 1 : 0}
           className={cn(
-            cls.auth,
+            cls.InputInstanceClass,
             className,
             touched && errors ? cls.errorBorder : null,
             theme && cls[theme]
@@ -86,7 +87,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
               mask={mask}
               name={name}
               className={cn(
-                cls.auth,
+                cls.InputInstanceClass,
                 className,
                 touched && errors ? cls.errorBorder : null,
                 theme && cls[theme]
@@ -105,7 +106,8 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
           name={name}
           touched={touched === true ? 1 : 0}
           className={cn(
-            password ? cls.forPasswordIcon : cls.auth,
+            cls.InputInstanceClass,
+            password && cls.forPasswordIcon,
             className,
             password ? null : touched && errors ? cls.errorBorder : null,
             theme && cls[theme]

@@ -1,4 +1,11 @@
-export { ServicesTitleIcon, ServicesDetailsIcon } from './servicesIcons/servicesIcons';
+export {
+  ServicesDetailsIcon,
+  ServicesArticleIcon1,
+  ServicesArticleIcon2,
+  ServicesArticleIcon3,
+  ServicesBackIcon,
+  ServicesDeleteIcon,
+} from './servicesIcons/servicesIcons';
 export { HidePassword, ShowPassword } from './authIcons/authIcons';
 
 export {
