@@ -8,6 +8,8 @@ import {
   IconWhatsApp,
   IconLogo,
 } from "@/assets/icons";
+import Link from "next/link";
+import { SearchInput } from "@/shared/formElements/SearchInput/SearchInput";
 
 interface HeaderProps {
   className?: string;
@@ -57,10 +59,10 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
 
         <li className={cls.contacts_list_card}>
-          <a href="" className={cls["card-link"]}>
+          <Link href="/card" className={cls["card-link"]}>
             <IconCard className={cls["icon"]} />
             <span>1450 ₸</span>
-          </a>
+          </Link>
         </li>
 
         <li className={cls.contacts_list_user}>
@@ -72,28 +74,28 @@ export const Header: FC<HeaderProps> = (props) => {
       </ul>
 
       <nav className={cls.nav}>
-        <a className={cls.nav_link_logo} href="">
+        <Link href="/" className={cls.nav_linkLogo}>
           <IconLogo className={cls.nav_logo} />
-        </a>
+        </Link>
 
         <ul className={cls.nav_list}>
           <li className={cls.nav_list_item}>
-            <a href="#">О компании</a>
+            <Link href="/about">О компании</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="#">Продукция</a>
+            <Link href="/catalog">Продукция</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="/services">Сервисы</a>
+            <Link href="/services">Сервисы</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="#">Новости</a>
+            <Link href="/news">Новости</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="#">Оплата и доставка</a>
+            <Link href="/payment">Оплата и доставка</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="#">Контакты</a>
+            <Link href="/contacts">Контакты</Link>
           </li>
         </ul>
 

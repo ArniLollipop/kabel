@@ -7,6 +7,8 @@ import IconPaymentVisa from "@/assets/icons/IconPaymentVisa.svg";
 import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 import Image from "next/image";
 
+import Link from "next/link";
+
 import {
   IconMobileMenuCard,
   IconMobileMenuHome,
@@ -33,22 +35,22 @@ export const Footer: FC<FooterProps> = (props) => {
 
           <ul className={cls.footerNav_list}>
             <li className={cls.footerNav_listItem}>
-              <a href="#">О компании</a>
+              <Link href="/about">О компании</Link>
             </li>
             <li className={cls.footerNav_listItem}>
-              <a href="#">Продукция</a>
+              <Link href="/catalog">Продукция</Link>
             </li>
             <li className={cls.footerNav_listItem}>
-              <a href="#">Сервисы</a>
+              <Link href="/services">Сервисы</Link>
             </li>
             <li className={cls.footerNav_listItem}>
-              <a href="#">Новости</a>
+              <Link href="/news">Новости</Link>
             </li>
             <li className={cls.footerNav_listItem}>
-              <a href="#">Оплата и доставка</a>
+              <Link href="/payment">Оплата и доставка</Link>
             </li>
             <li className={cls.footerNav_listItem}>
-              <a href="#">Контакты</a>
+              <Link href="/contacts">Контакты</Link>
             </li>
           </ul>
         </nav>
