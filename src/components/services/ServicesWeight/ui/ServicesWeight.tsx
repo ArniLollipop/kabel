@@ -1,12 +1,17 @@
+// packages
 import { FC, useState } from 'react';
 import classNames from 'classnames';
+
+// assets
 import cls from './ServicesWeight.module.scss';
 import { Form, Formik } from 'formik';
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
 import { ServicesDeleteIcon } from '@/assets/icons';
+
+// components
+import { InputInstance } from '@/shared/formElements/InputInstance';
+import { Button } from '@/UI/Button';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { ThemeButton } from '@/UI/Button/ui/Button';
 
 let cn = classNames.bind(cls);
 
@@ -149,6 +154,7 @@ export const ServiceWeightToggleButtons: FC<ServiceWeightToggleButtonsProps> = (
         const isActive = active === item.id;
         return (
           <Button
+            type="button"
             key={item.id}
             theme={ThemeButton.CLEAR}
             className={isActive ? cls.active : ''}
