@@ -1,10 +1,17 @@
+// packages
 import Head from 'next/head';
-import { MainLayout } from '@/layouts/MainLayout';
 import classNames from 'classnames';
-import { ServicesDetailsIcon } from '@/assets/icons';
-import cls from '../components/services/Services.module.scss';
 import Link from 'next/link';
+
+// components
+import { MainLayout } from '@/layouts/MainLayout';
+
+// assets
+import cls from '../components/services/Services.module.scss';
+import { ServicesDetailsIcon } from '@/assets/icons';
 import { ServicesLayout } from '@/layouts/ServicesLayout';
+
+// data
 import { data } from '@/data/ServicesData';
 
 let cn = classNames.bind(cls);
@@ -15,12 +22,14 @@ export default function Home() {
 
     return (
       <article key={articleId} className={cn(cls.ServicesArticleMainPage)}>
-        <ArticleIcon textColor={'#00ABC2'} />
+        <ArticleIcon className={cn(cls.articleIcon)} textColor={'#00ABC2'} />
         <h2>{title}</h2>
         <p>{desc}</p>
-        <Link href={`/services/${link}`}>
-          Подробнее <ServicesDetailsIcon textColor={'#00ABC2'} />
-        </Link>
+        <div className={cn(cls.detailsIconContainer)}>
+          <Link href={`/services/${link}`}>
+            Подробнее <ServicesDetailsIcon textColor={'#00ABC2'} />
+          </Link>
+        </div>
       </article>
     );
   });
