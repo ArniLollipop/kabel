@@ -84,7 +84,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <a href="#">Продукция</a>
           </li>
           <li className={cls.nav_list_item}>
-            <a href="#">Сервисы</a>
+            <a href="/services">Сервисы</a>
           </li>
           <li className={cls.nav_list_item}>
             <a href="#">Новости</a>

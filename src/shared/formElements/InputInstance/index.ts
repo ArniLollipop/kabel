@@ -1,3 +1,1 @@
-import { InputInstance } from './ui/InputInstance';
-
-export { InputInstance };
+export { InputInstance } from './ui/InputInstance';

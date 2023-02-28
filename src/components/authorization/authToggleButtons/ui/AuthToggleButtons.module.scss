@@ -1,0 +1,51 @@
+.AuthToggleButtons {
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-weight: 500;
+    font-size: var(--font-auth-toggle-button-size);
+    list-style-type: none;
+    margin-bottom: 11px;
+
+    & li:first-child {
+      border-right: 1px solid #9b9a9a;
+    }
+
+    li {
+      position: relative;
+      padding: 0 20px;
+      font-size: var(--font-auth-toggle-button-size);
+    }
+
+    a.active {
+      color: var(--color-accent);
+      padding-bottom: 7px;
+    }
+
+    a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -11px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 50%;
+      height: 3px;
+      background-color: var(--color-accent);
+    }
+  }
+
+  hr {
+    margin-bottom: 60px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 420px) {
+      margin-bottom: 20px;
+    }
+  }
+}

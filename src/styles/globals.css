@@ -4,15 +4,35 @@
   /* fonts */
   --font-family-main: "Montserrat", serif;
 
+  --font-size-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-default: var(--font-size-default) / var(--font-line-default) var(--font-family-main);
+
+  --font-size-title: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-line-title: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-title: var(--font-size-title) / var(--font-line-title) var(--font-family-main);
+
+  --font-button-size-default: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-auth-toggle-button-size: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-services-title: calc(13px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-size-getSmsCode: calc(12px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-size-small: calc(10px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-size-medium: calc(13px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+
   /* colors */
   --color-accent: #00abc2;
   --color-accent-secondary: #f6bf0c;
 
   --color-bg-grey: #f8f8f8;
   --color-bg-white: #ffffff;
+  --auth-bg-color: #f8f8f8;
+  --services-bg-color: #f0f7fb;
 
   --color-font-title: #39424b;
   --color-font-descr: #37454e;
+
+  --input-bg-color: #f8f8f9;
+  --error-border-color: #ff6666;
 }
 
 * {

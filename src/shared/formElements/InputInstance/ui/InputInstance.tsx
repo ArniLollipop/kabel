@@ -1,25 +1,41 @@
 // hooks
-import { FC } from 'react';
+import { FC, FocusEvent, InputHTMLAttributes } from 'react';
 
 // assets
-import global from '../../FormElementsStyle.module.scss';
+import cls from './InputInstance.module.scss';
 
 // packages
 import classNames from 'classnames';
-import { Field } from 'formik';
+import { Field, FieldProps } from 'formik';
 
 // types
-import { IInput } from '../../types';
+import MaskedInput from 'react-text-mask';
 
-let cn = classNames.bind(global);
+let cn = classNames.bind(cls);
 
-interface IInputInstanceProps extends IInput {
-  children?: any;
-  as?: any;
+interface IInputInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
+  password?: string;
+  labelText?: string;
+  touched?: boolean;
+  errors?: string;
+  className?: string;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  mask?: Array<string | RegExp> | false;
+  theme?: EInputInstanceTheme;
+  as?:
+    | React.ComponentType<FieldProps['field']>
+    | string
+    | React.ComponentType
+    | React.ForwardRefExoticComponent<any>;
+}
+
+export enum EInputInstanceTheme {
+  AUTH = 'auth',
+  SERVICES = 'services',
 }
 
 export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) => {
-  const { labelText, children, as } = props;
+  const { labelText, children, as, touched, errors, mask, theme, className, password } = props;
 
   const inputLabel = labelText && (
     <label htmlFor={id} className={''}>
@@ -27,16 +43,77 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
     </label>
   );
 
-  return (
-    <div>
-      {inputLabel}
-      {as ? (
-        <Field name={name} {...props} className={cn(global.inputInstance)}>
-          {props && children}
+  if (as) {
+    return (
+      <>
+        {inputLabel}
+        <Field
+          name={name}
+          {...props}
+          touched={touched === true ? 1 : 0}
+          className={cn(
+            cls.InputInstanceClass,
+            className,
+            touched && errors ? cls.errorBorder : null,
+            theme && cls[theme]
+          )}
+          as={as}
+        >
+          {children}
         </Field>
-      ) : (
-        <Field name={name} {...props} className={cn(global.inputInstance)} />
-      )}
-    </div>
-  );
+      </>
+    );
+  } else if (mask) {
+    return (
+      <>
+        {inputLabel}
+        <Field
+          {...props}
+          name={name}
+          touched={touched === true ? 1 : 0}
+          className={cn(
+            cls.InputInstanceClass,
+            className,
+            touched && errors ? cls.errorBorder : null,
+            theme && cls[theme]
+          )}
+        >
+          {({ field }: FieldProps) => (
+            <MaskedInput
+              {...field}
+              {...props}
+              // @ts-ignore
+              touched={touched === true ? 1 : 0}
+              mask={mask}
+              name={name}
+              className={cn(
+                cls.InputInstanceClass,
+                className,
+                touched && errors ? cls.errorBorder : null,
+                theme && cls[theme]
+              )}
+            />
+          )}
+        </Field>
+      </>
+    );
+  } else {
+    return (
+      <>
+        {inputLabel}
+        <Field
+          {...props}
+          name={name}
+          touched={touched === true ? 1 : 0}
+          className={cn(
+            cls.InputInstanceClass,
+            password && cls.forPasswordIcon,
+            className,
+            password ? null : touched && errors ? cls.errorBorder : null,
+            theme && cls[theme]
+          )}
+        />
+      </>
+    );
+  }
 };

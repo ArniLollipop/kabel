@@ -1,0 +1,28 @@
+.GetSmsCode {
+  div,
+  p,
+  span {
+    font-size: var(--font-size-getSmsCode);
+  }
+
+  p {
+    color: var(--error-border-color);
+    margin-bottom: 10px;
+  }
+
+  .confirmSmsCode {
+    margin-bottom: 20px;
+  }
+
+  .password {
+  }
+
+  .confirmPassword {
+  }
+}
+
+.sendAgain {
+  color: var(--color-accent);
+  border-bottom: 1px dashed var(--color-accent);
+  margin-bottom: 12px;
+}

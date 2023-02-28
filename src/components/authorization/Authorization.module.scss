@@ -2,16 +2,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-}
+  height: 80vh;
+  background-color: var(--auth-bg-color);
 
-.formContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 459px;
-  height: 386px;
-  background: #ffffff;
-  border-radius: 20px;
+  .formContainer {
+    text-align: center;
+    width: 80%;
+    max-width: 543px;
+    height: auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 26px 40px 70px;
+
+    @media (max-width: 420px) {
+      width: 90%;
+    }
+
+    @media (min-width: 768px) {
+      width: 60%;
+    }
+
+    @media (min-width: 1024px) {
+      width: 50%;
+    }
+  }
 }

@@ -57,7 +57,6 @@ export const IconCard: FC<IconProps> = (props) => {
 
 export const IconGeoTag: FC<IconProps> = (props) => {
   const { className } = props;
-  console.log(className);
 
   return (
     <svg

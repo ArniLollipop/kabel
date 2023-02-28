@@ -1,23 +1,17 @@
 // hooks
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 // packages
 import classNames from 'classnames';
-import { Formik, Form } from 'formik';
 
 // assets
 import cls from './Authorization.module.scss';
-import global from '@/shared/formElements/FormElementsStyle.module.scss';
-import { InputNameIcon, InputPhoneNumberIcon } from '@/assets/icons';
-
-// components
-import { authorizationSchema } from '@/helpers/validation';
-import { Button } from '@/UI/Button/Button';
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { InputInstanceWithMask } from '@/shared/formElements/InputInstanceWithMask';
 
 // helpers
-import { maskForPhone } from '@/helpers/masks';
+import { Register } from './register';
+import { Login } from './login';
+import { AuthToggleButtons } from './authToggleButtons';
+import { GetSmsCode } from './getSmsCode';
 
 let cn = classNames.bind(cls);
 
@@ -26,70 +20,20 @@ interface AuthorizationProps {
 }
 
 export const Authorization: FC<AuthorizationProps> = ({ className }) => {
+  const [active, setActive] = useState(1);
+
   return (
     <div className={cn(cls.Authorization)}>
-      <Formik
-        initialValues={{
-          name: '',
-          phoneNumber: '',
-        }}
-        validationSchema={authorizationSchema}
-        onSubmit={(values) => {
-          console.log('values is: ', {
-            ...values,
-          });
-        }}
-      >
-        {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => {
-          return (
-            <div className={cn(cls.formContainer)}>
-              <Form>
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.name && errors.name ? global.errorBorder : null
-                  )}
-                >
-                  <InputNameIcon />
-                  <InputInstance
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Имя"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.name}
-                    errors={errors.name}
-                    touched={touched.name}
-                  />
-                </div>
-
-                <div
-                  className={cn(
-                    global.inputContainer,
-                    touched.phoneNumber && errors.phoneNumber ? global.errorBorder : null
-                  )}
-                >
-                  <InputPhoneNumberIcon />
-                  <InputInstanceWithMask
-                    mask={maskForPhone}
-                    type="text"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    placeholder="+7 (___) ___-__-__"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.phoneNumber}
-                    errors={errors.phoneNumber}
-                    touched={touched.phoneNumber}
-                  />
-                </div>
-                <Button type="submit" text={'Получить код SMS'} />
-              </Form>
-            </div>
-          );
-        }}
-      </Formik>
+      <div className={cn(cls.formContainer)}>
+        <AuthToggleButtons active={active} setActive={setActive} />
+        {active === 1 ? (
+          <Register setActive={setActive} />
+        ) : active === 2 ? (
+          <GetSmsCode />
+        ) : (
+          <Login />
+        )}
+      </div>
     </div>
   );
 };

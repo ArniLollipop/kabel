@@ -1,0 +1,141 @@
+.ServicesWeight {
+  font-size: var(--font-size-default);
+
+  .unit {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+
+    h4 {
+      margin-right: 23px;
+    }
+
+    .unitToggleBtnContainer {
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        font-weight: 400;
+        font-size: var(--font-auth-toggle-button-size);
+        border-radius: 20px;
+        border: 1px solid var(--color-accent-secondary);
+
+        button {
+          padding: 7px 30px;
+          font-size: var(--font-size-small);
+        }
+
+        button.active {
+          color: var(--color-bg-white);
+          background-color: var(--color-accent-secondary);
+
+          &:first-child {
+            border-radius: 20px 0 0 20px;
+          }
+
+          &:last-child {
+            border-radius: 0 20px 20px 0;
+          }
+        }
+      }
+    }
+  }
+
+  .inputsContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    input {
+      border: 1px solid rgba(91, 99, 106, 0.7);
+      margin: 15px 0 23px 0;
+    }
+
+    .markInput {
+      border: 1px solid var(--color-accent-secondary);
+    }
+  }
+
+  .addCableBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+
+    button {
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      padding: 16px;
+      padding-left: 55px;
+      border-radius: 10px;
+    }
+
+    button,
+    p {
+      font-size: var(--font-size-small);
+    }
+
+    // .resultContainer {
+    //   display: flex;
+    //   align-items: center;
+    // }
+  }
+
+  .addCableBGIcon {
+    background-repeat: no-repeat;
+    background-position: calc(25px) 50%;
+    background-image: url('../../../../assets/icons/servicesIcons/ServicesAddIcon.svg');
+  }
+}
+
+@media (max-width: 1281px) {
+  .ServicesWeight {
+    label,
+    h4 {
+      font-size: var(--font-size-medium);
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .ServicesWeight {
+    .unit {
+      display: block;
+      margin: 21px 0 29px 0;
+
+      h4 {
+        margin: 0 0 21px 0;
+      }
+
+      .unitToggleBtnContainer {
+        display: block;
+
+        .buttons {
+          width: 61%;
+
+          button {
+            padding: 3% 13%;
+          }
+        }
+      }
+    }
+
+    .inputsContainer {
+      display: block;
+      gap: 15px;
+
+      button {
+        margin-top: 15px;
+      }
+    }
+
+    .addCableBtn {
+      display: block;
+
+      button {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
