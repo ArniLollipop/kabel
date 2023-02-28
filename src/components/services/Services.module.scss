@@ -19,7 +19,7 @@
     background-color: var(--color-bg-white);
     border-radius: 20px;
 
-    svg {
+    .articleIcon {
       position: absolute;
       top: 20px;
       right: 20px;
@@ -40,13 +40,23 @@
       margin: 27px 0;
     }
 
-    a {
+    .detailsIconContainer {
       position: absolute;
       bottom: 20px;
       left: 20px;
-      font-weight: 500;
-      font-size: 16px;
-      color: var(--color-accent);
+
+      a {
+        position: relative;
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--color-accent);
+
+        svg {
+          position: absolute;
+          top: 3px;
+          right: -17px;
+        }
+      }
     }
   }
 }
@@ -69,7 +79,7 @@
         margin-right: 0px;
       }
 
-      svg {
+      .articleIcon {
         position: absolute;
         top: 20px;
         left: 20px;

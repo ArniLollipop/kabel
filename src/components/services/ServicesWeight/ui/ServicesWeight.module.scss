@@ -11,9 +11,6 @@
     }
 
     .unitToggleBtnContainer {
-      border-radius: 20px;
-      border: 1px solid var(--color-accent-secondary);
-
       .buttons {
         display: flex;
         align-items: center;
@@ -21,6 +18,8 @@
         position: relative;
         font-weight: 400;
         font-size: var(--font-auth-toggle-button-size);
+        border-radius: 20px;
+        border: 1px solid var(--color-accent-secondary);
 
         button {
           padding: 7px 30px;
@@ -50,7 +49,7 @@
 
     input {
       border: 1px solid rgba(91, 99, 106, 0.7);
-      margin-top: 23px;
+      margin: 15px 0 23px 0;
     }
 
     .markInput {
@@ -95,6 +94,48 @@
     label,
     h4 {
       font-size: var(--font-size-medium);
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .ServicesWeight {
+    .unit {
+      display: block;
+      margin: 21px 0 29px 0;
+
+      h4 {
+        margin: 0 0 21px 0;
+      }
+
+      .unitToggleBtnContainer {
+        display: block;
+
+        .buttons {
+          width: 61%;
+
+          button {
+            padding: 3% 13%;
+          }
+        }
+      }
+    }
+
+    .inputsContainer {
+      display: block;
+      gap: 15px;
+
+      button {
+        margin-top: 15px;
+      }
+    }
+
+    .addCableBtn {
+      display: block;
+
+      button {
+        margin-bottom: 20px;
+      }
     }
   }
 }
