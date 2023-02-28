@@ -72,7 +72,7 @@ export const Header: FC<HeaderProps> = (props) => {
       </ul>
 
       <nav className={cls.nav}>
-        <a href="/" className={cls.nav_linkLogo}>
+        <a className={cls.nav_link_logo} href="">
           <IconLogo className={cls.nav_logo} />
         </a>
 

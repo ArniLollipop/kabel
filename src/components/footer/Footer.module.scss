@@ -131,16 +131,9 @@ $margins_mob: 5;
   width: 100vw;
   background-color: var(--color-bg-white);
   position: fixed;
+  z-index: 10;
   bottom: 0;
   display: none;
-
-  &_navMenu {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    padding: 5px 15px;
-    gap: 5px;
-  }
 
   &_navMenuItem {
     @include adaptive-1024-mob(14, 10, font-size);
@@ -157,10 +150,12 @@ $margins_mob: 5;
   .Footer {
     display: none;
   }
-}
 
-@media (max-width: 1024px) {
   .FooterMobile {
-    display: block;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 5px 15px;
+    gap: 5px;
   }
 }

@@ -1,0 +1,54 @@
+@import "/src/styles/globalMixins.scss";
+
+.ServicesSection {
+  @include adaptive-size(100, 20, padding-top);
+  @include adaptive-size(100, 20, padding-bottom);
+  padding-left: 15px;
+  padding-right: 15px;
+
+  max-width: 1185px;
+  margin: 0 auto;
+
+  &_title {
+    margin-bottom: 55px;
+  }
+
+  &_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  &_itemTitle {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #37454e;
+  }
+
+  &_itemImg {
+    width: 115px;
+    height: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+
+    background-color: var(--color-accent);
+  }
+}
+
+@media (max-width: 1024px) {
+  .ServicesSection {
+    display: none;
+  }
+}

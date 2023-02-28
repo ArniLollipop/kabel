@@ -14,6 +14,7 @@ import {
   IconMobileMenuServices,
   IconMobileMenuMore,
 } from "@/assets/icons";
+import Link from "next/link";
 
 let cn = classNames.bind(cls);
 
@@ -113,32 +114,30 @@ export const Footer: FC<FooterProps> = (props) => {
       </div>
 
       <div className={cls.FooterMobile}>
-        <ul className={cls.FooterMobile_navMenu}>
-          <li className={cls.FooterMobile_navMenuItem}>
-            <IconMobileMenuHome />
-            <span>Главная</span>
-          </li>
+        <Link href="/" className={cls.FooterMobile_navMenuItem}>
+          <IconMobileMenuHome />
+          <span>Главная</span>
+        </Link>
 
-          <li className={cls.FooterMobile_navMenuItem}>
-            <IconMobileMenuProduct />
-            <span>Продукция</span>
-          </li>
+        <Link href="/catalog" className={cls.FooterMobile_navMenuItem}>
+          <IconMobileMenuProduct />
+          <span>Продукция</span>
+        </Link>
 
-          <li className={cls.FooterMobile_navMenuItem}>
-            <IconMobileMenuServices />
-            <span>Сервисы</span>
-          </li>
+        <Link href="/services" className={cls.FooterMobile_navMenuItem}>
+          <IconMobileMenuServices />
+          <span>Сервисы</span>
+        </Link>
 
-          <li className={cls.FooterMobile_navMenuItem}>
-            <IconMobileMenuCard />
-            <span>Корзина</span>
-          </li>
+        <Link href="/card" className={cls.FooterMobile_navMenuItem}>
+          <IconMobileMenuCard />
+          <span>Корзина</span>
+        </Link>
 
-          <li className={cls.FooterMobile_navMenuItem}>
-            <IconMobileMenuMore />
-            <span>Еще</span>
-          </li>
-        </ul>
+        <Link href="" className={cls.FooterMobile_navMenuItem}>
+          <IconMobileMenuMore />
+          <span>Еще</span>
+        </Link>
       </div>
     </>
   );
