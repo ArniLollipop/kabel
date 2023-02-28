@@ -1,24 +1,35 @@
+// packages
 import Head from 'next/head';
-import { MainLayout } from '@/layouts/MainLayout';
-import { useRouter } from 'next/router';
-import { ServicesLayout } from '@/layouts/ServicesLayout';
-import { data } from '@/data/ServicesData';
 import Link from 'next/link';
-import { ServicesBackIcon, ServicesDetailsIcon } from '@/assets/icons';
+import { useRouter } from 'next/router';
 import classNames from 'classnames';
+
+// data
+import { data } from '@/data/ServicesData';
+
+// assets
+import { ServicesBackIcon, ServicesDetailsIcon } from '@/assets/icons';
 import cls from '../../components/services/ServicesID.module.scss';
+
+// components
 import { ServicesWeight } from '@/components/services/ServicesWeight';
 import { ServicesSection } from '@/components/services/ServicesSection';
 import { ServicesEncoding } from '@/components/services/ServicesEncoding';
+import { MainLayout } from '@/layouts/MainLayout';
+import { ServicesLayout } from '@/layouts/ServicesLayout';
+import { useEffect, useState } from 'react';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
 
 let cn = classNames.bind(cls);
 
 export default function Home() {
   const router = useRouter();
-  const { id } = router.query;
+  let { id } = router.query;
+
   const showArticles = data.map((article) => {
     const { articleId, title, link, articleIcon: ArticleIcon } = article;
-    const isActive = articleId === Number(id);
+    const isActive = link === id;
 
     return (
       <article
@@ -60,9 +71,9 @@ export default function Home() {
             <div className={cn(cls.serviceArticleIntroContainer)}>{showArticles}</div>
 
             <div className={cn(cls.serviceArticleIntroContent)}>
-              {Number(id) === 1 ? (
+              {id === 'weight' ? (
                 <ServicesWeight />
-              ) : Number(id) === 2 ? (
+              ) : id === 'section' ? (
                 <ServicesSection />
               ) : (
                 <ServicesEncoding />
