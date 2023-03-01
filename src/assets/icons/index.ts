@@ -57,3 +57,12 @@ export {
   IconCabinetEditPhoto,
 } from './cabinetIcons';
 
+export {
+  IconContactsClock, 
+  IconContactsGeo, 
+  IconContactsMail,
+  IconContactsPhone,
+  IconContactsTg, 
+  IconContactsWa} from "./contactsIcons"
+
+
