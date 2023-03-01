@@ -59,10 +59,8 @@ export const Header: FC<HeaderProps> = (props) => {
 
         <li className={cls.contacts_list_card}>
           <Link href="/card" className={cls["card-link"]}>
-            <Link href="/card" className={cls["card-link"]}>
-              <IconCard className={cls["icon"]} />
-              <span>1450 ₸</span>
-            </Link>
+            <IconCard className={cls["icon"]} />
+            <span>1450 ₸</span>
           </Link>
         </li>
 
@@ -76,26 +74,20 @@ export const Header: FC<HeaderProps> = (props) => {
 
       <nav className={cls.nav}>
         <Link href="/" className={cls.nav_linkLogo}>
-          <Link href="/" className={cls.nav_linkLogo}>
-            <IconLogo className={cls.nav_logo} />
-          </Link>
+          <IconLogo className={cls.nav_logo} />
         </Link>
 
         <ul className={cls.nav_list}>
           <li className={cls.nav_list_item}>
             <Link href="/about">О компании</Link>
-            <Link href="/about">О компании</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <Link href="/catalog">Продукция</Link>
             <Link href="/catalog">Продукция</Link>
           </li>
           <li className={cls.nav_list_item}>
             <Link href="/services">Сервисы</Link>
-            <Link href="/services">Сервисы</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <Link href="/news">Новости</Link>
             <Link href="/news">Новости</Link>
           </li>
           <li className={cls.nav_list_item}>
@@ -103,11 +95,10 @@ export const Header: FC<HeaderProps> = (props) => {
           </li>
           <li className={cls.nav_list_item}>
             <Link href="/contacts">Контакты</Link>
-            <Link href="/contacts">Контакты</Link>
           </li>
         </ul>
 
-        <SearchInput placeholder="Поиск по имени товара" className={cls.nav_search} />
+        <input type="text" placeholder="Поиск по имени товара" className={cls.nav_search} />
       </nav>
     </div>
   );
