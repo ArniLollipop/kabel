@@ -1,11 +1,11 @@
-import { FC, HTMLProps, ReactNode } from "react";
-import classNames from "classnames/bind";
-import cls from "./Title.module.scss";
+import { FC, HTMLProps, ReactNode } from 'react';
+import classNames from 'classnames/bind';
+import cls from './Title.module.scss';
 
 const cn = classNames.bind(cls);
 
 export const enum ThemeTitle {
-  MAIN = "main",
+  MAIN = 'main',
 }
 
 interface TitleProps extends HTMLProps<HTMLHeadingElement> {

@@ -1,0 +1,88 @@
+.CabinetLayout {
+  background: #f8f8f8;
+
+  &_wrapper {
+    width: 100%;
+    max-width: 1447px;
+    padding: 76px 15px 140px 15px;
+    margin: 0 auto;
+
+    display: flex;
+
+    gap: 35px;
+  }
+}
+
+.nav {
+  background: var(--color-bg-white);
+  padding: 8px;
+  padding-bottom: 30px;
+  border-radius: 15px;
+  display: flex;
+  max-height: 650px;
+  flex-direction: column;
+  gap: 10px;
+
+  &_logoutBtnContainer {
+    display: flex;
+    align-items: center;
+    margin: 133px 0 0 13px;
+
+    svg {
+      margin-right: 19px;
+    }
+  }
+
+  &_deleteAccountBtn {
+    text-align: start;
+    font-weight: 600;
+    margin: 42px 0 0 13px;
+  }
+
+  &_link {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 330px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+
+    color: var(--color-font-title);
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    svg:first-child {
+      margin-right: 15px;
+    }
+
+    svg:last-child {
+      position: absolute;
+      right: 15px;
+    }
+
+    span {
+      margin-right: 15px;
+    }
+
+    &.active {
+      background-color: var(--color-accent);
+      color: var(--color-bg-white);
+
+      svg path {
+        stroke: white;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+}

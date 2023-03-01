@@ -8,6 +8,10 @@ export {
 } from "./servicesIcons/servicesIcons";
 export { HidePassword, ShowPassword } from "./authIcons/authIcons";
 
+import { InputPhoneNumberIcon } from './InputPhoneNumberIcon';
+
+export { InputPhoneNumberIcon };
+
 export {
   IconCard,
   IconGeoTag,
@@ -15,7 +19,7 @@ export {
   IconUserCabinet,
   IconWhatsApp,
   IconLogo,
-} from "./headerIcons";
+} from './headerIcons';
 
 export {
   IconMobileMenuCard,
@@ -23,7 +27,7 @@ export {
   IconMobileMenuMore,
   IconMobileMenuProduct,
   IconMobileMenuServices,
-} from "./mobileMenuIcons";
+} from './mobileMenuIcons';
 
 export {
   IconShare,

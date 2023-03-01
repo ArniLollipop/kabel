@@ -1,15 +1,16 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from "react";
-import classNames from "classnames";
-import cls from "./Button.module.scss";
+import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import classNames from 'classnames';
+import cls from './Button.module.scss';
 
 let cn = classNames.bind(cls);
 
 export const enum ThemeButton {
-  YELLOW = "yellow",
-  BLUE = "blue",
-  CARD = "card",
-  BUY = "buy",
-  CLEAR = "clear",
+  YELLOW = 'yellow',
+  BLUE = 'blue',
+  CARD = 'card',
+  BUY = 'buy',
+  CLEAR = 'clear',
+  CANCEL = 'cancel',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
