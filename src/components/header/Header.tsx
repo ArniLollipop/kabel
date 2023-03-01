@@ -65,10 +65,10 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
 
         <li className={cls.contacts_list_user}>
-          <a href="" className={cls["user-link"]}>
+          <Link href="/cabinet/profile" className={cls["user-link"]}>
             <IconUserCabinet className={cls["icon"]} />
             <span>Личный кабинет</span>
-          </a>
+          </Link>
         </li>
       </ul>
 
