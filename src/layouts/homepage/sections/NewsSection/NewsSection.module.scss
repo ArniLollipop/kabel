@@ -1,0 +1,21 @@
+.NewsSection {
+  padding-left: 100px 15px;
+  padding-bottom: 100px;
+
+  max-width: 1185px;
+  margin: 0 auto;
+
+  &_title {
+    margin-bottom: 55px;
+  }
+
+  &_newsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}

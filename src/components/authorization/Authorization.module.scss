@@ -1,0 +1,29 @@
+.Authorization {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  background-color: var(--auth-bg-color);
+
+  .formContainer {
+    text-align: center;
+    width: 80%;
+    max-width: 543px;
+    height: auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 26px 40px 70px;
+
+    @media (max-width: 420px) {
+      width: 90%;
+    }
+
+    @media (min-width: 768px) {
+      width: 60%;
+    }
+
+    @media (min-width: 1024px) {
+      width: 50%;
+    }
+  }
+}

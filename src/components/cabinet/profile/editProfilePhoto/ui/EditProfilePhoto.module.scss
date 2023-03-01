@@ -1,0 +1,13 @@
+.editProfile {
+  position: relative;
+
+  &_avatar {
+    border-radius: 50%;
+  }
+
+  &_btn {
+    position: absolute;
+    bottom: 12px;
+    right: 5px;
+  }
+}
