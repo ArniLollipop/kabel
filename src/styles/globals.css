@@ -28,9 +28,8 @@
 
   --color-font-title: #39424b;
   --color-font-descr: #37454e;
-
-  --input-bg-color: #f8f8f9;
   --error-border-color: #ff6666;
+  --cancel-btn-color: #d2d8de;
 }
 
 * {

@@ -3,6 +3,7 @@ import {
   ServicesArticleIcon2,
   ServicesArticleIcon3,
 } from '../assets/icons/servicesIcons/servicesIcons';
+import cls from '../components/services/Services.module.scss';
 
 export const data = [
   {
@@ -11,7 +12,8 @@ export const data = [
     desc: `Данный сервис предназначен для вычисления весовых показателей кабеля/провода. Зная
     марку и сечение, вы моментально получите информацию о том, сколько весит 1 метр
     выбранной марки.`,
-    link: 'weight',
+    link: '1',
+    articleCls: cls.firstCalculation,
     articleIcon: ServicesArticleIcon1,
   },
   {
@@ -20,7 +22,8 @@ export const data = [
     desc: `Данный сервис предназначен для вычисления весовых показателей кабеля/провода. Зная
     марку и сечение, вы моментально получите информацию о том, сколько весит 1 метр
     выбранной марки.`,
-    link: 'section',
+    link: '2',
+    articleCls: cls.secondCalculation,
     articleIcon: ServicesArticleIcon2,
   },
   {
@@ -29,7 +32,8 @@ export const data = [
     desc: `Все проводники и кабели имеют специальную маркировку, которая показывает
     характеристики того или иного продукта. С помощью сервиса расшифровать марку стало еще
     проще.`,
-    link: 'encoding',
+    link: '3',
+    articleCls: cls.decoding,
     articleIcon: ServicesArticleIcon3,
   },
 ];

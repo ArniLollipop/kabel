@@ -15,7 +15,7 @@ export {
   IconUserCabinet,
   IconWhatsApp,
   IconLogo,
-} from "./headerIcons";
+} from './headerIcons';
 
 export {
   IconMobileMenuCard,
@@ -23,7 +23,7 @@ export {
   IconMobileMenuMore,
   IconMobileMenuProduct,
   IconMobileMenuServices,
-} from "./mobileMenuIcons";
+} from './mobileMenuIcons';
 
 export {
   IconShare,
@@ -41,7 +41,7 @@ export {
   IconCardItemOutOfStock,
   IconCardCounterMinus,
   IconCardCounterPlus,
-} from "./cardIcons";
+} from './cardIcons';
 
 export {
   IconCabinetBonuses,
@@ -56,13 +56,3 @@ export {
   IconCabinetPassword,
   IconCabinetEditPhoto,
 } from './cabinetIcons';
-
-export {
-  IconContactsClock, 
-  IconContactsGeo, 
-  IconContactsMail,
-  IconContactsPhone,
-  IconContactsTg, 
-  IconContactsWa} from "./contactsIcons"
-
-
