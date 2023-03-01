@@ -9,7 +9,6 @@ import {
   IconLogo,
 } from "@/assets/icons";
 import Link from "next/link";
-import { SearchInput } from "@/shared/formElements/SearchInput/SearchInput";
 
 interface HeaderProps {
   className?: string;
@@ -92,7 +91,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <Link href="/news">Новости</Link>
           </li>
           <li className={cls.nav_list_item}>
-            <Link href="/payment">Оплата и доставка</Link>
+            <Link href="/pay-del/payment">Оплата и доставка</Link>
           </li>
           <li className={cls.nav_list_item}>
             <Link href="/contacts">Контакты</Link>

@@ -42,3 +42,18 @@ export {
   IconCardCounterMinus,
   IconCardCounterPlus,
 } from "./cardIcons";
+
+export {
+  IconCabinetBonuses,
+  IconCabinetCards,
+  IconCabinetDelivery,
+  IconCabinetLogout,
+  IconCabinetOrder,
+  IconCabinetProfile,
+  IconCabinetSupport,
+  IconCabinetArrow,
+  IconCabinetEdit,
+  IconCabinetPassword,
+  IconCabinetEditPhoto,
+} from './cabinetIcons';
+
