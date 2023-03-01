@@ -1,0 +1,28 @@
+.GoodsListSection {
+  .goodsList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 50px;
+  }
+
+  .mockBtn {
+    display: none;
+  }
+
+  @media (max-width: 1400px) and (min-width: 1024px) {
+    .goodsList {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 50px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .mockBtn {
+      display: block;
+    }
+    .goodsList {
+      gap: 20px;
+    }
+  }
+}

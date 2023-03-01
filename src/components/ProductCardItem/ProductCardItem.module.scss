@@ -75,13 +75,16 @@
 
 // Catalog Theme
 .catalog {
-  padding: 18px 30px 25px 30px;
-  width: 583px;
+  padding: 20px 30px;
   border-radius: 30px;
+  align-items: center;
+  box-shadow: 1px 5px 19px -3px rgba(0, 0, 0, 0.2);
 
   .cardImg {
-    width: 137px;
-    height: 137px;
+    @include adaptive-size(137, 90, width);
+    @include adaptive-size(137, 90, height);
+    // width: 137px;
+    // height: 137px;
     margin-right: 10px;
   }
 
@@ -90,6 +93,10 @@
     flex-direction: column;
     gap: 35px;
     margin-right: 20px;
+
+    @media (min-width: 1400px) {
+      margin-top: 50px;
+    }
   }
 
   .cardTitle {
@@ -111,6 +118,12 @@
     display: none;
   }
 
+  .link {
+    position: absolute;
+    top: 20px;
+    width: 40%;
+  }
+
   .cardInfoIcons {
     gap: 20px;
     top: 18px;
@@ -123,6 +136,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    align-self: flex-end;
     gap: 25px;
   }
 
@@ -162,6 +176,8 @@
 
     .link {
       align-self: flex-start;
+      position: static;
+      width: 100%;
     }
 
     .cardPrice {
@@ -205,6 +221,16 @@
 
     .cardDescr {
       display: none;
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .catalog {
+    justify-content: space-between;
+
+    .cardBtns {
+      gap: 10px;
     }
   }
 }
