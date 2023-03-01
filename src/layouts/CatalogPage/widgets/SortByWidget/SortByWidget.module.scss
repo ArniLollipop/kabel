@@ -1,0 +1,35 @@
+.SortByWidget {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.sortBtn {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .SortByWidget {
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 149.4%;
+
+    color: #a4b0bb;
+  }
+
+  .sortSelector {
+    display: none;
+  }
+
+  .sortBtn {
+    display: block;
+    width: 14px;
+    height: 18px;
+    padding: 5px;
+    background-image: url("../../../../assets/icons/IconSortWidgetSort.svg");
+  }
+
+  .founded {
+    display: none;
+  }
+}

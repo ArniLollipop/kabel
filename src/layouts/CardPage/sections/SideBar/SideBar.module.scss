@@ -1,0 +1,108 @@
+@import "/src/styles/globalMixins.scss";
+
+.SideBar {
+  @include adaptive-1024(404, 350, width);
+
+  div {
+    background-color: var(--color-bg-white);
+    border-radius: 15px;
+  }
+
+  hr {
+    margin-bottom: 23px;
+    border: 1px solid #d8e0e9;
+    border-radius: 20px;
+  }
+
+  &_adventages {
+    padding: 30px 20px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+
+    span:not(:last-child) {
+      margin-bottom: 23px;
+    }
+
+    &_icon,
+    &_link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &_link {
+      color: var(--color-accent);
+    }
+
+    &_item {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+  }
+
+  &_paymentMethods {
+    padding: 15px 25px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      display: flex;
+      align-items: center;
+    }
+
+    &_title {
+      margin-bottom: 25px;
+    }
+
+    &_card {
+      margin-bottom: 15px;
+    }
+
+    &_icon {
+      margin-right: 20px;
+    }
+  }
+
+  &_payment {
+    padding: 15px 35px 35px 35px;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 20px;
+      color: var(--color-font-title);
+    }
+
+    &_title {
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    &_table {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      span {
+        margin-bottom: 22px;
+      }
+    }
+
+    &_sum {
+      justify-self: flex-end;
+    }
+  }
+}
+
+.btn {
+  border-radius: 15px;
+}
+
+@media (max-width: 1024px) {
+  .SideBar {
+    width: 100%;
+  }
+}

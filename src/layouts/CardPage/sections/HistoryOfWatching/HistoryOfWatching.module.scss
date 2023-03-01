@@ -1,0 +1,33 @@
+@import "/src/styles/globalMixins.scss";
+
+.HistoryOfWatching {
+  color: var(--color-font-title);
+
+  &_wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-gap: 40px;
+    grid-template-rows: auto;
+  }
+
+  &_title {
+    @include adaptive-size(40, 21, font-size);
+    @include adaptive-size(40, 21, line-height);
+    @include adaptive-size(50, 16, margin-bottom);
+    font-style: normal;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 1024px) {
+  .HistoryOfWatching {
+    &_wrapper {
+      grid-template-columns: repeat(auto-fit, 173px);
+      grid-gap: 20px;
+    }
+
+    &_title {
+      text-align: center;
+    }
+  }
+}
