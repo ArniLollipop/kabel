@@ -1,4 +1,4 @@
-@import '/src//styles/globalMixins.scss';
+@import "/src//styles/globalMixins.scss";
 
 .Title {
   font-family: var(--font-family-main);
@@ -15,7 +15,7 @@
   text-align: center;
   font-weight: 600;
   text-transform: uppercase;
-  background-image: url('../../assets/images/ImageTitleDecor.svg');
+  background-image: url(../../assets/images/ImageTitleDecor.svg);
   background-repeat: repeat-x;
   background-size: contain;
 }
