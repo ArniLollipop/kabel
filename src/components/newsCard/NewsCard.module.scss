@@ -23,8 +23,11 @@
   }
 
   &_headTitle {
+    @include adaptive-1024(15, 8, font-size);
+    @include adaptive-1024-mob(15, 15, font-size);
+
     font-weight: 600;
-    font-size: 15px;
+    // font-size: 15px;
     line-height: 150%;
     /* or 22px */
 
