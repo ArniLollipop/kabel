@@ -1,18 +1,18 @@
 // packages
-import { useState } from 'react';
+import { useState } from "react";
 
 // assets
-import cls from './index.module.scss';
-import { IconCabinetPassword, IconCabinetEdit } from '@/assets/icons';
+import cls from "./index.module.scss";
+import { IconCabinetPassword, IconCabinetEdit } from "@/assets/icons";
 
 // components
-import { ActivePageEnum, CabinetLayout } from '@/layouts/CabinetLayot/CabinetLayout';
-import { Button, ThemeButton } from '@/UI/Button/Button';
-import { ProductCardItem, ThemeProductCard } from '@/components/ProductCardItem/ProductCardItem';
-import { ShowEditProfile } from '@/components/cabinet/profile/showEditProfile';
-import { EditProfilePhoto } from '@/components/cabinet/profile/editProfilePhoto';
-import { Form, Formik } from 'formik';
-import Link from 'next/link';
+import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { Button, ThemeButton } from "@/UI/Button/Button";
+import { ProductCardItem, ThemeProductCard } from "@/components/ProductCardItem/ProductCardItem";
+import { ShowEditProfile } from "@/components/cabinet/profile/showEditProfile";
+import { EditProfilePhoto } from "@/components/cabinet/profile/editProfilePhoto";
+import { Form, Formik } from "formik";
+import Link from "next/link";
 
 export default function profilePage() {
   const [showEditProfile, setShowEditProfile] = useState(false);
@@ -27,7 +27,7 @@ export default function profilePage() {
             userProfilePhoto: null,
           }}
           onSubmit={(values) => {
-            console.log('values is: ', {
+            console.log("values is: ", {
               ...values,
             });
           }}
@@ -84,8 +84,6 @@ export default function profilePage() {
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
         </ul>
       </div>
-
-      <div className={cls.orders}></div>
     </CabinetLayout>
   );
 }

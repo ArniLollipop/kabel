@@ -1,28 +1,33 @@
 // packages
-import { useState } from 'react';
+import { useState } from "react";
 
 // assets
-import cls from './index.module.scss';
+import cls from "./index.module.scss";
 import {
   IconPhone,
   IconCardCounterPlus,
   IconCabinetDelivery,
   IconCabinetProfile,
   IconCabinetEdit,
-} from '@/assets/icons';
+} from "@/assets/icons";
 
 // components
-import { ActivePageEnum, CabinetLayout } from '@/layouts/CabinetLayot/CabinetLayout';
-import { Button, ThemeButton } from '@/UI/Button/Button';
-import { AddOrEditDelivery } from '@/components/cabinet/delivery/AddOrEditDelivery';
+import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { Button, ThemeButton } from "@/UI/Button/Button";
+import { AddOrEditDelivery } from "@/components/cabinet/delivery/AddOrEditDelivery";
+
+// Libs
+import classNames from "classnames/bind";
+
+const cn = classNames.bind(cls);
 
 export default function deliveryPage() {
   const [showAddOrEdit, setShowAddOrEdit] = useState(false);
 
   return (
-    <CabinetLayout activePage={ActivePageEnum.DELIVERY}>
+    <CabinetLayout activePage={ActivePageEnum.DELIVERY} className={cls.delivery}>
       {showAddOrEdit ? (
-        <AddOrEditDelivery setShowAddOrEdit={setShowAddOrEdit} />
+        <AddOrEditDelivery className={cls.delivery_form} setShowAddOrEdit={setShowAddOrEdit} />
       ) : (
         <>
           <Button
@@ -51,18 +56,21 @@ export default function deliveryPage() {
               </span>
 
               <div className={cls.delivery_btns}>
-                <label htmlFor="">
+                <label className={cls.delivery_btns_label} htmlFor="">
                   <input type="radio" name="default" />
                   По умолчанию
                 </label>
                 <Button
                   onClick={() => setShowAddOrEdit(true)}
-                  className={cls.delivery_editBtn}
+                  className={cn(cls.delivery_editBtn, cls.delivery_btns_edit)}
                   theme={ThemeButton.CLEAR}
                 >
                   <IconCabinetEdit /> Редактировать
                 </Button>
-                <Button className={cls.delivery_removeBtn} theme={ThemeButton.CLEAR}>
+                <Button
+                  className={cn(cls.delivery_removeBtn, cls.delivery_btns_delete)}
+                  theme={ThemeButton.CLEAR}
+                >
                   Удалить
                 </Button>
               </div>
@@ -83,18 +91,21 @@ export default function deliveryPage() {
               </span>
 
               <div className={cls.delivery_btns}>
-                <label htmlFor="">
+                <label className={cls.delivery_btns_label} htmlFor="">
                   <input type="radio" name="default" />
                   По умолчанию
                 </label>
                 <Button
                   onClick={() => setShowAddOrEdit(true)}
-                  className={cls.delivery_editBtn}
+                  className={cn(cls.delivery_editBtn, cls.delivery_btns_edit)}
                   theme={ThemeButton.CLEAR}
                 >
                   <IconCabinetEdit /> Редактировать
                 </Button>
-                <Button className={cls.delivery_removeBtn} theme={ThemeButton.CLEAR}>
+                <Button
+                  className={cn(cls.delivery_removeBtn, cls.delivery_btns_delete)}
+                  theme={ThemeButton.CLEAR}
+                >
                   Удалить
                 </Button>
               </div>

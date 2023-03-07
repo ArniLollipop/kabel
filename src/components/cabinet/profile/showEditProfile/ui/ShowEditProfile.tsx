@@ -1,22 +1,22 @@
 // packages
-import { FC } from 'react';
-import classNames from 'classnames';
-import { Form, Formik } from 'formik';
+import { FC } from "react";
+import classNames from "classnames";
+import { Form, Formik } from "formik";
 
 // assets
-import cls from './ShowEditProfile.module.scss';
+import cls from "./ShowEditProfile.module.scss";
 
 // validation
-import { profileSchema } from '@/helpers/validation';
+import { profileSchema } from "@/helpers/validation";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { EditProfilePhoto } from '../../editProfilePhoto';
-import { Button, ThemeButton } from '@/UI/Button/Button';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { EditProfilePhoto } from "../../editProfilePhoto";
+import { Button, ThemeButton } from "@/UI/Button/Button";
 
 // mask
-import { maskForPhone } from '@/helpers/masks';
+import { maskForPhone } from "@/helpers/masks";
 
 let cn = classNames.bind(cls);
 
@@ -32,16 +32,16 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
     <div className={cn(cls.ShowEditProfile)}>
       <Formik
         initialValues={{
-          name: '',
-          lastName: '',
-          fatherName: '',
-          email: '',
-          phoneNumber: '',
+          name: "",
+          lastName: "",
+          fatherName: "",
+          email: "",
+          phoneNumber: "",
           userEditProfilePhoto: null,
         }}
         validationSchema={profileSchema}
         onSubmit={(values) => {
-          console.log('values is: ', {
+          console.log("values is: ", {
             ...values,
           });
         }}
@@ -73,65 +73,65 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
                   />
 
                   <div className={cls.userCard_inputsContainer}>
-                    <div className={cls.userCard_NnLInputs}>
-                      <InputInstance
-                        theme={EInputInstanceTheme.PROFILE}
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Имя"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.name}
-                        errors={errors.name}
-                        touched={touched.name}
-                        className={cls.nameInput}
-                      />
+                    {/* <div className={cls.userCard_NnLInputs}> */}
+                    <InputInstance
+                      theme={EInputInstanceTheme.PROFILE}
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Имя"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                      errors={errors.name}
+                      touched={touched.name}
+                      className={cls.nameInput}
+                    />
 
-                      <InputInstance
-                        theme={EInputInstanceTheme.PROFILE}
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        placeholder="Фамилия"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.lastName}
-                        errors={errors.lastName}
-                        touched={touched.lastName}
-                        className={cls.lastNameInput}
-                      />
-                    </div>
+                    <InputInstance
+                      theme={EInputInstanceTheme.PROFILE}
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      placeholder="Фамилия"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.lastName}
+                      errors={errors.lastName}
+                      touched={touched.lastName}
+                      className={cls.lastNameInput}
+                    />
+                    {/* </div> */}
 
-                    <div className={cls.userCard_LnEInputs}>
-                      <InputInstance
-                        theme={EInputInstanceTheme.PROFILE}
-                        type="text"
-                        id="fatherName"
-                        name="fatherName"
-                        placeholder="Отчество"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.fatherName}
-                        errors={errors.fatherName}
-                        touched={touched.fatherName}
-                        className={cls.fatherNameInput}
-                      />
+                    {/* <div className={cls.userCard_LnEInputs}> */}
+                    <InputInstance
+                      theme={EInputInstanceTheme.PROFILE}
+                      type="text"
+                      id="fatherName"
+                      name="fatherName"
+                      placeholder="Отчество"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.fatherName}
+                      errors={errors.fatherName}
+                      touched={touched.fatherName}
+                      className={cls.fatherNameInput}
+                    />
 
-                      <InputInstance
-                        theme={EInputInstanceTheme.PROFILE}
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email:"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.email}
-                        errors={errors.email}
-                        touched={touched.email}
-                        className={cls.emailInput}
-                      />
-                    </div>
+                    <InputInstance
+                      theme={EInputInstanceTheme.PROFILE}
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email:"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                      errors={errors.email}
+                      touched={touched.email}
+                      className={cls.emailInput}
+                    />
+                    {/* </div> */}
 
                     <InputInstance
                       mask={maskForPhone}
@@ -148,6 +148,7 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
                       className={cls.phoneNumberInput}
                     />
                   </div>
+
                   <Button
                     className={cls.userCard_saveBtn}
                     onClick={handleSaveProfilePhoto}

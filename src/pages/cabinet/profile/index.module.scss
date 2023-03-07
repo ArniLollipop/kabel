@@ -142,14 +142,6 @@
   }
 }
 
-.orders {
-  width: 600px;
-  height: 300px;
-  background-color: #eee;
-  opacity: 0.3px;
-  border-radius: 15px;
-}
-
 @media (max-width: 550px) {
   .userCard {
     &_btns {
@@ -175,6 +167,18 @@
   }
 }
 
+@media (max-width: 768px) {
+  .userCard {
+    &_info {
+      flex-direction: column;
+    }
+
+    &_datas {
+      align-self: flex-start;
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .content {
     display: block;
@@ -184,16 +188,21 @@
   .recommended {
     margin-bottom: 20px;
   }
+
+  .userCard {
+    &_info {
+      justify-content: flex-start;
+    }
+
+    &_btns {
+      justify-content: flex-start;
+      gap: 40px;
+    }
+  }
 }
 
 @media (max-width: 1580px) {
   .content {
     grid-template-columns: repeat(1, 1fr);
-  }
-  .userCard {
-    &_info {
-      display: flex;
-      flex-direction: column;
-    }
   }
 }

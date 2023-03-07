@@ -8,7 +8,7 @@ export {
 } from "./servicesIcons/servicesIcons";
 export { HidePassword, ShowPassword } from "./authIcons/authIcons";
 
-import { InputPhoneNumberIcon } from './InputPhoneNumberIcon';
+import { InputPhoneNumberIcon } from "./InputPhoneNumberIcon";
 
 export { InputPhoneNumberIcon };
 
@@ -19,7 +19,7 @@ export {
   IconUserCabinet,
   IconWhatsApp,
   IconLogo,
-} from './headerIcons';
+} from "./headerIcons";
 
 export {
   IconMobileMenuCard,
@@ -27,7 +27,7 @@ export {
   IconMobileMenuMore,
   IconMobileMenuProduct,
   IconMobileMenuServices,
-} from './mobileMenuIcons';
+} from "./mobileMenuIcons";
 
 export {
   IconShare,
@@ -59,14 +59,13 @@ export {
   IconCabinetEdit,
   IconCabinetPassword,
   IconCabinetEditPhoto,
-} from './cabinetIcons';
+} from "./cabinetIcons";
 
 export {
-  IconContactsClock, 
-  IconContactsGeo, 
+  IconContactsClock,
+  IconContactsGeo,
   IconContactsMail,
   IconContactsPhone,
-  IconContactsTg, 
-  IconContactsWa} from "./contactsIcons"
-
-
+  IconContactsTg,
+  IconContactsWa,
+} from "./contactsIcons";
