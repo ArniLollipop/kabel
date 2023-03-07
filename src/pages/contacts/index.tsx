@@ -14,12 +14,13 @@ import {
   IconContactsWa,
 } from "@/assets/icons";
 import Link from "next/link";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 const cn = classNames.bind(cls);
 
 export default function contactsPage() {
   return (
-    <MainLayout>
+    <MainLayout activePage={ActiveHeaderPage.CONTACTS}>
       <div className={cn(cls.contactsPage)}>
         <Title className={cls.contactsPage_title}>Контакты</Title>
         <div className={cls.contactsPage_wrapper}>
