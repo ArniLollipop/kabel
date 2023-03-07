@@ -12,6 +12,7 @@ import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-
 import { IconCabinetArrow } from "@/assets/icons";
 import { Title } from "@/UI/Title/Title";
 import ImageDelivery from "@/assets/images/ImageDelivery.png";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 let cn = classNames.bind(cls);
 
@@ -23,7 +24,7 @@ export default function payment(props: paymentProps) {
   const { className } = props;
 
   return (
-    <MainLayout>
+    <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
       {/* PC Layout */}
       <DeliveryLayout className={cls.wrapper} activePage={ActivePageEnum.PAYMENT} title="Оплата">
         <div className={cls.text}>

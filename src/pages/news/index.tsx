@@ -10,6 +10,7 @@ import { SwiperSlide, Swiper, SwiperProps } from "swiper/react";
 
 import "swiper/css";
 import Link from "next/link";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 const cn = classNames.bind(cls);
 
@@ -56,7 +57,7 @@ const params: SwiperProps = {
 export default function newsPage() {
   const [myswiper, setSwiper] = useState<any>();
   return (
-    <MainLayout>
+    <MainLayout activePage={ActiveHeaderPage.NEWS}>
       {/* PC implementation */}
       <div className={cn(cls.news)}>
         <Title className={cls.news_title}>Новости</Title>

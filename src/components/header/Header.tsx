@@ -9,12 +9,29 @@ import {
   IconLogo,
 } from "@/assets/icons";
 import Link from "next/link";
+import classNames from "classnames/bind";
+
+const cn = classNames.bind(cls);
+
+export const enum ActiveHeaderPage {
+  ABOUT = "about",
+  CATALOG = "catalog",
+  SERVICES = "services",
+  NEWS = "news",
+  PAY_DEL = "pay_del",
+  CONTACTS = "contacts",
+  MAIN = "main",
+  CARD = "card",
+  MORE = "more",
+}
 
 interface HeaderProps {
   className?: string;
+  activePage?: ActiveHeaderPage;
 }
+
 export const Header: FC<HeaderProps> = (props) => {
-  const { className } = props;
+  const { className, activePage } = props;
 
   return (
     <div className={cls.Header}>
@@ -78,22 +95,51 @@ export const Header: FC<HeaderProps> = (props) => {
         </Link>
 
         <ul className={cls.nav_list}>
-          <li className={cls.nav_list_item}>
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.ABOUT,
+            })}
+          >
             <Link href="/about">О компании</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage == ActiveHeaderPage.CATALOG,
+            })}
+          >
             <Link href="/catalog">Продукция</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.SERVICES,
+            })}
+          >
             <Link href="/services">Сервисы</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.NEWS,
+            })}
+          >
             <Link href="/news">Новости</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.PAY_DEL,
+            })}
+          >
             <Link href="/pay-del/payment">Оплата и доставка</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.CONTACTS,
+            })}
+          >
             <Link href="/contacts">Контакты</Link>
           </li>
         </ul>

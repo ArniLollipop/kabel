@@ -14,6 +14,7 @@ import ImagePayment from "@/assets/images/ImagePayment.png";
 import IconPaymentKaspi from "@/assets/icons/IconPaymentKaspi.svg";
 import IconPaymentVisa from "@/assets/icons/IconPaymentVisa.svg";
 import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 interface deliveryProps {
   className?: string;
@@ -25,7 +26,7 @@ export default function delivery(props: deliveryProps) {
 
   return (
     <>
-      <MainLayout>
+      <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
         {/* PC Layout */}
         <DeliveryLayout
           className={cn(cls.wrapper, cls.wrapper_del)}

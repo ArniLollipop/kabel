@@ -6,6 +6,7 @@ import { article } from "@/data/NewsData";
 import { useRouter } from "next/router";
 import { Title } from "@/UI/Title/Title";
 import Image from "next/image";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 const cn = classNames.bind(cls);
 
@@ -21,7 +22,7 @@ export default function articlePage() {
   //   }, [articleId]);
 
   return (
-    <MainLayout>
+    <MainLayout activePage={ActiveHeaderPage.NEWS}>
       <div className={cn(cls.articlePage)}>
         <Title className={cls.articlePage_title}>Новости</Title>
 

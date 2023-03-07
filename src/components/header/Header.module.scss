@@ -158,6 +158,10 @@ $margins_mob: 5;
       &:hover {
         color: var(--color-accent);
       }
+
+      &.active {
+        color: var(--color-accent);
+      }
     }
 
     &_item:not(:last-child) {
