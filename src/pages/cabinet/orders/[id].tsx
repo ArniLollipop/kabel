@@ -4,7 +4,7 @@ import cls from "./index.module.scss";
 import { useRouter } from "next/router";
 import { ordersData } from "@/data/OrdersData";
 import { MainLayout } from "@/layouts/MainLayout";
-import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export default function OrderCard(props: OrderCardProps) {
   } = ordersData.filter((or) => or.id === 3)[0];
 
   return (
-    <CabinetLayout className={cn(cls.orders)} activePage={ActivePageEnum.ORDERS}>
+    <CabinetLayout className={cn(cls.orders)} activePage={ActiveCabinetPageEnum.ORDERS}>
       <div className={cls.orders_wrapper}>
         <h2 className={cls.orders_title}>Мои заказы</h2>
         <span className={cls.orders_subTitle}>Свежие</span>

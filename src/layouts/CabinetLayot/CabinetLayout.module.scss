@@ -39,6 +39,12 @@
     margin: 42px 0 0 13px;
   }
 
+  &.mobile {
+    .nav_link {
+      width: 100%;
+    }
+  }
+
   &_link {
     padding: 15px;
     display: flex;

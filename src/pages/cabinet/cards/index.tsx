@@ -9,7 +9,7 @@ import IconPaymentVisa from "@/assets/icons/IconPaymentVisa.svg";
 import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 
 // components
-import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
 import { Button, ThemeButton } from "@/UI/Button/Button";
 import { AddCard } from "@/components/cabinet/cards/AddCard";
 
@@ -17,7 +17,7 @@ export default function cardsPage() {
   const [showAddCard, setShowAddCard] = useState(false);
 
   return (
-    <CabinetLayout className={cls.cards_wrapper} activePage={ActivePageEnum.CARDS}>
+    <CabinetLayout className={cls.cards_wrapper} activePage={ActiveCabinetPageEnum.CARDS}>
       {showAddCard ? (
         <AddCard className={cls.form} setShowAddCard={setShowAddCard} />
       ) : (

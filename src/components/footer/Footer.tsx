@@ -190,15 +190,15 @@ export const Footer: FC<FooterProps> = (props) => {
         </Link>
 
         <Link
-          href="/more"
+          href="/cabinet"
           className={cn(cls.FooterMobile_navMenuItem, {
-            active: activePage === ActiveHeaderPage.MORE,
+            active: activePage === ActiveHeaderPage.CABINET,
           })}
         >
           <IconMobileMenuMore
-            textColor={activePage === ActiveHeaderPage.MORE ? "#00abc2" : "#4F4F4F"}
+            textColor={activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"}
           />
-          <span>Еще</span>
+          <span>Профиль </span>
         </Link>
       </div>
     </>
