@@ -6,7 +6,7 @@ import cls from "./index.module.scss";
 import { IconCabinetPassword, IconCabinetEdit } from "@/assets/icons";
 
 // components
-import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
 import { Button, ThemeButton } from "@/UI/Button/Button";
 import { ProductCardItem, ThemeProductCard } from "@/components/ProductCardItem/ProductCardItem";
 import { ShowEditProfile } from "@/components/cabinet/profile/showEditProfile";
@@ -18,7 +18,7 @@ export default function profilePage() {
   const [showEditProfile, setShowEditProfile] = useState(false);
 
   return (
-    <CabinetLayout className={cls.content} activePage={ActivePageEnum.PROFILE}>
+    <CabinetLayout className={cls.content} activePage={ActiveCabinetPageEnum.PROFILE}>
       {showEditProfile ? (
         <ShowEditProfile setShowEditProfile={setShowEditProfile} />
       ) : (

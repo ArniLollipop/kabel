@@ -1,7 +1,7 @@
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
-import { ActivePageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
+import { ActivePayDelPageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
 import Image from "next/image";
 import ImageDelivery from "@/assets/images/ImageDelivery.png";
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
@@ -30,7 +30,7 @@ export default function delivery(props: deliveryProps) {
         {/* PC Layout */}
         <DeliveryLayout
           className={cn(cls.wrapper, cls.wrapper_del)}
-          activePage={ActivePageEnum.DELIVERY}
+          activePage={ActivePayDelPageEnum.DELIVERY}
           title="Доставка"
         >
           <div className={cls.text}>

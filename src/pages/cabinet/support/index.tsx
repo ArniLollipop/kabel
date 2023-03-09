@@ -1,4 +1,4 @@
-import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
 import { IconWhatsApp } from "@/assets/icons";
 import cls from "./index.module.scss";
 import classNames from "classnames/bind";
@@ -42,7 +42,7 @@ export default function supportPage() {
   };
 
   return (
-    <CabinetLayout className={cls.support} activePage={ActivePageEnum.SUPPORT}>
+    <CabinetLayout className={cls.support} activePage={ActiveCabinetPageEnum.SUPPORT}>
       <div className={cls.support_wrapper}>
         <h1 className={cls.support_title}>Служба поддержки</h1>
         <div className={cls.support_content}>

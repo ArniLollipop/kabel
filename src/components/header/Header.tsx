@@ -22,7 +22,7 @@ export const enum ActiveHeaderPage {
   CONTACTS = "contacts",
   MAIN = "main",
   CARD = "card",
-  MORE = "more",
+  CABINET = "more",
 }
 
 interface HeaderProps {
@@ -37,9 +37,9 @@ export const Header: FC<HeaderProps> = (props) => {
     <div className={cls.Header}>
       <ul className={cls.contacts_list}>
         <li className={cls.contacts_list_mobileLogo}>
-          <a href="#">
+          <Link href="/">
             <IconLogo width="126" height="47" />
-          </a>
+          </Link>
         </li>
 
         <li className={cls.contacts_list_geoTag}>

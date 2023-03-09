@@ -12,7 +12,7 @@ import {
 } from "@/assets/icons";
 
 // components
-import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
 import { Button, ThemeButton } from "@/UI/Button/Button";
 import { AddOrEditDelivery } from "@/components/cabinet/delivery/AddOrEditDelivery";
 
@@ -25,7 +25,7 @@ export default function deliveryPage() {
   const [showAddOrEdit, setShowAddOrEdit] = useState(false);
 
   return (
-    <CabinetLayout activePage={ActivePageEnum.DELIVERY} className={cls.delivery}>
+    <CabinetLayout activePage={ActiveCabinetPageEnum.DELIVERY} className={cls.delivery}>
       {showAddOrEdit ? (
         <AddOrEditDelivery className={cls.delivery_form} setShowAddOrEdit={setShowAddOrEdit} />
       ) : (

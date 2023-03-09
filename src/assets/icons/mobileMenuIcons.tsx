@@ -110,34 +110,19 @@ export const IconMobileMenuMore: FC<mobileMenuIconsProps> = (props) => {
   const { className, textColor = "#4F4F4F" } = props;
 
   return (
-    <svg width="28" height="25" viewBox="0 0 28 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle
-        cx="3.66667"
-        cy="3.66667"
-        r="2.66667"
+    <svg
+      width="25"
+      height="25"
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M5.83398 21.6667V20.8331C5.83398 18.0717 8.07256 15.8334 10.834 15.8334H14.1673C16.9287 15.8334 19.1673 18.0717 19.1673 20.8331V21.6667M12.5007 5.83337C10.6597 5.83337 9.16732 7.32576 9.16732 9.16671C9.16732 11.0077 10.6597 12.5 12.5007 12.5C14.3416 12.5 15.834 11.0077 15.834 9.16671C15.834 7.32576 14.3416 5.83337 12.5007 5.83337ZM12.5007 24.1667C6.05733 24.1667 0.833984 18.9434 0.833984 12.5C0.833984 6.05672 6.05733 0.833374 12.5007 0.833374C18.944 0.833374 24.1673 6.05672 24.1673 12.5C24.1673 18.9434 18.944 24.1667 12.5007 24.1667Z"
         stroke={textColor}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={className}
-      />
-      <circle
-        cx="13.6667"
-        cy="3.66667"
-        r="2.66667"
-        stroke={textColor}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="23.6667"
-        cy="3.66667"
-        r="2.66667"
-        stroke={textColor}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="1.65"
+        stroke-linecap="square"
       />
     </svg>
   );

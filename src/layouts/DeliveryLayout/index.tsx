@@ -8,7 +8,7 @@ import { Title } from "@/UI/Title/Title";
 
 const cn = classNames.bind(cls);
 
-export const enum ActivePageEnum {
+export const enum ActivePayDelPageEnum {
   DELIVERY = "delivery",
   PAYMENT = "payment",
 }
@@ -16,7 +16,7 @@ export const enum ActivePageEnum {
 interface DeliveryLayoutProps {
   className?: string;
   children: ReactNode;
-  activePage: ActivePageEnum;
+  activePage: ActivePayDelPageEnum;
   title: string;
 }
 
@@ -31,9 +31,9 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
         <nav className={cls.deliveryLayout_nav}>
           <div className={cls.deliveryLayout_navWrapper}>
             <Link
-              href={`/pay-del/${ActivePageEnum.PAYMENT}`}
+              href={`/pay-del/${ActivePayDelPageEnum.PAYMENT}`}
               className={cn(cls.deliveryLayout_link, {
-                active: activePage === ActivePageEnum.PAYMENT,
+                active: activePage === ActivePayDelPageEnum.PAYMENT,
               })}
             >
               <span>Оплата</span>
@@ -41,9 +41,9 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
             </Link>
 
             <Link
-              href={`/pay-del/${ActivePageEnum.DELIVERY}`}
+              href={`/pay-del/${ActivePayDelPageEnum.DELIVERY}`}
               className={cn(cls.deliveryLayout_link, {
-                active: activePage === ActivePageEnum.DELIVERY,
+                active: activePage === ActivePayDelPageEnum.DELIVERY,
               })}
             >
               <span>Доставка</span>

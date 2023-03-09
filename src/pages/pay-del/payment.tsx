@@ -1,7 +1,7 @@
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
-import { ActivePageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
+import { ActivePayDelPageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
 import Image from "next/image";
 import ImagePayment from "@/assets/images/ImagePayment.png";
 import IconPaymentKaspi from "@/assets/icons/IconPaymentKaspi.svg";
@@ -26,7 +26,11 @@ export default function payment(props: paymentProps) {
   return (
     <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
       {/* PC Layout */}
-      <DeliveryLayout className={cls.wrapper} activePage={ActivePageEnum.PAYMENT} title="Оплата">
+      <DeliveryLayout
+        className={cls.wrapper}
+        activePage={ActivePayDelPageEnum.PAYMENT}
+        title="Оплата"
+      >
         <div className={cls.text}>
           <p className={cls.descrText}>
             Оплата товара <br /> Вы можете произвести оплату заказа любым удобным способом:
