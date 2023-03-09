@@ -215,7 +215,7 @@ export default function supportPage() {
           <div className={cls.support_orders}>
             <h2 className={cls.support_ordersTitle}>Здравствуйте, Аксултан Оспанов!</h2>
             <p className={cls.support_ordersTitle}>
-              Выберите из списка заказ, по которому возник у вас вопрос.{" "}
+              Выберите из списка заказ, по которому возник у вас вопрос.
             </p>
             <HistoryOrdersSlider className={cls.support_slider} params={params} />
             <div className={cls.support_slider}></div>

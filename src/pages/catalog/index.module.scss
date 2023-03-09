@@ -1,0 +1,45 @@
+@import "/src/styles/globalMixins.scss";
+
+.cardItem {
+  background-color: #f8f8f8;
+
+  &_wrapper {
+    @include adaptive-size(100, 30, padding-top);
+    @include adaptive-size(75, 40, padding-bottom);
+
+    max-width: 1700px;
+    margin: 0 auto;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.slider {
+  margin: 0 auto;
+  @include adaptive-size(90, 30, margin-top);
+
+  padding-top: 33px;
+  padding-bottom: 85px;
+  padding-left: 152px;
+  padding-right: 152px;
+  max-width: 1320px;
+  width: 100%;
+  background: var(--color-bg-white);
+  border-radius: 30px;
+
+  &_title {
+    @include adaptive-size(65, 15, margin-bottom);
+
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 149.4%;
+
+    color: var(--color-font-title);
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
