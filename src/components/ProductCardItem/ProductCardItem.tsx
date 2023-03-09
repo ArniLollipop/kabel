@@ -34,7 +34,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
       <Image src={mockImage} alt="product" className={cls.cardImg} />
 
       <div className={cls.cardInfo}>
-        <Link href="/" className={cls.link}>
+        <Link href="/catalog/1" className={cls.link}>
           <h3 className={cls.cardTitle}>Провод ПуГВнг (А)- LS</h3>
         </Link>
         <p className={cls.cardDescr}>Lorem ipsum dolor sit amet consectetur. Mattis</p>

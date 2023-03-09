@@ -21,7 +21,7 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
         Open
       </button>
 
-      <SortButtonsWidget className={cls.sortButtonsWidget} />
+      {/* <SortButtonsWidget className={cls.sortButtonsWidget} /> */}
 
       <SortByWidget />
       <ul className={cls.goodsList}>
