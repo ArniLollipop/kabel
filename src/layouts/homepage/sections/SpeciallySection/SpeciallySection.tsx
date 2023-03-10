@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./SpeciallySection.module.scss";
-import { Title } from "@/UI/Title/Title";
-import { Button, ThemeButton } from "@/UI/Button/Button";
-import { NewsCard } from "@/components/newsCard/NewsCard";
-import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
-import { ProductCardItem, ThemeProductCard } from "@/components/ProductCardItem/ProductCardItem";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './SpeciallySection.module.scss';
+import { Title } from '@/UI/Title/Title';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { NewsCard } from '@/components/newsCard/NewsCard';
+import ImageMockNewsCard from '@/assets/images/ImageMockNewsCard.png';
+import { ProductCardItem, ThemeProductCard } from '@/components/ProductCardItem/ProductCardItem';
 
 const cn = classNames.bind(cls);
 

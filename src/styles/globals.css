@@ -1,6 +1,6 @@
 :root {
   /* fonts */
-  --font-family-main: "Montserrat", serif;
+  --font-family-main: 'Montserrat', serif;
 
   --font-size-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
@@ -21,7 +21,7 @@
   --color-accent: #00abc2;
   --color-accent-secondary: #f6bf0c;
 
-  --color-bg-grey: #f8f8f8;
+  --color-bg-grey: #5b636a;
   --color-bg-white: #ffffff;
   --auth-bg-color: #f8f8f8;
   --services-bg-color: #f0f7fb;

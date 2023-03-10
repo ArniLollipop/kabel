@@ -1,22 +1,22 @@
 // packages
-import { FC } from "react";
-import classNames from "classnames";
-import { Form, Formik } from "formik";
+import { FC } from 'react';
+import classNames from 'classnames';
+import { Form, Formik } from 'formik';
 
 // assets
-import cls from "./ShowEditProfile.module.scss";
+import cls from './ShowEditProfile.module.scss';
 
 // validation
-import { profileSchema } from "@/helpers/validation";
+import { profileSchema } from '@/helpers/validation';
 
 // components
-import { InputInstance } from "@/shared/formElements/InputInstance";
-import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
-import { EditProfilePhoto } from "../../editProfilePhoto";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { InputInstance } from '@/shared/formElements/InputInstance';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { EditProfilePhoto } from '../../editProfilePhoto';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 // mask
-import { maskForPhone } from "@/helpers/masks";
+import { maskForPhone } from '@/helpers/masks';
 
 let cn = classNames.bind(cls);
 
@@ -32,16 +32,16 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
     <div className={cn(cls.ShowEditProfile)}>
       <Formik
         initialValues={{
-          name: "",
-          lastName: "",
-          fatherName: "",
-          email: "",
-          phoneNumber: "",
+          name: '',
+          lastName: '',
+          fatherName: '',
+          email: '',
+          phoneNumber: '',
           userEditProfilePhoto: null,
         }}
         validationSchema={profileSchema}
         onSubmit={(values) => {
-          console.log("values is: ", {
+          console.log('values is: ', {
             ...values,
           });
         }}

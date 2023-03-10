@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 // components
-import { Button, ThemeButton } from '@/UI/Button/Button';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 // assets
 import { IconCabinetEditPhoto } from '@/assets/icons';

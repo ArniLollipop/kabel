@@ -1,15 +1,15 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./SertificatesSection.module.scss";
-import { Title } from "@/UI/Title/Title";
-import Link from "next/link";
-import Image from "next/image";
-import ImageMockSertificate from "@/assets/images/ImageMockSertificate.png";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './SertificatesSection.module.scss';
+import { Title } from '@/UI/Title/Title';
+import Link from 'next/link';
+import Image from 'next/image';
+import ImageMockSertificate from '@/assets/images/ImageMockSertificate.png';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
+import 'swiper/css';
 
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 

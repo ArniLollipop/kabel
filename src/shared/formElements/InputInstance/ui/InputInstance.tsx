@@ -1,21 +1,21 @@
 // hooks
-import { FC, FocusEvent, InputHTMLAttributes } from "react";
+import { FC, FocusEvent, InputHTMLAttributes } from 'react';
 
 // assets
-import cls from "./InputInstance.module.scss";
+import cls from './InputInstance.module.scss';
 
 // packages
-import classNames from "classnames";
-import { Field, FieldProps } from "formik";
+import classNames from 'classnames';
+import { Field, FieldProps } from 'formik';
 
 // types
-import MaskedInput from "react-text-mask";
+import MaskedInput from 'react-text-mask';
 
 let cn = classNames.bind(cls);
 
 interface IInputInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
   password?: string;
-  labelText?: string;
+  labeltext?: string;
   touched?: boolean;
   errors?: string;
   className?: string;
@@ -23,24 +23,24 @@ interface IInputInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
   mask?: Array<string | RegExp> | false;
   theme?: EInputInstanceTheme;
   as?:
-    | React.ComponentType<FieldProps["field"]>
+    | React.ComponentType<FieldProps['field']>
     | string
     | React.ComponentType
     | React.ForwardRefExoticComponent<any>;
 }
 
 export enum EInputInstanceTheme {
-  AUTH = "auth",
-  SERVICES = "services",
-  PROFILE = "profile",
+  AUTH = 'auth',
+  SERVICES = 'services',
+  PROFILE = 'profile',
 }
 
 export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) => {
-  const { labelText, children, as, touched, errors, mask, theme, className, password } = props;
+  const { labeltext, children, as, touched, errors, mask, theme, className, password } = props;
 
-  const inputLabel = labelText && (
-    <label htmlFor={id} className={""}>
-      {labelText}
+  const inputLabel = labeltext && (
+    <label htmlFor={id} className={''}>
+      {labeltext}
     </label>
   );
 

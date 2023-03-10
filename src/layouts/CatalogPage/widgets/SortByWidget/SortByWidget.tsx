@@ -1,7 +1,7 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./SortByWidget.module.scss";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './SortByWidget.module.scss';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 

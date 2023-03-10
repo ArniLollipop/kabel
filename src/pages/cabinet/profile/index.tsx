@@ -7,7 +7,8 @@ import { IconCabinetPassword, IconCabinetEdit } from "@/assets/icons";
 
 // components
 import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ProductCardItem, ThemeProductCard } from "@/components/ProductCardItem/ProductCardItem";
 import { ShowEditProfile } from "@/components/cabinet/profile/showEditProfile";
 import { EditProfilePhoto } from "@/components/cabinet/profile/editProfilePhoto";

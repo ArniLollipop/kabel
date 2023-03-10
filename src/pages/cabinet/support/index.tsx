@@ -3,7 +3,8 @@ import { IconWhatsApp } from "@/assets/icons";
 import cls from "./index.module.scss";
 import classNames from "classnames/bind";
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 import { HistoryOrdersSlider } from "@/components/HistoryOrdersSlider/HistoryOrdersSlider";
 import { SwiperProps } from "swiper/react";
 

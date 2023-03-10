@@ -1,18 +1,18 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./OfferSection.module.scss";
-import { Button } from "@/UI/Button/Button";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Pagination } from "swiper";
-import Image from "next/image";
-import ImageHomepageDecor from "@/assets/images/ImageHomepageDecor.png";
-import Banner from "@/assets/images/Banner.png";
-import Banner2 from "@/assets/images/Banner2.png";
-import Banner3 from "@/assets/images/Banner3.png";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './OfferSection.module.scss';
+import { Button } from '@/UI/Button/ui/Button';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Pagination } from 'swiper';
+import Image from 'next/image';
+import ImageHomepageDecor from '@/assets/images/ImageHomepageDecor.png';
+import Banner from '@/assets/images/Banner.png';
+import Banner2 from '@/assets/images/Banner2.png';
+import Banner3 from '@/assets/images/Banner3.png';
 
-import "swiper/css/autoplay";
-import "swiper/css/effect-fade";
-import "swiper/css/pagination";
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
 
 const cn = classNames.bind(cls);
 
@@ -33,7 +33,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
     },
 
     pagination: {
-      el: ".pagination",
+      el: '.pagination',
       clickable: true,
     },
 
@@ -46,7 +46,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
     <>
       <section className={cn(cls.OfferSection)}>
         <div className={cls.offerInner}>
-          <h1 className={cn(cls.offerTitle, "title")}>
+          <h1 className={cn(cls.offerTitle, 'title')}>
             Отечественный производитель кабельно – проводниковой продукции
           </h1>
 
@@ -56,7 +56,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
 
           <Button className={cls.offerBtn}>Заказать сейчас</Button>
 
-          <div className={cn(cls.offerPagination, "pagination")}>
+          <div className={cn(cls.offerPagination, 'pagination')}>
             <span className="dot" role="button"></span>
             <span className="dot" role="button"></span>
             <span className="dot" role="button"></span>
@@ -93,7 +93,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
 
       <section className={cls.offerSectionMobile}>
         <div className={cls.offerSectionMobile_inner}>
-          <h1 className={cn(cls.offerSectionMobile_title, "title")}>
+          <h1 className={cn(cls.offerSectionMobile_title, 'title')}>
             Отечественный производитель кабельно – проводниковой продукции
           </h1>
 

@@ -13,7 +13,8 @@ import {
 
 // components
 import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 import { AddOrEditDelivery } from "@/components/cabinet/delivery/AddOrEditDelivery";
 
 // Libs

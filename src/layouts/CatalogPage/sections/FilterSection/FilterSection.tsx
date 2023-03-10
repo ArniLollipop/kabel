@@ -1,10 +1,10 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./FilterSection.module.scss";
-import { Button, ThemeButton } from "@/UI/Button/Button";
-import { IconRefreshFilters } from "@/assets/icons/IconRefreshFilters";
-import { SearchInput } from "@/shared/formElements/SearchInput/SearchInput";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
+import { Dispatch, FC, SetStateAction, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './FilterSection.module.scss';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { IconRefreshFilters } from '@/assets/icons/IconRefreshFilters';
+import { SearchInput } from '@/shared/formElements/SearchInput/SearchInput';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-headless-accordion';
 
 const cn = classNames.bind(cls);
 

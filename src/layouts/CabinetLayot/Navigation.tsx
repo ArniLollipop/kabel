@@ -13,8 +13,9 @@ import {
   IconCabinetSupport,
   IconCabinetArrow,
 } from "@/assets/icons";
-import { Button, ThemeButton } from "@/UI/Button/Button";
 import { ActiveCabinetPageEnum } from "@/layouts/CabinetLayot/CabinetLayout";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 
 const cn = classNames.bind(cls);
 

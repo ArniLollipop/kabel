@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./GoodsListItem.module.scss";
-import Image, { StaticImageData } from "next/image";
-import { IconShare, IconTrash, IconCardCounterMinus, IconCardCounterPlus } from "@/assets/icons";
-import { Button, ThemeButton } from "@/UI/Button/Button";
-import Link from "next/link";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './GoodsListItem.module.scss';
+import Image, { StaticImageData } from 'next/image';
+import { IconShare, IconTrash, IconCardCounterMinus, IconCardCounterPlus } from '@/assets/icons';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import Link from 'next/link';
 
 const cn = classNames.bind(cls);
 

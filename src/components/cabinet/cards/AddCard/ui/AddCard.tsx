@@ -1,21 +1,21 @@
 // packages
-import { FC } from "react";
-import { Form, Formik } from "formik";
-import classNames from "classnames";
+import { FC } from 'react';
+import { Form, Formik } from 'formik';
+import classNames from 'classnames';
 
 // assets
-import cls from "./AddCard.module.scss";
+import cls from './AddCard.module.scss';
 
 // components
-import { InputInstance } from "@/shared/formElements/InputInstance";
-import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { InputInstance } from '@/shared/formElements/InputInstance';
+import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 // validation
-import { addCardSchema } from "@/helpers/validation";
+import { addCardSchema } from '@/helpers/validation';
 
 // masks
-import { maskForCreditCard, maskForCVV, maskForDate } from "@/helpers/masks";
+import { maskForCreditCard, maskForCVV, maskForDate } from '@/helpers/masks';
 
 let cn = classNames.bind(cls);
 
@@ -31,14 +31,14 @@ export const AddCard: FC<AddCardProps> = (props) => {
     <div className={cn(cls.AddCard, className)}>
       <Formik
         initialValues={{
-          numberOfCard: "",
-          dateOfCard: "",
-          CVV: "",
-          nameOfCardOwner: "",
+          numberOfCard: '',
+          dateOfCard: '',
+          CVV: '',
+          nameOfCardOwner: '',
         }}
         validationSchema={addCardSchema}
         onSubmit={(values) => {
-          console.log("values is: ", {
+          console.log('values is: ', {
             ...values,
           });
         }}

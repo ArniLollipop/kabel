@@ -1,6 +1,6 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./SideBar.module.scss";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './SideBar.module.scss';
 import {
   IconCardDelivery,
   IconCardGarant,
@@ -10,8 +10,8 @@ import {
   IconSideBarCard,
   IconSideBarKaspi,
   IconSidebarPaymentMethods,
-} from "@/assets/icons";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+} from '@/assets/icons';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 

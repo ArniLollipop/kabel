@@ -1,18 +1,18 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./ProductCardItem.module.scss";
-import Link from "next/link";
-import { IconCardItemDelivery, IconCardItemInStock } from "@/assets/icons";
-import mockImage from "@/assets/images/ImageMockProduct2.png";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './ProductCardItem.module.scss';
+import Link from 'next/link';
+import { IconCardItemDelivery, IconCardItemInStock } from '@/assets/icons';
+import mockImage from '@/assets/images/ImageMockProduct2.png';
 
-import Image from "next/image";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import Image from 'next/image';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 
 export const enum ThemeProductCard {
-  CATALOG = "catalog",
-  MINI = "mini",
+  CATALOG = 'catalog',
+  MINI = 'mini',
 }
 
 interface ProductCardItemProps {

@@ -10,7 +10,8 @@ import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 
 // components
 import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 import { AddCard } from "@/components/cabinet/cards/AddCard";
 
 export default function cardsPage() {

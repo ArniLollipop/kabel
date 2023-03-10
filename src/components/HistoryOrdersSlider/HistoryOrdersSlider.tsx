@@ -1,13 +1,13 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./HistoryOrdersSlider.module.scss";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
-import { ordersData } from "@/data/OrdersData";
-import { OrderHistoryCard } from "@/components/OrderHistoryCard/OrderHistoryCard";
-import Image from "next/image";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './HistoryOrdersSlider.module.scss';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { ordersData } from '@/data/OrdersData';
+import { OrderHistoryCard } from '@/components/OrderHistoryCard/OrderHistoryCard';
+import Image from 'next/image';
 
-import "swiper/css";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import 'swiper/css';
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 
