@@ -45,6 +45,7 @@ export {
   IconCardItemOutOfStock,
   IconCardCounterMinus,
   IconCardCounterPlus,
+  IconCardTenge,
 } from "./cardIcons";
 
 export {

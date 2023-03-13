@@ -21,11 +21,11 @@ let cn = classNames.bind(cls);
 
 interface AddOrEditDeliveryProps {
   className?: string;
-  setShowAddOrEdit: (value: boolean) => void;
+  setIsOpen?: (value: boolean) => void;
 }
 
 export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
-  const { className, setShowAddOrEdit } = props;
+  const { className, setIsOpen } = props;
 
   return (
     <div className={cn(cls.AddOrEditDelivery, className)}>
@@ -59,7 +59,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               !errors?.home &&
               !errors?.phoneNumber
             ) {
-              setShowAddOrEdit(false);
+              setIsOpen!(false);
             }
           };
 
@@ -143,7 +143,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                 <div className={cls.container_BtnContainer}>
                   <Button
                     theme={ThemeButton.CANCEL}
-                    onClick={() => setShowAddOrEdit(false)}
+                    onClick={() => setIsOpen!(false)}
                     type="button"
                   >
                     Отменить

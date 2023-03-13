@@ -23,16 +23,16 @@ import classNames from "classnames/bind";
 const cn = classNames.bind(cls);
 
 export default function deliveryPage() {
-  const [showAddOrEdit, setShowAddOrEdit] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <CabinetLayout activePage={ActiveCabinetPageEnum.DELIVERY} className={cls.delivery}>
-      {showAddOrEdit ? (
-        <AddOrEditDelivery className={cls.delivery_form} setShowAddOrEdit={setShowAddOrEdit} />
+      {isOpen ? (
+        <AddOrEditDelivery className={cls.delivery_form} setIsOpen={setIsOpen} />
       ) : (
         <>
           <Button
-            onClick={() => setShowAddOrEdit(true)}
+            onClick={() => setIsOpen(true)}
             className={cls.delivery_addBtn}
             theme={ThemeButton.CLEAR}
           >
@@ -62,7 +62,7 @@ export default function deliveryPage() {
                   По умолчанию
                 </label>
                 <Button
-                  onClick={() => setShowAddOrEdit(true)}
+                  onClick={() => setIsOpen(true)}
                   className={cn(cls.delivery_editBtn, cls.delivery_btns_edit)}
                   theme={ThemeButton.CLEAR}
                 >
@@ -97,7 +97,7 @@ export default function deliveryPage() {
                   По умолчанию
                 </label>
                 <Button
-                  onClick={() => setShowAddOrEdit(true)}
+                  onClick={() => setIsOpen(true)}
                   className={cn(cls.delivery_editBtn, cls.delivery_btns_edit)}
                   theme={ThemeButton.CLEAR}
                 >

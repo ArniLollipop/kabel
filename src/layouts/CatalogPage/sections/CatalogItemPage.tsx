@@ -1,13 +1,13 @@
-import { FC } from 'react';
-import classNames from 'classnames/bind';
-import cls from './CatalogItemPage.module.scss';
-import Image from 'next/image';
-import ImageMockProduct from '@/assets/images/ImageMockProduct.png';
-import { IconCardItemInStock } from '@/assets/icons';
-import ImageMockProductMini from '@/assets/images/ImageMockProductMini.svg';
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
-import { IconShare } from '@/assets/icons';
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-headless-accordion';
+import { FC } from "react";
+import classNames from "classnames/bind";
+import cls from "./CatalogItemPage.module.scss";
+import Image from "next/image";
+import ImageMockProduct from "@/assets/images/ImageMockProduct.png";
+import { IconCardItemInStock } from "@/assets/icons";
+import ImageMockProductMini from "@/assets/images/ImageMockProductMini.svg";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
+import { IconShare } from "@/assets/icons";
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
 
 const cn = classNames.bind(cls);
 

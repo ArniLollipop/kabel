@@ -1,6 +1,6 @@
 :root {
   /* fonts */
-  --font-family-main: 'Montserrat', serif;
+  --font-family-main: "Montserrat", serif;
 
   --font-size-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
@@ -21,7 +21,7 @@
   --color-accent: #00abc2;
   --color-accent-secondary: #f6bf0c;
 
-  --color-bg-grey: #5b636a;
+  --color-bg-grey: #f8f8f8;
   --color-bg-white: #ffffff;
   --auth-bg-color: #f8f8f8;
   --services-bg-color: #f0f7fb;
@@ -33,6 +33,8 @@
 
   --input-bg-color: #f8f8f9;
   --error-border-color: #ff6666;
+  --modal-z-index: 1000;
+  --modal-overlay-color: rgba(41, 44, 47, 0.6);
 }
 
 * {

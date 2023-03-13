@@ -1,11 +1,10 @@
-import { ActiveHeaderPage } from "@/components/header/Header";
-import { CradPage } from "@/layouts/CardPage/CradPage";
+import { CardPage } from "@/layouts/CardPage/CardPage";
 import { MainLayout } from "@/layouts/MainLayout";
 
 export default function Card() {
   return (
-    <MainLayout activePage={ActiveHeaderPage.CARD}>
-      <CradPage />
+    <MainLayout>
+      <CardPage />
     </MainLayout>
   );
 }
