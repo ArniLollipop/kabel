@@ -17,6 +17,8 @@ import {
 import Link from "next/link";
 import { ActiveHeaderPage } from "@/components/header/Header";
 
+import { useAppSelector } from "@/hooks/store";
+
 let cn = classNames.bind(cls);
 
 interface FooterProps {
@@ -26,6 +28,7 @@ interface FooterProps {
 
 export const Footer: FC<FooterProps> = (props) => {
   const { className, activePage } = props;
+  const { isLoggedIn } = useAppSelector((state) => state.AuthSlice);
 
   return (
     <>
@@ -190,7 +193,7 @@ export const Footer: FC<FooterProps> = (props) => {
         </Link>
 
         <Link
-          href="/cabinet"
+          href={isLoggedIn ? "/cabinet" : "/auth"}
           className={cn(cls.FooterMobile_navMenuItem, {
             active: activePage === ActiveHeaderPage.CABINET,
           })}

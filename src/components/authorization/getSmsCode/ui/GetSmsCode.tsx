@@ -1,23 +1,29 @@
 // hooks
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/hooks/store";
+import { useRouter } from "next/router";
 
 // packages
-import classNames from 'classnames';
+import classNames from "classnames";
 
 // assets
-import cls from './GetSmsCode.module.scss';
+import cls from "./GetSmsCode.module.scss";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { Button } from '@/UI/Button';
-import { Form, Formik } from 'formik';
-import { getSmsCodeSchema } from '@/helpers/validation';
-import { ErrorBorder } from '@/shared/formElements/errorBorder';
-import { HidePassword, ShowPassword } from '@/assets/icons';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { Button } from "@/UI/Button";
+import { Form, Formik } from "formik";
+import { getSmsCodeSchema } from "@/helpers/validation";
+import { ErrorBorder } from "@/shared/formElements/errorBorder";
+import { HidePassword, ShowPassword } from "@/assets/icons";
 
 // themes
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+
+// Actions
+import { Register } from "@/store/slices/AuthSlice";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 let cn = classNames.bind(cls);
 
@@ -30,10 +36,22 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const { userName, userPhone, isError, error, isLoading, isLoggedIn } = useAppSelector(
+    (state) => state.AuthSlice
+  );
+
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const { className } = props;
 
+  useEffect(() => {
+    if (!isError && isLoggedIn) router.push("/");
+  }, [isError, isLoggedIn]);
+
   const createAccount = () => {
-    console.log('createAccount is working!');
+    console.log("createAccount is working!");
   };
 
   const FuncCountDown = (value?: string) => {
@@ -54,9 +72,9 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
   return (
     <Formik
       initialValues={{
-        confirmSmsCode: '',
-        password: '',
-        confirmPassword: '',
+        confirmSmsCode: "",
+        password: "",
+        confirmPassword: "",
       }}
       validationSchema={getSmsCodeSchema}
       onSubmit={(values) => {
@@ -65,9 +83,19 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
           return;
         } else {
           setIsPasswordMatch(false);
-          console.log('values GetSmsCode is: ', {
+          console.log("values GetSmsCode is: ", {
             ...values,
           });
+
+          dispatch(
+            Register({
+              pass: values.password,
+              phone: userPhone,
+              first_name: userName,
+              sms_code: values.confirmSmsCode,
+            })
+          );
+          !isError && router.push("/");
         }
       }}
     >
@@ -115,9 +143,9 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     {showPassword ? <ShowPassword /> : <HidePassword />}
                   </Button>
                   <InputInstance
-                    password={'password'}
+                    password={"password"}
                     theme={EInputInstanceTheme.AUTH}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     placeholder="Новый пароль"
@@ -142,9 +170,9 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     {showConfirmPassword ? <ShowPassword /> : <HidePassword />}
                   </Button>
                   <InputInstance
-                    password={'password'}
+                    password={"password"}
                     theme={EInputInstanceTheme.AUTH}
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     id="confirmPassword"
                     name="confirmPassword"
                     placeholder="Повторить пароль"
@@ -156,7 +184,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     className={cls.confirmPassword}
                   />
                 </ErrorBorder>
-                {isPasswordMatch && <p>Пароли не совподают!</p>}
+                {isPasswordMatch && <p>Пароли не совпадают!</p>}
                 <Button type="submit" theme={ThemeButton.YELLOW} onClick={createAccount}>
                   Создать
                 </Button>

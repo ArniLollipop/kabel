@@ -10,6 +10,7 @@ import {
 } from "@/assets/icons";
 import Link from "next/link";
 import classNames from "classnames/bind";
+import { useAppSelector } from "@/hooks/store";
 
 const cn = classNames.bind(cls);
 
@@ -32,6 +33,7 @@ interface HeaderProps {
 
 export const Header: FC<HeaderProps> = (props) => {
   const { className, activePage } = props;
+  const { isLoggedIn, user } = useAppSelector((state) => state.AuthSlice);
 
   return (
     <div className={cls.Header}>
@@ -82,9 +84,9 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
 
         <li className={cls.contacts_list_user}>
-          <Link href="/cabinet/profile" className={cls["user-link"]}>
+          <Link href={isLoggedIn ? "/cabinet/profile" : "/auth"} className={cls["user-link"]}>
             <IconUserCabinet className={cls["icon"]} />
-            <span>Личный кабинет</span>
+            <span>{user?.first_name || "Личный кабинет"}</span>
           </Link>
         </li>
       </ul>

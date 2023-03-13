@@ -17,6 +17,10 @@ import { ActiveCabinetPageEnum } from "@/layouts/CabinetLayot/CabinetLayout";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 
+import { logOut } from "@/store/slices/AuthSlice";
+import { useAppDispatch } from "@/hooks/store";
+import { useRouter } from "next/router";
+
 const cn = classNames.bind(cls);
 
 interface NavigationProps {
@@ -31,6 +35,14 @@ export const enum ThemeNavigation {
 
 export const Navigation: FC<NavigationProps> = (props) => {
   const { className, activePage, theme } = props;
+
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const logoutHandler = () => {
+    dispatch(logOut());
+    router.push("/");
+  };
 
   return (
     <nav className={cn(cls.nav, className, { mobile: theme === ThemeNavigation.MOBILE })}>
@@ -90,7 +102,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
       <div className={cn(cls.nav_logoutBtnContainer)}>
         <IconCabinetLogout fillColor="#F6BF0C" />
-        <Button theme={ThemeButton.CLEAR} onClick={() => console.log("Log out button works")}>
+        <Button theme={ThemeButton.CLEAR} onClick={logoutHandler}>
           Выйти
         </Button>
       </div>
