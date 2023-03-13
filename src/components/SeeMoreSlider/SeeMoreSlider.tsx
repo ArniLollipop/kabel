@@ -1,13 +1,13 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./SeeMoreSlider.module.scss";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
-import { SeeMoreCard } from "@/components/SeeMoreCard/SeeMoreCard";
-import { seeMoreDatas } from "@/data/SeeMoreCardData";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './SeeMoreSlider.module.scss';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { SeeMoreCard } from '@/components/SeeMoreCard/SeeMoreCard';
+import { seeMoreDatas } from '@/data/SeeMoreCardData';
 
-import "swiper/css";
-import { Button } from "@/UI/Button";
-import { ThemeButton } from "@/UI/Button/ui/Button";
+import 'swiper/css';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 
@@ -75,8 +75,8 @@ export const SeeMoreSlider: FC<SeeMoreSliderProps> = (props) => {
           <path
             d="M2.82164 27.543L15.0717 15.0703L2.87742 2.54304"
             stroke="#39424B"
-            stroke-width="5"
-            stroke-linecap="round"
+            strokeWidth="5"
+            strokeLinecap="round"
             stroke-linejoin="round"
           />
         </svg>
@@ -97,8 +97,8 @@ export const SeeMoreSlider: FC<SeeMoreSliderProps> = (props) => {
           <path
             d="M15.3134 2.83092L2.87747 15.3947L15.4412 27.8306"
             stroke="#39424B"
-            stroke-width="5"
-            stroke-linecap="round"
+            strokeWidth="5"
+            strokeLinecap="round"
             stroke-linejoin="round"
           />
         </svg>

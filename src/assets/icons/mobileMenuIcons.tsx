@@ -1,4 +1,4 @@
-import { FC, SVGProps } from "react";
+import { FC, SVGProps } from 'react';
 
 interface mobileMenuIconsProps extends SVGProps<SVGSVGElement> {
   className?: string;
@@ -6,7 +6,7 @@ interface mobileMenuIconsProps extends SVGProps<SVGSVGElement> {
 }
 
 export const IconMobileMenuHome: FC<mobileMenuIconsProps> = (props) => {
-  const { className, textColor = "#4F4F4F" } = props;
+  const { className, textColor = '#4F4F4F' } = props;
 
   return (
     <svg
@@ -26,7 +26,7 @@ export const IconMobileMenuHome: FC<mobileMenuIconsProps> = (props) => {
 };
 
 export const IconMobileMenuCard: FC<mobileMenuIconsProps> = (props) => {
-  const { className, textColor = "#4F4F4F" } = props;
+  const { className, textColor = '#4F4F4F' } = props;
 
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@ export const IconMobileMenuCard: FC<mobileMenuIconsProps> = (props) => {
 };
 
 export const IconMobileMenuProduct: FC<mobileMenuIconsProps> = (props) => {
-  const { className, textColor = "#4F4F4F" } = props;
+  const { className, textColor = '#4F4F4F' } = props;
 
   return (
     <svg
@@ -87,7 +87,7 @@ export const IconMobileMenuProduct: FC<mobileMenuIconsProps> = (props) => {
 };
 
 export const IconMobileMenuServices: FC<mobileMenuIconsProps> = (props) => {
-  const { className, textColor = "#4F4F4F" } = props;
+  const { className, textColor = '#4F4F4F' } = props;
 
   return (
     <svg
@@ -107,7 +107,7 @@ export const IconMobileMenuServices: FC<mobileMenuIconsProps> = (props) => {
 };
 
 export const IconMobileMenuMore: FC<mobileMenuIconsProps> = (props) => {
-  const { className, textColor = "#4F4F4F" } = props;
+  const { className, textColor = '#4F4F4F' } = props;
 
   return (
     <svg
@@ -121,8 +121,8 @@ export const IconMobileMenuMore: FC<mobileMenuIconsProps> = (props) => {
       <path
         d="M5.83398 21.6667V20.8331C5.83398 18.0717 8.07256 15.8334 10.834 15.8334H14.1673C16.9287 15.8334 19.1673 18.0717 19.1673 20.8331V21.6667M12.5007 5.83337C10.6597 5.83337 9.16732 7.32576 9.16732 9.16671C9.16732 11.0077 10.6597 12.5 12.5007 12.5C14.3416 12.5 15.834 11.0077 15.834 9.16671C15.834 7.32576 14.3416 5.83337 12.5007 5.83337ZM12.5007 24.1667C6.05733 24.1667 0.833984 18.9434 0.833984 12.5C0.833984 6.05672 6.05733 0.833374 12.5007 0.833374C18.944 0.833374 24.1673 6.05672 24.1673 12.5C24.1673 18.9434 18.944 24.1667 12.5007 24.1667Z"
         stroke={textColor}
-        stroke-width="1.65"
-        stroke-linecap="square"
+        strokeWidth="1.65"
+        strokeLinecap="square"
       />
     </svg>
   );
