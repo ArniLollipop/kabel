@@ -1,16 +1,21 @@
-import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
-import { IconWhatsApp } from "@/assets/icons";
-import cls from "./index.module.scss";
-import classNames from "classnames/bind";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
-import { Button } from "@/UI/Button";
-import { ThemeButton } from "@/UI/Button/ui/Button";
-import { HistoryOrdersSlider } from "@/components/HistoryOrdersSlider/HistoryOrdersSlider";
-import { SwiperProps } from "swiper/react";
+import { ActiveCabinetPageEnum, CabinetLayout } from '@/layouts/CabinetLayot/CabinetLayout';
+import { IconWhatsApp } from '@/assets/icons';
+import cls from './index.module.scss';
+import classNames from 'classnames/bind';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-headless-accordion';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
+import { HistoryOrdersSlider } from '@/components/HistoryOrdersSlider/HistoryOrdersSlider';
+import { SwiperProps } from 'swiper/react';
+import { useState } from 'react';
+import { Modal } from '@/shared/modal/Modal';
+import { RequestACall } from '@/components/requestCall/RequestACall';
 
 const cn = classNames.bind(cls);
 
 export default function supportPage() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const params: SwiperProps = {
     loop: true,
     speed: 500,
@@ -44,6 +49,9 @@ export default function supportPage() {
 
   return (
     <CabinetLayout className={cls.support} activePage={ActiveCabinetPageEnum.SUPPORT}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <RequestACall setIsOpen={setIsOpen} />
+      </Modal>
       <div className={cls.support_wrapper}>
         <h1 className={cls.support_title}>Служба поддержки</h1>
         <div className={cls.support_content}>
@@ -193,7 +201,11 @@ export default function supportPage() {
                 </AccordionItem>
               </Accordion>
 
-              <Button className={cls.support_callbackBtn} theme={ThemeButton.CLEAR}>
+              <Button
+                onClick={() => setIsOpen(true)}
+                className={cls.support_callbackBtn}
+                theme={ThemeButton.CLEAR}
+              >
                 Заказать звонок
               </Button>
             </div>

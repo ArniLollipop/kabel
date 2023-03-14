@@ -1,6 +1,6 @@
 :root {
   /* fonts */
-  --font-family-main: "Montserrat", serif;
+  --font-family-main: 'Montserrat', serif;
 
   --font-size-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
@@ -32,7 +32,6 @@
   --cancel-btn-color: #d2d8de;
 
   --input-bg-color: #f8f8f9;
-  --error-border-color: #ff6666;
   --modal-z-index: 1000;
   --modal-overlay-color: rgba(41, 44, 47, 0.6);
 }
