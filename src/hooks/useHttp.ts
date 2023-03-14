@@ -17,6 +17,7 @@ export const useHttp = (ctx?: NextPageContext) => {
 
   http.interceptors.request.use((config) => {
     const token = isServrerSide ? nookies.get(ctx).token : localStorage.getItem("token");
+    console.log(token);
 
     if (token) config.headers["Authorization"] = `Bearer ${token}`;
     return config;

@@ -8,11 +8,12 @@ import classNames from "classnames";
 
 // assets
 import cls from "./GetSmsCode.module.scss";
+import { IconContactsMail } from "@/assets/icons";
 
 // components
 import { InputInstance } from "@/shared/formElements/InputInstance";
 import { Button } from "@/UI/Button";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { getSmsCodeSchema } from "@/helpers/validation";
 import { ErrorBorder } from "@/shared/formElements/errorBorder";
 import { HidePassword, ShowPassword } from "@/assets/icons";
@@ -75,6 +76,8 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
         confirmSmsCode: "",
         password: "",
         confirmPassword: "",
+        email: "",
+        isEmail: true,
       }}
       validationSchema={getSmsCodeSchema}
       onSubmit={(values) => {
@@ -87,12 +90,13 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
             ...values,
           });
 
-          dispatch(
+          dispatch<any>(
             Register({
               pass: values.password,
               phone: userPhone,
               first_name: userName,
               sms_code: values.confirmSmsCode,
+              email: values.email,
             })
           );
           !isError && router.push("/");
@@ -133,6 +137,24 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   touched={touched.confirmSmsCode}
                   className={cls.confirmSmsCode}
                 />
+
+                <ErrorBorder touchedValue={touched.email} errorsValue={errors.email}>
+                  <IconContactsMail width={25} height={25} color="#C0C0C0" />
+                  <InputInstance
+                    password={"password"}
+                    theme={EInputInstanceTheme.AUTH}
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    errors={errors.email}
+                    touched={touched.email}
+                    className={cls.email}
+                  />
+                </ErrorBorder>
 
                 <ErrorBorder touchedValue={touched.password} errorsValue={errors.password}>
                   <Button
@@ -184,6 +206,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     className={cls.confirmPassword}
                   />
                 </ErrorBorder>
+
                 {isPasswordMatch && <p>Пароли не совпадают!</p>}
                 <Button type="submit" theme={ThemeButton.YELLOW} onClick={createAccount}>
                   Создать

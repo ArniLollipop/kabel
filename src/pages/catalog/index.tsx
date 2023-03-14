@@ -10,10 +10,11 @@ import { NextPageContext } from "next/types";
 
 export default function Card(props: productAnswI) {
   const dispatch = useAppDispatch();
+  //   res.then((res) => console.log(res));
 
-  useEffect(() => {
-    dispatch(setProducts(props));
-  }, [props]);
+  //   useEffect(() => {
+  //     dispatch(setProducts(props));
+  //   }, [props]);
 
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
@@ -26,6 +27,6 @@ export async function getServerSideProps(ctx: NextPageContext) {
   const res = await ProductService().getProducts();
 
   return {
-    props: { ...res },
+    props: res.data,
   };
 }

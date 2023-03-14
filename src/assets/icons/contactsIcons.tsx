@@ -65,12 +65,12 @@ export const IconContactsGeo: FC<ContactsIconsProps> = (props) => {
 };
 
 export const IconContactsMail: FC<ContactsIconsProps> = (props) => {
-  const { className } = props;
+  const { className, width, height, color } = props;
 
   return (
     <svg
-      width="35"
-      height="35"
+      width={width || "35"}
+      height={height || "35"}
       viewBox="0 0 35 35"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -78,14 +78,14 @@ export const IconContactsMail: FC<ContactsIconsProps> = (props) => {
     >
       <path
         d="M5.83268 5.83325H29.166C30.7702 5.83325 32.0827 7.14575 32.0827 8.74992V26.2499C32.0827 27.8541 30.7702 29.1666 29.166 29.1666H5.83268C4.22852 29.1666 2.91602 27.8541 2.91602 26.2499V8.74992C2.91602 7.14575 4.22852 5.83325 5.83268 5.83325Z"
-        stroke="#39424B"
+        stroke={color || "#39424B"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M32.0827 8.75L17.4993 18.9583L2.91602 8.75"
-        stroke="#39424B"
+        stroke={color || "#39424B"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -92,3 +92,8 @@ ul {
     padding-bottom: 60px;
   }
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50px var(--input-bg-color) !important;
+  -webkit-text-fill-color: #999 !important;
+}

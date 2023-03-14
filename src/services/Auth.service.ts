@@ -14,7 +14,8 @@ interface ProductServiceResponseI {
     phone: string,
     pass: string,
     first_name: string,
-    sms_code: string
+    sms_code: string,
+    email: string
   ) => Promise<AxiosResponse<userI>>;
   sendSms: (phone: string) => Promise<AxiosResponse<sendSmsI>>;
 }
@@ -30,13 +31,15 @@ export const AuthService = (): ProductServiceResponseI => {
     phone: string,
     pass: string,
     first_name: string,
-    sms_code: string
+    sms_code: string,
+    email: string
   ): Promise<AxiosResponse<userI>> => {
     const res = useHttp().post<userI>(endpoints.singUp, {
       phone_number: phone,
       password: pass,
       first_name,
       sms_code,
+      email,
     });
 
     return res;

@@ -13,6 +13,14 @@ interface authState {
   error: any;
 }
 
+export interface RegisterI {
+  phone: string;
+  pass: string;
+  first_name: string;
+  sms_code: string;
+  email: string;
+}
+
 // Init
 const name = "auth";
 const initialState: authState = {
@@ -114,16 +122,11 @@ export const Login = createAsyncThunk(
 export const Register = createAsyncThunk(
   `${name}/Register`,
   async (
-    {
-      phone,
-      pass,
-      first_name,
-      sms_code,
-    }: { phone: string; pass: string; first_name: string; sms_code: string },
+    { phone, pass, first_name, sms_code, email }: RegisterI,
     { rejectWithValue, dispatch }
   ) => {
     try {
-      const { data } = await AuthService().singUp(phone, pass, first_name, sms_code);
+      const { data } = await AuthService().singUp(phone, pass, first_name, sms_code, email);
 
       dispatch(setUser(data));
       localStorage.setItem("access_token", data.access_token);
