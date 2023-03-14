@@ -1,26 +1,18 @@
-import { FC, useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import cls from "./article.module.scss";
 import { MainLayout } from "@/layouts/MainLayout";
-import { article } from "@/data/NewsData";
-import { useRouter } from "next/router";
 import { Title } from "@/UI/Title/Title";
 import Image from "next/image";
 import { ActiveHeaderPage } from "@/components/header/Header";
+import { NextPageContext } from "next";
+import { NewsService } from "@/services/News.service";
+import { newsI } from "@/types/NewsTypes";
 
 const cn = classNames.bind(cls);
 
-export default function articlePage() {
-  //   const [article, setArticle] = useState<newsI>();
-  //   const { query } = useRouter();
-  //   const articleId = query.id;
-
-  //   useEffect(() => {
-  //     const article = articleId && news.filter((news) => news.id === +articleId);
-  //     console.log(article);
-  //     typeof article === "object" && setArticle(article[0]);
-  //   }, [articleId]);
-
+export default function articlePage(props: newsI) {
+  const { newssection_set: sections, title, description, thumbnail } = props;
+  console.log(props);
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       <div className={cn(cls.articlePage)}>
@@ -28,17 +20,49 @@ export default function articlePage() {
 
         <div className={cls.articlePage_wrapper}>
           <div className={cls.articlePage_content}>
-            <h3 className={cls.articlePage_artTitle}>{article.title}</h3>
+            <h3 className={cls.articlePage_artTitle}>{title}</h3>
 
-            {article.newssection_set.map((sect) => (
-              <section key={sect.id}>
-                {sect.image && <img className={cls.articlePage_img} src={sect.image} alt="image" />}
-                <p className={cn(cls.articlePage_text, { marked: sect.isMarked })}>{sect.text}</p>
-              </section>
-            ))}
+            {sections.length === 0 && (
+              <>
+                <Image
+                  src={thumbnail}
+                  alt="image"
+                  width={1146}
+                  height={460}
+                  className={cls.articlePage_imgEmpty}
+                ></Image>
+                <p className={cls.articlePage_text}>{description}</p>
+              </>
+            )}
+
+            {sections.length > 0 &&
+              sections.map(({ id, image, is_marked, text }) => (
+                <section key={id}>
+                  {image && (
+                    <Image
+                      className={cls.articlePage_img}
+                      src={image}
+                      width={1146}
+                      height={460}
+                      alt="image"
+                    />
+                  )}
+
+                  <p className={cn(cls.articlePage_text, { marked: is_marked })}>{text}</p>
+                </section>
+              ))}
           </div>
         </div>
       </div>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx: NextPageContext) {
+  const { id } = ctx.query;
+  const newsId = typeof id === "string" ? id : Array.isArray(id) ? id[0] : "";
+  const res = await NewsService().getNewsById(newsId);
+  return {
+    props: res,
+  };
 }

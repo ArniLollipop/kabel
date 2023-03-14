@@ -13,7 +13,8 @@ export const enum ThemeNewsCard {
 interface NewsCardProps {
   className?: string;
   theme?: ThemeNewsCard;
-  thumbnailImg: StaticImageData;
+  //   thumbnailImg: StaticImageData;
+  thumbnailImg: string;
   headTitle: string;
   descrText: string;
 }
@@ -24,7 +25,13 @@ export const NewsCard: FC<NewsCardProps> = (props) => {
   return (
     <div className={cn(cls.NewsCard, cls[theme], className)}>
       <div className={cls.NewsCard_head}>
-        <Image className={cls.NewsCard_headImg} src={thumbnailImg} alt="news thumbnail" />
+        <Image
+          className={cls.NewsCard_headImg}
+          src={thumbnailImg}
+          width={80}
+          height={80}
+          alt="news thumbnail"
+        />
         <h4 className={cls.NewsCard_headTitle}>{headTitle}</h4>
       </div>
       <p className={cls.NewsCard_descr}>{descrText}</p>

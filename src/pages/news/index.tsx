@@ -4,19 +4,18 @@ import cls from "./index.module.scss";
 import { Title } from "@/UI/Title/Title";
 import { MainLayout } from "@/layouts/MainLayout";
 import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
-import { news, articleI } from "@/data/NewsData";
+import { news as newsMock, articleI } from "@/data/NewsData";
 import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
 import { SwiperSlide, Swiper, SwiperProps } from "swiper/react";
 
 import "swiper/css";
 import Link from "next/link";
 import { ActiveHeaderPage } from "@/components/header/Header";
+import { NewsService } from "@/services/News.service";
+import { NewsResponseI } from "@/types/NewsTypes";
+import { dateConverter } from "@/helpers/dateConverter";
 
 const cn = classNames.bind(cls);
-
-interface indexProps {
-  className?: string;
-}
 
 const params: SwiperProps = {
   autoplay: {
@@ -54,8 +53,10 @@ const params: SwiperProps = {
   },
 };
 
-export default function newsPage() {
+export default function newsPage(props: NewsResponseI) {
+  const { results: news } = props;
   const [myswiper, setSwiper] = useState<any>();
+  console.log(dateConverter("2023-03-09T15:51:49.471621+06:00"));
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       {/* PC implementation */}
@@ -76,15 +77,15 @@ export default function newsPage() {
                   <Link href={`/news/${news.id}`}>
                     <NewsCard
                       className={cls.news_newsCard}
-                      thumbnailImg={ImageMockNewsCard}
+                      headTitle={news.title}
+                      thumbnailImg={news.thumbnail}
                       theme={ThemeNewsCard.WHITE_BG}
-                      {...news}
+                      descrText={news.description}
                     />
                   </Link>
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div></div>
           </div>
         </div>
       </div>
@@ -95,13 +96,21 @@ export default function newsPage() {
           <Link href={`/news/${news.id}`} key={news.id}>
             <NewsCard
               className={cls.news_newsCardMobile}
-              thumbnailImg={ImageMockNewsCard}
+              thumbnailImg={news.thumbnail}
               theme={ThemeNewsCard.BLUE_BG}
-              {...news}
+              descrText={news.description}
+              headTitle={news.title}
             />
           </Link>
         ))}
       </div>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await NewsService().getNews();
+  return {
+    props: res,
+  };
 }
