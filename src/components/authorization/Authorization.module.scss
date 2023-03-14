@@ -1,8 +1,11 @@
+@import "/src/styles/globalMixins.scss";
+
 .Authorization {
+  @include adaptive-size(150, 20, padding-top);
+  @include adaptive-size(150, 20, padding-bottom);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80vh;
   background-color: var(--auth-bg-color);
 
   .formContainer {
