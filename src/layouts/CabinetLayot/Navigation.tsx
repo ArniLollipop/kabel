@@ -1,7 +1,7 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./CabinetLayout.module.scss";
-import Link from "next/link";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './CabinetLayout.module.scss';
+import Link from 'next/link';
 
 import {
   IconCabinetBonuses,
@@ -12,14 +12,15 @@ import {
   IconCabinetProfile,
   IconCabinetSupport,
   IconCabinetArrow,
-} from "@/assets/icons";
-import { ActiveCabinetPageEnum } from "@/layouts/CabinetLayot/CabinetLayout";
-import { Button } from "@/UI/Button";
-import { ThemeButton } from "@/UI/Button/ui/Button";
+  IconCabinetFlag,
+} from '@/assets/icons';
+import { ActiveCabinetPageEnum } from '@/layouts/CabinetLayot/CabinetLayout';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
 
-import { logOut } from "@/store/slices/AuthSlice";
-import { useAppDispatch } from "@/hooks/store";
-import { useRouter } from "next/router";
+import { logOut } from '@/store/slices/AuthSlice';
+import { useAppDispatch } from '@/hooks/store';
+import { useRouter } from 'next/router';
 
 const cn = classNames.bind(cls);
 
@@ -30,7 +31,7 @@ interface NavigationProps {
 }
 
 export const enum ThemeNavigation {
-  MOBILE = "mobile",
+  MOBILE = 'mobile',
 }
 
 export const Navigation: FC<NavigationProps> = (props) => {
@@ -41,7 +42,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
   const logoutHandler = () => {
     dispatch(logOut());
-    router.push("/");
+    router.push('/');
   };
 
   return (
@@ -88,6 +89,15 @@ export const Navigation: FC<NavigationProps> = (props) => {
       >
         <IconCabinetBonuses />
         <span>Накопленные бонусы</span>
+        <IconCabinetArrow />
+      </Link>
+
+      <Link
+        href="/cabinet/currency"
+        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.CURRENCY })}
+      >
+        <IconCabinetFlag />
+        <span>Валюта и ЛБМ</span>
         <IconCabinetArrow />
       </Link>
 

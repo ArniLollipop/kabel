@@ -1,3 +1,4 @@
+import { ICurrencyResult } from "@/types/GetCurrencyTypes";
 import { FC } from "react";
 import {
   OfferSection,
@@ -9,13 +10,15 @@ import {
   SertificatesSection,
   SpeciallySection,
 } from "./sections";
+import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
 
 interface HomepageProps {
   className?: string;
+  currency: ICurrencyResult;
 }
 
 export const Homepage: FC<HomepageProps> = (props) => {
-  const { className } = props;
+  const { className, currency } = props;
 
   return (
     <>
@@ -27,6 +30,7 @@ export const Homepage: FC<HomepageProps> = (props) => {
       <ServicesSection />
       <SertificatesSection />
       <NewsSection />
+      <GetCurrency currency={currency} />
     </>
   );
 };

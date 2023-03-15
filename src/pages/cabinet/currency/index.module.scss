@@ -1,0 +1,19 @@
+.currency {
+  width: 40%;
+  background-color: #fff;
+  max-height: 280px;
+  padding: 21px;
+  border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+  .currency {
+    width: 100%;
+  }
+}
+
+@media (max-width: 750px) {
+  .currency {
+    background: none;
+  }
+}
