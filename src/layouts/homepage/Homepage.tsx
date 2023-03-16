@@ -11,25 +11,21 @@ import {
   SpeciallySection,
 } from "./sections";
 import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
+import { HomeProps } from "@/pages";
 
-interface HomepageProps {
-  className?: string;
-  currency: ICurrencyResult;
-}
-
-export const Homepage: FC<HomepageProps> = (props) => {
-  const { className, currency } = props;
+export const Homepage: FC<HomeProps> = (props) => {
+  const { currency, aboutInfo, categories, sertificates, adventages, news, offers } = props;
 
   return (
     <>
-      <OfferSection />
-      <AboutSection />
-      <ProductsSection />
-      <SpeciallySection />
-      <AdvantagesSection />
+      <OfferSection offers={offers} />
+      <AboutSection aboutInfo={aboutInfo} />
+      <ProductsSection categories={categories} />
+      <SpeciallySection news={news} />
+      <AdvantagesSection adventages={adventages} />
       <ServicesSection />
-      <SertificatesSection />
-      <NewsSection />
+      <SertificatesSection sertificates={sertificates} />
+      <NewsSection news={news} />
       <GetCurrency currency={currency} />
     </>
   );

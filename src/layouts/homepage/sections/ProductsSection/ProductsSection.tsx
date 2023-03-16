@@ -7,41 +7,34 @@ import ImageMockCard from "@/assets/images/ImageMockCard.png";
 import ImageMockCard2 from "@/assets/images/ImageMockCard2.png";
 import ImageMockCard3 from "@/assets/images/ImageMockCard3.png";
 import Link from "next/link";
+import { categoryI } from "@/types/ProductTypes";
 
 const cn = classNames.bind(cls);
-
 interface ProductsSectionProps {
-  className?: string;
+  categories: categoryI[];
 }
 
 export const ProductsSection: FC<ProductsSectionProps> = (props) => {
-  const { className } = props;
-
+  const { categories } = props;
   return (
     <section className={cn(cls.ProductsSection)}>
       <Title className={cls.ProductsSection_title}>Продукция</Title>
 
       <ul className={cls.ProductsSection_list}>
-        <li className={cls.ProductsSection_item}>
-          <Link href="/catalog" className={cls.ProductsSection_link}>
-            <Image src={ImageMockCard} alt="Product image" className={cls.ProductsSection_img} />
-            <p className={cls.ProductsSection_imgDescr}>МЕДНЫЕ КАБЕЛЯ</p>
-          </Link>
-        </li>
-
-        <li className={cls.ProductsSection_item}>
-          <Link href="/catalog" className={cls.ProductsSection_link}>
-            <Image src={ImageMockCard2} alt="Product image" className={cls.ProductsSection_img} />
-            <p className={cls.ProductsSection_imgDescr}>МЕДНЫЕ КАБЕЛЯ</p>
-          </Link>
-        </li>
-
-        <li className={cls.ProductsSection_item}>
-          <Link href="/catalog" className={cls.ProductsSection_link}>
-            <Image src={ImageMockCard3} alt="Product image" className={cls.ProductsSection_img} />
-            <p className={cls.ProductsSection_imgDescr}>МЕДНЫЕ КАБЕЛЯ</p>
-          </Link>
-        </li>
+        {categories.map((cat) => (
+          <li className={cls.ProductsSection_item} key={cat.name}>
+            <Link href="/catalog" className={cls.ProductsSection_link}>
+              <Image
+                src={cat.image}
+                alt="Product image"
+                className={cls.ProductsSection_img}
+                width={390}
+                height={290}
+              />
+              <p className={cls.ProductsSection_imgDescr}>{cat.name}</p>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );

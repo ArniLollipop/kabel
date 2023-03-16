@@ -18,6 +18,7 @@ export interface productI {
   cost: number;
   image: string;
   availability: "в наличии" | "под заказ";
+  description: string;
   is_active: boolean;
   core_number: number;
   section: number;
@@ -27,7 +28,26 @@ export interface productI {
 
 export interface productAnswI {
   count: number;
-  next: string;
-  previous: string;
+  next: string | null;
+  previous: string | null;
   results: productI[];
+}
+
+interface subcategorySetI {
+  name: string;
+  category: string;
+}
+
+export interface categoryI {
+  name: string;
+  subcategory_set: subcategorySetI[];
+  icon: string;
+  image: string;
+}
+
+export interface categoriesAnswI {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: categoryI[];
 }

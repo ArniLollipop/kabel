@@ -1,4 +1,4 @@
-import { productAnswI } from "@/types/ProductTypes";
+import { productAnswI, categoriesAnswI } from "@/types/ProductTypes";
 import { useHttp } from "@/hooks/useHttp";
 import { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
@@ -14,14 +14,20 @@ const enum endpoints {
 }
 
 interface ProductServiceResponseI {
-  getProducts: () => Promise<AxiosResponse<ProductServiceResponseI>>;
+  getProducts: () => Promise<ProductServiceResponseI>;
+  getCategories: () => Promise<categoriesAnswI>;
 }
 
 export const ProductService = (ctx?: NextPageContext): ProductServiceResponseI => {
-  const getProducts = async (): Promise<AxiosResponse<ProductServiceResponseI>> => {
+  const getProducts = async (): Promise<ProductServiceResponseI> => {
     const res = await useHttp(ctx).get(endpoints.getProducts);
-    return res;
+    return res.data;
   };
 
-  return { getProducts };
+  const getCategories = async (): Promise<categoriesAnswI> => {
+    const res = await useHttp(ctx).get(endpoints.getCategories);
+    return res.data;
+  };
+
+  return { getProducts, getCategories };
 };

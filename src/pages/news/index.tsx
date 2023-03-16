@@ -4,7 +4,6 @@ import cls from "./index.module.scss";
 import { Title } from "@/UI/Title/Title";
 import { MainLayout } from "@/layouts/MainLayout";
 import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
-import { news as newsMock, articleI } from "@/data/NewsData";
 import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
 import { SwiperSlide, Swiper, SwiperProps } from "swiper/react";
 
@@ -12,7 +11,7 @@ import "swiper/css";
 import Link from "next/link";
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { NewsService } from "@/services/News.service";
-import { NewsResponseI } from "@/types/NewsTypes";
+import { newsI, NewsResponseI } from "@/types/NewsTypes";
 import { dateConverter } from "@/helpers/dateConverter";
 
 const cn = classNames.bind(cls);
@@ -53,10 +52,13 @@ const params: SwiperProps = {
   },
 };
 
-export default function newsPage(props: NewsResponseI) {
-  const { results: news } = props;
+interface newsPageI {
+  news: newsI[];
+}
+
+export default function newsPage(props: newsPageI) {
+  const { news } = props;
   const [myswiper, setSwiper] = useState<any>();
-  console.log(dateConverter("2023-03-09T15:51:49.471621+06:00"));
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       {/* PC implementation */}
@@ -74,15 +76,11 @@ export default function newsPage(props: NewsResponseI) {
             >
               {news.map((news) => (
                 <SwiperSlide className={cls.news_sliderSlide} key={news.id}>
-                  <Link href={`/news/${news.id}`}>
-                    <NewsCard
-                      className={cls.news_newsCard}
-                      headTitle={news.title}
-                      thumbnailImg={news.thumbnail}
-                      theme={ThemeNewsCard.WHITE_BG}
-                      descrText={news.description}
-                    />
-                  </Link>
+                  <NewsCard
+                    className={cls.news_newsCard}
+                    theme={ThemeNewsCard.WHITE_BG}
+                    {...news}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -93,15 +91,9 @@ export default function newsPage(props: NewsResponseI) {
       {/* MobImplementation */}
       <div className={cls.newsMobile}>
         {news.map((news) => (
-          <Link href={`/news/${news.id}`} key={news.id}>
-            <NewsCard
-              className={cls.news_newsCardMobile}
-              thumbnailImg={news.thumbnail}
-              theme={ThemeNewsCard.BLUE_BG}
-              descrText={news.description}
-              headTitle={news.title}
-            />
-          </Link>
+          <div key={news.id}>
+            <NewsCard className={cls.news_newsCardMobile} theme={ThemeNewsCard.BLUE_BG} {...news} />
+          </div>
         ))}
       </div>
     </MainLayout>
@@ -109,8 +101,8 @@ export default function newsPage(props: NewsResponseI) {
 }
 
 export async function getServerSideProps() {
-  const res = await NewsService().getNews();
+  const news = await NewsService().getNews();
   return {
-    props: res,
+    props: { news },
   };
 }

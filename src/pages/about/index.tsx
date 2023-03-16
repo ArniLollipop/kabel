@@ -10,10 +10,6 @@ import { AboutI } from "@/types/AboutTypes";
 
 const cn = classNames.bind(cls);
 
-//  interface indexProps {
-//  className?: string;
-//  }
-
 export default function aboutPage(props: AboutI) {
   const { id, image, text, title, our_goal } = props;
   return (
@@ -29,8 +25,7 @@ export default function aboutPage(props: AboutI) {
             height={460}
           />
 
-          <p className={cls.about_descr}>{text}</p>
-
+          <div dangerouslySetInnerHTML={{ __html: text }} />
           <p className={cls.about_accent}>{our_goal}</p>
         </div>
       </div>
@@ -42,6 +37,6 @@ export async function getServerSideProps() {
   const res = await AboutService().getAboutInfo();
 
   return {
-    props: res.data,
+    props: res,
   };
 }

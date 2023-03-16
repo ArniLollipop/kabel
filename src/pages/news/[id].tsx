@@ -12,7 +12,6 @@ const cn = classNames.bind(cls);
 
 export default function articlePage(props: newsI) {
   const { newssection_set: sections, title, description, thumbnail } = props;
-  console.log(props);
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       <div className={cn(cls.articlePage)}>
