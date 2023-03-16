@@ -13,15 +13,18 @@ import { IconCabinetArrow } from "@/assets/icons";
 import { Title } from "@/UI/Title/Title";
 import ImageDelivery from "@/assets/images/ImageDelivery.png";
 import { ActiveHeaderPage } from "@/components/header/Header";
+import { PayDelService } from "@/services/PayDel.Service";
+import { payDelI } from "@/types/PayDelTypes";
 
 let cn = classNames.bind(cls);
 
 interface paymentProps {
-  className?: string;
+  payment: payDelI;
+  delivery: payDelI;
 }
 
 export default function payment(props: paymentProps) {
-  const { className } = props;
+  const { delivery, payment } = props;
 
   return (
     <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
@@ -31,45 +34,8 @@ export default function payment(props: paymentProps) {
         activePage={ActivePayDelPageEnum.PAYMENT}
         title="Оплата"
       >
-        <div className={cls.text}>
-          <p className={cls.descrText}>
-            Оплата товара <br /> Вы можете произвести оплату заказа любым удобным способом:
-          </p>
-          <p className={cls.descrText}>
-            Наличными тенге курьеру (только при доставке по г. Алматы) или в магазине при
-            самовывозе. Вместе с товаром передается кассовый или товарный чек. У наших курьеров
-            сдача есть всегда! Банковской картой (Visa, MasterCard, American Express, а также
-            дебетные электронные карты), эмитированной любым банком в процессе оформления Вашего
-            заказа онлайн. Оплата производится по защищенному каналу через систему Авторизации АО
-            "Halykbank". Удобно, быстро, безопасно! Банковским переводом на наш расчетный счет в АО
-            "Halykbank" после оформления Вашего заказа онлайн и обязательного резервирования товара.
-            Счет на оплату открывается в новом окне при оформлении заказа на сайте. При
-            необходимости - просто распечатайте счет Доставка товара по г. Алматы: Интернет-магазин
-            выполняет доставку товара собственной Службой доставки. Доставка осуществляется все дни
-            недели, кроме воскресенья.
-          </p>
+        <div className={cls.descrText} dangerouslySetInnerHTML={{ __html: payment.text }} />
 
-          <p className={cls.descrText}>
-            В случае вопросов и пожеланий обращайтесь к нам по следующим координатам:
-          </p>
-
-          <p className={cls.descrText}>
-            Служба поддержки покупателей:
-            <a className={cls.accentLink} href="tel:+77273291515">
-              &nbsp; +7 727 329-15-15&nbsp;
-            </a>
-            (ежедневно, кроме воскресенья и праздничных дней с 9.00 до 20.00)
-          </p>
-
-          <p className={cls.descrText}>
-            Электронная почта:
-            <a className={cls.accentLink} href="mailto:almaty-kazkabel@mail.ru">
-              &nbsp;almaty-kazkabel@mail.ru&nbsp;
-            </a>
-            <br />К оплате принимаются все виды банковских карт нижеперечисленных платежных систем,
-            а также дебетные (электронные) карты.
-          </p>
-        </div>
         <div className={cls.images}>
           <Image src={ImagePayment} alt="payment image" />
           <div className={cls.methods}>
@@ -94,47 +60,10 @@ export default function payment(props: paymentProps) {
                   </AccordionHeader>
                   <AccordionBody className={cn(cls.mobile_accBody, { active: open })}>
                     <span className={cls.mobile_accBodyTitle}>Оплата</span>
-                    <div className={cls.text}>
-                      <p className={cls.descrText}>
-                        Оплата товара <br /> Вы можете произвести оплату заказа любым удобным
-                        способом:
-                      </p>
-                      <p className={cls.descrText}>
-                        Наличными тенге курьеру (только при доставке по г. Алматы) или в магазине
-                        при самовывозе. Вместе с товаром передается кассовый или товарный чек. У
-                        наших курьеров сдача есть всегда! Банковской картой (Visa, MasterCard,
-                        American Express, а также дебетные электронные карты), эмитированной любым
-                        банком в процессе оформления Вашего заказа онлайн. Оплата производится по
-                        защищенному каналу через систему Авторизации АО "Halykbank". Удобно, быстро,
-                        безопасно! Банковским переводом на наш расчетный счет в АО "Halykbank" после
-                        оформления Вашего заказа онлайн и обязательного резервирования товара. Счет
-                        на оплату открывается в новом окне при оформлении заказа на сайте. При
-                        необходимости - просто распечатайте счет Доставка товара по г. Алматы:
-                        Интернет-магазин выполняет доставку товара собственной Службой доставки.
-                        Доставка осуществляется все дни недели, кроме воскресенья.
-                      </p>
-
-                      <p className={cls.descrText}>
-                        В случае вопросов и пожеланий обращайтесь к нам по следующим координатам:
-                      </p>
-
-                      <p className={cls.descrText}>
-                        Служба поддержки покупателей:
-                        <a className={cls.accentLink} href="tel:+77273291515">
-                          &nbsp; +7 727 329-15-15&nbsp;
-                        </a>
-                        (ежедневно, кроме воскресенья и праздничных дней с 9.00 до 20.00)
-                      </p>
-
-                      <p className={cls.descrText}>
-                        Электронная почта:
-                        <a className={cls.accentLink} href="mailto:almaty-kazkabel@mail.ru">
-                          &nbsp;almaty-kazkabel@mail.ru&nbsp;
-                        </a>
-                        <br />К оплате принимаются все виды банковских карт нижеперечисленных
-                        платежных систем, а также дебетные (электронные) карты.
-                      </p>
-                    </div>
+                    <div
+                      className={cls.descrText}
+                      dangerouslySetInnerHTML={{ __html: payment.text }}
+                    />
                     <div className={cn(cls.images, cls.mobile_images)}>
                       <Image src={ImagePayment} alt="payment image" />
                       <div className={cls.methods}>
@@ -157,54 +86,11 @@ export default function payment(props: paymentProps) {
                   </AccordionHeader>
                   <AccordionBody className={cn(cls.mobile_accBody, { active: open })}>
                     <span className={cls.mobile_accBodyTitle}>Доставка</span>
+                    <div
+                      className={cls.descrText}
+                      dangerouslySetInnerHTML={{ __html: delivery.text }}
+                    />
 
-                    <div className={cls.text}>
-                      <p className={cls.descrText}>
-                        Бесплатная доставка: по г. Алматы при заказе на сумму свыше 6000 тенге
-                        доставка осуществляется бесплатно. <br /> Платная доставка: по г. Алматы при
-                        заказе на сумму менее 6000 тенге стоимость доставки - 1000 тенге. <br />{" "}
-                        Стоимость доставки в отдаленные районы Алматы согласовывается отдельно. Вы
-                        также можете забрать Ваш товар самостоятельно из нашего магазина. В этом
-                        случае Вам необходимо связаться с нами и обязательно зарезервировать Ваш
-                        товар и уточнить время и место.
-                      </p>
-                      <p className={cls.descrText}>
-                        Заказы, принятые до 13.00, доставляются в этот же день. Заказы, принятые
-                        после 13.00, доставляются на следующий день. Время доставки согласовывается
-                        с менеджером Службы доставки, который свяжется с Вами после того, как Вы
-                        разместите свой заказ. Доставка осуществляется все дни недели, кроме
-                        выходных и праздничных дней (с понедельника по пятницу) по Республике
-                        Казахстан (исключая г. Алматы)
-                      </p>
-
-                      <p className={cls.descrText}>Доставка товара осуществляется:</p>
-
-                      <p className={cls.descrText}>
-                        Курьерской службой по принципу "из рук - в руки" по категориям "Экспресс" и
-                        "Стандарт" - г. Астана, областные центры и другие крупные города. <br />{" "}
-                        Сроки доставки: <br />
-                        "Экспресс" (заказы весом до 300 гр.) - от 1 до 4 рабочих дня (в зависимости
-                        от адреса доставки, не считая день отправки. <br /> "Стандарт" (заказы весом
-                        свыше 300 гр.) - от 3 до 10 рабочих дня (в зависимости от адреса доставки),
-                        не считая день отправки. Стоимость доставки по нужному Вам адресу - 1900
-                        тенге.
-                      </p>
-
-                      <p className={cls.descrText}>
-                        АО "КазПочта" с выдачей заказа через почтовые отделения - все населенные
-                        пункты Казахстана. <br /> Сроки доставки: <br /> от 3 до 10 рабочих дня (в
-                        зависимости от адреса доставки), не считая день отправки. <br /> Стоимость
-                        доставки по нужному Вам адресу - 1100 тенге.
-                      </p>
-                      <p className={cls.descrText}>
-                        Отправка заказа осуществляется после оплаты заказа. Отправка осуществляется
-                        ТОЛЬКО в рабочие дни. <br /> Внимание! Неправильно указанный номер телефона,
-                        неточный или неполный адрес могут привести к задержке выполнения Вашего
-                        заказа. Пожалуйста, внимательно проверяйте Ваши персональные данные при
-                        оформлении заказа. Конфиденциальность ваших данных гарантируется. Купленный
-                        товар обмену и возврату не подлежит.
-                      </p>
-                    </div>
                     <div className={cn(cls.images, cls.images_del, cls.mobile_images)}>
                       <Image src={ImageDelivery} alt="payment image" />
                       <div className={cls.methods}>
@@ -284,4 +170,12 @@ export default function payment(props: paymentProps) {
       </div>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps() {
+  const payment = await PayDelService().getPayment();
+  const delivery = await PayDelService().getDelivery();
+  return {
+    props: { payment, delivery },
+  };
 }
