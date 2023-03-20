@@ -3,13 +3,27 @@ import { ActiveHeaderPage } from "@/components/header/Header";
 import { CatalogPage } from "@/layouts/CatalogPage/CatalogPage";
 import { MainLayout } from "@/layouts/MainLayout";
 import { ProductService } from "@/services/Product.servise";
-import { productAnswI } from "@/types/ProductTypes";
+import { categoriesAnswI, coresI, productAnswI } from "@/types/ProductTypes";
 import { useAppDispatch } from "@/hooks/store";
-import { setProducts } from "@/store/slices/ProductSlice";
+import { setProducts, setCategories, setCores } from "@/store/slices/ProductSlice";
 import { NextPageContext } from "next/types";
 
-export default function Card(props: productAnswI) {
+interface CardProps {
+  products: productAnswI;
+  categories: categoriesAnswI;
+  cores: coresI;
+}
+
+export default function Card(props: CardProps) {
+  const { categories, products, cores } = props;
+
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setProducts(products));
+    dispatch(setCategories(categories));
+    dispatch(setCores(cores));
+  }, [products, categories, cores]);
 
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
@@ -19,9 +33,11 @@ export default function Card(props: productAnswI) {
 }
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  const res = await ProductService().getProducts();
+  const products = await ProductService().getProducts();
+  const categories = await ProductService().getCategories();
+  const cores = await ProductService().getCores();
 
   return {
-    props: res,
+    props: { products, categories, cores },
   };
 }

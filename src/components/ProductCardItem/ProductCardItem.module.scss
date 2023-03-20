@@ -83,12 +83,12 @@
   .cardImg {
     @include adaptive-size(137, 90, width);
     @include adaptive-size(137, 90, height);
-    // width: 137px;
-    // height: 137px;
+    object-fit: contain;
     margin-right: 10px;
   }
 
   .cardInfo {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 35px;

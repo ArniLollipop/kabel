@@ -38,7 +38,7 @@ interface subcategorySetI {
   category: string;
 }
 
-export interface categoryI {
+interface categoryI {
   name: string;
   subcategory_set: subcategorySetI[];
   icon: string;
@@ -50,4 +50,12 @@ export interface categoriesAnswI {
   next: string | null;
   previous: string | null;
   results: categoryI[];
+}
+
+export interface coresI {
+  [key: string]: number[];
+}
+
+export interface coresAnswI {
+  result: coresI;
 }

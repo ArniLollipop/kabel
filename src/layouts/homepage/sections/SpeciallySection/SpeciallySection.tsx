@@ -6,7 +6,6 @@ import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { NewsCard } from "@/components/newsCard/NewsCard";
 import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
 import { ProductCardItem, ThemeProductCard } from "@/components/ProductCardItem/ProductCardItem";
-import { newsI } from "@/types/NewsTypes";
 
 const cn = classNames.bind(cls);
 
@@ -42,17 +41,34 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
       </div>
 
       <div className={cn(cls.SpeciallySection_cardList, { hidden: activeSection == 1 })}>
+        {/* <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} />
         <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} />
         <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} />
         <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} />
-        <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} />
-        <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} />
+        <ProductCardItem className={cls.SpeciallySection_cardItem} theme={ThemeProductCard.MINI} /> */}
       </div>
 
       <div className={cn(cls.SpeciallySection_newsList, { hidden: activeSection == 0 })}>
-        {news.map((news) => (
-          <NewsCard className={cls.SpeciallySection_newsCard} key={news.id} {...news} />
-        ))}
+        {/* <NewsCard
+          className={cls.SpeciallySection_newsCard}
+          thumbnailImg={ImageMockNewsCard}
+          headTitle="Инновация года: возобновляемая энергия"
+          descrText="Несмотря на энергетический кризис, интерес инвесторов к возобновляемым источникам энергии (ВИЭ) в 2022 году продолжил расти. По данным Международного энергетического…"
+        />
+
+        <NewsCard
+          className={cls.SpeciallySection_newsCard}
+          thumbnailImg={ImageMockNewsCard}
+          headTitle="Инновация года: возобновляемая энергия"
+          descrText="Несмотря на энергетический кризис, интерес инвесторов к возобновляемым источникам энергии (ВИЭ) в 2022 году продолжил расти. По данным Международного энергетического…"
+        />
+
+        <NewsCard
+          className={cls.SpeciallySection_newsCard}
+          thumbnailImg={ImageMockNewsCard}
+          headTitle="Инновация года: возобновляемая энергия"
+          descrText="Несмотря на энергетический кризис, интерес инвесторов к возобновляемым источникам энергии (ВИЭ) в 2022 году продолжил расти. По данным Международного энергетического…"
+        /> */}
       </div>
     </section>
   );

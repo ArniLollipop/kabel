@@ -1,33 +1,36 @@
-import { productAnswI, categoriesAnswI } from "@/types/ProductTypes";
+import { productAnswI, categoriesAnswI, coresI, coresAnswI } from "@/types/ProductTypes";
 import { useHttp } from "@/hooks/useHttp";
 import { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
 
-const baseUrl = "https://kazkabel-back.zoom-app.kz";
-
 const enum endpoints {
   getCategories = "/products/categories/",
-  getCategoriesByName = "/products/categories/",
-  getCoreNumbers = "/products/core_numbers/",
+  getCores = "/products/cores_sections/",
   getProducts = "/products/products/",
-  getProductsByCode = "/products/products/",
 }
 
 interface ProductServiceResponseI {
-  getProducts: () => Promise<ProductServiceResponseI>;
-  getCategories: () => Promise<categoriesAnswI>;
+  getProducts: (queries?: string) => Promise<productAnswI>;
+  getCategories: () => Promise<AxiosResponse<categoriesAnswI>>;
+  getCores: () => Promise<coresI>;
 }
 
 export const ProductService = (ctx?: NextPageContext): ProductServiceResponseI => {
-  const getProducts = async (): Promise<ProductServiceResponseI> => {
-    const res = await useHttp(ctx).get(endpoints.getProducts);
+  const getProducts = async (queries?: string): Promise<productAnswI> => {
+    const params = queries ? queries : "";
+    const res = await useHttp(ctx).get<productAnswI>(endpoints.getProducts + params);
     return res.data;
   };
 
-  const getCategories = async (): Promise<categoriesAnswI> => {
+  const getCategories = async (): Promise<AxiosResponse<categoriesAnswI>> => {
     const res = await useHttp(ctx).get(endpoints.getCategories);
     return res.data;
   };
 
-  return { getProducts, getCategories };
+  const getCores = async (): Promise<coresI> => {
+    const res = await useHttp(ctx).get<coresAnswI>(endpoints.getCores);
+    return res.data.result;
+  };
+
+  return { getProducts, getCategories, getCores };
 };

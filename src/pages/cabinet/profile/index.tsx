@@ -79,11 +79,11 @@ export default function profilePage() {
 
       <div className={cls.recommended}>
         <h2 className={cls.recommended_title}>Рекомендуем к покупке</h2>
-        <ul>
+        {/* <ul>
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
-        </ul>
+        </ul> */}
       </div>
     </CabinetLayout>
   );
