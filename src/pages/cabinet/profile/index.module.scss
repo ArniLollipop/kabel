@@ -26,14 +26,20 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
+    width: 450px;
 
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
     color: var(--color-font-title);
 
-    span {
-      color: #a9a9a9;
+    p {
+      display: flex;
+
+      span {
+        margin-right: 10px;
+        color: #a9a9a9;
+      }
     }
   }
 
@@ -142,7 +148,7 @@
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 760px) {
   .userCard {
     &_btns {
       display: block;
@@ -190,6 +196,8 @@
   }
 
   .userCard {
+    box-shadow: 1px 5px 19px -3px rgba(0, 0, 0, 0.2);
+
     &_info {
       justify-content: flex-start;
     }

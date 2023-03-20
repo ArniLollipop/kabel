@@ -68,6 +68,7 @@ export {
   IconCabinetPassword,
   IconCabinetEditPhoto,
   IconCabinetFlag,
+  IconCabinetChangePhoneNumber,
 } from "./cabinetIcons";
 
 export {
