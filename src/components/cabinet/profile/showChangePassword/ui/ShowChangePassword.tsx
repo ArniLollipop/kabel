@@ -1,18 +1,18 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames';
-import cls from './ShowChangePassword.module.scss';
-import { HidePassword, IconCabinetArrow, ShowPassword } from '@/assets/icons';
-import { useAppSelector } from '@/hooks/store';
-import { Form, Formik } from 'formik';
-import { SentToEmailOrPhoneNumber } from './SentToEmailOrPhoneNumber';
-import { hideEmail, hidePhoneNumber } from '@/helpers/hideEmail';
-import { ErrorBorder } from '@/shared/formElements/errorBorder';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { changePasswordsSchema } from '@/helpers/validation';
-import { ProfileService } from '@/services/Profile.service';
+import { FC, useState } from "react";
+import classNames from "classnames";
+import cls from "./ShowChangePassword.module.scss";
+import { HidePassword, IconCabinetArrow, ShowPassword } from "@/assets/icons";
+import { useAppSelector } from "@/hooks/store";
+import { Form, Formik } from "formik";
+import { SentToEmailOrPhoneNumber } from "./SentToEmailOrPhoneNumber";
+import { hideEmail, hidePhoneNumber } from "@/helpers/hideEmail";
+import { ErrorBorder } from "@/shared/formElements/errorBorder";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { changePasswordsSchema } from "@/helpers/validation";
+import { ProfileService } from "@/services/Profile.service";
 
 let cn = classNames.bind(cls);
 
@@ -25,7 +25,7 @@ interface ShowChangePasswordProps {
 
 export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
   const { className, setShowChangePassword, setShowModal, setNumberOrEmail } = props;
-  const [showSentTo, setShowSentTo] = useState('');
+  const [showSentTo, setShowSentTo] = useState("");
   const [showChangePasswords, setShowChangePasswords] = useState(false);
 
   // DON'T FORGET TO USE GET USER ID IN ORDER TO SHOW EXACT USERS DATA INSTEAD OF USING PROFILE USER OR AUTH USER AND EVERYWHERE YOU HAVE THESE TWO IMPORTS
@@ -34,7 +34,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
 
   const [changePassNew, setChangePassNew] = useState(false);
   const [changePassConfirm, setChangePassConfirm] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <div className={cn(cls.ShowChangePassword)}>
@@ -44,12 +44,12 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
           email: profileUser?.email || authUser?.email || null,
           // @ts-ignore
           phone_number: profileUser?.phone_number || authUser?.phone_number || null,
-          changePassNew: '',
-          changePassConfirm: '',
+          changePassNew: "",
+          changePassConfirm: "",
         }}
         validationSchema={changePasswordsSchema}
         onSubmit={(values) => {
-          console.log('values is: ', {
+          console.log("values is: ", {
             ...values,
           });
         }}
@@ -58,8 +58,9 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
           const sendSmsCodeToPhone = async () => {
             try {
               const res = await ProfileService().changePassByPhone(values.phone_number, true);
+              // @ts-ignore
               if (res.result) {
-                setShowSentTo('phone');
+                setShowSentTo("phone");
               }
             } catch (e: any) {
               setErrorMessage(e);
@@ -73,27 +74,31 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                   values.phone_number,
                   values.changePassConfirm
                 );
+                // @ts-ignore
+
                 if (res.result) {
-                  setNumberOrEmail('Пароль');
+                  setNumberOrEmail("Пароль");
                   setShowChangePassword(false);
                   setShowModal(true);
                 }
               } catch (error) {
-                console.log('error inside changePasswordFinal is: ', error);
+                console.log("error inside changePasswordFinal is: ", error);
+                // @ts-ignore
+
                 setErrorMessage(error);
               }
             } else {
-              setErrorMessage('Пароли не совподают!');
+              setErrorMessage("Пароли не совподают!");
             }
           };
 
           return (
             <Form>
               {showSentTo ? (
-                showSentTo === 'email' ? (
+                showSentTo === "email" ? (
                   <SentToEmailOrPhoneNumber
                     type={showSentTo}
-                    title={'Введите код из письма'}
+                    title={"Введите код из письма"}
                     info={`Отправили его на почту ${hideEmail(authUser?.email)}`}
                     phone_number={values.phone_number}
                     setShowChangePasswords={setShowChangePasswords}
@@ -102,7 +107,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                 ) : (
                   <SentToEmailOrPhoneNumber
                     type={showSentTo}
-                    title={'Введите код из сообщения'}
+                    title={"Введите код из сообщения"}
                     info={`Отправили его на номер ${hidePhoneNumber(authUser?.phone_number)}`}
                     phone_number={values.phone_number}
                     setShowChangePasswords={setShowChangePasswords}
@@ -123,9 +128,9 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                       {changePassNew ? <ShowPassword /> : <HidePassword />}
                     </Button>
                     <InputInstance
-                      password={'password'}
+                      password={"password"}
                       theme={EInputInstanceTheme.AUTH}
-                      type={changePassNew ? 'text' : 'password'}
+                      type={changePassNew ? "text" : "password"}
                       id="changePassNew"
                       name="changePassNew"
                       placeholder="Новый пароль"
@@ -150,9 +155,9 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                       {changePassConfirm ? <ShowPassword /> : <HidePassword />}
                     </Button>
                     <InputInstance
-                      password={'password'}
+                      password={"password"}
                       theme={EInputInstanceTheme.AUTH}
-                      type={changePassConfirm ? 'text' : 'password'}
+                      type={changePassConfirm ? "text" : "password"}
                       id="changePassConfirm"
                       name="changePassConfirm"
                       placeholder="Повторить пароль"
@@ -179,7 +184,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                   </small>
 
                   <div className={cn(cls.btnContainer)}>
-                    <div onClick={() => setShowSentTo('email')} className={cn(cls.btn)}>
+                    <div onClick={() => setShowSentTo("email")} className={cn(cls.btn)}>
                       <p>По почте</p>
                       <IconCabinetArrow />
                     </div>

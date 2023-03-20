@@ -65,26 +65,31 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
       </div>
 
       <div className={cn(cls.SpeciallySection_cardList, { hidden: activeSection == 1 })}>
+        {/* @ts-ignore */}
         <ProductCardItem
           className={cls.SpeciallySection_cardItem}
           theme={ThemeProductCard.MINI}
           {...mockAct}
         />
+        {/* @ts-ignore */}
         <ProductCardItem
           className={cls.SpeciallySection_cardItem}
           theme={ThemeProductCard.MINI}
           {...mockAct}
         />
+        {/* @ts-ignore */}
         <ProductCardItem
           className={cls.SpeciallySection_cardItem}
           theme={ThemeProductCard.MINI}
           {...mockAct}
         />
+        {/* @ts-ignore */}
         <ProductCardItem
           className={cls.SpeciallySection_cardItem}
           theme={ThemeProductCard.MINI}
           {...mockAct}
         />
+        {/* @ts-ignore */}
         <ProductCardItem
           className={cls.SpeciallySection_cardItem}
           theme={ThemeProductCard.MINI}

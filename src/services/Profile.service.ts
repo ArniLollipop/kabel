@@ -1,14 +1,14 @@
-import { useHttp } from '@/hooks/useHttp';
-import axios, { AxiosResponse } from 'axios';
-import { NextPageContext } from 'next';
-import { EditProfileProps } from '@/store/slices/ProfileSlice';
+import { useHttp } from "@/hooks/useHttp";
+import axios, { AxiosResponse } from "axios";
+import { NextPageContext } from "next";
+import { EditProfileProps } from "@/store/slices/ProfileSlice";
 
 enum endpoints {
-  editProfile = 'users/',
-  changePassByPhone = 'users/send_sms/',
-  compareSmsCodes = 'users/sms_code_verification/',
-  changePassFinal = 'users/change_password/',
-  getExactUser = 'users/',
+  editProfile = "users/",
+  changePassByPhone = "users/send_sms/",
+  compareSmsCodes = "users/sms_code_verification/",
+  changePassFinal = "users/change_password/",
+  getExactUser = "users/",
 }
 
 interface IProfileServiceResponse {
@@ -53,14 +53,18 @@ export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse =
         phone_number,
         for_password,
       });
+      return res.data;
     }
+
     if (for_email) {
       res = await useHttp().post(endpoints.changePassByPhone, {
         phone_number,
         for_email,
       });
+      return res.data;
     }
-    return res.data;
+    // @ts-ignore
+    else return res.data;
   };
 
   // const compareSmsCodes = async (sms_code: string): Promise<AxiosResponse<any>> => {
@@ -72,8 +76,8 @@ export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse =
   // };
 
   const compareSmsCodes = async (sms_code: string, token: string): Promise<AxiosResponse<any>> => {
-    const res = await axios.post(
-      'https://kazkabel-back.zoom-app.kz/users/sms_code_verification/',
+    const res = await axios.post<any>(
+      "https://kazkabel-back.zoom-app.kz/users/sms_code_verification/",
       {
         sms_code,
       },
