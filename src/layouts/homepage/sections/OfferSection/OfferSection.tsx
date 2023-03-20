@@ -94,7 +94,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
         </Swiper>
       </section>
 
-      {/* <section className={cls.offerSectionMobile}>
+      <section className={cls.offerSectionMobile}>
         <div className={cls.offerSectionMobile_inner}>
           <h1 className={cn(cls.offerSectionMobile_title, "title")}>
             Отечественный производитель кабельно – проводниковой продукции
@@ -128,7 +128,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
             <Image className={cls.offerSectionMobile_sliderImg} src={Banner3} alt="Offer img" />
           </SwiperSlide>
         </Swiper>
-      </section> */}
+      </section>
     </>
   );
 };
