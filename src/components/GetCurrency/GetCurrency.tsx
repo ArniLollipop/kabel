@@ -1,8 +1,8 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./GetCurrency.module.scss";
-import { ICurrencyResult, IMetalResponse, IMetalResult } from "@/types/GetCurrencyTypes";
-import { dateConverter } from "@/helpers/dateConverter";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './GetCurrency.module.scss';
+import { ICurrencyResult, IMetalResponse, IMetalResult } from '@/types/GetCurrencyTypes';
+import { dateConverter } from '@/helpers/dateConverter';
 import {
   IconCurrencyEUR,
   IconCurrencyRUS,
@@ -10,8 +10,8 @@ import {
   IconMetalDown,
   IconMetalMinus,
   IconMetalUp,
-} from "@/assets/icons";
-import Link from "next/link";
+} from '@/assets/icons';
+import Link from 'next/link';
 
 let cn = classNames.bind(cls);
 
@@ -26,31 +26,36 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
   const currencyItems = [];
   const formattedDate = dateConverter(currency.date);
 
+  let formattedMetalDate;
   // @ts-ignore
   const showMetal = metalRes.result.map((metal: IMetalResult) => {
-    const { name, profit, price } = metal;
-    const metalIcon =
-      profit === 0 ? <IconMetalMinus /> : profit > 0 ? <IconMetalUp /> : <IconMetalDown />;
+    if (metal.date) {
+      formattedMetalDate = dateConverter(metal.date);
+    } else {
+      const { name, profit, price } = metal;
+      const metalIcon =
+        profit === 0 ? <IconMetalMinus /> : profit > 0 ? <IconMetalUp /> : <IconMetalDown />;
 
-    return (
-      <div className={cn(cls.metalInfo)}>
-        {name}
-        <span>
-          {metalIcon}
-          {price.toFixed(2)}
-        </span>
-        {profit}
-      </div>
-    );
+      return (
+        <div className={cn(cls.metalInfo)}>
+          {name}
+          <span>
+            {metalIcon}
+            {price.toFixed(2)}
+          </span>
+          {profit}
+        </div>
+      );
+    }
   });
 
   for (const item in currency) {
-    if (item !== "date") {
+    if (item !== 'date') {
       currencyItems.push(
         <div key={item} className={cn(cls.currencyIntro)}>
-          {item === "EUR" ? (
+          {item === 'EUR' ? (
             <IconCurrencyEUR />
-          ) : item === "USD" ? (
+          ) : item === 'USD' ? (
             <IconCurrencyUSA />
           ) : (
             <IconCurrencyRUS />
@@ -74,18 +79,18 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
           <p>{formattedDate}</p>
         </div>
         <div className={cn(cls.currencyWrapper)}>{currencyItems}</div>
-        <Link target={"_blank"} href={"https://www.nationalbank.kz/ru"}>
+        <Link target={'_blank'} href={'https://www.nationalbank.kz/ru'}>
           nationalbank.kz
         </Link>
       </div>
 
       <div className={cn(cls.GetCurrency_currencyContainer, className)}>
         <p>
-          Курс продаж цветных металлов по данным{" "}
-          <Link target={"_blank"} className={cn(cls.metalLink)} href={"https://www.lme.com/en/"}>
+          Курс продаж цветных металлов по данным{' '}
+          <Link target={'_blank'} className={cn(cls.metalLink)} href={'https://www.lme.com/en/'}>
             LME
-          </Link>{" "}
-          на <span>{formattedDate}</span>
+          </Link>{' '}
+          на <span>{formattedMetalDate}</span>
         </p>
         <div className={cn(cls.metalContainer)}>{showMetal}</div>
       </div>

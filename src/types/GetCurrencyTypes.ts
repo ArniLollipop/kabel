@@ -10,6 +10,7 @@ export interface ICurrencyResponse {
 }
 
 export interface IMetalResult {
+  date: string;
   name: string;
   price: 1043028.1248215679;
   profit: 0;
