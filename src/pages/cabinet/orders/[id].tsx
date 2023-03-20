@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import classNames from 'classnames/bind';
-import cls from './index.module.scss';
-import { useRouter } from 'next/router';
-import { ordersData } from '@/data/OrdersData';
-import { MainLayout } from '@/layouts/MainLayout';
-import { ActiveCabinetPageEnum, CabinetLayout } from '@/layouts/CabinetLayot/CabinetLayout';
-import Image from 'next/image';
-import Link from 'next/link';
+import { FC } from "react";
+import classNames from "classnames/bind";
+import cls from "./index.module.scss";
+import { useRouter } from "next/router";
+import { ordersData } from "@/data/OrdersData";
+import { MainLayout } from "@/layouts/MainLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import Image from "next/image";
+import Link from "next/link";
 
 const cn = classNames.bind(cls);
 
@@ -79,7 +79,7 @@ export default function OrderCard(props: OrderCardProps) {
                 stroke="#00ABC2"
                 strokeWidth="2"
                 strokeLinecap="round"
-                stroke-linejoin="round"
+                strokeLinejoin="round"
               />
             </svg>
           </Link>

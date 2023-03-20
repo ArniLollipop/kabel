@@ -1,4 +1,4 @@
-import { FC, SVGProps } from "react";
+import { FC, SVGProps } from 'react';
 
 interface CabinetIconsProps extends SVGProps<SVGSVGElement> {
   className?: string;
@@ -74,20 +74,20 @@ export const IconCabinetProfile: FC<CabinetIconsProps> = (props) => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill={fillColor || "none"}
+      fill={fillColor || 'none'}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
       <path
         d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-        stroke={fillColor || "#00ABC2"}
+        stroke={fillColor || '#00ABC2'}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-        stroke={fillColor || "#00ABC2"}
+        stroke={fillColor || '#00ABC2'}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -97,7 +97,7 @@ export const IconCabinetProfile: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetOrder: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#00ABC2" } = props;
+  const { className, fillColor = '#00ABC2' } = props;
 
   return (
     <svg
@@ -143,7 +143,7 @@ export const IconCabinetOrder: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetDelivery: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#00ABC2" } = props;
+  const { className, fillColor = '#00ABC2' } = props;
 
   return (
     <svg
@@ -173,7 +173,7 @@ export const IconCabinetDelivery: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetCards: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#00ABC2" } = props;
+  const { className, fillColor = '#00ABC2' } = props;
 
   return (
     <svg
@@ -203,7 +203,7 @@ export const IconCabinetCards: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetBonuses: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#00ABC2" } = props;
+  const { className, fillColor = '#00ABC2' } = props;
 
   return (
     <svg
@@ -224,7 +224,7 @@ export const IconCabinetBonuses: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetSupport: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#00ABC2" } = props;
+  const { className, fillColor = '#00ABC2' } = props;
 
   return (
     <svg
@@ -254,7 +254,7 @@ export const IconCabinetSupport: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetLogout: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#00ABC2" } = props;
+  const { className, fillColor = '#00ABC2' } = props;
 
   return (
     <svg
@@ -291,7 +291,7 @@ export const IconCabinetLogout: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetArrow: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = "#39424B" } = props;
+  const { className, fillColor = '#39424B' } = props;
 
   return (
     <svg

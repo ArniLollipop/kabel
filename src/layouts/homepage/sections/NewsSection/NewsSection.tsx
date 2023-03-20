@@ -60,9 +60,9 @@ export const NewsSection: FC<NewsSectionProps> = (props) => {
             <path
               d="M9.875 19.25L1.125 10.5L9.875 1.75"
               stroke="#39424B"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </Button>
@@ -82,9 +82,9 @@ export const NewsSection: FC<NewsSectionProps> = (props) => {
             <path
               d="M1.125 19.25L9.875 10.5L1.125 1.75"
               stroke="#39424B"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </Button>

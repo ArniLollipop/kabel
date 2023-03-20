@@ -1,21 +1,28 @@
 import { useHttp } from "@/hooks/useHttp";
 import { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
-import { ICurrencyResponse } from "@/types/GetCurrencyTypes";
+import { ICurrencyResponse, ICurrencyResult } from "@/types/GetCurrencyTypes";
 
 enum endpoints {
   getCurrency = "/widgets/get_currency/",
+  getMetal = "widgets/get_metal_currency/",
 }
 
 interface IGetCurrencyResponse {
-  getCurrency: () => Promise<ICurrencyResponse>;
+  getCurrency: () => Promise<ICurrencyResult>;
+  getMetal: () => Promise<AxiosResponse<any>>;
 }
 
 export const GetCurrencyService = (ctx?: NextPageContext): IGetCurrencyResponse => {
-  const getCurrency = async (): Promise<ICurrencyResponse> => {
-    const res = await useHttp().get(endpoints.getCurrency);
+  const getCurrency = async (): Promise<ICurrencyResult> => {
+    const res = await useHttp().get<ICurrencyResponse>(endpoints.getCurrency);
+    return res.data.result;
+  };
+
+  const getMetal = async (): Promise<AxiosResponse<any>> => {
+    const res = await useHttp().get(endpoints.getMetal);
     return res.data;
   };
 
-  return { getCurrency };
+  return { getCurrency, getMetal };
 };

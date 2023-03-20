@@ -38,7 +38,7 @@ interface subcategorySetI {
   category: string;
 }
 
-interface categoryI {
+export interface categoryI {
   name: string;
   subcategory_set: subcategorySetI[];
   icon: string;

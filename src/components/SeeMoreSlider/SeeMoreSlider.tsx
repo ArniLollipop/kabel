@@ -1,13 +1,13 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames/bind';
-import cls from './SeeMoreSlider.module.scss';
-import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
-import { SeeMoreCard } from '@/components/SeeMoreCard/SeeMoreCard';
-import { seeMoreDatas } from '@/data/SeeMoreCardData';
+import { FC, useState } from "react";
+import classNames from "classnames/bind";
+import cls from "./SeeMoreSlider.module.scss";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { SeeMoreCard } from "@/components/SeeMoreCard/SeeMoreCard";
+import { seeMoreDatas } from "@/data/SeeMoreCardData";
 
-import 'swiper/css';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
+import "swiper/css";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 
 const cn = classNames.bind(cls);
 
@@ -77,7 +77,7 @@ export const SeeMoreSlider: FC<SeeMoreSliderProps> = (props) => {
             stroke="#39424B"
             strokeWidth="5"
             strokeLinecap="round"
-            stroke-linejoin="round"
+            strokeLinejoin="round"
           />
         </svg>
       </Button>
@@ -99,7 +99,7 @@ export const SeeMoreSlider: FC<SeeMoreSliderProps> = (props) => {
             stroke="#39424B"
             strokeWidth="5"
             strokeLinecap="round"
-            stroke-linejoin="round"
+            strokeLinejoin="round"
           />
         </svg>
       </Button>

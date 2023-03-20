@@ -24,7 +24,6 @@ interface OfferSectionProps {
 
 export const OfferSection: FC<OfferSectionProps> = (props) => {
   const { className, offers } = props;
-  console.log(offers);
 
   const [myswiper, setSwiper] = useState<any>({});
 
@@ -61,7 +60,6 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
         >
           {offers.map((sect) => {
             const { button_text, button_url, id, image, text, title } = sect;
-            console.log(image);
             return (
               <SwiperSlide key={id}>
                 <div className={cls.offerInner}>

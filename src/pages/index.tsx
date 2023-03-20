@@ -1,21 +1,24 @@
 import { ActiveHeaderPage } from "@/components/header/Header";
-import { useAppDispatch } from "@/hooks/store";
 import { Homepage } from "@/layouts/homepage/Homepage";
 import { MainLayout } from "@/layouts/MainLayout";
-import { AboutService } from "@/services/About.service";
-import { GetCurrencyService } from "@/services/GetCurrency";
-import { ProductService } from "@/services/Product.servise";
-import { SertificateService } from "@/services/Sertificate.service";
+// Types
 import { AboutI } from "@/types/AboutTypes";
-import { ICurrencyResult } from "@/types/GetCurrencyTypes";
 import { categoryI } from "@/types/ProductTypes";
 import { sertificateI } from "@/types/SertificateTypes";
-import { AdventagesService } from "@/services/Adventages.servise";
-import { adventagesI } from "@/types/AdventagesTypes";
-import { NewsService } from "@/services/News.service";
 import { newsI } from "@/types/NewsTypes";
-import { OfferService } from "@/services/Offer.service";
 import { offerI } from "@/types/OfferTypes";
+import { ICurrencyResponse, IMetalResponse } from "@/types/GetCurrencyTypes";
+import { ICurrencyResult } from "@/types/GetCurrencyTypes";
+import { adventagesI } from "@/types/AdventagesTypes";
+
+// Services
+import { AdventagesService } from "@/services/Adventages.servise";
+import { NewsService } from "@/services/News.service";
+import { OfferService } from "@/services/Offer.service";
+import { GetCurrencyService } from "@/services/GetCurrency";
+import { SertificateService } from "@/services/Sertificate.service";
+import { AboutService } from "@/services/About.service";
+import { ProductService } from "@/services/Product.servise";
 
 export interface HomeProps {
   offers: offerI[];
@@ -25,6 +28,8 @@ export interface HomeProps {
   sertificates: sertificateI[];
   adventages: adventagesI[];
   news: newsI[];
+  currencyRes: ICurrencyResult;
+  metalRes: IMetalResponse;
 }
 
 export default function Home(props: HomeProps) {
@@ -37,22 +42,24 @@ export default function Home(props: HomeProps) {
 
 export async function getServerSideProps() {
   const offers = await OfferService().getOffers();
-  const currency = await GetCurrencyService().getCurrency();
   const aboutInfo = await AboutService().getAboutInfo();
   const categories = await ProductService().getCategories();
   const sertificates = await SertificateService().getSertificate();
   const adventages = await AdventagesService().getAdventages();
   const news = await NewsService().getNews();
+  const currencyRes = await GetCurrencyService().getCurrency();
+  const metalRes = await GetCurrencyService().getMetal();
 
   return {
     props: {
-      currency: currency.result,
       categories: categories.results,
       aboutInfo,
       sertificates,
       adventages,
       news,
       offers,
+      currencyRes,
+      metalRes,
     },
   };
 }

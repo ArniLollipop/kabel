@@ -8,3 +8,13 @@ export interface ICurrencyResult {
 export interface ICurrencyResponse {
   result: ICurrencyResult;
 }
+
+export interface IMetalResult {
+  name: string;
+  price: 1043028.1248215679;
+  profit: 0;
+}
+
+export interface IMetalResponse {
+  result: IMetalResult;
+}

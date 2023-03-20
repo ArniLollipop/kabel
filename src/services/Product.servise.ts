@@ -11,7 +11,7 @@ const enum endpoints {
 
 interface ProductServiceResponseI {
   getProducts: (queries?: string) => Promise<productAnswI>;
-  getCategories: () => Promise<AxiosResponse<categoriesAnswI>>;
+  getCategories: () => Promise<categoriesAnswI>;
   getCores: () => Promise<coresI>;
 }
 
@@ -22,8 +22,8 @@ export const ProductService = (ctx?: NextPageContext): ProductServiceResponseI =
     return res.data;
   };
 
-  const getCategories = async (): Promise<AxiosResponse<categoriesAnswI>> => {
-    const res = await useHttp(ctx).get(endpoints.getCategories);
+  const getCategories = async (): Promise<categoriesAnswI> => {
+    const res = await useHttp(ctx).get<categoriesAnswI>(endpoints.getCategories);
     return res.data;
   };
 

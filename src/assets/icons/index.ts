@@ -1,4 +1,11 @@
-export { IconCurrencyEUR, IconCurrencyRUS, IconCurrencyUSA } from './GetCurrencyIcons';
+export {
+  IconMetalDown,
+  IconMetalUp,
+  IconCurrencyEUR,
+  IconCurrencyRUS,
+  IconCurrencyUSA,
+  IconMetalMinus,
+} from "./GetCurrencyIcons";
 
 export {
   ServicesDetailsIcon,
@@ -7,10 +14,10 @@ export {
   ServicesArticleIcon3,
   ServicesBackIcon,
   ServicesDeleteIcon,
-} from './servicesIcons/servicesIcons';
-export { HidePassword, ShowPassword } from './authIcons/authIcons';
+} from "./servicesIcons/servicesIcons";
+export { HidePassword, ShowPassword } from "./authIcons/authIcons";
 
-export { InputPhoneNumberIcon } from './InputPhoneNumberIcon';
+export { InputPhoneNumberIcon } from "./InputPhoneNumberIcon";
 
 export {
   IconCard,
@@ -19,7 +26,7 @@ export {
   IconUserCabinet,
   IconWhatsApp,
   IconLogo,
-} from './headerIcons';
+} from "./headerIcons";
 
 export {
   IconMobileMenuCard,
@@ -27,7 +34,7 @@ export {
   IconMobileMenuMore,
   IconMobileMenuProduct,
   IconMobileMenuServices,
-} from './mobileMenuIcons';
+} from "./mobileMenuIcons";
 
 export {
   IconShare,
@@ -46,7 +53,7 @@ export {
   IconCardCounterMinus,
   IconCardCounterPlus,
   IconCardTenge,
-} from './cardIcons';
+} from "./cardIcons";
 
 export {
   IconCabinetBonuses,
@@ -61,7 +68,7 @@ export {
   IconCabinetPassword,
   IconCabinetEditPhoto,
   IconCabinetFlag,
-} from './cabinetIcons';
+} from "./cabinetIcons";
 
 export {
   IconContactsClock,
@@ -70,4 +77,4 @@ export {
   IconContactsPhone,
   IconContactsTg,
   IconContactsWa,
-} from './contactsIcons';
+} from "./contactsIcons";
