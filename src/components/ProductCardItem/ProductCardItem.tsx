@@ -49,9 +49,9 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
             ? props.description
             : `${props.description.slice(0, 77)}...`}
         </p>
-      </div>
 
-      <span className={cls.cardPrice}>{props.cost}</span>
+        <span className={cls.cardPrice}>{props.cost} ₸</span>
+      </div>
 
       <div className={cls.cardBtns}>
         <Button theme={ThemeButton.CARD} className={cls.cardAddBtn}>

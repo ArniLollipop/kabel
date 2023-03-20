@@ -10,6 +10,11 @@ interface characteristicsI {
   value: string;
 }
 
+interface colorsI {
+  color_name: string;
+  image: string;
+}
+
 export interface productI {
   code: number;
   colors_info: colorsI[];
@@ -23,7 +28,8 @@ export interface productI {
   core_number: number;
   section: number;
   subcategory: string;
-  colors: string[];
+  colors: colorsI[];
+  recommended_products: productI[];
 }
 
 export interface productAnswI {

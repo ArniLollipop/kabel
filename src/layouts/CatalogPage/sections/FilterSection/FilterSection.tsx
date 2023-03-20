@@ -21,11 +21,9 @@ interface FilterSectionProps {
 }
 
 export const FilterSection: FC<FilterSectionProps> = (props) => {
-  const { className, isOpened, closeFilters } = props;
+  const { isOpened, closeFilters } = props;
   const { categories, cores, products } = useAppSelector((state) => state.ProductSlice);
   const dispatch = useAppDispatch();
-
-  console.log(products);
 
   interface sortI {
     availability: "Все" | "в наличии" | "под заказ";
@@ -63,14 +61,6 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
             {/* Header of Filters */}
             <div className={cls.header} id="top">
               <span>{products?.count || "Нет"} товаров</span>
-
-              <button
-                type="button"
-                className={cls.mockBtn}
-                onClick={() => closeFilters && closeFilters(false)}
-              >
-                Close
-              </button>
 
               <div className={cls.mainBtns}>
                 <Button
@@ -246,6 +236,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 theme={ThemeButton.BLUE}
                 type="submit"
                 disabled={isSubmitting}
+                onClick={() => closeFilters && closeFilters(false)}
               >
                 Применить
               </Button>

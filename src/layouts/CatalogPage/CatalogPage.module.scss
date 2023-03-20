@@ -10,6 +10,7 @@
     grid-template-columns: 1fr 3fr;
     gap: 40px;
     position: relative;
+    height: 100%;
 
     @media (max-width: 1024px) {
       display: block;

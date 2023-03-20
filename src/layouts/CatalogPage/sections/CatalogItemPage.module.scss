@@ -72,8 +72,10 @@
 
       &_contentDescr {
         width: 100%;
+        max-width: 34vw;
 
-        .inStock {
+        .inStock,
+        .outStock {
           @include adaptive-size(24, 12, font-size);
           @include adaptive-size(29, 18, line-height);
           @include adaptive-size(30, 10, margin-bottom);
@@ -81,27 +83,59 @@
 
           display: flex;
           align-items: center;
+        }
 
+        .inStock {
           color: #a8d982;
+        }
+
+        .outStock {
+          color: #d98582;
+        }
+
+        @media (max-width: 1024px) {
+          max-width: 100%;
         }
       }
 
       &_colors {
         @include adaptive-size(70, 15, margin-bottom);
+
+        div {
+          display: flex;
+          gap: 10px;
+        }
+
+        img {
+          @include adaptive-size(40, 30, width);
+          @include adaptive-size(40, 30, height);
+        }
       }
 
       &_descr {
-        @include adaptive-size(55, 10, margin-bottom);
+        @include adaptive-size(20, 12, font-size);
+        @include adaptive-size(25, 16, line-height);
+        @include adaptive-size(30, 10, margin-bottom);
+      }
+
+      &_charList {
+        &:not(:last-child) {
+          @include adaptive-size(30, 10, margin-bottom);
+        }
+
+        &:last-child {
+          @include adaptive-size(55, 10, margin-bottom);
+        }
       }
 
       &_descrItem {
         @include adaptive-size(20, 12, font-size);
         @include adaptive-size(25, 16, line-height);
-        @include adaptive-size(30, 10, margin-bottom);
+        @include adaptive-size(15, 10, padding-bottom);
+        @include adaptive-size(15, 10, padding-top);
 
         font-weight: 400;
 
-        padding-bottom: 2px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -109,10 +143,6 @@
         border-radius: 5px;
 
         color: var(--color-font-title);
-
-        &:not(:last-child) {
-          @include adaptive-size(30, 20, margin-bottom);
-        }
       }
     }
 
@@ -235,6 +265,40 @@
     margin-top: 80px;
   }
 
+  .mobileDescr {
+    display: none;
+
+    &_body {
+      padding-top: 10px;
+    }
+  }
+
+  .char {
+    &_accTitle {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--color-accent);
+
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &_accIcon {
+      transition: all 0.3s ease;
+    }
+
+    &_accIconActive {
+      transform: rotate(90deg);
+    }
+  }
+
   @media (max-width: 1024px) {
     &_itemCard {
       flex-direction: column;
@@ -253,6 +317,14 @@
   }
 
   @media (max-width: 768px) {
+    .pcDescr {
+      display: none;
+    }
+
+    .mobileDescr {
+      display: block;
+    }
+
     &_itemCard .card {
       &_content {
         flex-direction: column;

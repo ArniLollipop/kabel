@@ -2,85 +2,165 @@ import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./CatalogItemPage.module.scss";
 import Image from "next/image";
-import ImageMockProduct from "@/assets/images/ImageMockProduct.png";
-import { IconCardItemInStock } from "@/assets/icons";
-import ImageMockProductMini from "@/assets/images/ImageMockProductMini.svg";
+import { IconCardItemInStock, IconCardItemOutOfStock } from "@/assets/icons";
 import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { IconShare } from "@/assets/icons";
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
+import { productI } from "@/types/ProductTypes";
+import nullImg from "@/assets/images/nullImg.webp";
 
 const cn = classNames.bind(cls);
 
-interface CatalogItemPageProps {
+interface CatalogItemPageProps extends productI {
   className?: string;
 }
 
 export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   const { className } = props;
 
+  const renderCharList = (start?: number, end?: number) => {
+    const startPoint = start ? start : 0;
+    const endPoint = end ? end : props.characteristics_info.length;
+
+    return (
+      <ul className={cls.card_charList}>
+        {props.characteristics_info.slice(startPoint, endPoint).map(({ key, value, id }) => (
+          <li className={cls.card_descrItem} key={id}>
+            <span className={cls.card_descrCategoryName}>{key}</span>
+            <span className={cls.card_descrCategoryVal}>{value}</span>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className={cn(cls.CatalogItemPage)}>
       <div className={cls.CatalogItemPage_wrapper}>
         <div className={cls.CatalogItemPage_itemCard}>
           <div className={cls.card}>
-            <h1 className={cls.card_title}>Провод ПуГВнг (А)- LS</h1>
+            <h1 className={cls.card_title}>{props.name}</h1>
 
-            <span className={cls.card_code}>Код товара: 1234567</span>
+            <span className={cls.card_code}>Код товара: {props.code}</span>
 
             <div className={cls.card_content}>
-              <Image className={cls.card_img} src={ImageMockProduct} alt="Card image" />
+              {/* Картинка товара */}
+              <Image
+                className={cls.card_img}
+                src={props.image || nullImg}
+                alt="Card image"
+                width={500}
+                height={500}
+              />
 
               <div className={cls.card_contentDescr}>
-                <div className={cls.inStock}>
-                  <IconCardItemInStock />В наличии
+                {/* Наличие */}
+                <div
+                  className={cn({
+                    inStock: props.availability === "в наличии",
+                    outStock: props.availability === "под заказ",
+                  })}
+                >
+                  {props.availability === "в наличии" ? (
+                    <>
+                      <IconCardItemInStock />В наличии
+                    </>
+                  ) : (
+                    <>
+                      <IconCardItemOutOfStock />
+                      Под заказ
+                    </>
+                  )}
                 </div>
 
+                {/* Выбор цветов */}
                 <div className={cls.card_colors}>
                   <h3 className={cls.card_subTitle}>Цвет</h3>
                   <div className="">
-                    <Image src={ImageMockProductMini} alt="image mini" />
-                    <Image src={ImageMockProductMini} alt="image mini" />
-                    <Image src={ImageMockProductMini} alt="image mini" />
-                    <Image src={ImageMockProductMini} alt="image mini" />
-                    <Image src={ImageMockProductMini} alt="image mini" />
-                    <Image src={ImageMockProductMini} alt="image mini" />
+                    {props.colors_info.map(({ image: src }, i) => (
+                      <Image src={src} alt="image mini" width={35} height={35} key={i} />
+                    ))}
                   </div>
                 </div>
 
-                <div className="">
+                {/* Описание / Характеристики */}
+                <div className={cls.pcDescr}>
                   <h3 className={cls.card_subTitle}>Описание</h3>
-                  <ul className={cls.card_descr}>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Стандарт</span>
-                      <span className={cls.card_descrCategoryVal}>ГОСТ 31947-2012</span>
-                    </li>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Количество жил</span>
-                      <span className={cls.card_descrCategoryVal}>1</span>
-                    </li>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Сечение:</span>
-                      <span className={cls.card_descrCategoryVal}>0,5</span>
-                    </li>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Цвет</span>
-                      <span className={cls.card_descrCategoryVal}>желто-зеленый</span>
-                    </li>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Тип</span>
-                      <span className={cls.card_descrCategoryVal}>установочный</span>
-                    </li>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Диаметр, мм</span>
-                      <span className={cls.card_descrCategoryVal}>2,01</span>
-                    </li>
-                    <li className={cls.card_descrItem}>
-                      <span className={cls.card_descrCategoryName}>Номинальное напряжение, кВ</span>
-                      <span className={cls.card_descrCategoryVal}>0,450</span>
-                    </li>
-                  </ul>
-                  <a href="#details">Все характеристики</a>
+                  {/* Описание */}
+                  <p className={cls.card_descr}>{props.description}</p>
+
+                  {/* Характеристики */}
+
+                  {props.characteristics_info.length > 5 ? (
+                    <>
+                      {renderCharList(0, 5)}
+                      <Accordion className={cls.char}>
+                        <AccordionItem>
+                          {({ open }: { open: boolean }) => (
+                            <>
+                              <AccordionHeader className={cls.char_accTitle}>
+                                <span>Все характеристики</span>
+                                <svg
+                                  width="9"
+                                  height="15"
+                                  viewBox="0 0 9 15"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className={cn(cls.char_accIcon, { char_accIconActive: open })}
+                                >
+                                  <path
+                                    d="M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619"
+                                    stroke="#00ABC2"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              </AccordionHeader>
+                              <AccordionBody className={cls.char_accList}>
+                                {renderCharList(5, props.characteristics_info.length)}
+                              </AccordionBody>
+                            </>
+                          )}
+                        </AccordionItem>
+                      </Accordion>
+                    </>
+                  ) : (
+                    renderCharList()
+                  )}
                 </div>
+
+                <Accordion className={cls.mobileDescr}>
+                  <AccordionItem>
+                    {({ open }: { open: boolean }) => (
+                      <>
+                        <AccordionHeader className={cls.char_accTitle}>
+                          <span>Развернуть описание</span>
+                          <svg
+                            width="9"
+                            height="15"
+                            viewBox="0 0 9 15"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={cn(cls.char_accIcon, { char_accIconActive: open })}
+                          >
+                            <path
+                              d="M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619"
+                              stroke="#00ABC2"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </AccordionHeader>
+                        <AccordionBody className={cn(cls.char_accList, cls.mobileDescr_body)}>
+                          <p className={cls.card_descr}>{props.description}</p>
+                          {renderCharList()}
+                        </AccordionBody>
+                      </>
+                    )}
+                  </AccordionItem>
+                </Accordion>
               </div>
             </div>
           </div>
@@ -92,7 +172,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 <span>Скидки при заказе от 10000 тг.</span>
               </p>
 
-              <span className={cls.buyActions_price}>550 ₸</span>
+              <span className={cls.buyActions_price}>{props.cost} ₸</span>
 
               <Button className={cls.buyActions_btn} theme={ThemeButton.CARD}>
                 В корзину
@@ -113,10 +193,6 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
             </div>
           </div>
         </div>
-
-        {/* <div className={cls.CatalogItemPage_more}></div> */}
-
-        {/* <div className={cls.CatalogItemPage_details} id="details"></div> */}
       </div>
     </div>
   );

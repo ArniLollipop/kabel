@@ -8,15 +8,17 @@ import { seeMoreDatas } from "@/data/SeeMoreCardData";
 import "swiper/css";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
+import { productI } from "@/types/ProductTypes";
 
 const cn = classNames.bind(cls);
 
 interface SeeMoreSliderProps {
   className?: string;
+  slides: productI[];
 }
 
 export const SeeMoreSlider: FC<SeeMoreSliderProps> = (props) => {
-  const { className } = props;
+  const { className, slides } = props;
 
   const [mySwiper, setSwiper] = useState<any>();
 
@@ -54,8 +56,8 @@ export const SeeMoreSlider: FC<SeeMoreSliderProps> = (props) => {
   return (
     <div className={cls.slider}>
       <Swiper {...params} onSwiper={(swiper) => setSwiper(swiper)}>
-        {seeMoreDatas.map((card) => (
-          <SwiperSlide className={cls.slider_slide} key={card.id}>
+        {slides.map((card) => (
+          <SwiperSlide className={cls.slider_slide} key={card.code}>
             <SeeMoreCard {...card} />
           </SwiperSlide>
         ))}
