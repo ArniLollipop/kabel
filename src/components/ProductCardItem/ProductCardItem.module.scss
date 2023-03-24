@@ -83,19 +83,22 @@
   .cardImg {
     @include adaptive-size(137, 90, width);
     @include adaptive-size(137, 90, height);
-    // width: 137px;
-    // height: 137px;
+    object-fit: contain;
     margin-right: 10px;
   }
 
   .cardInfo {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 35px;
     margin-right: 20px;
+    margin-top: 50px;
 
-    @media (min-width: 1400px) {
-      margin-top: 50px;
+    @media (max-width: 1024px) {
+      gap: 15px;
+      margin-bottom: 15px;
+      margin-top: 15px;
     }
   }
 
@@ -115,7 +118,12 @@
   }
 
   .cardPrice {
-    display: none;
+    @include adaptive-size(20, 16, font-size);
+    @include adaptive-size(22, 18, line-height);
+    margin-top: -10px;
+    font-weight: 600;
+
+    color: #000000;
   }
 
   .link {

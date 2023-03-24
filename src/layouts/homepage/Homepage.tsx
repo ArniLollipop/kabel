@@ -1,3 +1,4 @@
+import { ICurrencyResult, IMetalResponse } from "@/types/GetCurrencyTypes";
 import { FC } from "react";
 import {
   OfferSection,
@@ -9,24 +10,24 @@ import {
   SertificatesSection,
   SpeciallySection,
 } from "./sections";
+import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
+import { HomeProps } from "@/pages";
 
-interface HomepageProps {
-  className?: string;
-}
-
-export const Homepage: FC<HomepageProps> = (props) => {
-  const { className } = props;
+export const Homepage: FC<HomeProps> = (props) => {
+  const { metalRes, aboutInfo, categories, sertificates, adventages, news, offers, currencyRes } =
+    props;
 
   return (
     <>
-      <OfferSection />
-      <AboutSection />
-      <ProductsSection />
-      <SpeciallySection />
-      <AdvantagesSection />
+      <OfferSection offers={offers} />
+      <AboutSection aboutInfo={aboutInfo} />
+      <ProductsSection categories={categories} />
+      <SpeciallySection news={news} />
+      <AdvantagesSection adventages={adventages} />
       <ServicesSection />
-      <SertificatesSection />
-      <NewsSection />
+      <SertificatesSection sertificates={sertificates} />
+      <NewsSection news={news} />
+      <GetCurrency currency={currencyRes} metalRes={metalRes} />
     </>
   );
 };

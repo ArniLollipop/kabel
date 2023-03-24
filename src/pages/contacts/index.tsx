@@ -1,10 +1,7 @@
-import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Title } from "@/UI/Title/Title";
-import Image from "next/image";
-import ImageMockContactsMap from "@/assets/images/ImageMockContactsMap.png";
 import {
   IconContactsClock,
   IconContactsGeo,
@@ -13,24 +10,35 @@ import {
   IconContactsTg,
   IconContactsWa,
 } from "@/assets/icons";
-import Link from "next/link";
+import { ActiveHeaderPage } from "@/components/header/Header";
+import { MapComponent } from "@/components/map/MapComponent";
 
 const cn = classNames.bind(cls);
 
-export default function contactsPage() {
+export interface Coords {
+  coordsAlmaty: {
+    lng: number;
+    lat: number;
+  };
+  coordsAstana: {
+    lng: number;
+    lat: number;
+  };
+}
+
+function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
+  const { lat: latAlmaty, lng: lngAlmaty } = coordsAlmaty;
+  const { lat: latAstana, lng: lngAstana } = coordsAstana;
+
   return (
-    <MainLayout>
+    <MainLayout activePage={ActiveHeaderPage.CONTACTS}>
       <div className={cn(cls.contactsPage)}>
         <Title className={cls.contactsPage_title}>Контакты</Title>
         <div className={cls.contactsPage_wrapper}>
           <div className={cls.contactsPage_item}>
             {/* Map implementation */}
             <div className={cls.contactsPage_imageWrapper}>
-              <Image
-                className={cls.contactsPage_image}
-                src={ImageMockContactsMap}
-                alt="mock image"
-              />
+              <MapComponent coords={{ lat: latAlmaty, lon: lngAlmaty }} />
             </div>
 
             {/* Text datas */}
@@ -99,11 +107,7 @@ export default function contactsPage() {
           <div className={cls.contactsPage_item}>
             {/* Map implementation */}
             <div className={cls.contactsPage_imageWrapper}>
-              <Image
-                className={cls.contactsPage_image}
-                src={ImageMockContactsMap}
-                alt="mock image"
-              />
+              <MapComponent coords={{ lat: latAstana, lon: lngAstana }} />
             </div>
 
             {/* Text datas */}
@@ -173,3 +177,28 @@ export default function contactsPage() {
     </MainLayout>
   );
 }
+
+export async function getServerSideProps() {
+  const urlAlmaty = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
+  const urlAstana = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94a"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
+
+  const resAlmaty = await fetch(urlAlmaty);
+  const resAstana = await fetch(urlAstana);
+
+  const dataAlmaty = await resAlmaty.json();
+  const dataAstana = await resAstana.json();
+  if (dataAlmaty.status && dataAstana.status === "OK") {
+    const coordsAlmaty = dataAlmaty.results[0].geometry.location;
+    const coordsAstana = dataAstana.results[0].geometry.location;
+    return {
+      props: {
+        coordsAlmaty,
+        coordsAstana,
+      },
+    };
+  } else {
+    throw new Error("Ошибка при получений кординатов!");
+  }
+}
+
+export default contactsPage;

@@ -1,7 +1,8 @@
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./SortByWidget.module.scss";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
+import { Field } from "formik";
 
 const cn = classNames.bind(cls);
 
@@ -14,21 +15,22 @@ export const SortByWidget: FC<SortByWidgetProps> = (props) => {
 
   return (
     <div className={cn(cls.SortByWidget)}>
-      <div className={cls.sortSelector}>
-        Сортировать по :
-        <select name="" id="">
-          <option value="">Популярности</option>
-          <option value="">Убыванию цены</option>
-          <option value="">Возрастанию цены</option>
-        </select>
-      </div>
+      <label htmlFor="sortWidget">Сортировать по:</label>
 
-      <span>
-        <span className={cls.founded}>Найдено</span> 30 товаров
-      </span>
-      <Button theme={ThemeButton.CLEAR} className={cls.sortBtn}>
-        {}
-      </Button>
+      <Field
+        component="select"
+        id="sortWidget"
+        name="sortWidget"
+        multiple={false}
+        className={cls.SortByWidget_selector}
+      >
+        <option value="cost" className={cls.SortByWidget_option}>
+          Возрастанию цены
+        </option>
+        <option value="-cost" className={cls.SortByWidget_option}>
+          Убыванию цены
+        </option>
+      </Field>
     </div>
   );
 };

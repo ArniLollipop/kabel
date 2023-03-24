@@ -15,7 +15,7 @@ let cn = classNames.bind(cls);
 
 interface IInputInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
   password?: string;
-  labelText?: string;
+  labeltext?: string;
   touched?: boolean;
   errors?: string;
   className?: string;
@@ -27,6 +27,7 @@ interface IInputInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
     | string
     | React.ComponentType
     | React.ForwardRefExoticComponent<any>;
+  ref?: any;
 }
 
 export enum EInputInstanceTheme {
@@ -36,11 +37,11 @@ export enum EInputInstanceTheme {
 }
 
 export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) => {
-  const { labelText, children, as, touched, errors, mask, theme, className, password } = props;
+  const { labeltext, children, as, touched, errors, mask, theme, className, password, ref } = props;
 
-  const inputLabel = labelText && (
+  const inputLabel = labeltext && (
     <label htmlFor={id} className={""}>
-      {labelText}
+      {labeltext}
     </label>
   );
 
@@ -51,6 +52,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
         <Field
           name={name}
           {...props}
+          ref={ref}
           touched={touched === true ? 1 : 0}
           className={cn(
             cls.InputInstanceClass,
@@ -70,6 +72,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
         {inputLabel}
         <Field
           {...props}
+          ref={ref}
           name={name}
           touched={touched === true ? 1 : 0}
           className={cn(
@@ -87,6 +90,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
               touched={touched === true ? 1 : 0}
               mask={mask}
               name={name}
+              ref={ref}
               className={cn(
                 cls.InputInstanceClass,
                 className,
@@ -105,6 +109,7 @@ export const InputInstance: FC<IInputInstanceProps> = ({ name, id, ...props }) =
         <Field
           {...props}
           name={name}
+          ref={ref}
           touched={touched === true ? 1 : 0}
           className={cn(
             cls.InputInstanceClass,

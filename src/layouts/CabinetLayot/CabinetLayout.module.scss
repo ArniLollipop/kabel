@@ -19,7 +19,7 @@
   padding-bottom: 30px;
   border-radius: 15px;
   display: flex;
-  max-height: 650px;
+  max-height: 700px;
   flex-direction: column;
   gap: 10px;
 
@@ -37,6 +37,12 @@
     text-align: start;
     font-weight: 600;
     margin: 42px 0 0 13px;
+  }
+
+  &.mobile {
+    .nav_link {
+      width: 100%;
+    }
   }
 
   &_link {

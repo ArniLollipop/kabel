@@ -1,7 +1,12 @@
 @import "/src/styles/globalMixins.scss";
+$pathToIcon: "../../../../assets/icons";
 
 .SideBar {
   @include adaptive-1024(404, 350, width);
+
+  label {
+    cursor: pointer;
+  }
 
   div {
     background-color: var(--color-bg-white);
@@ -19,6 +24,33 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: column;
+
+    .radioBtn {
+      position: relative;
+
+      input:where([type="radio"]) {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 22px;
+        height: 22px;
+        margin: calc(0.75em - 11px) 0.25rem 0 0;
+        vertical-align: top;
+        border-radius: 4px;
+        background-image: url("#{$pathToIcon}/IconCardRadiobuttonNotChecked.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      input:checked {
+        background: no-repeat center center;
+        background-image: url("#{$pathToIcon}/IconCardRadiobuttonChecked.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
 
     span:not(:last-child) {
       margin-bottom: 23px;
@@ -48,6 +80,33 @@
     display: flex;
     flex-direction: column;
 
+    .radioBtn {
+      position: relative;
+
+      input:where([type="radio"]) {
+        position: absolute;
+        top: 5px;
+        right: 0;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 22px;
+        height: 22px;
+        margin: calc(0.75em - 11px) 0.25rem 0 0;
+        vertical-align: top;
+        border-radius: 4px;
+        background-image: url("#{$pathToIcon}/IconCardRadiobuttonNotChecked.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      input:checked {
+        background: no-repeat center center;
+        background-image: url("#{$pathToIcon}/IconCardRadiobuttonChecked.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
+
     span {
       display: flex;
       align-items: center;
@@ -57,8 +116,16 @@
       margin-bottom: 25px;
     }
 
-    &_card {
+    &_cards {
+      display: flex;
+      align-items: center;
       margin-bottom: 15px;
+    }
+
+    &_label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     &_icon {
@@ -78,6 +145,16 @@
       color: var(--color-font-title);
     }
 
+    &_address {
+      display: flex;
+      gap: 13px;
+      margin-bottom: 31px;
+    }
+
+    &_btn {
+      color: var(--color-accent);
+    }
+
     &_title {
       margin-bottom: 15px;
       display: block;
@@ -93,6 +170,43 @@
 
     &_sum {
       justify-self: flex-end;
+    }
+
+    &_datePicker {
+      h4 {
+        margin-bottom: 12px;
+      }
+
+      input[type="date"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        border: 1px solid var(--color-font-title);
+        padding: 5px 10px;
+        border-radius: 50px;
+        outline: none;
+        font-size: inherit;
+        color: inherit;
+        margin-bottom: 25px;
+      }
+
+      &_btnContainer {
+        overflow-x: scroll;
+        white-space: nowrap;
+        margin-bottom: 45px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      &_defaultBtn {
+        margin-left: 12px;
+        padding: 15px 30px;
+        border-radius: 50px;
+        border: 1px solid var(--color-font-title);
+      }
     }
   }
 }

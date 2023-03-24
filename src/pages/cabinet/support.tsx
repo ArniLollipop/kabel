@@ -1,8 +1,8 @@
-import { ActivePageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
 
 export default function supportPage() {
   return (
-    <CabinetLayout activePage={ActivePageEnum.SUPPORT}>
+    <CabinetLayout activePage={ActiveCabinetPageEnum.SUPPORT}>
       <h1>SUPPORT</h1>
     </CabinetLayout>
   );

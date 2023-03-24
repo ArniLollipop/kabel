@@ -1,45 +1,45 @@
 // packages
-import { FC } from 'react';
-import classNames from 'classnames';
-import { Form, Formik } from 'formik';
+import { FC } from "react";
+import classNames from "classnames";
+import { Form, Formik } from "formik";
 
 // assets
-import cls from './AddOrEditDelivery.module.scss';
+import cls from "./AddOrEditDelivery.module.scss";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { Button, ThemeButton } from '@/UI/Button/Button';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 
 // mask
-import { maskForPhone } from '@/helpers/masks';
+import { maskForPhone } from "@/helpers/masks";
 
 // validation
-import { deliveryAddressSchema } from '@/helpers/validation';
+import { deliveryAddressSchema } from "@/helpers/validation";
 
 let cn = classNames.bind(cls);
 
 interface AddOrEditDeliveryProps {
   className?: string;
-  setShowAddOrEdit: (value: boolean) => void;
+  setIsOpen?: (value: boolean) => void;
 }
 
 export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
-  const { className, setShowAddOrEdit } = props;
+  const { className, setIsOpen } = props;
 
   return (
-    <div className={cn(cls.AddOrEditDelivery)}>
+    <div className={cn(cls.AddOrEditDelivery, className)}>
       <Formik
         initialValues={{
-          address: '',
-          apartment: '',
-          floor: '',
-          home: '',
-          phoneNumber: '',
+          address: "",
+          apartment: "",
+          floor: "",
+          home: "",
+          phoneNumber: "",
         }}
         validationSchema={deliveryAddressSchema}
         onSubmit={(values) => {
-          console.log('values is: ', {
+          console.log("values is: ", {
             ...values,
           });
         }}
@@ -59,7 +59,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               !errors?.home &&
               !errors?.phoneNumber
             ) {
-              setShowAddOrEdit(false);
+              setIsOpen!(false);
             }
           };
 
@@ -143,7 +143,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                 <div className={cls.container_BtnContainer}>
                   <Button
                     theme={ThemeButton.CANCEL}
-                    onClick={() => setShowAddOrEdit(false)}
+                    onClick={() => setIsOpen!(false)}
                     type="button"
                   >
                     Отменить

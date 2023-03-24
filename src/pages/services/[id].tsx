@@ -1,25 +1,26 @@
 // packages
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import classNames from 'classnames';
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import classNames from "classnames";
 
 // data
-import { data } from '@/data/ServicesData';
+import { data } from "@/data/ServicesData";
 
 // assets
-import { ServicesBackIcon, ServicesDetailsIcon } from '@/assets/icons';
-import cls from '../../components/services/ServicesID.module.scss';
+import { ServicesBackIcon, ServicesDetailsIcon } from "@/assets/icons";
+import cls from "../../components/services/ServicesID.module.scss";
 
 // components
-import { ServicesWeight } from '@/components/services/ServicesWeight';
-import { ServicesSection } from '@/components/services/ServicesSection';
-import { ServicesEncoding } from '@/components/services/ServicesEncoding';
-import { MainLayout } from '@/layouts/MainLayout';
-import { ServicesLayout } from '@/layouts/ServicesLayout';
-import { useEffect, useState } from 'react';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
+import { ServicesWeight } from "@/components/services/ServicesWeight";
+import { ServicesSection } from "@/components/services/ServicesSection";
+import { ServicesEncoding } from "@/components/services/ServicesEncoding";
+import { MainLayout } from "@/layouts/MainLayout";
+import { ServicesLayout } from "@/layouts/ServicesLayout";
+import { useEffect, useState } from "react";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { ActiveHeaderPage } from "@/components/header/Header";
 
 let cn = classNames.bind(cls);
 
@@ -39,10 +40,10 @@ export default function Home() {
         <Link href={`/services/${link}`}>
           <ArticleIcon
             className={cls.articleIconWidthNHeight}
-            textColor={isActive ? '#fff' : '#00ABC2'}
+            textColor={isActive ? "#fff" : "#00ABC2"}
           />
           <h2>{title}</h2>
-          <ServicesDetailsIcon textColor={isActive ? '#fff' : '#00ABC2'} />
+          <ServicesDetailsIcon textColor={isActive ? "#fff" : "#00ABC2"} />
         </Link>
       </article>
     );
@@ -62,18 +63,18 @@ export default function Home() {
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap"
         />
       </Head>
-      <MainLayout>
+      <MainLayout activePage={ActiveHeaderPage.SERVICES}>
         <ServicesLayout>
           <section className={cn(cls.container)}>
-            <Link href={'/services'} className={cn(cls.backBtn)}>
+            <Link href={"/services"} className={cn(cls.backBtn)}>
               <ServicesBackIcon />
             </Link>
             <div className={cn(cls.serviceArticleIntroContainer)}>{showArticles}</div>
 
             <div className={cn(cls.serviceArticleIntroContent)}>
-              {id === 'weight' ? (
+              {id === "weight" ? (
                 <ServicesWeight />
-              ) : id === 'section' ? (
+              ) : id === "section" ? (
                 <ServicesSection />
               ) : (
                 <ServicesEncoding />

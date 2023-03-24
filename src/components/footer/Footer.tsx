@@ -1,5 +1,5 @@
 import { FC } from "react";
-import classNames from "classnames";
+import classNames from "classnames/bind";
 import cls from "./Footer.module.scss";
 import { IconLogo } from "@/assets/icons";
 import IconPaymentKaspi from "@/assets/icons/IconPaymentKaspi.svg";
@@ -15,15 +15,20 @@ import {
   IconMobileMenuMore,
 } from "@/assets/icons";
 import Link from "next/link";
+import { ActiveHeaderPage } from "@/components/header/Header";
+
+import { useAppSelector } from "@/hooks/store";
 
 let cn = classNames.bind(cls);
 
 interface FooterProps {
   className?: string;
+  activePage?: ActiveHeaderPage;
 }
 
 export const Footer: FC<FooterProps> = (props) => {
-  const { className } = props;
+  const { className, activePage } = props;
+  const { isLoggedIn } = useAppSelector((state) => state.AuthSlice);
 
   return (
     <>
@@ -32,22 +37,46 @@ export const Footer: FC<FooterProps> = (props) => {
           <IconLogo className={cls.footerNav_logo} textColor="#fff" />
 
           <ul className={cls.footerNav_list}>
-            <li className={cls.footerNav_listItem}>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.ABOUT,
+              })}
+            >
               <Link href="/about">О компании</Link>
             </li>
-            <li className={cls.footerNav_listItem}>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.CATALOG,
+              })}
+            >
               <Link href="/catalog">Продукция</Link>
             </li>
-            <li className={cls.footerNav_listItem}>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.SERVICES,
+              })}
+            >
               <Link href="/services">Сервисы</Link>
             </li>
-            <li className={cls.footerNav_listItem}>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.NEWS,
+              })}
+            >
               <Link href="/news">Новости</Link>
             </li>
-            <li className={cls.footerNav_listItem}>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.PAY_DEL,
+              })}
+            >
               <Link href="/pay-del/payment">Оплата и доставка</Link>
             </li>
-            <li className={cls.footerNav_listItem}>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.CONTACTS,
+              })}
+            >
               <Link href="/contacts">Контакты</Link>
             </li>
           </ul>
@@ -115,29 +144,64 @@ export const Footer: FC<FooterProps> = (props) => {
 
       {/* Mobile implementation */}
       <div className={cls.FooterMobile}>
-        <Link href="/" className={cls.FooterMobile_navMenuItem}>
-          <IconMobileMenuHome />
+        <Link
+          href="/"
+          className={cn(cls.FooterMobile_navMenuItem, {
+            active: activePage === ActiveHeaderPage.MAIN,
+          })}
+        >
+          <IconMobileMenuHome
+            textColor={activePage === ActiveHeaderPage.MAIN ? "#00abc2" : "#4F4F4F"}
+          />
           <span>Главная</span>
         </Link>
 
-        <Link href="/catalog" className={cls.FooterMobile_navMenuItem}>
-          <IconMobileMenuProduct />
+        <Link
+          href="/catalog"
+          className={cn(cls.FooterMobile_navMenuItem, {
+            active: activePage === ActiveHeaderPage.CATALOG,
+          })}
+        >
+          <IconMobileMenuProduct
+            textColor={activePage === ActiveHeaderPage.CATALOG ? "#00abc2" : "#4F4F4F"}
+          />
           <span>Продукция</span>
         </Link>
 
-        <Link href="/services" className={cls.FooterMobile_navMenuItem}>
-          <IconMobileMenuServices />
+        <Link
+          href="/services"
+          className={cn(cls.FooterMobile_navMenuItem, {
+            active: activePage === ActiveHeaderPage.SERVICES,
+          })}
+        >
+          <IconMobileMenuServices
+            textColor={activePage === ActiveHeaderPage.SERVICES ? "#00abc2" : "#4F4F4F"}
+          />
           <span>Сервисы</span>
         </Link>
 
-        <Link href="/card" className={cls.FooterMobile_navMenuItem}>
-          <IconMobileMenuCard />
+        <Link
+          href="/card"
+          className={cn(cls.FooterMobile_navMenuItem, {
+            active: activePage === ActiveHeaderPage.CARD,
+          })}
+        >
+          <IconMobileMenuCard
+            textColor={activePage === ActiveHeaderPage.CARD ? "#00abc2" : "#4F4F4F"}
+          />
           <span>Корзина</span>
         </Link>
 
-        <Link href="" className={cls.FooterMobile_navMenuItem}>
-          <IconMobileMenuMore />
-          <span>Еще</span>
+        <Link
+          href={isLoggedIn ? "/cabinet" : "/auth"}
+          className={cn(cls.FooterMobile_navMenuItem, {
+            active: activePage === ActiveHeaderPage.CABINET,
+          })}
+        >
+          <IconMobileMenuMore
+            textColor={activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"}
+          />
+          <span>Профиль </span>
         </Link>
       </div>
     </>

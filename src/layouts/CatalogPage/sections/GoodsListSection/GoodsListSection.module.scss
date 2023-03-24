@@ -1,13 +1,30 @@
+@import "/src/styles//globalMixins.scss";
+
 .GoodsListSection {
   .goodsList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     gap: 50px;
+
+    &_notFound {
+      @include adaptive-size(24, 16, font-size);
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      padding-top: 100px;
+    }
   }
 
   .mockBtn {
     display: none;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    transform: translateY(-50%);
+    z-index: 10;
   }
 
   @media (max-width: 1400px) and (min-width: 1024px) {

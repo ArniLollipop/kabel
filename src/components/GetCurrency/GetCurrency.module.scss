@@ -1,0 +1,136 @@
+.GetCurrency {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 101px;
+  font-weight: 400;
+  font-size: 15px;
+
+  .dateContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #39424b;
+
+    p > span {
+      color: #00abc2;
+    }
+  }
+
+  .currencyWrapper {
+    margin: 40px 10px 20px;
+  }
+
+  &_currencyContainer {
+    border: 1px solid #a4b0bb;
+    width: 100%;
+    max-width: 361px;
+    height: 250px;
+    padding: 11px 25px;
+
+    &:nth-child(1) {
+      margin-right: 55px;
+    }
+
+    &:nth-child(2) {
+      margin-left: 55px;
+    }
+
+    a {
+      display: flex;
+      justify-content: flex-end;
+      color: #00abc2;
+    }
+    p {
+      align-self: flex-end;
+    }
+
+    .metalLink {
+      display: inline-block;
+    }
+
+    .metalContainer {
+      margin: 11px 0;
+
+      .metalInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        border-bottom: 1px dashed #777c93;
+        margin-top: 12px;
+        font-size: 13px;
+
+        span {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 35%;
+
+          svg {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.currencyIntro {
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;
+  margin-bottom: 10px;
+  padding: 5px 0;
+
+  .currencyIntroData {
+    position: relative;
+    width: 100%;
+    margin-left: 18px;
+
+    .currencyValue {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+.currencyIntro:nth-child(2) {
+  background-color: white;
+}
+
+@media (max-width: 857px) {
+  .GetCurrency {
+    margin: 0 10px 25px 10px;
+
+    &_currencyContainer {
+      &:nth-child(1) {
+        margin-right: 10px;
+      }
+
+      &:nth-child(2) {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .GetCurrency {
+    display: block;
+    margin-bottom: 25px;
+
+    &_currencyContainer {
+      &:nth-child(1) {
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+
+      &:nth-child(2) {
+        margin: 0 auto;
+      }
+    }
+  }
+}

@@ -3,8 +3,7 @@ import classNames from "classnames/bind";
 import cls from "./GoodsList.module.scss";
 import { GoodsListItem } from "@/layouts/CardPage/sections/GoodsList/GoodsListItem";
 import MockImage from "@/assets/images/ImageMockProduct.png";
-import MockImageMini from "@/assets/images/ImageMockProductMini.svg";
-import MockImage2 from "@/assets/images/ImageMockProduct2.png";
+import MockImageMini from "@/assets/images/ImageMockProductMini3.png";
 
 const cn = classNames.bind(cls);
 

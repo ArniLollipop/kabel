@@ -18,17 +18,17 @@
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
   }
 
   &_item {
     @include adaptive-size(395, 115, max-width);
-    @include adaptive-size(357, 129, max-height);
   }
 
   &_link {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 
   &_img {
@@ -45,8 +45,8 @@
     @include adaptive-size(100, 5, padding-right);
     @include adaptive-size(20, 10, padding-bottom);
     @include adaptive-size(100, 5, padding-left);
+    flex: 1 1 auto;
 
-    // padding: 20px 100px;
     background-color: var(--color-accent);
     transform: translateY(-2px);
     width: 100%;

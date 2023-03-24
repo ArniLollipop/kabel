@@ -25,14 +25,15 @@
   --color-bg-white: #ffffff;
   --auth-bg-color: #f8f8f8;
   --services-bg-color: #f0f7fb;
-  --auth-bg-color: #f8f8f8;
-  --services-bg-color: #f0f7fb;
 
   --color-font-title: #39424b;
   --color-font-descr: #37454e;
+  --error-border-color: #ff6666;
+  --cancel-btn-color: #d2d8de;
 
   --input-bg-color: #f8f8f9;
-  --error-border-color: #ff6666;
+  --modal-z-index: 1000;
+  --modal-overlay-color: rgba(41, 44, 47, 0.6);
 }
 
 * {
@@ -89,4 +90,9 @@ ul {
   body {
     padding-bottom: 60px;
   }
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50px var(--input-bg-color) !important;
+  -webkit-text-fill-color: #999 !important;
 }

@@ -9,20 +9,40 @@ import {
   IconLogo,
 } from "@/assets/icons";
 import Link from "next/link";
+import classNames from "classnames/bind";
+import { useAppSelector } from "@/hooks/store";
+
+const cn = classNames.bind(cls);
+
+export const enum ActiveHeaderPage {
+  ABOUT = "about",
+  CATALOG = "catalog",
+  SERVICES = "services",
+  NEWS = "news",
+  PAY_DEL = "pay_del",
+  CONTACTS = "contacts",
+  MAIN = "main",
+  CARD = "card",
+  CABINET = "more",
+}
 
 interface HeaderProps {
   className?: string;
+  activePage?: ActiveHeaderPage;
 }
+
 export const Header: FC<HeaderProps> = (props) => {
-  const { className } = props;
+  const { className, activePage } = props;
+  const { user: authUser, isLoggedIn } = useAppSelector((state) => state.AuthSlice);
+  const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
 
   return (
     <div className={cls.Header}>
       <ul className={cls.contacts_list}>
         <li className={cls.contacts_list_mobileLogo}>
-          <a href="#">
+          <Link href="/">
             <IconLogo width="126" height="47" />
-          </a>
+          </Link>
         </li>
 
         <li className={cls.contacts_list_geoTag}>
@@ -65,9 +85,10 @@ export const Header: FC<HeaderProps> = (props) => {
         </li>
 
         <li className={cls.contacts_list_user}>
-          <Link href="/cabinet/profile" className={cls["user-link"]}>
+          <Link href={isLoggedIn ? "/cabinet/profile" : "/auth"} className={cls["user-link"]}>
             <IconUserCabinet className={cls["icon"]} />
-            <span>Личный кабинет</span>
+            {/* @ts-ignore */}
+            <span>{profileUser?.first_name || authUser?.first_name || "Личный кабинет"}</span>
           </Link>
         </li>
       </ul>
@@ -78,22 +99,51 @@ export const Header: FC<HeaderProps> = (props) => {
         </Link>
 
         <ul className={cls.nav_list}>
-          <li className={cls.nav_list_item}>
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.ABOUT,
+            })}
+          >
             <Link href="/about">О компании</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage == ActiveHeaderPage.CATALOG,
+            })}
+          >
             <Link href="/catalog">Продукция</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.SERVICES,
+            })}
+          >
             <Link href="/services">Сервисы</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.NEWS,
+            })}
+          >
             <Link href="/news">Новости</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.PAY_DEL,
+            })}
+          >
             <Link href="/pay-del/payment">Оплата и доставка</Link>
           </li>
-          <li className={cls.nav_list_item}>
+
+          <li
+            className={cn(cls.nav_list_item, {
+              active: activePage === ActiveHeaderPage.CONTACTS,
+            })}
+          >
             <Link href="/contacts">Контакты</Link>
           </li>
         </ul>

@@ -1,0 +1,64 @@
+@import "/src/styles/globalMixins.scss";
+
+.articlePage {
+  padding: 50px 0;
+  &_title {
+    margin-bottom: 55px;
+  }
+
+  &_wrapper {
+    max-width: 1770px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  &_artTitle {
+    @include adaptive-size(30, 20, font-size);
+    @include adaptive-size(35, 25, line-height);
+    @include adaptive-size(30, 20, margin-bottom);
+    font-weight: 600;
+    max-width: 1200px;
+  }
+
+  &_imgEmpty {
+    margin-bottom: 30px !important;
+  }
+
+  &_content {
+    background: #eff7fb;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 15px;
+
+    color: var(--color-font-title);
+
+    section {
+      max-width: 1200px;
+      margin-bottom: 30px;
+    }
+
+    img {
+      width: 100%;
+      object-fit: contain;
+      margin-bottom: 15px;
+      //   max-width: 1200px;
+    }
+
+    p {
+      @include adaptive-size(25, 15, font-size);
+      @include adaptive-size(35, 25, line-height);
+      font-weight: 500;
+      //   line-height: 35px;
+    }
+  }
+}
+
+.marked {
+  @include adaptive-size(70, 20, margin-left);
+
+  border-left: 5px solid #00abc2;
+  padding-left: 40px;
+  //   margin-left: 70px;
+}

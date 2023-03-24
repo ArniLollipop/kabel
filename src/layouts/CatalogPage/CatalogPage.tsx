@@ -19,7 +19,7 @@ export const CatalogPage: FC<CatalogPageProps> = (props) => {
     <div className={cn(cls.CatalogPage)}>
       <div className={cls.CatalogPage_wrapper}>
         <FilterSection isOpened={isFiltersOpened} closeFilters={setIsFitlersOpened} />
-        <GoodsListSection openFilters={setIsFitlersOpened} />
+        <GoodsListSection isOpened={isFiltersOpened} openFilters={setIsFitlersOpened} />
       </div>
     </div>
   );

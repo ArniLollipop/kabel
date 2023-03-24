@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import cls from "./GoodsListItem.module.scss";
 import Image, { StaticImageData } from "next/image";
 import { IconShare, IconTrash, IconCardCounterMinus, IconCardCounterPlus } from "@/assets/icons";
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import Link from "next/link";
 
 const cn = classNames.bind(cls);
@@ -44,7 +44,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
         <div className={cls.GoodsDescr_props}>
           <p className={cls.GoodsDescr_props_color}>
-            <span>Цвет:</span>желто-зеленый
+            <span>Цвет:</span>Красный
             <Image
               src={imgMini}
               alt="Product image miniature"

@@ -15,6 +15,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 
 // data
 import { select1, select2 } from "@/data/ServicesData";
+import { ServicesToggleButtons } from "../../ServicesToggleButtons";
 
 let cn = classNames.bind(cls);
 
@@ -57,7 +58,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                     value={values.power}
                     errors={errors.power}
                     touched={touched.power}
-                    labelText={"Марка кабеля с сечение"}
+                    labeltext={"Марка кабеля с сечение"}
                     className={cls.markInput}
                   />
                 </div>
@@ -65,7 +66,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                 <div className={cn(cls.chooseTypeContainer)}>
                   <div className={cn(cls.chooseBtn)}>
                     <label>Введите мощность (кВт)</label>
-                    <ServiceSectionToggleButtons
+                    <ServicesToggleButtons
                       data={[
                         { id: 1, children: "1-фазная (220 В)" },
                         { id: 2, children: "3-фазная (380 В)" },
@@ -86,7 +87,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                         value={values.quantity}
                         errors={errors.quantity}
                         touched={touched.quantity}
-                        labelText={"Кол-во метров"}
+                        labeltext={"Кол-во метров"}
                         className={cls.quantityInput}
                       />
                     </div>
@@ -103,7 +104,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                         value={values.weight}
                         errors={errors.weight}
                         touched={touched.weight}
-                        labelText={"Вес, кг"}
+                        labeltext={"Вес, кг"}
                         className={cls.weightInput}
                       />
                     </div>
@@ -127,7 +128,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       value={values.selectOfUsing}
                       errors={errors.selectOfUsing}
                       touched={touched.selectOfUsing}
-                      labelText={"Выберите применение"}
+                      labeltext={"Выберите применение"}
                       className={cls.weightInput}
                     >
                       {select1.map(({ id, title }) => (
@@ -149,7 +150,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       value={values.selectOfWeight}
                       errors={errors.selectOfWeight}
                       touched={touched.selectOfWeight}
-                      labelText={"Вес, кг"}
+                      labeltext={"Вес, кг"}
                       className={cls.weightInput}
                     >
                       {select2.map(({ id, title }) => (
@@ -163,7 +164,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 
                 <div className={cn(cls.chooseBtn)}>
                   <label>Выберите количество жил</label>
-                  <ServiceSectionToggleButtons
+                  <ServicesToggleButtons
                     data={[
                       { id: 1, children: "1" },
                       { id: 2, children: "2 и более" },
@@ -173,7 +174,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 
                 <div className={cn(cls.chooseBtn)}>
                   <label>Выберите материал жилы</label>
-                  <ServiceSectionToggleButtons
+                  <ServicesToggleButtons
                     data={[
                       { id: 1, children: "Медь (Cu)" },
                       { id: 2, children: "Алюминий (алюм. сплав)" },
@@ -185,46 +186,6 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
           );
         }}
       </Formik>
-    </div>
-  );
-};
-
-// MOVE TO SEPARATE FILE ↓
-// ********************************************
-interface Data {
-  id: number;
-  children: string;
-}
-
-interface ServiceSectionToggleButtonsProps {
-  data: Data[];
-}
-
-export const ServiceSectionToggleButtons: FC<ServiceSectionToggleButtonsProps> = (props) => {
-  const [active, setActive] = useState(1);
-
-  const { data } = props;
-
-  const navigate = (id: number): void => {
-    setActive(id);
-  };
-
-  return (
-    <div className={cn(cls.buttons)}>
-      {data.map((item) => {
-        const isActive = active === item.id;
-        return (
-          <Button
-            type="button"
-            key={item.id}
-            theme={ThemeButton.CLEAR}
-            className={isActive ? cls.active : cls.default}
-            onClick={() => navigate(item.id)}
-          >
-            {item.children}
-          </Button>
-        );
-      })}
     </div>
   );
 };

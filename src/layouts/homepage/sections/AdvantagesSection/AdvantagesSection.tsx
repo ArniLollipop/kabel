@@ -9,16 +9,17 @@ import IconAdvantagesGems from "@/assets/icons/IconAdvantagesGems.svg";
 import IconAdvantagesDelivery from "@/assets/icons/IconAdvantagesDelivery.svg";
 import IconAdvantagesHands from "@/assets/icons/IconAdvantagesHands.svg";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { adventagesI } from "@/types/AdventagesTypes";
 
 const cn = classNames.bind(cls);
 
 interface AdvantagesSectionProps {
   className?: string;
+  adventages: adventagesI[];
 }
 
 export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
-  const { className } = props;
-
+  const { className, adventages } = props;
   const params: SwiperProps = {
     loop: false,
     speed: 500,
@@ -48,45 +49,17 @@ export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
       <Title className={cls.AdvantagesSection_title}>Преимущества</Title>
 
       <Swiper {...params}>
-        <SwiperSlide className={cls.AdvantagesSection_sliderItem}>
-          <li className={cls.AdvantagesSection_item}>
-            <span className={cls.AdvantagesSection_itemStep}>01</span>
-            <Image src={IconAdvantagesGems} alt="advantages icon" />
-            <p className={cls.AdvantagesSection_itemDescr}>высокое качество продукции</p>
-          </li>
-        </SwiperSlide>
-
-        <SwiperSlide className={cls.AdvantagesSection_sliderItem}>
-          <li className={cls.AdvantagesSection_item}>
-            <span className={cls.AdvantagesSection_itemStep}>02</span>
-            <Image src={IconAdvantagesCalendar} alt="advantages icon" />
-            <p className={cls.AdvantagesSection_itemDescr}>Более 15 лет на рынке</p>
-          </li>
-        </SwiperSlide>
-
-        <SwiperSlide className={cls.AdvantagesSection_sliderItem}>
-          <li className={cls.AdvantagesSection_item}>
-            <span className={cls.AdvantagesSection_itemStep}>03</span>
-            <Image src={IconAdvantagesHands} alt="advantages icon" />
-            <p className={cls.AdvantagesSection_itemDescr}>Более 10 000 довольных клиентов</p>
-          </li>
-        </SwiperSlide>
-
-        <SwiperSlide className={cls.AdvantagesSection_sliderItem}>
-          <li className={cls.AdvantagesSection_item}>
-            <span className={cls.AdvantagesSection_itemStep}>04</span>
-            <Image src={IconAdvantagesLike} alt="advantages icon" />
-            <p className={cls.AdvantagesSection_itemDescr}>Продукция всегда в наличии</p>
-          </li>
-        </SwiperSlide>
-
-        <SwiperSlide className={cls.AdvantagesSection_sliderItem}>
-          <li className={cls.AdvantagesSection_item}>
-            <span className={cls.AdvantagesSection_itemStep}>05</span>
-            <Image src={IconAdvantagesDelivery} alt="advantages icon" />
-            <p className={cls.AdvantagesSection_itemDescr}>Доставка в регионы</p>
-          </li>
-        </SwiperSlide>
+        {adventages.map(({ advantage, icon, id }, i) => (
+          <SwiperSlide className={cls.AdvantagesSection_sliderItem} key={id}>
+            <li className={cls.AdvantagesSection_item}>
+              <span className={cls.AdvantagesSection_itemStep}>
+                {i + 1 > 9 ? i + 1 : `0${i + 1}`}
+              </span>
+              <Image src={icon} alt="advantages icon" width={45} height={45} />
+              <p className={cls.AdvantagesSection_itemDescr}>{advantage}</p>
+            </li>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );

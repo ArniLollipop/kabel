@@ -9,16 +9,18 @@ import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 
-import { Button, ThemeButton } from "@/UI/Button/Button";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
+import { sertificateI } from "@/types/SertificateTypes";
 
 const cn = classNames.bind(cls);
 
-interface SertificatesSectionProps {
+interface ServicesSectionProps {
   className?: string;
+  sertificates: sertificateI[];
 }
 
-export const SertificatesSection: FC<SertificatesSectionProps> = (props) => {
-  const { className } = props;
+export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
+  const { sertificates } = props;
 
   const [myswiper, setSwiper] = useState<any>({});
 
@@ -63,25 +65,11 @@ export const SertificatesSection: FC<SertificatesSectionProps> = (props) => {
       <Title className={cls.SertificatesSection_title}>Сертификаты</Title>
 
       <Swiper {...params} className={cls.slider} onSwiper={(swiper) => setSwiper(swiper)}>
-        <SwiperSlide>
-          <Image src={ImageMockSertificate} alt="Sertificate" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src={ImageMockSertificate} alt="Sertificate" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src={ImageMockSertificate} alt="Sertificate" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src={ImageMockSertificate} alt="Sertificate" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src={ImageMockSertificate} alt="Sertificate" />
-        </SwiperSlide>
+        {sertificates.map((sert) => (
+          <SwiperSlide key={sert.id}>
+            <Image src={sert.image} alt="Sertificate" width={234} height={351} />
+          </SwiperSlide>
+        ))}
       </Swiper>
 
       <Button
@@ -122,10 +110,6 @@ export const SertificatesSection: FC<SertificatesSectionProps> = (props) => {
           />
         </svg>
       </Button>
-
-      <Link href="/" className={cls.slider_link}>
-        Все сертификаты
-      </Link>
     </section>
   );
 };

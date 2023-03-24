@@ -20,7 +20,7 @@ export const HistoryOfWatching: FC<HistoryOfWatchingProps> = (props) => {
     <div className={cls.HistoryOfWatching}>
       <h2 className={cls.HistoryOfWatching_title}>Вы недавно смотрели</h2>
       <ul className={cls.HistoryOfWatching_wrapper}>
-        <ProductCardItem theme={ThemeProductCard.MINI} />
+        {/* <ProductCardItem theme={ThemeProductCard.MINI} /> */}
       </ul>
     </div>
   );

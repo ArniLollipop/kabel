@@ -1,12 +1,14 @@
 @import "/src/styles/globalMixins.scss";
 
 .NewsCard {
-  @include adaptive-size(25, 10, padding-top);
-  @include adaptive-size(25, 10, padding-bottom);
+  @include adaptive-size(35, 20, padding-top);
+  @include adaptive-size(35, 20, padding-bottom);
 
   padding-right: 16px;
   padding-left: 16px;
   border-radius: 20px;
+
+  position: relative;
 
   &_head {
     display: flex;
@@ -23,8 +25,11 @@
   }
 
   &_headTitle {
+    @include adaptive-1024(15, 8, font-size);
+    @include adaptive-1024-mob(15, 15, font-size);
+
     font-weight: 600;
-    font-size: 15px;
+    // font-size: 15px;
     line-height: 150%;
     /* or 22px */
 
@@ -41,6 +46,21 @@
     line-height: 150%;
 
     color: #37454e;
+  }
+
+  &_date {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height, or 123% */
+
+    text-transform: uppercase;
+
+    color: #7f8d96;
+
+    position: absolute;
+    right: 16px;
+    top: 12px;
   }
 }
 

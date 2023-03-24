@@ -172,7 +172,7 @@ export const IconCardInsurance: FC<CardIconsProps> = (props) => {
 };
 
 export const IconCardGeoTag: FC<CardIconsProps> = (props) => {
-  const { className } = props;
+  const { className, textColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -185,14 +185,14 @@ export const IconCardGeoTag: FC<CardIconsProps> = (props) => {
     >
       <path
         d="M26.25 12.5C26.25 21.25 15 28.75 15 28.75C15 28.75 3.75 21.25 3.75 12.5C3.75 9.51631 4.93526 6.65483 7.04505 4.54505C9.15483 2.43526 12.0163 1.25 15 1.25C17.9837 1.25 20.8452 2.43526 22.955 4.54505C25.0647 6.65483 26.25 9.51631 26.25 12.5Z"
-        stroke="#00ABC2"
+        stroke={textColor}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M15 16.25C17.0711 16.25 18.75 14.5711 18.75 12.5C18.75 10.4289 17.0711 8.75 15 8.75C12.9289 8.75 11.25 10.4289 11.25 12.5C11.25 14.5711 12.9289 16.25 15 16.25Z"
-        stroke="#00ABC2"
+        stroke={textColor}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -466,6 +466,21 @@ export const IconCardCounterPlus: FC<CardIconsProps> = (props) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const IconCardTenge: FC<CardIconsProps> = (props) => {
+  const { className, textColor } = props;
+
+  return (
+    <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M1 4.12407H4M7 4.12407H4M4 4.12407V10.5M1 1.5H4H7"
+        stroke="#39424B"
+        strokeWidth="2"
+        strokeLinecap="square"
       />
     </svg>
   );

@@ -44,6 +44,10 @@ $margins_mob: 5;
     &:not(:last-child) {
       margin-right: 17px;
     }
+
+    &.active {
+      color: var(--color-accent);
+    }
   }
 }
 
@@ -143,7 +147,21 @@ $margins_mob: 5;
     align-items: center;
     justify-content: space-between;
     // font-size: 10px;
+
+    &.active {
+      color: var(--color-accent);
+
+      //   svg path,
+      //   svg rect,
+      //   svg circle {
+      //     stroke: var(--color-accent);
+      //   }
+    }
   }
+}
+
+.icon path {
+  stroke: #000;
 }
 
 @media (max-width: 1024px) {

@@ -15,10 +15,6 @@
   @include adaptive-size(30, 22, line-height);
   font-weight: 500;
   color: var(--color-font-title);
-
-  &:not(:last-child) {
-    margin-bottom: 30px;
-  }
 }
 
 .images {

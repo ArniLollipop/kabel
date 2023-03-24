@@ -1,10 +1,16 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./FilterSection.module.scss";
-import { Button, ThemeButton } from "@/UI/Button/Button";
-import { IconRefreshFilters } from "@/assets/icons/IconRefreshFilters";
-import { SearchInput } from "@/shared/formElements/SearchInput/SearchInput";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
+import { useAppSelector, useAppDispatch } from "@/hooks/store";
+import { Field, Form, Formik } from "formik";
+import { CheckBoxInstance } from "@/shared/formElements/checkboxInstance/CheckBoxInstance";
+import { RadioInstance } from "@/shared/formElements/radioInstance/RadioInstance";
+import { ProductService } from "@/services/Product.servise";
+import { setProducts } from "@/store/slices/ProductSlice";
+import { queriesGenerator } from "@/helpers/queriesGenerator";
+import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
 
 const cn = classNames.bind(cls);
 
@@ -15,228 +21,232 @@ interface FilterSectionProps {
 }
 
 export const FilterSection: FC<FilterSectionProps> = (props) => {
-  const { className, isOpened, closeFilters } = props;
+  const { isOpened, closeFilters } = props;
+  const { categories, cores, products } = useAppSelector((state) => state.ProductSlice);
+  const dispatch = useAppDispatch();
+
+  interface sortI {
+    availability: "Все" | "в наличии" | "под заказ";
+    checkedCors: string[];
+    categories: string[];
+    sortWidget: "-cost" | "cost";
+  }
+
+  const submitHandler = async (value: sortI) => {
+    const { availability, categories, checkedCors, sortWidget } = value;
+
+    const core_number = [...new Set(checkedCors.map((el) => el.slice(0, el.indexOf("x"))))];
+    const section = [...new Set(checkedCors.map((el) => el.slice(el.indexOf("x") + 1, el.length)))];
+
+    const coresQuery = queriesGenerator(core_number, "core_number");
+    const sectionsQuery = queriesGenerator(section, "section");
+    const categoriesQuery = queriesGenerator(categories, "subcategory");
+    const availabilityQuery = availability === "Все" ? "" : `availability=${availability}`;
+    const sortQuery = `&ordering=${sortWidget}`;
+
+    const queries = `?${coresQuery}${sectionsQuery}${categoriesQuery}${availabilityQuery}${sortQuery}`;
+    console.log("result", queries);
+    const res = await ProductService().getProducts(queries);
+    dispatch(setProducts(res));
+  };
 
   return (
     <div className={cn(cls.FilterSection, { visible: isOpened })}>
-      <div className={cls.header} id="top">
-        <span>5500 товаров</span>
+      <Formik
+        initialValues={{ availability: "Все", checkedCors: [], categories: [], sortWidget: "cost" }}
+        onSubmit={(values: sortI) => submitHandler(values)}
+      >
+        {({ isSubmitting, values }) => (
+          <Form>
+            {/* Header of Filters */}
+            <div className={cls.header} id="top">
+              <span>{products?.count || "Нет"} товаров</span>
 
-        <button className={cls.mockBtn} onClick={() => closeFilters && closeFilters(false)}>
-          Close
-        </button>
-
-        <div className={cls.mainBtns}>
-          <Button theme={ThemeButton.YELLOW} className={cls.resetBtn}>
-            сбросить
-          </Button>
-          <Button theme={ThemeButton.CLEAR}>
-            <IconRefreshFilters />
-          </Button>
-        </div>
-      </div>
-
-      <SearchInput placeholder="Название" className={cls.searchInput} />
-
-      <div className={cls.availability}>
-        <h3 className={cn(cls.availability_title, cls.filterTitle)}>Наличие</h3>
-        <label htmlFor="all" className={cls.availability_inputGroup}>
-          <input type="radio" name="availability" value="all" id="all" checked />
-          Все
-        </label>
-
-        <label htmlFor="inStock" className={cls.availability_inputGroup}>
-          <input type="radio" name="availability" value="inStock" id="inStock" />В наличии
-        </label>
-
-        <label htmlFor="underOrder" className={cls.availability_inputGroup}>
-          <input type="radio" name="availability" value="underOrder" id="underOrder" />
-          Под заказ
-        </label>
-      </div>
-
-      <div className={cls.product}>
-        <h3 className={cn(cls.product_title, cls.filterTitle)}>Продукция</h3>
-
-        <Accordion className={cls.filtersAcc} alwaysOpen={true}>
-          {/* Медные кабеля и провода */}
-
-          <AccordionItem isActive={true}>
-            {({ open }: { open: boolean }) => (
-              <>
-                <AccordionHeader
-                  className={cn(cls.filtersAcc_title, { filtersAcc_titleActive: open })}
+              <div className={cls.mainBtns}>
+                <Button
+                  theme={ThemeButton.YELLOW}
+                  className={cls.resetBtn}
+                  type="button"
+                  onClick={async () => {
+                    values.availability = "Все";
+                    values.categories = [];
+                    values.checkedCors = [];
+                    values.sortWidget = "cost";
+                    const res = await ProductService().getProducts();
+                    dispatch(setProducts(res));
+                  }}
                 >
-                  <h3 className={cls.accTitle}>Медные кабеля и провода</h3>
-                  <svg
-                    className={cn(cls.filtersAcc_arrow, { filtersAcc_arrowActive: open })}
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                      //   stroke="#00ABC2"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </AccordionHeader>
+                  сбросить
+                </Button>
+              </div>
+            </div>
 
-                <AccordionBody
-                  className={cn(cls.filtersAcc_body, { filtersAcc_bodyActive: open })}
-                  as="ul"
-                >
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                  <li className={cls.filtersAcc_item}>ШВВП</li>
-                  <li className={cls.filtersAcc_item}>ПУГНП</li>
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                  <li className={cls.filtersAcc_item}>ШВВП</li>
-                  <li className={cls.filtersAcc_item}>ПУГНП</li>
-                </AccordionBody>
-              </>
-            )}
-          </AccordionItem>
+            {/* Sort by */}
+            <SortByWidget />
 
-          {/* Алюминиевые кабеля и провода */}
-          <AccordionItem>
-            {({ open }: { open: boolean }) => (
-              <>
-                <AccordionHeader
-                  className={cn(cls.filtersAcc_title, { filtersAcc_titleActive: open })}
-                >
-                  <h3 className={cls.accTitle}>Алюминиевые кабеля и провода</h3>
-                  <svg
-                    className={cn(cls.filtersAcc_arrow, { filtersAcc_arrowActive: open })}
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                      //   stroke="#00ABC2"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </AccordionHeader>
+            {/* Availability filters */}
+            <div className={cls.availability}>
+              <h3 className={cn(cls.availability_title, cls.filterTitle)}>Наличие</h3>
 
-                <AccordionBody
-                  className={cn(cls.filtersAcc_body, { filtersAcc_bodyActive: open })}
-                  as="ul"
-                >
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                </AccordionBody>
-              </>
-            )}
-          </AccordionItem>
+              <RadioInstance
+                name="availability"
+                value="Все"
+                id="all"
+                text="Все"
+                className={cls.FilterSection_radio}
+              />
+              <RadioInstance
+                name="availability"
+                value="в наличии"
+                id="inStock"
+                text="В наличии"
+                className={cls.FilterSection_radio}
+              />
+              <RadioInstance
+                name="availability"
+                value="под заказ"
+                id="underOrder"
+                text="Под заказ"
+                className={cls.FilterSection_radio}
+              />
+            </div>
 
-          {/* Комплектующие для кабелей и проводов  */}
-          <AccordionItem>
-            {({ open }: { open: boolean }) => (
-              <>
-                <AccordionHeader
-                  className={cn(cls.filtersAcc_title, { filtersAcc_titleActive: open })}
-                >
-                  <h3 className={cls.accTitle}>Комплектующие для кабелей и проводов </h3>
-                  <svg
-                    className={cn(cls.filtersAcc_arrow, { filtersAcc_arrowActive: open })}
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                      //   stroke="#00ABC2"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </AccordionHeader>
+            {/* Categories filters */}
+            <div className={cls.product}>
+              <h3 className={cn(cls.product_title, cls.filterTitle)}>Продукция</h3>
 
-                <AccordionBody
-                  className={cn(cls.filtersAcc_body, { filtersAcc_bodyActive: open })}
-                  as="ul"
-                >
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                  <li className={cls.filtersAcc_item}>ШВВП</li>
-                  <li className={cls.filtersAcc_item}>ПУГНП</li>
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                  <li className={cls.filtersAcc_item}>ШВВП</li>
-                  <li className={cls.filtersAcc_item}>ПУГНП</li>
-                </AccordionBody>
-              </>
-            )}
-          </AccordionItem>
+              <Accordion className={cls.filtersAcc} alwaysOpen={true}>
+                {/* Categories */}
+                <>
+                  {categories ? (
+                    categories.results.map((cat, i) => (
+                      <AccordionItem isActive={i === 0 ? true : false} key={cat.name}>
+                        {({ open }: { open: boolean }) => (
+                          <>
+                            <AccordionHeader
+                              as="div"
+                              className={cn(cls.filtersAcc_title, { filtersAcc_titleActive: open })}
+                            >
+                              <h3 className={cls.accTitle}>{cat.name}</h3>
+                              <svg
+                                className={cn(cls.filtersAcc_arrow, {
+                                  filtersAcc_arrowActive: open,
+                                })}
+                                width="15"
+                                height="9"
+                                viewBox="0 0 15 9"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </AccordionHeader>
 
-          {/* Сечение */}
-          <AccordionItem isActive={true}>
-            {({ open }: { open: boolean }) => (
-              <>
-                <AccordionHeader className={cn(cls.filtersAcc_title, cls.filtersAcc_titleCross)}>
-                  <h3 className={cls.accTitle}>Сечение </h3>
-                  <svg
-                    className={cn(cls.filtersAcc_arrow, { filtersAcc_arrowActive: open })}
-                    width="15"
-                    height="9"
-                    viewBox="0 0 15 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                      stroke="#39424b"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </AccordionHeader>
+                            <AccordionBody
+                              className={cn(cls.filtersAcc_body, { filtersAcc_bodyActive: open })}
+                              as="ul"
+                            >
+                              {cat.subcategory_set.map((subcat) => (
+                                <li className={cls.filtersAcc_item} key={subcat.name}>
+                                  <CheckBoxInstance
+                                    value={subcat.name}
+                                    name="categories"
+                                    id={subcat.name}
+                                    text={subcat.name}
+                                    className={cls.filtersAcc_itemInput}
+                                  />
+                                </li>
+                              ))}
+                            </AccordionBody>
+                          </>
+                        )}
+                      </AccordionItem>
+                    ))
+                  ) : (
+                    <></>
+                  )}
 
-                <AccordionBody className={cls.filtersAcc_body} as="ul">
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                  <li className={cls.filtersAcc_item}>ШВВП</li>
-                  <li className={cls.filtersAcc_item}>ПУГНП</li>
-                  <li className={cls.filtersAcc_item}>ПВ-1</li>
-                  <li className={cls.filtersAcc_item}>ПВ-2</li>
-                  <li className={cls.filtersAcc_item}>ППВ</li>
-                  <li className={cls.filtersAcc_item}>ШВВП</li>
-                  <li className={cls.filtersAcc_item}>ПУГНП</li>
-                </AccordionBody>
-              </>
-            )}
-          </AccordionItem>
-        </Accordion>
-      </div>
+                  {/* Сечение */}
+                  <AccordionItem isActive={true}>
+                    {({ open }: { open: boolean }) => (
+                      <>
+                        <AccordionHeader
+                          className={cn(cls.filtersAcc_title, cls.filtersAcc_titleCross)}
+                          as="div"
+                        >
+                          <h3 className={cls.accTitle}>Сечение </h3>
+                          <svg
+                            className={cn(cls.filtersAcc_arrow, { filtersAcc_arrowActive: open })}
+                            width="15"
+                            height="9"
+                            viewBox="0 0 15 9"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
+                              stroke="#39424b"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </AccordionHeader>
 
-      <Button className={cls.submitBtn} theme={ThemeButton.BLUE}>
-        Применить
-      </Button>
+                        <AccordionBody className={cls.filtersAcc_body} as="ul">
+                          {cores ? (
+                            Object.keys(cores).map((core) => (
+                              <ul className={cls.filtersAcc_coreSect} key={core}>
+                                {cores[core].map((coreSect) => (
+                                  <li
+                                    className={cls.filtersAcc_coreSectItem}
+                                    key={`${core}x${coreSect}`}
+                                    data-sub={`${core}x${coreSect}`}
+                                  >
+                                    <CheckBoxInstance
+                                      text={`${core}x${coreSect}`}
+                                      name="checkedCors"
+                                      value={`${core}x${coreSect}`}
+                                      id="coreItem"
+                                    />
+                                  </li>
+                                ))}
+                              </ul>
+                            ))
+                          ) : (
+                            <></>
+                          )}
+                        </AccordionBody>
+                      </>
+                    )}
+                  </AccordionItem>
+                </>
+              </Accordion>
+            </div>
 
-      <a href="#top" className={cls.anchorUp}>
-        Наверх
-      </a>
+            {/* Submit Btns */}
+            <div className={cls.submitBtns}>
+              <Button
+                className={cls.submitBtn}
+                theme={ThemeButton.BLUE}
+                type="submit"
+                disabled={isSubmitting}
+                onClick={() => closeFilters && closeFilters(false)}
+              >
+                Применить
+              </Button>
+              <a href="#top" className={cls.anchorUp}>
+                Наверх
+              </a>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
