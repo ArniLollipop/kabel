@@ -1,0 +1,73 @@
+@import "/src/styles/globalMixins.scss";
+
+.NewsCard {
+  @include adaptive-size(35, 20, padding-top);
+  @include adaptive-size(35, 20, padding-bottom);
+
+  padding-right: 16px;
+  padding-left: 16px;
+  border-radius: 20px;
+
+  position: relative;
+
+  &_head {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  &_headImg {
+    border-radius: 10px;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+
+  &_headTitle {
+    @include adaptive-1024(15, 8, font-size);
+    @include adaptive-1024-mob(15, 15, font-size);
+
+    font-weight: 600;
+    // font-size: 15px;
+    line-height: 150%;
+    /* or 22px */
+
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    color: #37454e;
+  }
+
+  &_descr {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 150%;
+
+    color: #37454e;
+  }
+
+  &_date {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height, or 123% */
+
+    text-transform: uppercase;
+
+    color: #7f8d96;
+
+    position: absolute;
+    right: 16px;
+    top: 12px;
+  }
+}
+
+.blueBg {
+  background-color: #eff7fb;
+}
+
+.whiteBg {
+  background-color: #fff;
+}

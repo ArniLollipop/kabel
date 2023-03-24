@@ -1,0 +1,35 @@
+@import '../../styles/globalMixins.scss';
+
+.CardPage {
+  @include adaptive-size(100, 28, padding-bottom);
+
+  background-color: var(--color-bg-grey);
+
+  &_wrapper {
+    width: 100%;
+    max-width: 1447px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+}
+
+.CardPageTitle {
+  @include adaptive-size(45, 17, font-size);
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+.CardPageContent {
+  @include adaptive-size(125, 32, margin-bottom);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1024px) {
+  .CardPageContent {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,75 @@
+.ShowEditProfile {
+  .userCard {
+    position: relative;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+
+    &_container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 127px;
+    }
+
+    &_inputsContainer {
+    }
+
+    &_NnLInputs {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    &_LnEInputs {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    &_disabledBtn {
+      filter: opacity(0.5);
+      position: absolute;
+      bottom: 41px;
+      right: 38px;
+    }
+
+    &_saveBtn {
+      position: absolute;
+      bottom: 41px;
+      right: 38px;
+    }
+  }
+}
+
+@media screen and (max-width: 748px) {
+  .ShowEditProfile {
+    .userCard {
+      &_container,
+      &_NnLInputs,
+      &_LnEInputs {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      &_inputsContainer {
+        width: 100%;
+      }
+
+      &_container {
+        margin-bottom: 0;
+      }
+
+      &_saveBtn {
+        position: static;
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+@import '/src/styles/globalMixins.scss';
+
+.contactsPage {
+  padding: 85px 0 140px 0;
+
+  .subtitle {
+    @include adaptive-size(18, 15, font-size);
+
+    margin-bottom: 10px;
+    line-height: 22px;
+  }
+
+  .descr {
+    @include adaptive-size(16, 15, font-size);
+
+    line-height: 20px;
+  }
+
+  &_wrapper {
+    width: 93vw;
+    margin: 0 auto;
+    color: var(--color-font-title);
+    font-weight: 500;
+  }
+
+  &_title {
+    margin-bottom: 70px;
+  }
+
+  &_item {
+    background: #eff7fb;
+    border-radius: 20px;
+    padding: 32px 23px;
+    display: flex;
+    gap: 35px;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &_text {
+    padding-top: 30px;
+  }
+
+  &_city {
+    @include adaptive-size(25, 15, font-size);
+    @include adaptive-size(30, 22, line-height);
+    @include adaptive-size(55, 15, margin-bottom);
+
+    display: block;
+  }
+
+  &_mail {
+    align-items: center !important;
+  }
+
+  &_phones div {
+    display: grid;
+    row-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+
+    p {
+      grid-column: 1 / span 2;
+      margin-bottom: 0 !important;
+    }
+
+    a {
+      width: 100%;
+    }
+  }
+
+  &_textItems {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    column-gap: 30px;
+    row-gap: 30px;
+  }
+
+  &_textItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  &_contactUs div {
+    display: flex;
+    gap: 40px;
+  }
+
+  @media (max-width: 1024px) {
+    &_item {
+      flex-direction: column-reverse;
+    }
+
+    &_phones div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &_image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

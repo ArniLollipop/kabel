@@ -1,0 +1,99 @@
+@import "../../../styles/globalMixins.scss";
+.Button {
+  font-family: var(--font-family-main);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Themes
+.blue,
+.yellow,
+.card,
+.buy {
+}
+
+.blue {
+  @include adaptive-size(18, 10, padding-top);
+  @include adaptive-size(18, 10, padding-bottom);
+  @include adaptive-size(30, 17, padding-left);
+  @include adaptive-size(30, 17, padding-right);
+  @include adaptive-size(30, 17, padding-right);
+  @include adaptive-size(18, 12, font-size);
+
+  color: var(--color-bg-white);
+  border: none;
+
+  color: var(--color-bg-white);
+  border: none;
+
+  background-color: var(--color-accent);
+  color: var(--color-bg-white);
+
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.yellow {
+  color: var(--color-bg-white);
+  border: none;
+
+  background-color: var(--color-accent-secondary);
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.card {
+  background-color: var(--color-accent);
+  background-image: url("../../../assets/icons/IconButtonCard.svg");
+
+  color: var(--color-bg-white);
+  border: none;
+
+  padding: 20px 68px 20px 38px;
+
+  background-repeat: no-repeat;
+  background-position: right calc((100% - 130px) / 2) top 50%;
+
+  font-size: 24px;
+  font-weight: 400;
+  border-radius: 15px;
+}
+
+.buy {
+  background-color: var(--color-accent-secondary);
+  background-image: url("../../../assets//icons/IconButtonBuy.svg");
+  background-repeat: no-repeat;
+  background-position: right calc((100% - 190px) / 2) top 50%;
+  padding: 20px 40px 20px 10px;
+
+  color: var(--color-bg-white);
+  border: none;
+
+  font-size: 24px;
+  font-weight: 400;
+  border-radius: 15px;
+}
+
+.cancel {
+  color: var(--color-font-title);
+  border: none;
+
+  background-color: var(--cancel-btn-color);
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.clear {
+  border: none;
+  background-color: transparent;
+}

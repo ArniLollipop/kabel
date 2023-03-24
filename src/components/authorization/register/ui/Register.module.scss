@@ -1,0 +1,22 @@
+.Register {
+  position: relative;
+  .inputName {
+    margin-bottom: 20px;
+    background-image: url("../../../../assets/icons/authIcons/InputNameIcon.svg");
+  }
+
+  .inputPhoneNumber {
+    margin-bottom: 20px;
+    background-image: url("../../../../assets/icons/authIcons/InputPhoneNumberIcon.svg");
+  }
+
+  .error {
+    font-size: 12px;
+    position: absolute;
+    color: red;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: -23px;
+  }
+}

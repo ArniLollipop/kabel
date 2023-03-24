@@ -1,0 +1,64 @@
+.ServicesSectionToggleButtons {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+  font-weight: 400;
+  font-size: var(--font-auth-toggle-button-size);
+
+  button {
+    border-radius: 10px;
+    padding: 15px 17px;
+    font-size: var(--font-size-small);
+    width: 100%;
+    max-width: 275px;
+  }
+
+  .default {
+    border: 1px solid var(--color-bg-grey);
+  }
+
+  button.active {
+    color: var(--color-bg-white);
+    background-color: var(--color-accent);
+  }
+}
+
+.ServicesWeightToggleButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-weight: 400;
+  font-size: var(--font-auth-toggle-button-size);
+  border-radius: 20px;
+  border: 1px solid var(--color-accent-secondary);
+
+  button {
+    padding: 7px 30px;
+    font-size: var(--font-size-small);
+  }
+
+  button.active {
+    color: var(--color-bg-white);
+    background-color: var(--color-accent-secondary);
+
+    &:first-child {
+      border-radius: 20px 0 0 20px;
+    }
+
+    &:last-child {
+      border-radius: 0 20px 20px 0;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .ServicesWeightToggleButtons {
+    width: 61%;
+
+    button {
+      padding: 3% 13%;
+    }
+  }
+}
