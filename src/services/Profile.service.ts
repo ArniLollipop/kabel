@@ -4,11 +4,11 @@ import { NextPageContext } from "next";
 import { EditProfileProps } from "@/store/slices/ProfileSlice";
 
 enum endpoints {
-  editProfile = "users/",
-  changePassByPhone = "users/send_sms/",
-  compareSmsCodes = "users/sms_code_verification/",
-  changePassFinal = "users/change_password/",
-  getExactUser = "users/",
+  editProfile = "users/users/",
+  changePassByPhone = "users/users/send_sms/",
+  compareSmsCodes = "users/users/sms_code_verification/",
+  changePassFinal = "users/users/change_password/",
+  getExactUser = "users/users/",
 }
 
 interface IProfileServiceResponse {
