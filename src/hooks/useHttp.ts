@@ -12,7 +12,7 @@ export const useHttp = (ctx?: NextPageContext) => {
 
   const http = axios.create({
     withCredentials: true,
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL || "https://kazkabel-back.zoom-app.kz/",
   });
 
   http.interceptors.request.use((config) => {
