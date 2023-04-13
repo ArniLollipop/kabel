@@ -12,6 +12,7 @@ const cn = classNames.bind(cls);
 
 export default function aboutPage(props: AboutI) {
   const { id, image, text, title, our_goal } = props;
+
   return (
     <MainLayout activePage={ActiveHeaderPage.ABOUT}>
       <div className={cn(cls.about)}>
@@ -25,8 +26,7 @@ export default function aboutPage(props: AboutI) {
             height={460}
           />
 
-          <div dangerouslySetInnerHTML={{ __html: text }} />
-          <p className={cls.about_accent}>{our_goal}</p>
+          <div className={cls.about_accent} dangerouslySetInnerHTML={{ __html: our_goal }} />
         </div>
       </div>
     </MainLayout>

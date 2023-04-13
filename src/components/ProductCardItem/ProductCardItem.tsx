@@ -45,9 +45,11 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
           <h3 className={cls.cardTitle}>{props.name}</h3>
         </Link>
         <p className={cls.cardDescr}>
-          {props.description.length < 77
-            ? props.description
-            : `${props.description.slice(0, 77)}...`}
+          {props.description
+            ? props.description.length < 77
+              ? props.description
+              : `${props.description?.slice(0, 77)}...`
+            : ""}
         </p>
 
         <span className={cls.cardPrice}>{props.cost} ₸</span>

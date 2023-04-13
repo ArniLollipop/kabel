@@ -23,7 +23,7 @@ export interface productI {
   cost: number;
   image: string;
   availability: "в наличии" | "под заказ";
-  description: string;
+  description: string | null;
   is_active: boolean;
   core_number: number;
   section: number;

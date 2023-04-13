@@ -29,7 +29,11 @@ export const SeeMoreCard: FC<SeeMoreCardProps> = (props) => {
       <div className={cls.SeeMoreCard_text}>
         <h4 className={cls.SeeMoreCard_title}>{name}</h4>
         <p className={cls.SeeMoreCard_descr}>
-          {description.length > 150 ? `${description.slice(0, 150)}...` : description}
+          {description
+            ? description.length > 150
+              ? `${description.slice(0, 150)}...`
+              : description
+            : ""}
         </p>
         <Link className={cls.SeeMoreCard_link} href={`/catalog/${code}`}>
           Подробнее

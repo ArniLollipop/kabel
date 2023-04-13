@@ -33,7 +33,10 @@ export const AboutSection: FC<AboutSectionProps> = (props) => {
             className={cls.AboutSection_text}
           />
 
-          <p className={cls.AboutSection_descrAccent}>{aboutInfo.our_goal}</p>
+          <div
+            className={cls.AboutSection_descrAccent}
+            dangerouslySetInnerHTML={{ __html: aboutInfo.our_goal }}
+          />
         </div>
       </div>
     </section>

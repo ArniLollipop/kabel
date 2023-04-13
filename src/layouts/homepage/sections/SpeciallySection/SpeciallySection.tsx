@@ -99,7 +99,7 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
 
       <div className={cn(cls.SpeciallySection_newsList, { hidden: activeSection == 0 })}>
         {news.map((news) => (
-          <NewsCard className={cls.SpeciallySection_newsCard} {...news} />
+          <NewsCard className={cls.SpeciallySection_newsCard} {...news} key={news.id} />
         ))}
       </div>
     </section>
