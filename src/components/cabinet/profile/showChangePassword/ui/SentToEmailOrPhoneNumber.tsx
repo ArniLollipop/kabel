@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import { memo, useEffect, useState } from "react";
-import cls from "./ShowChangePassword.module.scss";
-import ReactPinInput from "react-pin-input";
-import { Button } from "@/UI/Button";
-import { ThemeButton } from "@/UI/Button/ui/Button";
-import { ProfileService } from "@/services/Profile.service";
+import classNames from 'classnames';
+import { memo, useEffect, useState } from 'react';
+import cls from './ShowChangePassword.module.scss';
+import ReactPinInput from 'react-pin-input';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
+import { ProfileService } from '@/services/Profile.service';
 
 let cn = classNames.bind(cls);
 
@@ -19,8 +19,8 @@ interface SentToEmailProps {
 }
 
 export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
-  const [smsCode, setSmsCode] = useState("");
-  const [token, setToken] = useState("");
+  const [smsCode, setSmsCode] = useState('');
+  const [token, setToken] = useState('');
   const [countdown, setCountdown] = useState(60);
   const { title, info, setShowChangePasswords, setShowSentTo } = props;
 
@@ -39,24 +39,23 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
     // send sms code to the backend IF success show passwords
     try {
       const res = await ProfileService().compareSmsCodes(value, token);
-      console.log("res inside compareSmsCodeFunc is: ", res);
+      console.log('res inside compareSmsCodeFunc is: ', res);
 
       // @ts-ignore
       if (res.result) {
-        setShowSentTo("");
+        setShowSentTo('');
         setShowChangePasswords(true);
       }
     } catch (error) {
-      console.log("error inside compareSmsCodeFunc is: ", error);
+      console.log('error inside compareSmsCodeFunc is: ', error);
     }
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem('access_token');
     if (token) {
       setToken(token);
     }
-    console.log("token is: ", token);
     funcCountDown();
   }, []);
 
@@ -69,13 +68,13 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
         length={4}
         initialValue=""
         type="numeric"
-        style={{ margin: "35px 0" }}
+        style={{ margin: '35px 0' }}
         inputStyle={{
-          borderColor: "#39424B",
-          borderRadius: "10px",
-          marginRight: "20px",
+          borderColor: '#39424B',
+          borderRadius: '10px',
+          marginRight: '20px',
         }}
-        inputFocusStyle={{ borderColor: "black" }}
+        inputFocusStyle={{ borderColor: 'black' }}
         onComplete={(value: string, index: number) => {
           compareSmsCodeFunc(value);
         }}

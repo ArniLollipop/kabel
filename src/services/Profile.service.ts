@@ -1,14 +1,26 @@
-import { useHttp } from "@/hooks/useHttp";
-import axios, { AxiosResponse } from "axios";
-import { NextPageContext } from "next";
-import { EditProfileProps } from "@/store/slices/ProfileSlice";
+import { useHttp } from '@/hooks/useHttp';
+import axios, { AxiosResponse } from 'axios';
+import { NextPageContext } from 'next';
+import { EditProfileProps } from '@/store/slices/ProfileSlice';
+
+interface IAddressReq {
+  address: string;
+  apartment: number;
+  floor: number;
+  house: number;
+  phone_number: string;
+  is_default: boolean;
+  user: number;
+}
 
 enum endpoints {
-  editProfile = "users/users/",
-  changePassByPhone = "users/users/send_sms/",
-  compareSmsCodes = "users/users/sms_code_verification/",
-  changePassFinal = "users/users/change_password/",
-  getExactUser = "users/users/",
+  editProfile = 'users/users/',
+  changePassByPhone = 'users/users/send_sms/',
+  compareSmsCodes = 'users/users/sms_code_verification/',
+  changePassFinal = 'users/users/change_password/',
+  getExactUser = 'users/users/',
+  getBonus = 'users/users/my_bonus_card/',
+  addAddress = 'users/user_addresses/',
 }
 
 interface IProfileServiceResponse {
@@ -25,6 +37,8 @@ interface IProfileServiceResponse {
   compareSmsCodes: (sms_code: string, token: string) => Promise<AxiosResponse<any>>;
   changePassFinal: (phone_number: string, password: string) => Promise<AxiosResponse<any>>;
   getExactUser: (userId: number | undefined | any) => Promise<AxiosResponse<any>>;
+  getBonus: (token: string | null) => Promise<AxiosResponse<any>>;
+  addAddress: (address: IAddressReq) => Promise<AxiosResponse<any>>;
 }
 
 export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse => {
@@ -77,7 +91,7 @@ export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse =
 
   const compareSmsCodes = async (sms_code: string, token: string): Promise<AxiosResponse<any>> => {
     const res = await axios.post<any>(
-      "https://kazkabel-back.zoom-app.kz/users/sms_code_verification/",
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/sms_code_verification`,
       {
         sms_code,
       },
@@ -108,5 +122,28 @@ export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse =
     return res.data;
   };
 
-  return { editProfile, changePassByPhone, changePassFinal, compareSmsCodes, getExactUser };
+  const getBonus = async (token: string | null): Promise<AxiosResponse<any>> => {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}users/users/my_bonus_card/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return res.data;
+  };
+
+  const addAddress = async (address: IAddressReq): Promise<AxiosResponse<any>> => {
+    const res = await useHttp().post(endpoints.addAddress, { address });
+    return res.data;
+  };
+
+  return {
+    editProfile,
+    changePassByPhone,
+    changePassFinal,
+    getBonus,
+    compareSmsCodes,
+    getExactUser,
+    addAddress,
+  };
 };

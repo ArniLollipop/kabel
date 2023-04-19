@@ -1,24 +1,24 @@
 // packages
-import { useState } from "react";
+import { useState } from 'react';
 
 // assets
-import cls from "./index.module.scss";
+import cls from './index.module.scss';
 import {
   IconPhone,
   IconCardCounterPlus,
   IconCabinetDelivery,
   IconCabinetProfile,
   IconCabinetEdit,
-} from "@/assets/icons";
+} from '@/assets/icons';
 
 // components
-import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
-import { Button } from "@/UI/Button";
-import { ThemeButton } from "@/UI/Button/ui/Button";
-import { AddOrEditDelivery } from "@/components/cabinet/delivery/AddOrEditDelivery";
+import { ActiveCabinetPageEnum, CabinetLayout } from '@/layouts/CabinetLayot/CabinetLayout';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
+import { AddOrEditDelivery } from '@/components/cabinet/delivery/AddOrEditDelivery';
 
 // Libs
-import classNames from "classnames/bind";
+import classNames from 'classnames/bind';
 
 const cn = classNames.bind(cls);
 

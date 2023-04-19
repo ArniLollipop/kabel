@@ -1,7 +1,7 @@
-import nookies from "nookies";
-import { userI } from "@/types/AuthTypes";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { NextPageContext } from "next";
+import nookies from 'nookies';
+import { userI } from '@/types/AuthTypes';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { NextPageContext } from 'next';
 
 interface MyAxiosRequestConfig extends AxiosRequestConfig {
   _isRetry?: boolean;
@@ -12,14 +12,14 @@ export const useHttp = (ctx?: NextPageContext) => {
 
   const http = axios.create({
     withCredentials: true,
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL || "https://kazkabel-back.zoom-app.kz/",
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL || 'https://api.cable.kz/',
   });
 
   http.interceptors.request.use((config) => {
-    const token = isServrerSide ? nookies.get(ctx).token : localStorage.getItem("token");
+    const token = isServrerSide ? nookies.get(ctx).token : localStorage.getItem('token');
     console.log(token);
 
-    if (token) config.headers["Authorization"] = `Bearer ${token}`;
+    if (token) config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   });
 
@@ -41,8 +41,8 @@ export const useHttp = (ctx?: NextPageContext) => {
             }
           );
 
-          localStorage.setItem("token", response.data.access_token);
-          nookies.set(ctx, "token", response.data.access_token);
+          localStorage.setItem('token', response.data.access_token);
+          nookies.set(ctx, 'token', response.data.access_token);
           return http.request(originalRequest);
         } catch (e) {
           console.error(`Error from Http`, e);

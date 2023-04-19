@@ -12,6 +12,7 @@ const cn = classNames.bind(cls);
 
 export default function articlePage(props: newsI) {
   const { newssection_set: sections, title, description, thumbnail } = props;
+  console.log('sections is: ', sections);
 
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
@@ -36,7 +37,8 @@ export default function articlePage(props: newsI) {
             )}
 
             {sections.length > 0 &&
-              sections.map(({ id, image, is_marked, text }) => (
+              // @ts-ignore
+              sections.map(({ id, image, is_marked, text, image_text }) => (
                 <section key={id}>
                   {image && (
                     <Image
@@ -47,7 +49,7 @@ export default function articlePage(props: newsI) {
                       alt="image"
                     />
                   )}
-
+                  <p>{image_text}</p>
                   <p className={cn(cls.articlePage_text, { marked: is_marked })}>{text}</p>
                 </section>
               ))}
