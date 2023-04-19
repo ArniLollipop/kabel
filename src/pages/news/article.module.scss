@@ -1,4 +1,4 @@
-@import "/src/styles/globalMixins.scss";
+@import '/src/styles/globalMixins.scss';
 
 .articlePage {
   padding: 50px 0;
@@ -41,9 +41,8 @@
 
     img {
       width: 100%;
-      object-fit: contain;
+      object-fit: initial;
       margin-bottom: 15px;
-      //   max-width: 1200px;
     }
 
     p {

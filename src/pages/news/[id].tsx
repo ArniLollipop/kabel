@@ -1,17 +1,18 @@
-import classNames from "classnames/bind";
-import cls from "./article.module.scss";
-import { MainLayout } from "@/layouts/MainLayout";
-import { Title } from "@/UI/Title/Title";
-import Image from "next/image";
-import { ActiveHeaderPage } from "@/components/header/Header";
-import { NextPageContext } from "next";
-import { NewsService } from "@/services/News.service";
-import { newsI } from "@/types/NewsTypes";
+import classNames from 'classnames/bind';
+import cls from './article.module.scss';
+import { MainLayout } from '@/layouts/MainLayout';
+import { Title } from '@/UI/Title/Title';
+import Image from 'next/image';
+import { ActiveHeaderPage } from '@/components/header/Header';
+import { NextPageContext } from 'next';
+import { NewsService } from '@/services/News.service';
+import { newsI } from '@/types/NewsTypes';
 
 const cn = classNames.bind(cls);
 
 export default function articlePage(props: newsI) {
   const { newssection_set: sections, title, description, thumbnail } = props;
+
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       <div className={cn(cls.articlePage)}>
@@ -59,7 +60,7 @@ export default function articlePage(props: newsI) {
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const { id } = ctx.query;
-  const newsId = typeof id === "string" ? id : Array.isArray(id) ? id[0] : "";
+  const newsId = typeof id === 'string' ? id : Array.isArray(id) ? id[0] : '';
   const res = await NewsService().getNewsById(newsId);
   return {
     props: res,

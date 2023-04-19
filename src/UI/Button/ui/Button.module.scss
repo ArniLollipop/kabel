@@ -1,4 +1,4 @@
-@import "../../../styles/globalMixins.scss";
+@import '../../../styles/globalMixins.scss';
 .Button {
   font-family: var(--font-family-main);
   transition: all 0.3s ease;
@@ -52,7 +52,7 @@
 
 .card {
   background-color: var(--color-accent);
-  background-image: url("../../../assets/icons/IconButtonCard.svg");
+  background-image: url('../../../assets/icons/IconButtonCard.svg');
 
   color: var(--color-bg-white);
   border: none;
@@ -69,7 +69,7 @@
 
 .buy {
   background-color: var(--color-accent-secondary);
-  background-image: url("../../../assets//icons/IconButtonBuy.svg");
+  background-image: url('../../../assets//icons/IconButtonBuy.svg');
   background-repeat: no-repeat;
   background-position: right calc((100% - 190px) / 2) top 50%;
   padding: 20px 40px 20px 10px;
@@ -96,4 +96,5 @@
 .clear {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }

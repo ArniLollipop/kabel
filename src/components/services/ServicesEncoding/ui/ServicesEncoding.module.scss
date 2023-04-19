@@ -1,6 +1,54 @@
 .ServicesEncoding {
   color: var(--color-font-title);
 
+  form {
+    position: relative;
+    width: 50%;
+
+    .searchBtn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .decodingInfoContainer {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-radius: 10px;
+      box-shadow: 1px 5px 19px -3px rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      margin-bottom: 20px;
+
+      img {
+        height: 100%;
+        max-height: 200px;
+        object-fit: contain;
+      }
+
+      .infoContainer {
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin: 15px 0;
+
+          .valueKey {
+            width: 44px;
+            height: 25px;
+            border: 1px solid #c7c8de;
+            border-radius: 2px;
+            text-align: center;
+          }
+
+          .value {
+            max-width: 315px;
+          }
+        }
+      }
+    }
+  }
+
   h4 {
     font-size: var(--font-services-title);
   }
@@ -11,16 +59,19 @@
   }
 
   .decoding {
-    width: 50%;
-    margin-bottom: 51px;
+    width: 100%;
+    margin-bottom: 25px;
     border: 1px solid var(--color-accent-secondary);
   }
 
   @media (max-width: 1024px) {
-    .decoding {
+    form {
       width: 100%;
-      margin-bottom: 30px;
-      padding: 15px 10px;
+
+      .decoding {
+        margin-bottom: 30px;
+        padding: 15px 10px;
+      }
     }
   }
 }

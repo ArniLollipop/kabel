@@ -1,18 +1,14 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./index.module.scss";
-import { Title } from "@/UI/Title/Title";
-import { MainLayout } from "@/layouts/MainLayout";
-import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
-import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
-import { SwiperSlide, Swiper, SwiperProps } from "swiper/react";
-
-import "swiper/css";
-import Link from "next/link";
-import { ActiveHeaderPage } from "@/components/header/Header";
-import { NewsService } from "@/services/News.service";
-import { newsI, NewsResponseI } from "@/types/NewsTypes";
-import { dateConverter } from "@/helpers/dateConverter";
+import { useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './index.module.scss';
+import { Title } from '@/UI/Title/Title';
+import { MainLayout } from '@/layouts/MainLayout';
+import { NewsCard, ThemeNewsCard } from '@/components/newsCard/NewsCard';
+import { SwiperSlide, Swiper, SwiperProps } from 'swiper/react';
+import 'swiper/css';
+import { ActiveHeaderPage } from '@/components/header/Header';
+import { NewsService } from '@/services/News.service';
+import { newsI } from '@/types/NewsTypes';
 
 const cn = classNames.bind(cls);
 
@@ -59,6 +55,7 @@ interface newsPageI {
 export default function newsPage(props: newsPageI) {
   const { news } = props;
   const [myswiper, setSwiper] = useState<any>();
+
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       {/* PC implementation */}

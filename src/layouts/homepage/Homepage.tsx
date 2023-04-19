@@ -1,5 +1,5 @@
-import { ICurrencyResult, IMetalResponse } from "@/types/GetCurrencyTypes";
-import { FC } from "react";
+import { ICurrencyResult, IMetalResponse } from '@/types/GetCurrencyTypes';
+import { FC } from 'react';
 import {
   OfferSection,
   AboutSection,
@@ -9,9 +9,9 @@ import {
   NewsSection,
   SertificatesSection,
   SpeciallySection,
-} from "./sections";
-import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
-import { HomeProps } from "@/pages";
+} from './sections';
+import { GetCurrency } from '@/components/GetCurrency/GetCurrency';
+import { HomeProps } from '@/pages';
 
 export const Homepage: FC<HomeProps> = (props) => {
   const { metalRes, aboutInfo, categories, sertificates, adventages, news, offers, currencyRes } =

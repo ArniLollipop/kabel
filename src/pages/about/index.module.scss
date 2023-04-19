@@ -1,4 +1,4 @@
-@import "/src//styles/globalMixins.scss";
+@import '/src//styles/globalMixins.scss';
 
 .about {
   @include adaptive-size(240, 15, padding-bottom);
@@ -24,6 +24,7 @@
 
     font-weight: 500;
     color: #37454e;
+    margin: 0 auto;
   }
 
   &_title {
@@ -39,13 +40,18 @@
     height: auto;
 
     border-radius: 20px;
-    object-fit: contain;
+    // object-fit: contain;
   }
 
   &_descr {
     @include adaptive-size(25, 15, font-size);
     @include adaptive-size(35, 18, line-height);
     @include adaptive-size(30, 15, margin-bottom);
+  }
+
+  &_text {
+    @include adaptive-size(20, 10, font-size);
+    @include adaptive-size(35, 18, line-height);
   }
 
   &_accent {

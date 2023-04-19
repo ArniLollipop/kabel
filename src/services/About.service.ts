@@ -1,10 +1,10 @@
-import { useHttp } from "@/hooks/useHttp";
-import { AxiosResponse } from "axios";
-import { NextPageContext } from "next";
-import { AboutI, AboutAnswI } from "@/types/AboutTypes";
+import { useHttp } from '@/hooks/useHttp';
+import { AxiosResponse } from 'axios';
+import { NextPageContext } from 'next';
+import { AboutI, AboutAnswI } from '@/types/AboutTypes';
 
 const enum endpoints {
-  getAboutInfo = "/main/about_company/1/",
+  getAboutInfo = '/main/about_company/',
 }
 
 interface AboutServiceResponseI {

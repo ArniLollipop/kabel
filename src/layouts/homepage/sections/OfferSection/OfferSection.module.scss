@@ -1,4 +1,4 @@
-@import "/src/styles/globalMixins.scss";
+@import '/src/styles/globalMixins.scss';
 
 .OfferSection {
   overflow: hidden;
@@ -42,13 +42,26 @@
 }
 
 .offerBtn {
-  @include adaptive-1024(45, 20, margin-bottom);
+  @include adaptive-size(18, 10, padding-top);
+  @include adaptive-size(18, 10, padding-bottom);
+  @include adaptive-size(30, 17, padding-left);
+  @include adaptive-size(30, 17, padding-right);
+  @include adaptive-size(30, 17, padding-right);
+  @include adaptive-size(18, 12, font-size);
+
+  background-color: var(--color-accent);
+  color: var(--color-bg-white);
+
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
 }
 
 .offerPagination {
   display: flex;
   gap: 18px;
-  margin-bottom: 33px;
+  margin: 45px 0 33px;
 
   span {
     @include adaptive-1024(18, 10, width);
@@ -64,6 +77,18 @@
   span.swiper-pagination-bullet-active {
     background-color: var(--color-accent) !important;
   }
+}
+
+.offerBtn {
+  position: absolute;
+  bottom: 30%;
+  left: 10;
+}
+
+.offerPagination {
+  position: absolute;
+  bottom: 15%;
+  left: 10;
 }
 
 .offerLabel {
@@ -140,10 +165,48 @@
 }
 
 @media (max-width: 1024px) {
-  .OfferSection {
+  .offerInner {
+    @include adaptive-1024(76, 10, padding-top);
+    @include adaptive-size(230, 40, padding-left);
+  }
+
+  .sliderImage {
+    object-fit: cover;
+    height: 250px;
+    width: 100%;
+  }
+
+  .offerLabel {
     display: none;
   }
-  .offerSectionMobile {
-    display: block;
+
+  .offerPagination {
+    display: none;
+  }
+
+  .offerTitle {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150.5%;
+    padding-top: 25px;
+
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  .offerDescr {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffff;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 550px) {
+  .offerInner {
+    @include adaptive-1024(76, 0, padding-top);
+    @include adaptive-size(230, 60, padding-left);
   }
 }

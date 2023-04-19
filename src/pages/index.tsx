@@ -1,24 +1,24 @@
-import { ActiveHeaderPage } from "@/components/header/Header";
-import { Homepage } from "@/layouts/homepage/Homepage";
-import { MainLayout } from "@/layouts/MainLayout";
+import { ActiveHeaderPage } from '@/components/header/Header';
+import { Homepage } from '@/layouts/homepage/Homepage';
+import { MainLayout } from '@/layouts/MainLayout';
 // Types
-import { AboutI } from "@/types/AboutTypes";
-import { categoryI } from "@/types/ProductTypes";
-import { sertificateI } from "@/types/SertificateTypes";
-import { newsI } from "@/types/NewsTypes";
-import { offerI } from "@/types/OfferTypes";
-import { ICurrencyResponse, IMetalResponse } from "@/types/GetCurrencyTypes";
-import { ICurrencyResult } from "@/types/GetCurrencyTypes";
-import { adventagesI } from "@/types/AdventagesTypes";
+import { AboutI } from '@/types/AboutTypes';
+import { categoryI } from '@/types/ProductTypes';
+import { sertificateI } from '@/types/SertificateTypes';
+import { newsI } from '@/types/NewsTypes';
+import { offerI } from '@/types/OfferTypes';
+import { ICurrencyResponse, IMetalResponse } from '@/types/GetCurrencyTypes';
+import { ICurrencyResult } from '@/types/GetCurrencyTypes';
+import { adventagesI } from '@/types/AdventagesTypes';
 
 // Services
-import { AdventagesService } from "@/services/Adventages.servise";
-import { NewsService } from "@/services/News.service";
-import { OfferService } from "@/services/Offer.service";
-import { GetCurrencyService } from "@/services/GetCurrency";
-import { SertificateService } from "@/services/Sertificate.service";
-import { AboutService } from "@/services/About.service";
-import { ProductService } from "@/services/Product.servise";
+import { AdventagesService } from '@/services/Adventages.servise';
+import { NewsService } from '@/services/News.service';
+import { OfferService } from '@/services/Offer.service';
+import { GetCurrencyService } from '@/services/GetCurrency';
+import { SertificateService } from '@/services/Sertificate.service';
+import { AboutService } from '@/services/About.service';
+import { ProductService } from '@/services/Product.servise';
 
 export interface HomeProps {
   offers: offerI[];

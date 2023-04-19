@@ -1,17 +1,23 @@
-import { ActiveHeaderPage } from "@/components/header/Header";
-import { MainLayout } from "@/layouts/MainLayout";
-import { Title } from "@/UI/Title/Title";
-import classNames from "classnames/bind";
-import cls from "./index.module.scss";
-import Image from "next/image";
-import ImageHomepageAboutBig from "@/assets/images/ImageHomepageAboutBig.png";
-import { AboutService } from "@/services/About.service";
-import { AboutI } from "@/types/AboutTypes";
+import { ActiveHeaderPage } from '@/components/header/Header';
+import { MainLayout } from '@/layouts/MainLayout';
+import { Title } from '@/UI/Title/Title';
+import classNames from 'classnames/bind';
+import cls from './index.module.scss';
+import Image from 'next/image';
+import { AboutService } from '@/services/About.service';
+import { AboutI } from '@/types/AboutTypes';
 
 const cn = classNames.bind(cls);
 
 export default function aboutPage(props: AboutI) {
-  const { id, image, text, title, our_goal } = props;
+  // @ts-ignore
+  const { image, text, title, our_goal } = props.results[0];
+
+  function clearHtmlTags(htmlString: string) {
+    const regex = /(<([^>]+)>)/gi;
+    return htmlString.replace(regex, '');
+  }
+  const clearedText = clearHtmlTags(our_goal || '');
 
   return (
     <MainLayout activePage={ActiveHeaderPage.ABOUT}>
@@ -26,7 +32,8 @@ export default function aboutPage(props: AboutI) {
             height={460}
           />
 
-          <div className={cls.about_accent} dangerouslySetInnerHTML={{ __html: our_goal }} />
+          <div className={cls.about_text} dangerouslySetInnerHTML={{ __html: text }} />
+          <p className={cls.about_accent}>{clearedText}</p>
         </div>
       </div>
     </MainLayout>
