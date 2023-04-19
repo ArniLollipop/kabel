@@ -1,4 +1,4 @@
-@import "/src//styles/globalMixins.scss";
+@import '/src//styles/globalMixins.scss';
 
 .FilterSection {
   background-color: var(--color-bg-white);
@@ -8,9 +8,9 @@
   padding: 30px 30px 55px 15px;
   position: sticky;
   top: 15px;
-
   display: flex;
   flex-direction: column;
+  max-height: 1450px;
 
   .submitBtn {
     margin: 0 auto;
