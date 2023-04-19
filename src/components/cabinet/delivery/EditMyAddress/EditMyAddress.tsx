@@ -1,3 +1,4 @@
+// @ts-nocheck
 // packages
 import { FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
@@ -17,21 +18,24 @@ import { maskForPhone } from '@/helpers/masks';
 // validation
 import { deliveryAddressSchema } from '@/helpers/validation';
 import { ProfileService } from '@/services/Profile.service';
-import { useAppDispatch, useAppSelector } from '@/hooks/store';
+import { useAppDispatch } from '@/hooks/store';
 import { setMyAddresses } from '@/store/slices/ProfileSlice';
 
 let cn = classNames.bind(cls);
 
-interface AddOrEditDeliveryProps {
+interface EditMyAddressProps {
   className?: string;
   setIsOpen?: (value: boolean) => void;
+  addressToChange: any;
 }
 
-export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
-  const { className, setIsOpen } = props;
+export const EditMyAddress: FC<EditMyAddressProps> = (props) => {
+  const { className, setIsOpen, addressToChange } = props;
   const [user, setUser] = useState<any>();
   const [token, setToken] = useState<any>();
   const dispatch = useAppDispatch();
+
+  const { address, apartment, floor, house, phone_number, id: addressId } = addressToChange[0];
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user') as string);
@@ -44,11 +48,11 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
     <div className={cn(cls.AddOrEditDelivery, className)}>
       <Formik
         initialValues={{
-          address: '',
-          apartment: '',
-          floor: '',
-          home: '',
-          phoneNumber: '',
+          address: address,
+          apartment: apartment,
+          floor: floor,
+          home: house,
+          phoneNumber: phone_number,
         }}
         validationSchema={deliveryAddressSchema}
         onSubmit={(values) => {
@@ -72,7 +76,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               !errors?.home &&
               !errors?.phoneNumber
             ) {
-              const res = await ProfileService().addAddress(
+              const res = await ProfileService().changeMyAddress(
                 {
                   address: String(values.address),
                   apartment: Number(values.apartment),
@@ -82,7 +86,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   is_default: false,
                   user: Number(user.id),
                 },
-                token
+                addressId
               );
               if (res) {
                 const token = localStorage.getItem('access_token');

@@ -4,13 +4,14 @@ import { NextPageContext } from 'next';
 import { EditProfileProps } from '@/store/slices/ProfileSlice';
 
 interface IAddressReq {
-  address: string;
-  apartment: number;
-  floor: number;
-  house: number;
-  phone_number: string;
-  is_default: boolean;
-  user: number;
+  address?: string;
+  apartment?: number;
+  floor?: number;
+  house?: number;
+  phone_number?: string;
+  is_default?: boolean;
+  user?: number;
+  addressId?: number;
 }
 
 enum endpoints {
@@ -21,6 +22,8 @@ enum endpoints {
   getExactUser = 'users/users/',
   getBonus = 'users/users/my_bonus_card/',
   addAddress = 'users/user_addresses/',
+  getMyAddresses = 'users/user_addresses/my_addresses/',
+  changeMyAddress = 'users/user_addresses/',
 }
 
 interface IProfileServiceResponse {
@@ -38,7 +41,10 @@ interface IProfileServiceResponse {
   changePassFinal: (phone_number: string, password: string) => Promise<AxiosResponse<any>>;
   getExactUser: (userId: number | undefined | any) => Promise<AxiosResponse<any>>;
   getBonus: (token: string | null) => Promise<AxiosResponse<any>>;
-  addAddress: (address: IAddressReq) => Promise<AxiosResponse<any>>;
+  addAddress: (address: IAddressReq, token: string) => Promise<AxiosResponse<any>>;
+  getMyAddresses: (token: string | null) => Promise<AxiosResponse<any>>;
+  changeMyAddress: (address: IAddressReq, addressId: number) => Promise<AxiosResponse<any>>;
+  deleteMyAddress: (addressId: number) => Promise<AxiosResponse<any>>;
 }
 
 export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse => {
@@ -132,8 +138,64 @@ export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse =
     return res.data;
   };
 
-  const addAddress = async (address: IAddressReq): Promise<AxiosResponse<any>> => {
-    const res = await useHttp().post(endpoints.addAddress, { address });
+  const addAddress = async (address: IAddressReq, token: string): Promise<AxiosResponse<any>> => {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/user_addresses/`,
+      address,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  };
+
+  const getMyAddresses = async (token: string | null): Promise<AxiosResponse<any>> => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/user_addresses/my_addresses/`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  };
+
+  const changeMyAddress = async (
+    address: IAddressReq,
+    addressId: number
+  ): Promise<AxiosResponse<any>> => {
+    const token = localStorage.getItem('access_token');
+
+    const res = await axios.patch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/user_addresses/${addressId}/`,
+      address,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  };
+
+  const deleteMyAddress = async (addressId: number): Promise<AxiosResponse<any>> => {
+    const token = localStorage.getItem('access_token');
+
+    const res = await axios.delete(
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/user_addresses/${addressId}/`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
     return res.data;
   };
 
@@ -145,5 +207,8 @@ export const ProfileService = (ctx?: NextPageContext): IProfileServiceResponse =
     compareSmsCodes,
     getExactUser,
     addAddress,
+    getMyAddresses,
+    changeMyAddress,
+    deleteMyAddress,
   };
 };

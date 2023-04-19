@@ -16,6 +16,7 @@ const initialState = {
   isLoading: false,
   error: null,
   isError: false,
+  myAddresses: null,
 };
 
 // Slice
@@ -26,6 +27,9 @@ const ProfileSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
+    },
+    setMyAddresses: (state, action: PayloadAction<any>) => {
+      state.myAddresses = action.payload;
     },
   },
 
@@ -74,5 +78,5 @@ export const EditProfile = createAsyncThunk(
   }
 );
 
-export const { setUser } = ProfileSlice.actions;
+export const { setUser, setMyAddresses } = ProfileSlice.actions;
 export default ProfileSlice.reducer;

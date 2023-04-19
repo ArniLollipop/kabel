@@ -1,0 +1,27 @@
+.AddOrEditDelivery {
+  position: relative;
+  padding: 30px;
+  max-width: 502px;
+  background-color: white;
+  border-radius: 15px;
+  margin-bottom: 20px;
+
+  input {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .container {
+    &_ApNFlNHmInputs {
+      display: flex;
+      gap: 13px;
+    }
+
+    &_BtnContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 34px;
+    }
+  }
+}
