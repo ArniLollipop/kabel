@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { ActivePayDelPageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
@@ -20,6 +20,11 @@ import ImageDelivery from "@/assets/images/ImageDelivery.png";
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { PayDelService } from "@/services/PayDel.Service";
 import { payDelI } from "@/types/PayDelTypes";
+import { useHttp } from "@/hooks/useHttp";
+const enum endpoints {
+  getPayment = "/main/payment/",
+  getDelivery = "/main/delivery/",
+}
 
 let cn = classNames.bind(cls);
 
@@ -28,8 +33,28 @@ interface paymentProps {
   delivery: payDelI;
 }
 
-export default function payment(props: paymentProps) {
-  const { delivery, payment } = props;
+export default function payment() {
+  const [payment, setPayment] = useState<any>();
+  const [delivery, setDelivery] = useState<any>();
+
+  async function getPayment() {
+    try {
+      const res = await useHttp().get(endpoints.getPayment);
+      setPayment(res.data.results[0].text);
+    } catch {}
+  }
+
+  async function getDelivery() {
+    try {
+      const res = await useHttp().get(endpoints.getDelivery);
+      setDelivery(res.data.results[0].text);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    getPayment();
+    getDelivery();
+  }, []);
 
   return (
     <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
@@ -41,7 +66,7 @@ export default function payment(props: paymentProps) {
       >
         <div
           className={cls.descrText}
-          dangerouslySetInnerHTML={{ __html: payment.text }}
+          dangerouslySetInnerHTML={{ __html: payment }}
         />
 
         <div className={cls.images}>
@@ -74,7 +99,7 @@ export default function payment(props: paymentProps) {
                     <span className={cls.mobile_accBodyTitle}>Оплата</span>
                     <div
                       className={cls.descrText}
-                      dangerouslySetInnerHTML={{ __html: payment.text }}
+                      dangerouslySetInnerHTML={{ __html: payment }}
                     />
                     <div className={cn(cls.images, cls.mobile_images)}>
                       <Image src={ImagePayment} alt="payment image" />
@@ -104,7 +129,7 @@ export default function payment(props: paymentProps) {
                     <span className={cls.mobile_accBodyTitle}>Доставка</span>
                     <div
                       className={cls.descrText}
-                      dangerouslySetInnerHTML={{ __html: delivery.text }}
+                      dangerouslySetInnerHTML={{ __html: delivery }}
                     />
 
                     <div
@@ -192,12 +217,4 @@ export default function payment(props: paymentProps) {
       </div>
     </MainLayout>
   );
-}
-
-export async function getServerSideProps() {
-  const payment = await PayDelService().getPayment();
-  const delivery = await PayDelService().getDelivery();
-  return {
-    props: { payment, delivery },
-  };
 }

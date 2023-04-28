@@ -1,10 +1,15 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { ActivePayDelPageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
 import Image from "next/image";
 import ImageDelivery from "@/assets/images/ImageDelivery.png";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
+} from "react-headless-accordion";
 import { IconCabinetArrow } from "@/assets/icons";
 import { MainLayout } from "@/layouts/MainLayout";
 
@@ -17,6 +22,12 @@ import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { payDelI } from "@/types/PayDelTypes";
 import { PayDelService } from "@/services/PayDel.Service";
+import { useHttp } from "@/hooks/useHttp";
+
+const enum endpoints {
+  getPayment = "/main/payment/",
+  getDelivery = "/main/delivery/",
+}
 
 interface deliveryProps {
   payment: payDelI;
@@ -24,8 +35,28 @@ interface deliveryProps {
 }
 const cn = classNames.bind(cls);
 
-export default function delivery(props: deliveryProps) {
-  const { delivery, payment } = props;
+export default function delivery() {
+  const [payment, setPayment] = useState<any>();
+  const [delivery, setDelivery] = useState<any>();
+
+  async function getPayment() {
+    try {
+      const res = await useHttp().get(endpoints.getPayment);
+      setPayment(res.data.results[0].text);
+    } catch {}
+  }
+
+  async function getDelivery() {
+    try {
+      const res = await useHttp().get(endpoints.getDelivery);
+      setDelivery(res.data.results[0].text);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    getPayment();
+    getDelivery();
+  }, []);
 
   return (
     <>
@@ -36,7 +67,10 @@ export default function delivery(props: deliveryProps) {
           activePage={ActivePayDelPageEnum.DELIVERY}
           title="Доставка"
         >
-          <div className={cls.descrText} dangerouslySetInnerHTML={{ __html: delivery.text }} />
+          <div
+            className={cls.descrText}
+            dangerouslySetInnerHTML={{ __html: delivery }}
+          />
 
           <div className={cn(cls.images, cls.images_del)}>
             <Image src={ImageDelivery} alt="payment image" />
@@ -118,15 +152,19 @@ export default function delivery(props: deliveryProps) {
               <AccordionItem>
                 {({ open }: { open: boolean }) => (
                   <>
-                    <AccordionHeader className={cn(cls.mobile_accItem, { active: open })}>
+                    <AccordionHeader
+                      className={cn(cls.mobile_accItem, { active: open })}
+                    >
                       <span>Оплата</span>
                       <IconCabinetArrow />
                     </AccordionHeader>
-                    <AccordionBody className={cn(cls.mobile_accBody, { active: open })}>
+                    <AccordionBody
+                      className={cn(cls.mobile_accBody, { active: open })}
+                    >
                       <span className={cls.mobile_accBodyTitle}>Оплата</span>
                       <div
                         className={cls.descrText}
-                        dangerouslySetInnerHTML={{ __html: payment.text }}
+                        dangerouslySetInnerHTML={{ __html: payment }}
                       />
 
                       <div className={cn(cls.images, cls.mobile_images)}>
@@ -145,19 +183,29 @@ export default function delivery(props: deliveryProps) {
               <AccordionItem>
                 {({ open }: { open: boolean }) => (
                   <>
-                    <AccordionHeader className={cn(cls.mobile_accItem, { active: open })}>
+                    <AccordionHeader
+                      className={cn(cls.mobile_accItem, { active: open })}
+                    >
                       <span>Доставка</span>
                       <IconCabinetArrow />
                     </AccordionHeader>
-                    <AccordionBody className={cn(cls.mobile_accBody, { active: open })}>
+                    <AccordionBody
+                      className={cn(cls.mobile_accBody, { active: open })}
+                    >
                       <span className={cls.mobile_accBodyTitle}>Доставка</span>
 
                       <div
                         className={cls.descrText}
-                        dangerouslySetInnerHTML={{ __html: delivery.text }}
+                        dangerouslySetInnerHTML={{ __html: delivery }}
                       />
 
-                      <div className={cn(cls.images, cls.images_del, cls.mobile_images)}>
+                      <div
+                        className={cn(
+                          cls.images,
+                          cls.images_del,
+                          cls.mobile_images
+                        )}
+                      >
                         <Image src={ImageDelivery} alt="payment image" />
                         <div className={cls.methods}>
                           <svg
@@ -237,12 +285,4 @@ export default function delivery(props: deliveryProps) {
       </MainLayout>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const payment = await PayDelService().getPayment();
-  const delivery = await PayDelService().getDelivery();
-  return {
-    props: { payment, delivery },
-  };
 }
