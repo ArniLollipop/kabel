@@ -79,6 +79,13 @@ export const Footer: FC<FooterProps> = (props) => {
             >
               <Link href="/contacts">Контакты</Link>
             </li>
+            <li
+              className={cn(cls.footerNav_listItem, {
+                active: activePage === ActiveHeaderPage.CONTACTS,
+              })}
+            >
+              <Link href="/politics">Политика конфиденциальности</Link>
+            </li>
           </ul>
         </nav>
 
@@ -86,13 +93,21 @@ export const Footer: FC<FooterProps> = (props) => {
           <ul className={cls.footerInfo_table}>
             <li className={cls.footerInfo_tableCol}>
               <h4 className={cls.footerInfo_tableColTitle}>Адрес</h4>
-              <span className={cn(cls.footerInfo_tableColRow, cls.footerInfo_withAdressIcon)}>
+              <span
+                className={cn(
+                  cls.footerInfo_tableColRow,
+                  cls.footerInfo_withAdressIcon
+                )}
+              >
                 Алматы ул. Тлендиева 94/94А <br />
                 склад: ул. Бирлик 9
               </span>
               <a
                 href="mailto: almaty-kazkabel@mail.ru"
-                className={cn(cls.footerInfo_tableColRow, cls.footerInfo_withEmailIcon)}
+                className={cn(
+                  cls.footerInfo_tableColRow,
+                  cls.footerInfo_withEmailIcon
+                )}
               >
                 almaty-kazkabel@mail.ru
               </a>
@@ -100,21 +115,36 @@ export const Footer: FC<FooterProps> = (props) => {
 
             <li className={cls.footerInfo_tableCol}>
               <h4 className={cls.footerInfo_tableColTitle}>Время работы</h4>
-              <span className={cls.footerInfo_tableColRow}>Пн-пт с 9:00 до 18:00</span>
-              <span className={cls.footerInfo_tableColRow}>Сб с 9:00 до 15:30</span>
-              <span className={cls.footerInfo_tableColRow}>Обед с 13:00-14:00</span>
+              <span className={cls.footerInfo_tableColRow}>
+                Пн-пт с 9:00 до 18:00
+              </span>
+              <span className={cls.footerInfo_tableColRow}>
+                Сб с 9:00 до 15:30
+              </span>
+              <span className={cls.footerInfo_tableColRow}>
+                Обед с 13:00-14:00
+              </span>
             </li>
 
             <li className={cls.footerInfo_tableCol}>
               <h4 className={cls.footerInfo_tableColTitle}>Телефоны</h4>
               <div className={cls.footerInfo_tableColPhones}>
-                <a href="tel:+77273014798" className={cls.footerInfo_tableColRow}>
+                <a
+                  href="tel:+77273014798"
+                  className={cls.footerInfo_tableColRow}
+                >
                   +7 727 301 47 98
                 </a>
-                <a href="tel:88000704798" className={cls.footerInfo_tableColRow}>
+                <a
+                  href="tel:88000704798"
+                  className={cls.footerInfo_tableColRow}
+                >
                   8 800 070 47 98
                 </a>
-                <a href="tel:+77273554798" className={cls.footerInfo_tableColRow}>
+                <a
+                  href="tel:+77273554798"
+                  className={cls.footerInfo_tableColRow}
+                >
                   +7 727 355 47 98
                 </a>
                 <a
@@ -138,7 +168,9 @@ export const Footer: FC<FooterProps> = (props) => {
               </div>
             </li>
           </ul>
-          <span className={cls.footerInfo_protected}>© 2023 Все права защищены</span>
+          <span className={cls.footerInfo_protected}>
+            © 2023 Все права защищены
+          </span>
         </div>
       </div>
 
@@ -151,7 +183,9 @@ export const Footer: FC<FooterProps> = (props) => {
           })}
         >
           <IconMobileMenuHome
-            textColor={activePage === ActiveHeaderPage.MAIN ? "#00abc2" : "#4F4F4F"}
+            textColor={
+              activePage === ActiveHeaderPage.MAIN ? "#00abc2" : "#4F4F4F"
+            }
           />
           <span>Главная</span>
         </Link>
@@ -163,7 +197,9 @@ export const Footer: FC<FooterProps> = (props) => {
           })}
         >
           <IconMobileMenuProduct
-            textColor={activePage === ActiveHeaderPage.CATALOG ? "#00abc2" : "#4F4F4F"}
+            textColor={
+              activePage === ActiveHeaderPage.CATALOG ? "#00abc2" : "#4F4F4F"
+            }
           />
           <span>Продукция</span>
         </Link>
@@ -175,7 +211,9 @@ export const Footer: FC<FooterProps> = (props) => {
           })}
         >
           <IconMobileMenuServices
-            textColor={activePage === ActiveHeaderPage.SERVICES ? "#00abc2" : "#4F4F4F"}
+            textColor={
+              activePage === ActiveHeaderPage.SERVICES ? "#00abc2" : "#4F4F4F"
+            }
           />
           <span>Сервисы</span>
         </Link>
@@ -187,7 +225,9 @@ export const Footer: FC<FooterProps> = (props) => {
           })}
         >
           <IconMobileMenuCard
-            textColor={activePage === ActiveHeaderPage.CARD ? "#00abc2" : "#4F4F4F"}
+            textColor={
+              activePage === ActiveHeaderPage.CARD ? "#00abc2" : "#4F4F4F"
+            }
           />
           <span>Корзина</span>
         </Link>
@@ -199,7 +239,9 @@ export const Footer: FC<FooterProps> = (props) => {
           })}
         >
           <IconMobileMenuMore
-            textColor={activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"}
+            textColor={
+              activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"
+            }
           />
           <span>Профиль </span>
         </Link>

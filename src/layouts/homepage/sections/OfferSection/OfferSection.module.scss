@@ -1,4 +1,4 @@
-@import '/src/styles/globalMixins.scss';
+@import "/src/styles/globalMixins.scss";
 
 .OfferSection {
   overflow: hidden;
@@ -14,8 +14,8 @@
 .offerInner {
   @include adaptive-1024(76, 25, padding-top);
   @include adaptive-size(230, 85, padding-left);
-  background: url(../../../../assets//images/ImageHomepageDecor.png) left 5vw top / auto 100%
-    repeat-y;
+  background: url(../../../../assets//images/ImageHomepageDecor.png) left 5vw
+    top / auto 100% repeat-y;
 
   height: 100%;
 
@@ -61,7 +61,7 @@
 .offerPagination {
   display: flex;
   gap: 18px;
-  margin: 45px 0 33px;
+  z-index: 1;
 
   span {
     @include adaptive-1024(18, 10, width);
@@ -73,10 +73,15 @@
     border-radius: 100%;
     cursor: pointer;
   }
+}
 
-  span.swiper-pagination-bullet-active {
-    background-color: var(--color-accent) !important;
-  }
+.swiper-pagination-bullet {
+  opacity: 100;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #00abc2 !important;
+  z-index: 1;
 }
 
 .offerBtn {
@@ -87,8 +92,8 @@
 
 .offerPagination {
   position: absolute;
-  bottom: 15%;
-  left: 10;
+  bottom: 20% !important;
+  left: 15% !important;
 }
 
 .offerLabel {
@@ -118,8 +123,8 @@
   position: relative;
 
   &_inner {
-    background: url(../../../../assets//images/ImageHomepageDecor.png) left 16px top / auto 100%
-      repeat-y;
+    background: url(../../../../assets//images/ImageHomepageDecor.png) left 16px
+      top / auto 100% repeat-y;
 
     position: absolute;
     z-index: 10;
@@ -155,6 +160,7 @@
   &_slider {
     width: auto;
     border-radius: 10px;
+    z-index: 0;
   }
 
   &_sliderImg {

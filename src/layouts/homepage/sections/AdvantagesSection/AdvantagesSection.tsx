@@ -1,15 +1,15 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./AdvantagesSection.module.scss";
-import { Title } from "@/UI/Title/Title";
-import Image from "next/image";
-import IconAdvantagesCalendar from "@/assets/icons/IconAdvantagesCalendar.svg";
-import IconAdvantagesLike from "@/assets/icons/IconAdvantagesLike.svg";
-import IconAdvantagesGems from "@/assets/icons/IconAdvantagesGems.svg";
-import IconAdvantagesDelivery from "@/assets/icons/IconAdvantagesDelivery.svg";
-import IconAdvantagesHands from "@/assets/icons/IconAdvantagesHands.svg";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
-import { adventagesI } from "@/types/AdventagesTypes";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './AdvantagesSection.module.scss';
+import { Title } from '@/UI/Title/Title';
+import Image from 'next/image';
+import IconAdvantagesCalendar from '@/assets/icons/IconAdvantagesCalendar.svg';
+import IconAdvantagesLike from '@/assets/icons/IconAdvantagesLike.svg';
+import IconAdvantagesGems from '@/assets/icons/IconAdvantagesGems.svg';
+import IconAdvantagesDelivery from '@/assets/icons/IconAdvantagesDelivery.svg';
+import IconAdvantagesHands from '@/assets/icons/IconAdvantagesHands.svg';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { adventagesI } from '@/types/AdventagesTypes';
 
 const cn = classNames.bind(cls);
 
@@ -49,7 +49,7 @@ export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
       <Title className={cls.AdvantagesSection_title}>Преимущества</Title>
 
       <Swiper {...params}>
-        {adventages.map(({ advantage, icon, id }, i) => (
+        {adventages?.map(({ advantage, icon, id }, i) => (
           <SwiperSlide className={cls.AdvantagesSection_sliderItem} key={id}>
             <li className={cls.AdvantagesSection_item}>
               <span className={cls.AdvantagesSection_itemStep}>

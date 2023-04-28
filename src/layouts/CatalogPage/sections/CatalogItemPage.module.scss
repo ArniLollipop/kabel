@@ -109,6 +109,7 @@
         img {
           @include adaptive-size(40, 30, width);
           @include adaptive-size(40, 30, height);
+          border-radius: 50%;
         }
       }
 
@@ -192,16 +193,46 @@
         }
 
         &_btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          gap: 10px;
           @include adaptive-1024(24, 16, font-size);
 
           padding: 20px 10px;
           //   font-size: 24px;
           width: 80%;
-          background-position: right 5% top 50%;
+          background-image: none;
           margin-bottom: 15px;
 
           @media (max-width: 1024px) {
             font-size: 24px;
+          }
+          @media (max-width: 640px) {
+            padding: 15px;
+          }
+
+          &__count {
+            position: absolute;
+            top: -10px;
+            color: white;
+            right: -10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f6bf0c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            /* or 120% */
+
+            color: #ffffff;
           }
         }
 

@@ -1,5 +1,4 @@
-import { ICurrencyResult, IMetalResponse } from '@/types/GetCurrencyTypes';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   OfferSection,
   AboutSection,

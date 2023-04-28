@@ -1,5 +1,9 @@
-@import '/src/styles/globalMixins.scss';
-$pathToIcon: '../../../../assets/icons';
+@import "/src/styles/globalMixins.scss";
+$pathToIcon: "../../../../assets/icons";
+
+.SideBar_SideBar_adventages__ZyoC_ {
+  margin-bottom: 30px;
+}
 
 .SideBar {
   @include adaptive-1024(404, 350, width);
@@ -20,15 +24,14 @@ $pathToIcon: '../../../../assets/icons';
   }
 
   &_adventages {
-    padding: 30px 20px;
-    margin-bottom: 40px;
+    padding: 3px 20px;
     display: flex;
     flex-direction: column;
 
     .radioBtn {
       position: relative;
 
-      input:where([type='radio']) {
+      input:where([type="radio"]) {
         position: absolute;
         top: 5px;
         right: 0;
@@ -38,17 +41,21 @@ $pathToIcon: '../../../../assets/icons';
         height: 22px;
         margin: calc(0.75em - 11px) 0.25rem 0 0;
         vertical-align: top;
+        border: 2px solid #f6bf0c;
         border-radius: 4px;
-        background-image: url('#{$pathToIcon}/IconCardRadiobuttonNotChecked.svg');
         background-repeat: no-repeat;
         background-position: center center;
+        background-size: 0;
       }
 
       input:checked {
+        transition: all;
+        transition-duration: 300ms;
+        background-color: #f6bf0c;
         background: no-repeat center center;
-        background-image: url('#{$pathToIcon}/IconCardRadiobuttonChecked.svg');
         background-repeat: no-repeat;
         background-position: center center;
+        background-image: url("#{$pathToIcon}/IconCardRadiobuttonChecked.svg");
       }
     }
 
@@ -83,7 +90,7 @@ $pathToIcon: '../../../../assets/icons';
     .radioBtn {
       position: relative;
 
-      input:where([type='radio']) {
+      input:where([type="radio"]) {
         position: absolute;
         top: 5px;
         right: 0;
@@ -94,14 +101,15 @@ $pathToIcon: '../../../../assets/icons';
         margin: calc(0.75em - 11px) 0.25rem 0 0;
         vertical-align: top;
         border-radius: 4px;
-        background-image: url('#{$pathToIcon}/IconCardRadiobuttonNotChecked.svg');
+        border: 2px solid #f6bf0c;
+        border-radius: 4px;
         background-repeat: no-repeat;
         background-position: center center;
       }
 
       input:checked {
         background: no-repeat center center;
-        background-image: url('#{$pathToIcon}/IconCardRadiobuttonChecked.svg');
+        background-image: url("#{$pathToIcon}/IconCardRadiobuttonChecked.svg");
         background-repeat: no-repeat;
         background-position: center center;
       }
@@ -173,11 +181,12 @@ $pathToIcon: '../../../../assets/icons';
     }
 
     &_datePicker {
+      position: relative;
       h4 {
         margin-bottom: 12px;
       }
 
-      input[type='date'] {
+      input[type="date"] {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -192,9 +201,11 @@ $pathToIcon: '../../../../assets/icons';
       }
 
       &_btnContainer {
-        overflow-x: scroll;
-        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 45px;
+        flex-wrap: wrap;
 
         &::-webkit-scrollbar {
           display: none;
@@ -202,10 +213,17 @@ $pathToIcon: '../../../../assets/icons';
       }
 
       &_defaultBtn {
-        margin-left: 12px;
         padding: 15px 30px;
         border-radius: 50px;
         border: 1px solid var(--color-font-title);
+      }
+
+      &_pickedBtn {
+        padding: 13px 30px;
+        border-radius: 50px;
+        border: none;
+        background-color: #f6bf0c;
+        color: white;
       }
     }
   }
@@ -218,5 +236,84 @@ $pathToIcon: '../../../../assets/icons';
 @media (max-width: 1024px) {
   .SideBar {
     width: 100%;
+  }
+}
+
+.mb {
+  margin-bottom: 40px;
+  padding: 30px;
+}
+
+.address {
+  padding: 0;
+  padding-bottom: 10px;
+
+  span {
+    margin-bottom: 10px;
+  }
+
+  label {
+    margin: 0;
+    padding: 3px 0;
+    font-size: 16px;
+    max-width: 80%;
+  }
+}
+
+.dateBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #39424b;
+  padding: 5px 10px;
+  border-radius: 50px;
+  width: fit-content;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #39424b;
+  margin-bottom: 10px;
+}
+
+.dateChoices {
+  position: absolute;
+  top: 90%;
+  width: 100%;
+  border-radius: 0;
+  z-index: 1;
+  animation: opacity 300ms;
+}
+
+.dateSelect {
+  position: relative;
+  width: fit-content;
+}
+
+.dateChoice {
+  cursor: pointer;
+  padding: 7px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #39424b;
+  border-top: none;
+  &:first-child {
+    border-top: 1px solid #39424b;
+  }
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
   }
 }

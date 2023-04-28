@@ -1,16 +1,16 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./SertificatesSection.module.scss";
-import { Title } from "@/UI/Title/Title";
-import Link from "next/link";
-import Image from "next/image";
-import ImageMockSertificate from "@/assets/images/ImageMockSertificate.png";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './SertificatesSection.module.scss';
+import { Title } from '@/UI/Title/Title';
+import Link from 'next/link';
+import Image from 'next/image';
+import ImageMockSertificate from '@/assets/images/ImageMockSertificate.png';
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
+import 'swiper/css';
 
-import { Button, ThemeButton } from "@/UI/Button/ui/Button";
-import { sertificateI } from "@/types/SertificateTypes";
+import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { sertificateI } from '@/types/SertificateTypes';
 
 const cn = classNames.bind(cls);
 
@@ -65,7 +65,7 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
       <Title className={cls.SertificatesSection_title}>Сертификаты</Title>
 
       <Swiper {...params} className={cls.slider} onSwiper={(swiper) => setSwiper(swiper)}>
-        {sertificates.map((sert) => (
+        {sertificates?.map((sert) => (
           <SwiperSlide key={sert.id}>
             <Image src={sert.image} alt="Sertificate" width={234} height={351} />
           </SwiperSlide>

@@ -1,30 +1,30 @@
 // hooks
-import { FC, useState, useEffect } from 'react';
-import { useAppDispatch } from '@/hooks/store';
+import { FC, useState, useEffect } from "react";
+import { useAppDispatch } from "@/hooks/store";
 
 // packages
-import classNames from 'classnames';
+import classNames from "classnames";
 
 // assets
-import cls from './Register.module.scss';
+import cls from "./Register.module.scss";
 
 // helpers
-import { maskForPhone } from '@/helpers/masks';
+import { maskForPhone } from "@/helpers/masks";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { Button } from '@/UI/Button';
-import { Form, Formik, FormikErrors, FormikTouched } from 'formik';
-import { registerSchema } from '@/helpers/validation';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { Button } from "@/UI/Button";
+import { Form, Formik, FormikErrors, FormikTouched } from "formik";
+import { registerSchema } from "@/helpers/validation";
 
 // themes
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
 
 // actions
-import { setUserName, setUserPhone } from '@/store/slices/AuthSlice';
-import { AuthService } from '@/services/Auth.service';
-import { AxiosError } from 'axios';
+import { setUserName, setUserPhone } from "@/store/slices/AuthSlice";
+import { AuthService } from "@/services/Auth.service";
+import { AxiosError } from "axios";
 
 let cn = classNames.bind(cls);
 
@@ -40,7 +40,7 @@ interface GetSmsCodeProps {
 
 export const Register: FC<RegisterProps> = (props) => {
   const { className, setActive } = props;
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const dispatch = useAppDispatch();
 
   const getSmsCode = (props: GetSmsCodeProps) => {
@@ -53,14 +53,14 @@ export const Register: FC<RegisterProps> = (props) => {
   return (
     <Formik
       initialValues={{
-        name: '',
-        phoneNumber: '',
+        name: "",
+        phoneNumber: "",
       }}
       validationSchema={registerSchema}
       onSubmit={(values) => {
-        console.log('values Register is: ', {
+        console.log("values Register is: ", {
           ...values,
-          phoneNumber: values.phoneNumber.replace(/\D+/g, ''),
+          phoneNumber: values.phoneNumber.replace(/\D+/g, ""),
         });
       }}
     >

@@ -1,13 +1,22 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./CatalogItemPage.module.scss";
 import Image from "next/image";
 import { IconCardItemInStock, IconCardItemOutOfStock } from "@/assets/icons";
 import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { IconShare } from "@/assets/icons";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
+} from "react-headless-accordion";
 import { productI } from "@/types/ProductTypes";
 import nullImg from "@/assets/images/nullImg.webp";
+import { useAppSelector } from "@/hooks/store";
+// import { Router } from "next/router";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const cn = classNames.bind(cls);
 
@@ -17,6 +26,22 @@ interface CatalogItemPageProps extends productI {
 
 export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   const { className } = props;
+  const { items } = useAppSelector((state) => state.CartSlice);
+
+  const [count, setCount] = useState<number>(0);
+
+  const { push } = useRouter();
+
+  useEffect(() => {
+    setCount(0);
+    if (items) {
+      items.map((el: any) => {
+        if (el.product_info.code === props.code) {
+          setCount(el.length);
+        }
+      });
+    }
+  }, []);
 
   const renderCharList = (start?: number, end?: number) => {
     const startPoint = start ? start : 0;
@@ -24,12 +49,14 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
     return (
       <ul className={cls.card_charList}>
-        {props.characteristics_info.slice(startPoint, endPoint).map(({ key, value, id }) => (
-          <li className={cls.card_descrItem} key={id}>
-            <span className={cls.card_descrCategoryName}>{key}</span>
-            <span className={cls.card_descrCategoryVal}>{value}</span>
-          </li>
-        ))}
+        {props.characteristics_info
+          .slice(startPoint, endPoint)
+          .map(({ key, value, id }) => (
+            <li className={cls.card_descrItem} key={id}>
+              <span className={cls.card_descrCategoryName}>{key}</span>
+              <span className={cls.card_descrCategoryVal}>{value}</span>
+            </li>
+          ))}
       </ul>
     );
   };
@@ -78,7 +105,13 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                   <h3 className={cls.card_subTitle}>Цвет</h3>
                   <div className="">
                     {props.colors_info.map(({ image: src }, i) => (
-                      <Image src={src} alt="image mini" width={35} height={35} key={i} />
+                      <Image
+                        src={src}
+                        alt="image mini"
+                        width={35}
+                        height={35}
+                        key={i}
+                      />
                     ))}
                   </div>
                 </div>
@@ -106,7 +139,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                                   viewBox="0 0 9 15"
                                   fill="none"
                                   xmlns="http://www.w3.org/2000/svg"
-                                  className={cn(cls.char_accIcon, { char_accIconActive: open })}
+                                  className={cn(cls.char_accIcon, {
+                                    char_accIconActive: open,
+                                  })}
                                 >
                                   <path
                                     d="M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619"
@@ -118,7 +153,10 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                                 </svg>
                               </AccordionHeader>
                               <AccordionBody className={cls.char_accList}>
-                                {renderCharList(5, props.characteristics_info.length)}
+                                {renderCharList(
+                                  5,
+                                  props.characteristics_info.length
+                                )}
                               </AccordionBody>
                             </>
                           )}
@@ -142,7 +180,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                             viewBox="0 0 9 15"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className={cn(cls.char_accIcon, { char_accIconActive: open })}
+                            className={cn(cls.char_accIcon, {
+                              char_accIconActive: open,
+                            })}
                           >
                             <path
                               d="M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619"
@@ -153,7 +193,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                             />
                           </svg>
                         </AccordionHeader>
-                        <AccordionBody className={cn(cls.char_accList, cls.mobileDescr_body)}>
+                        <AccordionBody
+                          className={cn(cls.char_accList, cls.mobileDescr_body)}
+                        >
                           <p className={cls.card_descr}>{props.description}</p>
                           {renderCharList()}
                         </AccordionBody>
@@ -174,8 +216,57 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
               <span className={cls.buyActions_price}>{props.cost} ₸</span>
 
-              <Button className={cls.buyActions_btn} theme={ThemeButton.CARD}>
+              <Button
+                onClick={() => push("/card")}
+                className={cls.buyActions_btn}
+                theme={ThemeButton.CARD}
+              >
+                {count > 0 && (
+                  <p className={cls.buyActions_btn__count}>{count}</p>
+                )}
                 В корзину
+                <svg
+                  width="20"
+                  height="22"
+                  viewBox="0 0 20 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <ellipse
+                    cx="3.25"
+                    cy="18.692"
+                    rx="2.25"
+                    ry="2.21156"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <ellipse
+                    cx="15.625"
+                    cy="18.692"
+                    rx="2.25"
+                    ry="2.21156"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M15.625 16.4809H3.25V1H1"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M3.25 3.21094L19 4.31672L17.875 12.0572H3.25"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </Button>
 
               <div className={cls.buyActions_secondaruBtns}>

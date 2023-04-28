@@ -19,3 +19,101 @@
     bottom: -23px;
   }
 }
+.forget {
+  display: block;
+  margin-left: auto;
+  text-transform: capitalize;
+  font-size: 16px;
+  background-color: transparent;
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.mt {
+  margin-top: 15px;
+}
+$pathToIcon: "../../../../assets/icons";
+
+$pathToIcon: "../../../../assets/icons";
+
+.GetSmsCode {
+  div,
+  p,
+  button,
+  span {
+    font-size: var(--font-size-getSmsCode);
+  }
+
+  p {
+    color: var(--error-border-color);
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: flex;
+    text-align: initial;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    color: #868686;
+    font-size: 16px;
+
+    input {
+      margin-right: 15px;
+    }
+  }
+
+  input:where([type="checkbox"]) {
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    margin: calc(0.75em - 11px) 0.25rem 0 0;
+    vertical-align: top;
+    border-radius: 4px;
+    background-image: url("#{$pathToIcon}/IconCardRadiobuttonNotChecked.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  input:checked {
+    background: no-repeat center center;
+    background-image: url("#{$pathToIcon}/IconCardRadiobuttonChecked.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .confirmSmsCode {
+    margin-bottom: 20px;
+  }
+
+  .password {
+  }
+
+  .confirmPassword {
+  }
+
+  .isEmail {
+    display: block;
+    width: 100%;
+  }
+
+  .sendAgainContainer {
+    margin-bottom: 15px;
+
+    &_sendAgain {
+      color: var(--color-accent);
+      border-bottom: 1px dashed var(--color-accent);
+    }
+  }
+
+  @media (max-width: 750px) {
+    label {
+      font-size: var(--font-size-medium);
+    }
+  }
+}

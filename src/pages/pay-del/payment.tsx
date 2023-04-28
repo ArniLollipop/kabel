@@ -8,7 +8,12 @@ import IconPaymentKaspi from "@/assets/icons/IconPaymentKaspi.svg";
 import IconPaymentVisa from "@/assets/icons/IconPaymentVisa.svg";
 import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 import { MainLayout } from "@/layouts/MainLayout";
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from "react-headless-accordion";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
+} from "react-headless-accordion";
 import { IconCabinetArrow } from "@/assets/icons";
 import { Title } from "@/UI/Title/Title";
 import ImageDelivery from "@/assets/images/ImageDelivery.png";
@@ -34,7 +39,10 @@ export default function payment(props: paymentProps) {
         activePage={ActivePayDelPageEnum.PAYMENT}
         title="Оплата"
       >
-        <div className={cls.descrText} dangerouslySetInnerHTML={{ __html: payment.text }} />
+        <div
+          className={cls.descrText}
+          dangerouslySetInnerHTML={{ __html: payment.text }}
+        />
 
         <div className={cls.images}>
           <Image src={ImagePayment} alt="payment image" />
@@ -54,11 +62,15 @@ export default function payment(props: paymentProps) {
             <AccordionItem>
               {({ open }: { open: boolean }) => (
                 <>
-                  <AccordionHeader className={cn(cls.mobile_accItem, { active: open })}>
+                  <AccordionHeader
+                    className={cn(cls.mobile_accItem, { active: open })}
+                  >
                     <span>Оплата</span>
                     <IconCabinetArrow />
                   </AccordionHeader>
-                  <AccordionBody className={cn(cls.mobile_accBody, { active: open })}>
+                  <AccordionBody
+                    className={cn(cls.mobile_accBody, { active: open })}
+                  >
                     <span className={cls.mobile_accBodyTitle}>Оплата</span>
                     <div
                       className={cls.descrText}
@@ -80,18 +92,28 @@ export default function payment(props: paymentProps) {
             <AccordionItem>
               {({ open }: { open: boolean }) => (
                 <>
-                  <AccordionHeader className={cn(cls.mobile_accItem, { active: open })}>
+                  <AccordionHeader
+                    className={cn(cls.mobile_accItem, { active: open })}
+                  >
                     <span>Доставка</span>
                     <IconCabinetArrow />
                   </AccordionHeader>
-                  <AccordionBody className={cn(cls.mobile_accBody, { active: open })}>
+                  <AccordionBody
+                    className={cn(cls.mobile_accBody, { active: open })}
+                  >
                     <span className={cls.mobile_accBodyTitle}>Доставка</span>
                     <div
                       className={cls.descrText}
                       dangerouslySetInnerHTML={{ __html: delivery.text }}
                     />
 
-                    <div className={cn(cls.images, cls.images_del, cls.mobile_images)}>
+                    <div
+                      className={cn(
+                        cls.images,
+                        cls.images_del,
+                        cls.mobile_images
+                      )}
+                    >
                       <Image src={ImageDelivery} alt="payment image" />
                       <div className={cls.methods}>
                         <svg

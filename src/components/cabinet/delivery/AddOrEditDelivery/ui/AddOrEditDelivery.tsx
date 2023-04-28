@@ -1,102 +1,121 @@
 // packages
-import { FC, useEffect, useState } from 'react';
-import classNames from 'classnames';
-import { Form, Formik } from 'formik';
+import { FC, useEffect } from "react";
+import classNames from "classnames";
+import { Form, Formik } from "formik";
 
 // assets
-import cls from './AddOrEditDelivery.module.scss';
+import cls from "./AddOrEditDelivery.module.scss";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 
 // mask
-import { maskForPhone } from '@/helpers/masks';
+import { maskForPhone } from "@/helpers/masks";
 
 // validation
-import { deliveryAddressSchema } from '@/helpers/validation';
-import { ProfileService } from '@/services/Profile.service';
-import { useAppDispatch, useAppSelector } from '@/hooks/store';
-import { setMyAddresses } from '@/store/slices/ProfileSlice';
+import { deliveryAddressSchema } from "@/helpers/validation";
+
+import { useHttp } from "@/hooks/useHttp";
+import { useAppSelector } from "@/hooks/store";
 
 let cn = classNames.bind(cls);
 
 interface AddOrEditDeliveryProps {
   className?: string;
   setIsOpen?: (value: boolean) => void;
+  address?: String;
+  apartment?: Number;
+  floor?: Number;
+  house?: Number;
+  phone_number?: Number;
+  id?: Number;
 }
 
 export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
-  const { className, setIsOpen } = props;
-  const [user, setUser] = useState<any>();
-  const [token, setToken] = useState<any>();
-  const dispatch = useAppDispatch();
+  const { user: authUser } = useAppSelector((state) => state.AuthSlice);
+  const {
+    className,
+    setIsOpen,
+    address,
+    apartment,
+    floor,
+    house,
+    phone_number,
+    id,
+  } = props;
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user') as string);
-    const token = localStorage.getItem('access_token');
-    setToken(token);
-    setUser(user);
+    const temp = document.querySelector(
+      "#setAddress"
+    ) as HTMLInputElement | null;
+    if (temp) {
+      temp.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
   }, []);
 
   return (
-    <div className={cn(cls.AddOrEditDelivery, className)}>
+    <div id="setAddress" className={cn(cls.AddOrEditDelivery, className)}>
       <Formik
         initialValues={{
-          address: '',
-          apartment: '',
-          floor: '',
-          home: '',
-          phoneNumber: '',
+          address: address ? address : "",
+          apartment: apartment ? apartment : "",
+          floor: floor ? floor : "",
+          house: house ? house : "",
+          phone_number: phone_number ? phone_number : "",
         }}
         validationSchema={deliveryAddressSchema}
-        onSubmit={(values) => {
-          console.log('values is: ', {
-            ...values,
-          });
-        }}
       >
         {({ values, touched, errors, handleChange, handleBlur }) => {
           const handleSaveAddOrDelivery = async () => {
-            const { address, apartment, floor, home, phoneNumber } = touched;
+            const { address, apartment, floor, house, phone_number } = touched;
             if (
               address &&
               apartment &&
               floor &&
-              home &&
-              phoneNumber &&
+              house &&
+              phone_number &&
               !errors?.address &&
               !errors?.apartment &&
               !errors?.floor &&
-              !errors?.home &&
-              !errors?.phoneNumber
+              !errors?.house &&
+              !errors?.phone_number
             ) {
-              const res = await ProfileService().addAddress(
-                {
-                  address: String(values.address),
-                  apartment: Number(values.apartment),
-                  floor: Number(values.floor),
-                  house: Number(values.home),
-                  phone_number: values.phoneNumber,
-                  is_default: false,
-                  user: Number(user.id),
-                },
-                token
-              );
-              if (res) {
-                const token = localStorage.getItem('access_token');
-                // @ts-ignore
-                const { results } = await ProfileService().getMyAddresses(token);
-                dispatch(setMyAddresses(results));
-                setIsOpen!(false);
+              if (address && authUser?.id) {
+                await useHttp()
+                  .put("users/user_addresses/" + id + "/", {
+                    ...values,
+                    user: authUser?.id,
+                  })
+                  .then(() => {
+                    setIsOpen(false);
+                  });
+              } else if (authUser?.id) {
+                await useHttp()
+                  .post(
+                    "users/user_addresses/",
+                    {
+                      ...values,
+                      user: authUser?.id,
+                    },
+                    {
+                      headers: {
+                        Authorization:
+                          "Bearer " + localStorage.getItem("access_token"),
+                      },
+                    }
+                  )
+                  .then(() => {
+                    setIsOpen(false);
+                  });
               }
             }
           };
 
           return (
             <div className={cls.container}>
-              <p>Новый адрес</p>
+              <p>{address ? "Изменить адрес" : "Новый адрес"}</p>
               <Form>
                 <InputInstance
                   theme={EInputInstanceTheme.PROFILE}
@@ -144,14 +163,14 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   <InputInstance
                     theme={EInputInstanceTheme.PROFILE}
                     type="number"
-                    id="home"
-                    name="home"
+                    id="house"
+                    name="house"
                     placeholder="Дом"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.home}
-                    errors={errors.home}
-                    touched={touched.home}
+                    value={values.house}
+                    errors={errors.house}
+                    touched={touched.house}
                     className={cls.homeInput}
                   />
                 </div>
@@ -160,14 +179,14 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   mask={maskForPhone}
                   theme={EInputInstanceTheme.PROFILE}
                   type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
+                  id="phone_number"
+                  name="phone_number"
                   placeholder="+7 (___) ___ __ __"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.phoneNumber}
-                  errors={errors.phoneNumber}
-                  touched={touched.phoneNumber}
+                  value={values.phone_number}
+                  errors={errors.phone_number}
+                  touched={touched.phone_number}
                   className={cls.phoneNumberInput}
                 />
 

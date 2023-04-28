@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ProfileService } from '@/services/Profile.service';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { ProfileService } from "@/services/Profile.service";
 
 export interface EditProfileProps {
   email?: string;
@@ -10,13 +10,12 @@ export interface EditProfileProps {
 }
 
 // Init
-const name = 'profile';
+const name = "profile";
 const initialState = {
   user: null,
   isLoading: false,
   error: null,
   isError: false,
-  myAddresses: null,
 };
 
 // Slice
@@ -28,9 +27,6 @@ const ProfileSlice = createSlice({
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
     },
-    setMyAddresses: (state, action: PayloadAction<any>) => {
-      state.myAddresses = action.payload;
-    },
   },
 
   extraReducers: (builder) => {
@@ -41,16 +37,22 @@ const ProfileSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(EditProfile.fulfilled, (state, action: PayloadAction<any>) => {
-      state.isLoading = false;
-      state.user = action.payload;
-    });
+    builder.addCase(
+      EditProfile.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      }
+    );
 
-    builder.addCase(EditProfile.rejected, (state, action: PayloadAction<any>) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.error = action.payload;
-    });
+    builder.addCase(
+      EditProfile.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.payload;
+      }
+    );
   },
 });
 
@@ -66,17 +68,17 @@ export const EditProfile = createAsyncThunk(
   ) => {
     try {
       const data = await ProfileService().editProfile(userId, values, avatar);
-      console.log('data inside edit profile slice is: ', data);
+      console.log("data inside edit profile slice is: ", data);
       dispatch(setUser(data));
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data));
 
       return data;
     } catch (error: any) {
-      console.error('error inside AuthSlice:1 ', error);
+      console.error("error inside AuthSlice:1 ", error);
       return rejectWithValue(Object.values(error.response.data)[0]);
     }
   }
 );
 
-export const { setUser, setMyAddresses } = ProfileSlice.actions;
+export const { setUser } = ProfileSlice.actions;
 export default ProfileSlice.reducer;

@@ -1,21 +1,27 @@
-import { IconCardDelivery, IconSideBarCard, IconSideBarKaspi, IconCardTenge } from '@/assets/icons';
+import {
+  IconCardDelivery,
+  IconSideBarCard,
+  IconSideBarKaspi,
+  IconCardTenge,
+} from "@/assets/icons";
+import { useHttp } from "@/hooks/useHttp";
 
 export const CardDeliveryData = [
   {
     id: 1,
-    text: 'Улица Шевченко',
+    text: "Улица Шевченко",
     cardDeliveryIconBus: null,
     cardDeliveryIconTenge: null,
   },
   {
     id: 2,
-    text: 'Богенбай батыра 86/47',
+    text: "Богенбай батыра 86/47",
     cardDeliveryIconBus: null,
     cardDeliveryIconTenge: null,
   },
   {
     id: 3,
-    text: 'Доставка 500',
+    text: "Доставка",
     cardDeliveryIconBus: IconCardDelivery,
     cardDeliveryIconTenge: IconCardTenge,
   },
@@ -24,12 +30,12 @@ export const CardDeliveryData = [
 export const CardPayData = [
   {
     id: 1,
-    text: 'Картой онлайн',
+    text: "Картой онлайн",
     cardPayIcon: IconSideBarCard,
   },
   {
     id: 2,
-    text: 'Kaspi Pay',
+    text: "Kaspi Pay",
     cardPayIcon: IconSideBarKaspi,
   },
 ];

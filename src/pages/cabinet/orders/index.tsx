@@ -1,4 +1,7 @@
-import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import {
+  ActiveCabinetPageEnum,
+  CabinetLayout,
+} from "@/layouts/CabinetLayot/CabinetLayout";
 import { HistoryOrdersSlider } from "@/components/HistoryOrdersSlider/HistoryOrdersSlider";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
@@ -39,10 +42,14 @@ export default function ordersPage() {
   };
 
   return (
-    <CabinetLayout className={cn(cls.orders)} activePage={ActiveCabinetPageEnum.ORDERS}>
+    <CabinetLayout
+      className={cn(cls.orders)}
+      activePage={ActiveCabinetPageEnum.ORDERS}
+    >
       <div className={cls.orders_wrapper}>
         <h1 className={cls.orders_title}>Мои заказы</h1>
         <span className={cls.orders_subTitle}>Свежие</span>
+
         <HistoryOrdersSlider params={params} className={cls.orders_slider} />
       </div>
     </CabinetLayout>

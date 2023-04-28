@@ -2,34 +2,34 @@ import {
   ServicesArticleIcon1,
   ServicesArticleIcon2,
   ServicesArticleIcon3,
-} from '../assets/icons/servicesIcons/servicesIcons';
+} from "../assets/icons/servicesIcons/servicesIcons";
 
 export const data = [
   {
     articleId: 1,
-    title: 'Таблица веса кабеля',
+    title: "Таблица Веса кабеля",
     desc: `Данный сервис предназначен для вычисления весовых показателей кабеля/провода. Зная
     марку и сечение, вы моментально получите информацию о том, сколько весит 1 метр
     выбранной марки.`,
-    link: 'weight',
+    link: "weight",
     articleIcon: ServicesArticleIcon1,
   },
   {
     articleId: 2,
-    title: 'Расчет сечения кабеля',
+    title: "Расчет сечения кабеля",
     desc: `Данный сервис предназначен для вычисления весовых показателей кабеля/провода. Зная
     марку и сечение, вы моментально получите информацию о том, сколько весит 1 метр
     выбранной марки.`,
-    link: 'section',
+    link: "section",
     articleIcon: ServicesArticleIcon2,
   },
   {
     articleId: 3,
-    title: 'Расшифровка кабеля',
+    title: "Расшифровка кабеля",
     desc: `Все проводники и кабели имеют специальную маркировку, которая показывает
     характеристики того или иного продукта. С помощью сервиса расшифровать марку стало еще
     проще.`,
-    link: 'encoding',
+    link: "encoding",
     articleIcon: ServicesArticleIcon3,
   },
 ];
@@ -37,30 +37,31 @@ export const data = [
 export const select1 = [
   {
     id: 1,
-    title: 'внутри помещения',
+    title: "внутри помещения",
   },
   {
     id: 2,
-    title: 'вне помещения',
+    title: "вне помещения",
   },
   {
     id: 3,
-    title: 'подключение электроснабжения к дому',
+    title: "подключение электроснабжения к дому",
   },
 ];
 
 export const select2 = [
   {
     id: 1,
-    title: 'на земле',
+    title: "на земле",
   },
   {
     id: 2,
-    title: 'на воздухе',
+    title: "на воздухе",
   },
   {
     id: 4,
-    title: 'в трубе или непоследственно в теплоизолированной стене, в молдингах',
+    title:
+      "в трубе или непоследственно в теплоизолированной стене, в молдингах",
   },
   {
     id: 5,
@@ -69,45 +70,6 @@ export const select2 = [
   },
   {
     id: 6,
-    title: 'непосредственно в кладке (бетоне), штробе',
-  },
-];
-
-export const WeightData = [
-  {
-    id: 1,
-    title: 'Кабель ВВГнг 1x1,5',
-    weight: '41',
-    secondWeight: '42',
-  },
-  {
-    id: 2,
-    title: 'Кабель ВВГнг 1x1,5',
-    weight: '41',
-    secondWeight: '42',
-  },
-  {
-    id: 3,
-    title: 'Кабель ВВГнг 1x1,5',
-    weight: '41',
-    secondWeight: '42',
-  },
-  {
-    id: 4,
-    title: 'Кабель ВВГнг 1x1,5',
-    weight: '41',
-    secondWeight: '42',
-  },
-  {
-    id: 5,
-    title: 'Кабель ВВГнг 1x1,5',
-    weight: '41',
-    secondWeight: '42',
-  },
-  {
-    id: 6,
-    title: 'Кабель ВВГнг 1x1,5',
-    weight: '41',
-    secondWeight: '42',
+    title: "непосредственно в кладке (бетоне), штробе",
   },
 ];

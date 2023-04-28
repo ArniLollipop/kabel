@@ -1,11 +1,11 @@
-import { sendSmsI, userI } from '@/types/AuthTypes';
-import { useHttp } from '@/hooks/useHttp';
-import { AxiosResponse } from 'axios';
+import { sendSmsI, userI } from "@/types/AuthTypes";
+import { useHttp } from "@/hooks/useHttp";
+import { AxiosResponse } from "axios";
 
 const enum endpoints {
-  logIn = 'users/users/authorization/',
-  singUp = 'users/users/registration/',
-  sendSms = 'users/users/send_sms/',
+  logIn = "users/users/authorization/",
+  singUp = "users/users/registration/",
+  sendSms = "users/users/send_sms/",
 }
 
 interface ProductServiceResponseI {
@@ -47,18 +47,7 @@ export const AuthService = (): ProductServiceResponseI => {
 
   const sendSms = async (phone: string): Promise<AxiosResponse<sendSmsI>> => {
     const res = useHttp().post(endpoints.sendSms, { phone_number: phone });
-    console.log('res is: ', res);
-
-    return res;
-  };
-
-  // change it then
-  const changePhoneNumber = async (
-    phone_number: string,
-    for_phone_number: boolean
-  ): Promise<AxiosResponse<sendSmsI>> => {
-    const res = useHttp().post(endpoints.sendSms, { phone_number, for_phone_number });
-    console.log('res is: ', res);
+    console.log("res is: ", res);
 
     return res;
   };

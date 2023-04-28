@@ -5,16 +5,15 @@ import classNames from 'classnames';
 // assets
 import cls from './ServicesWeight.module.scss';
 import { Form, Formik } from 'formik';
+import { ServicesDeleteIcon } from '@/assets/icons';
 
 // components
 import { InputInstance } from '@/shared/formElements/InputInstance';
 import { Button } from '@/UI/Button';
 import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
 import { ThemeButton } from '@/UI/Button/ui/Button';
-import { IconSearch } from '@/assets/icons/IconSearchComponent';
-import { ServiceService } from '@/services/Service.service';
-import { useAppDispatch, useAppSelector } from '@/hooks/store';
-import { setServicesWeight } from '@/store/slices/ProductSlice';
+import { ServicesToggleButtons } from '../../ServicesToggleButtons';
+import { PdfPrintShareFeatures } from '../../PdfPrintShareFeatures';
 
 let cn = classNames.bind(cls);
 
@@ -24,13 +23,13 @@ interface ServicesWeightProps {
 
 export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
   const { className } = props;
-  const { servicesWeight } = useAppSelector((state) => state.ProductSlice);
-  const dispatch = useAppDispatch();
 
   return (
     <Formik
       initialValues={{
-        cable_type: '',
+        mark: '',
+        quantity: '',
+        weight: '',
       }}
       onSubmit={(values) => {
         console.log('values is: ', {
@@ -38,56 +37,96 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
         });
       }}
     >
-      {({ values, touched, errors, handleChange, handleBlur }) => {
-        const getCables = async () => {
-          const { cable_type } = values;
-          const cableType = cable_type.charAt(0).toUpperCase() + cable_type.slice(1);
-          const res = await ServiceService().getServiceWeight(cableType);
-          if (res.data.results) {
-            dispatch(setServicesWeight(res.data.results));
-          }
-        };
-
+      {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => {
         return (
-          <div className={cls.ServicesWeight}>
-            <Form>
-              <InputInstance
-                theme={EInputInstanceTheme.SERVICES}
-                type="text"
-                id="cable_type"
-                name="cable_type"
-                placeholder="Поиск"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.cable_type}
-                errors={errors.cable_type}
-                touched={touched.cable_type}
-                className={cls.search}
-              />
-              <Button onClick={getCables} className={cls.searchBtn} theme={ThemeButton.CLEAR}>
-                <IconSearch />
-              </Button>
-            </Form>
-            <div className={cls.info}>
-              <p>Наименование</p>
-              <p>Вес 1 км кабеля, 660 В</p>
-              <p>Вес 1 км кабеля, 1000 В</p>
+          <Form>
+            <div className={cn(cls.ServicesWeight)}>
+              <div className={cn(cls.unit)}>
+                <h4>Единица измерения</h4>
+
+                <div className={cn(cls.unitToggleBtnContainer)}>
+                  <ServicesToggleButtons
+                    weight={'weight'}
+                    data={[
+                      { id: 1, children: 'Метры' },
+                      { id: 2, children: 'Килограммы' },
+                    ]}
+                  />
+                </div>
+              </div>
+
+              <div className={cn(cls.inputsContainer)}>
+                <div>
+                  <InputInstance
+                    theme={EInputInstanceTheme.SERVICES}
+                    type="text"
+                    id="mark"
+                    name="mark"
+                    placeholder="Например ААБ2лШВу  3х150(ож)-10"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.mark}
+                    errors={errors.mark}
+                    touched={touched.mark}
+                    labeltext={'Марка кабеля с сечение'}
+                    className={cls.markInput}
+                  />
+                </div>
+
+                <div>
+                  <InputInstance
+                    theme={EInputInstanceTheme.SERVICES}
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    placeholder="Например 100"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.quantity}
+                    errors={errors.quantity}
+                    touched={touched.quantity}
+                    labeltext={'Кол-во метров'}
+                    className={cls.quantityInput}
+                  />
+                </div>
+
+                <div>
+                  <InputInstance
+                    theme={EInputInstanceTheme.SERVICES}
+                    type="number"
+                    id="weight"
+                    name="weight"
+                    placeholder="Например 5"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.weight}
+                    errors={errors.weight}
+                    touched={touched.weight}
+                    labeltext={'Вес, кг'}
+                    className={cls.weightInput}
+                  />
+                </div>
+
+                <Button type="button" theme={ThemeButton.CLEAR}>
+                  <ServicesDeleteIcon />
+                </Button>
+              </div>
+
+              <div className={cn(cls.addCableBtn)}>
+                <Button className={cn(cls.addCableBGIcon)} type="button" theme={ThemeButton.CLEAR}>
+                  Добавить кабель
+                </Button>
+                <p>Общая длина кабеля: </p>
+                <p>Общий вес кабеля: </p>
+
+                {/* <div className={cn(cls.resultContainer)}>
+                SHOW RESULT HERE
+                </div> */}
+              </div>
+
+              <PdfPrintShareFeatures />
             </div>
-            <div className={cls.itemsContainer}>
-              {servicesWeight &&
-                // @ts-ignore
-                servicesWeight?.map((item: any) => {
-                  const { id, cable_type, weight_660v, weight_1000v } = item;
-                  return (
-                    <div key={id} className={cls.items}>
-                      <p>{cable_type} кг</p>
-                      <p>{weight_660v} кг</p>
-                      <p>{weight_1000v}</p>
-                    </div>
-                  );
-                })}
-            </div>
-          </div>
+          </Form>
         );
       }}
     </Formik>

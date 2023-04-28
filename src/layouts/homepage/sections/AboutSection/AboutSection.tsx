@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { FC } from 'react';
 import classNames from 'classnames/bind';
 import cls from './AboutSection.module.scss';
@@ -19,10 +18,10 @@ export const AboutSection: FC<AboutSectionProps> = (props) => {
 
   return (
     <section className={cls.AboutSection}>
-      <Title className={cls.AboutSection_title}>{aboutInfo.results[0].title}</Title>
+      <Title className={cls.AboutSection_title}>{aboutInfo?.title}</Title>
       <div className={cls.AboutSection_descrWrapper}>
         <Image
-          src={aboutInfo.results[0].image}
+          src={aboutInfo?.image}
           className={cls.AboutSection_descrImage}
           alt="About image"
           width={470}
@@ -30,13 +29,13 @@ export const AboutSection: FC<AboutSectionProps> = (props) => {
         />
         <div className={cls.AboutSection_descrText}>
           <div
-            dangerouslySetInnerHTML={{ __html: aboutInfo.results[0].text }}
+            dangerouslySetInnerHTML={{ __html: aboutInfo?.text }}
             className={cls.AboutSection_text}
           />
 
           <div
             className={cls.AboutSection_descrAccent}
-            dangerouslySetInnerHTML={{ __html: aboutInfo.results[0].our_goal }}
+            dangerouslySetInnerHTML={{ __html: aboutInfo?.our_goal }}
           />
         </div>
       </div>

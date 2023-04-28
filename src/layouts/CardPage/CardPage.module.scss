@@ -1,4 +1,4 @@
-@import '../../styles/globalMixins.scss';
+@import "../../styles/globalMixins.scss";
 
 .CardPage {
   @include adaptive-size(100, 28, padding-bottom);
@@ -11,6 +11,16 @@
     padding: 0 15px;
     margin: 0 auto;
   }
+}
+
+.Empty {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.EmptyText {
 }
 
 .CardPageTitle {

@@ -2,18 +2,32 @@
   /* fonts */
   --font-family-main: "Montserrat", serif;
 
-  --font-size-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-  --font-line-default: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-  --font-default: var(--font-size-default) / var(--font-line-default) var(--font-family-main);
+  --font-size-default: calc(
+    16px + (24 - 16) * ((100vw - 320px) / (1920 - 320))
+  );
+  --font-line-default: calc(
+    16px + (24 - 16) * ((100vw - 320px) / (1920 - 320))
+  );
+  --font-default: var(--font-size-default) / var(--font-line-default)
+    var(--font-family-main);
 
   --font-size-title: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-line-title: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-  --font-title: var(--font-size-title) / var(--font-line-title) var(--font-family-main);
+  --font-title: var(--font-size-title) / var(--font-line-title)
+    var(--font-family-main);
 
-  --font-button-size-default: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-  --font-auth-toggle-button-size: calc(14px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-  --font-services-title: calc(13px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
-  --font-size-getSmsCode: calc(12px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+  --font-button-size-default: calc(
+    14px + (24 - 16) * ((100vw - 320px) / (1920 - 320))
+  );
+  --font-auth-toggle-button-size: calc(
+    14px + (24 - 16) * ((100vw - 320px) / (1920 - 320))
+  );
+  --font-services-title: calc(
+    13px + (24 - 16) * ((100vw - 320px) / (1920 - 320))
+  );
+  --font-size-getSmsCode: calc(
+    12px + (24 - 16) * ((100vw - 320px) / (1920 - 320))
+  );
   --font-size-small: calc(10px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
   --font-size-medium: calc(13px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
 
@@ -95,4 +109,23 @@ ul {
 input:-webkit-autofill {
   -webkit-box-shadow: inset 0 0 0 50px var(--input-bg-color) !important;
   -webkit-text-fill-color: #999 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #00abc2 !important;
+}
+
+.swiper-pagination-bullet {
+  opacity: 100 !important;
+}
+.swiper {
+  z-index: 0 !important;
+}
+
+.swiper-wrapper {
+  z-index: 0 !important;
+}
+
+img {
+  object-fit: cover;
 }

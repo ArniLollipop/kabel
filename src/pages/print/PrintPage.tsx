@@ -1,16 +1,16 @@
 // packages
-import { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
-import Head from 'next/head';
-import { useReactToPrint } from 'react-to-print';
-import { toast } from 'react-toastify';
+import { useEffect, useRef, useState } from "react";
+import classNames from "classnames";
+import Head from "next/head";
+import { useReactToPrint } from "react-to-print";
+import { toast } from "react-toastify";
 
 // assets
-import { IconLogo } from '@/assets/icons';
-import cls from './PrintPage.module.scss';
+import { IconLogo } from "@/assets/icons";
+import cls from "./PrintPage.module.scss";
 
 // data
-import { printData } from '@/data/PrintData';
+import { printData } from "@/data/PrintData";
 
 let cn = classNames.bind(cls);
 
@@ -20,12 +20,12 @@ export default function PrintPage() {
 
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
-    documentTitle: 'emp-data',
+    documentTitle: "emp-data",
     onAfterPrint: () =>
-      toast('Успешно напечатано!', {
+      toast("Успешно напечатано!", {
         hideProgressBar: true,
         autoClose: 2000,
-        type: 'success',
+        type: "success",
       }),
   });
 
@@ -62,7 +62,7 @@ export default function PrintPage() {
         </div>
         <hr />
 
-        <h2>Расчет веса кабеля</h2>
+        <h2>Таблица веса кабеля</h2>
         <div className={cn(cls.thContainer)}>
           <thead>
             <th>Марка кабеля с сечением</th>

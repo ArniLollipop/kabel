@@ -1,0 +1,22 @@
+.Politics {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.PoliticsH2 {
+  margin: 20px 0;
+}
+
+.PoliticsText {
+  max-width: 70%;
+}
+
+@media (max-width: 1024px) {
+  .PoliticsText {
+    max-width: 100%;
+  }
+}

@@ -1,4 +1,4 @@
-@import '/src/styles/globalMixins.scss';
+@import "/src/styles/globalMixins.scss";
 
 .articlePage {
   padding: 50px 0;
@@ -41,8 +41,10 @@
 
     img {
       width: 100%;
-      object-fit: initial;
+      height: auto;
       margin-bottom: 15px;
+      // object-fit: contain;
+      // max-width: 1200px;
     }
 
     p {
@@ -51,6 +53,19 @@
       font-weight: 500;
       //   line-height: 35px;
     }
+  }
+
+  &_img {
+    border-radius: 20px;
+    max-height: 460px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &_img__text {
+    @include adaptive-size(30, 40, margin-bottom);
+    font-size: 15px;
+    font-weight: 600;
   }
 }
 

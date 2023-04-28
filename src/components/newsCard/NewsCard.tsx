@@ -1,16 +1,16 @@
-import { FC } from "react";
-import classNames from "classnames/bind";
-import cls from "./NewsCard.module.scss";
-import Image from "next/image";
-import { newsI } from "@/types/NewsTypes";
-import { dateConverter } from "@/helpers/dateConverter";
-import Link from "next/link";
+import { FC } from 'react';
+import classNames from 'classnames/bind';
+import cls from './NewsCard.module.scss';
+import Image from 'next/image';
+import { newsI } from '@/types/NewsTypes';
+import { dateConverter } from '@/helpers/dateConverter';
+import Link from 'next/link';
 
 const cn = classNames.bind(cls);
 
 export const enum ThemeNewsCard {
-  WHITE_BG = "whiteBg",
-  BLUE_BG = "blueBg",
+  WHITE_BG = 'whiteBg',
+  BLUE_BG = 'blueBg',
 }
 
 interface NewsCardProps extends newsI {

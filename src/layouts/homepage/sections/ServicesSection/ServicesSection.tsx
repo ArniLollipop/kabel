@@ -25,21 +25,27 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
           <div className={cls.ServicesSection_itemImg}>
             <Image src={IconServicesCalcWeight} alt="Services icon" />
           </div>
-          <span className={cls.ServicesSection_itemTitle}>Расчет Веса кабеля</span>
+          <span className={cls.ServicesSection_itemTitle}>
+            Таблица Веса кабеля
+          </span>
         </li>
 
         <li className={cls.ServicesSection_item}>
           <div className={cls.ServicesSection_itemImg}>
             <Image src={IconServicesCalc} alt="Services icon" />
           </div>
-          <span className={cls.ServicesSection_itemTitle}>расчет сечения кабеля</span>
+          <span className={cls.ServicesSection_itemTitle}>
+            расчет сечения кабеля
+          </span>
         </li>
 
         <li className={cls.ServicesSection_item}>
           <div className={cls.ServicesSection_itemImg}>
             <Image src={IconServicesDecoding} alt="Services icon" />
           </div>
-          <span className={cls.ServicesSection_itemTitle}>Расшифровка кабеля</span>
+          <span className={cls.ServicesSection_itemTitle}>
+            Расшифровка кабеля
+          </span>
         </li>
       </ul>
     </section>

@@ -5,8 +5,8 @@ import { AboutI } from "@/types/AboutTypes";
 import { payDelI } from "@/types/PayDelTypes";
 
 const enum endpoints {
-  getPayment = "/main/payment/1/",
-  getDelivery = "/main/delivery/1/",
+  getPayment = "/main/payment/",
+  getDelivery = "/main/delivery/",
 }
 
 interface PayDelServiceResponseI {
@@ -14,7 +14,9 @@ interface PayDelServiceResponseI {
   getDelivery: () => Promise<payDelI>;
 }
 
-export const PayDelService = (ctx?: NextPageContext): PayDelServiceResponseI => {
+export const PayDelService = (
+  ctx?: NextPageContext
+): PayDelServiceResponseI => {
   const getPayment = async (): Promise<payDelI> => {
     const res = await useHttp().get<payDelI>(endpoints.getPayment);
     return res.data;

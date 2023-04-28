@@ -1,13 +1,14 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames/bind';
-import cls from './HistoryOrdersSlider.module.scss';
-import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
-import { ordersData } from '@/data/OrdersData';
-import { OrderHistoryCard } from '@/components/OrderHistoryCard/OrderHistoryCard';
-import Image from 'next/image';
+import { FC, useEffect, useState } from "react";
+import classNames from "classnames/bind";
+import cls from "./HistoryOrdersSlider.module.scss";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { ordersData } from "@/data/OrdersData";
+import { OrderHistoryCard } from "@/components/OrderHistoryCard/OrderHistoryCard";
+import Image from "next/image";
 
-import 'swiper/css';
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import "swiper/css";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
+import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
@@ -20,10 +21,29 @@ export const HistoryOrdersSlider: FC<HistoryOrdersSliderProps> = (props) => {
   const { className, params } = props;
   const [myswiper, setSwiper] = useState<any>({});
 
+  const [orders, setOrders] = useState<any>();
+
+  async function getOrders() {
+    try {
+      const res = await useHttp().get("orders/orders/my_orders/", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      });
+      setOrders(res.data.result);
+    } catch (err) {
+      setOrders([]);
+    }
+  }
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
   return (
     <div className={cn(cls.slider, className)}>
       <Swiper {...params} onSwiper={(swiper) => setSwiper(swiper)}>
-        {ordersData.map((order) => {
+        {orders?.map((order: any) => {
           return (
             <SwiperSlide key={order.id}>
               <OrderHistoryCard {...order} />
@@ -31,6 +51,7 @@ export const HistoryOrdersSlider: FC<HistoryOrdersSliderProps> = (props) => {
           );
         })}
       </Swiper>
+
       <Button
         className={cls.slider_next}
         theme={ThemeButton.CLEAR}

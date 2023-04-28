@@ -1,18 +1,22 @@
 // packages
-import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 // components
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 
 // assets
-import { IconCabinetEditPhoto } from '@/assets/icons';
-import cls from './EditProfilePhoto.module.scss';
-import ImageDefaultAvatar from '@/assets/images/ImageDefaultAvatar.png';
-import { EditProfile } from '@/store/slices/ProfileSlice';
-import { useAppDispatch, useAppSelector } from '@/hooks/store';
+import { IconCabinetEditPhoto } from "@/assets/icons";
+import cls from "./EditProfilePhoto.module.scss";
+import ImageDefaultAvatar from "@/assets/images/ImageDefaultAvatar.png";
+import { EditProfile } from "@/store/slices/ProfileSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 
-export const EditProfilePhoto = ({ setFieldValue, avatar, immediately }: any) => {
+export const EditProfilePhoto = ({
+  setFieldValue,
+  avatar,
+  immediately,
+}: any) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined);
 
@@ -20,20 +24,15 @@ export const EditProfilePhoto = ({ setFieldValue, avatar, immediately }: any) =>
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
   const dispatch = useAppDispatch();
 
-  console.log('avatar is: ', avatar);
-
   const handleClick = () => {
     hiddenFileInput.current?.click();
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files && e.currentTarget.files[0];
+    const file = e.currentTarget.files ? e.currentTarget.files[0] : "";
 
-    const formData = new FormData();
-    // @ts-ignore
-    formData.append('avatar', file);
     if (immediately) {
-      dispatch<any>(EditProfile({ userId: authUser?.id, avatar: formData }));
+      dispatch<any>(EditProfile({ userId: authUser?.id, avatar: file }));
     }
 
     if (file) {
@@ -42,7 +41,7 @@ export const EditProfilePhoto = ({ setFieldValue, avatar, immediately }: any) =>
       reader.onload = () => {
         // @ts-ignore
         setPreviewUrl(reader.result);
-        setFieldValue('avatar', file);
+        setFieldValue("avatar", file);
       };
     }
   };
@@ -86,7 +85,7 @@ export const EditProfilePhoto = ({ setFieldValue, avatar, immediately }: any) =>
           accept="image/*"
           ref={hiddenFileInput}
           onChange={handleFileSelect}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           name="img"
         />
       </div>

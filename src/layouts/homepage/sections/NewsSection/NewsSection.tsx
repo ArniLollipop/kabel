@@ -1,13 +1,13 @@
-import { FC, useState } from "react";
-import classNames from "classnames/bind";
-import cls from "./NewsSection.module.scss";
-import { Title } from "@/UI/Title/Title";
-import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
-import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
-import { newsI } from "@/types/NewsTypes";
-import { SwiperProps, SwiperSlide, Swiper } from "swiper/react";
-import { Button } from "@/UI/Button";
-import { ThemeButton } from "@/UI/Button/ui/Button";
+import { FC, useState } from 'react';
+import classNames from 'classnames/bind';
+import cls from './NewsSection.module.scss';
+import { Title } from '@/UI/Title/Title';
+import { NewsCard, ThemeNewsCard } from '@/components/newsCard/NewsCard';
+import ImageMockNewsCard from '@/assets/images/ImageMockNewsCard.png';
+import { newsI } from '@/types/NewsTypes';
+import { SwiperProps, SwiperSlide, Swiper } from 'swiper/react';
+import { Button } from '@/UI/Button';
+import { ThemeButton } from '@/UI/Button/ui/Button';
 
 const cn = classNames.bind(cls);
 
@@ -38,7 +38,7 @@ export const NewsSection: FC<NewsSectionProps> = (props) => {
           onSwiper={(swiper) => setSwiper(swiper)}
           {...params}
         >
-          {news.map((news) => (
+          {news?.map((news) => (
             <SwiperSlide className={cls.NewsSection_sliderSlide} key={news.id}>
               <NewsCard className={cls.NewsSection_newsCard} {...news} />
             </SwiperSlide>

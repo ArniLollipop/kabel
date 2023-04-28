@@ -1,5 +1,7 @@
 @mixin adaptive-size($pcSize, $mobSize, $sizeValue) {
-  #{$sizeValue}: calc(#{$mobSize + px} + #{$pcSize - $mobSize} * ((100vw - 320px) / (1920 - 320)));
+  #{$sizeValue}: calc(
+    #{$mobSize + px} + #{$pcSize - $mobSize} * ((100vw - 320px) / (1920 - 320))
+  );
 }
 
 @mixin adaptive-768($pcSize, $mobSize, $sizeValue) {
@@ -13,7 +15,8 @@
 @mixin adaptive-1024($pcSize, $mobSize, $sizeValue) {
   #{$sizeValue}: clamp(
     #{$mobSize + px},
-    #{$mobSize + px} + #{$pcSize - $mobSize} * ((100vw - 1024px) / (1920 - 1024)),
+    #{$mobSize + px} + #{$pcSize - $mobSize} *
+      ((100vw - 1024px) / (1920 - 1024)),
     #{$pcSize + px}
   );
 }

@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { userI } from '@/types/AuthTypes';
-import { AxiosError } from 'axios';
-import { AuthService } from '@/services/Auth.service';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { userI } from "@/types/AuthTypes";
+import { AxiosError } from "axios";
+import { AuthService } from "@/services/Auth.service";
 
 interface authState {
   userPhone: string;
@@ -22,12 +22,10 @@ export interface RegisterI {
 }
 
 // Init
-const name = 'auth';
+const name = "auth";
 const initialState: authState = {
-  userPhone: '',
-  userName: '',
-  // @ts-ignore
-  // user: typeof window !== 'undefined' && JSON.parse(localStorage.getItem('user')),
+  userPhone: "",
+  userName: "",
   user: null,
   isLoggedIn: false,
   isLoading: false,
@@ -63,6 +61,10 @@ const AuthSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.clear();
     },
+
+    setCartSum: (state, action: PayloadAction<Number>) => {
+      state.cartSum = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -73,10 +75,9 @@ const AuthSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(Login.fulfilled, (state, action: PayloadAction<any>) => {
+    builder.addCase(Login.fulfilled, (state) => {
       state.isLoading = false;
       state.isLoggedIn = true;
-      state.user = action.payload;
     });
 
     builder.addCase(Login.rejected, (state, action: PayloadAction<unknown>) => {
@@ -92,32 +93,38 @@ const AuthSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(Register.fulfilled, (state, action: PayloadAction<any>) => {
+    builder.addCase(Register.fulfilled, (state) => {
       state.isLoading = false;
       state.isLoggedIn = true;
-      state.user = action.payload;
     });
 
-    builder.addCase(Register.rejected, (state, action: PayloadAction<unknown>) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.error = action.payload;
-    });
+    builder.addCase(
+      Register.rejected,
+      (state, action: PayloadAction<unknown>) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.payload;
+      }
+    );
   },
 });
 
 export const Login = createAsyncThunk(
   `${name}/Login`,
-  async ({ phone, pass }: { phone: string; pass: string }, { rejectWithValue, dispatch }) => {
+  async (
+    { phone, pass }: { phone: string; pass: string },
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       const { data } = await AuthService().logIn(phone, pass);
       dispatch(setUser(data));
-      localStorage.setItem('access_token', data.access_token);
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+      localStorage.setItem("user", JSON.stringify(data));
 
       return data;
     } catch (error: any) {
-      console.error('error inside AuthSlice:1 ', error);
+      console.error("error inside AuthSlice:1 ", error);
       return rejectWithValue(Object.values(error.response.data)[0]);
     }
   }
@@ -130,19 +137,26 @@ export const Register = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     try {
-      const { data } = await AuthService().singUp(phone, pass, first_name, sms_code, email);
+      const { data } = await AuthService().singUp(
+        phone,
+        pass,
+        first_name,
+        sms_code,
+        email
+      );
 
       dispatch(setUser(data));
-      localStorage.setItem('access_token', data.access_token);
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data));
 
       return data;
     } catch (error) {
-      console.error('error inside productSlice: ', error);
+      console.error("error inside productSlice: ", error);
       return rejectWithValue(error);
     }
   }
 );
 
-export const { setUser, logOut, setUserName, setUserPhone, setIsLoggedIn } = AuthSlice.actions;
+export const { setUser, logOut, setUserName, setUserPhone, setIsLoggedIn } =
+  AuthSlice.actions;
 export default AuthSlice.reducer;

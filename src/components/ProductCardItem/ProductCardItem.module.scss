@@ -233,6 +233,46 @@
   }
 }
 
+.cartPlus {
+  display: flex;
+  align-items: center;
+}
+
+.cartBtn {
+  display: flex;
+  align-items: center;
+  border: 1px solid #00abc2;
+  border-radius: 15px;
+  padding: 5px 25px;
+  width: 150px;
+  max-width: 100%;
+  justify-content: space-between;
+  animation: opacity 200ms ease-in;
+}
+
+.cartCounter {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #00abc2;
+}
+
+.cartMinus,
+.cartPlus {
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+}
+
+.cartMinus {
+  margin-top: -7.5px;
+}
+
 @media (max-width: 1400px) {
   .catalog {
     justify-content: space-between;
@@ -240,5 +280,14 @@
     .cardBtns {
       gap: 10px;
     }
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
   }
 }
