@@ -39,8 +39,8 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const [addresses, setAddresses] = useState<any>();
   const [times, setTimes] = useState<any>();
   const [open, setOpen] = useState<boolean>(false);
-  const [date, setDate] = useState<string>();
-  const [time, setTime] = useState<Object>({ time_from: "", time_to: "" });
+  const [date, setDate] = useState<any>();
+  const [time, setTime] = useState<any>({ time_from: "", time_to: "" });
   const [salePoints, setSalePoints] = useState<any>([]);
 
   async function getTime() {

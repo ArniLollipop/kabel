@@ -13,16 +13,21 @@ export interface CartI {
   items: any;
 }
 
+export interface cartAnswI {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  data: CartI;
+}
+
 interface AboutServiceResponseI {
-  getCartInfo: () => Promise<CartI[]>;
+  getCartInfo: () => Promise<CartI>;
 }
 
 export const CartService = (ctx?: NextPageContext): AboutServiceResponseI => {
-  const getCartInfo = async (): Promise<CartI[]> => {
+  const getCartInfo = async (): Promise<CartI> => {
     const userId = JSON.parse(localStorage.getItem("user") || "");
-    const res = await useHttp().get<CartI[]>(
-      endpoints.getCart + userId.id + "/"
-    );
+    const res = await useHttp().get<CartI>(endpoints.getCart + userId.id + "/");
     return res.data;
   };
 

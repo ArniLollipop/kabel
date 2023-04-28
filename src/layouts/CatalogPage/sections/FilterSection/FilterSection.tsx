@@ -39,6 +39,10 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     sortWidget: "-cost" | "cost";
   }
 
+  console.log("====================================");
+  console.log(categories?.results, "asdasdasd");
+  console.log("====================================");
+
   const submitHandler = async (value: sortI) => {
     const { availability, categories, checkedCors, sortWidget } = value;
 
@@ -142,7 +146,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 {/* Categories */}
                 <>
                   {categories ? (
-                    categories.results.map((cat, i) => (
+                    categories.results?.map((cat: any, i: number) => (
                       <AccordionItem
                         isActive={i === 0 ? true : false}
                         key={cat.name}
@@ -181,7 +185,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                               })}
                               as="ul"
                             >
-                              {cat.subcategory_set.map((subcat) => (
+                              {cat.subcategory_set.map((subcat: any) => (
                                 <li
                                   className={cls.filtersAcc_item}
                                   key={subcat.name}

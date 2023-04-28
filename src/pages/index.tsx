@@ -34,7 +34,7 @@ export interface HomeProps {
 }
 
 export default function Home() {
-  const [items, setItems] = useState();
+  const [items, setItems] = useState<any>();
 
   async function getters() {
     const offers = await OfferService().getOffers();
@@ -47,7 +47,7 @@ export default function Home() {
     const metalRes = await GetCurrencyService().getMetal();
 
     setItems({
-      categories: categories.results,
+      categories: categories,
       aboutInfo,
       sertificates,
       adventages,

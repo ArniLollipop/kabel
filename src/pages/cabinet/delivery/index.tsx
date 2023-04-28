@@ -29,8 +29,8 @@ const cn = classNames.bind(cls);
 export default function deliveryPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
-  const [addresses, setAddresses] = useState();
-  const [address, setAddress] = useState({});
+  const [addresses, setAddresses] = useState<any>();
+  const [address, setAddress] = useState<any>({});
 
   async function getAddresses() {
     const res = await useHttp().get("users/user_addresses/");
@@ -98,7 +98,7 @@ export default function deliveryPage() {
           </Button>
 
           <ul className={cls.delivery_adressList}>
-            {addresses?.map((el) => {
+            {addresses?.map((el: any) => {
               return (
                 <li key={el.id} className={cls.delivery_adressListItem}>
                   <h2>Адрес доставки</h2>

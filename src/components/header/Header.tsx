@@ -47,7 +47,7 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = (props) => {
   const { activePage } = props;
   const dispatch = useAppDispatch();
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState<any>();
   const { user: authUser, isLoggedIn } = useAppSelector(
     (state) => state.AuthSlice
   );
@@ -57,13 +57,16 @@ export const Header: FC<HeaderProps> = (props) => {
   const [searchRes, setSearchRes] = useState<any>();
 
   const [activeCat, setActiveCat] = useState<string>("");
-  const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
+  const { user: first_name } = useAppSelector((state) => state.ProfileSlice);
 
   async function getCart() {
     try {
       const res = await CartService().getCartInfo();
       dispatch(setAmount(res.total_amount));
       dispatch(setItems(res.items));
+      console.log("====================================");
+      console.log(res);
+      console.log("====================================");
     } catch (error) {}
   }
 
@@ -175,9 +178,7 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconUserCabinet className={cls["icon"]} />
               {/* @ts-ignore */}
               <span>
-                {profileUser?.first_name ||
-                  authUser?.first_name ||
-                  "Личный кабинет"}
+                {first_name || authUser?.first_name || "Личный кабинет"}
               </span>
             </Link>
           </li>

@@ -5,6 +5,7 @@ interface newsSectionSetI {
   image: string | null;
   text: string | null;
   is_marked: boolean;
+  image_text: string | null;
 }
 
 export interface newsI {

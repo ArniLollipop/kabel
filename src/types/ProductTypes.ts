@@ -45,10 +45,10 @@ interface subcategorySetI {
 }
 
 export interface categoryI {
-  name: string;
+  name: "";
   subcategory_set: subcategorySetI[];
-  icon: string;
-  image: string;
+  icon: "";
+  image: "";
 }
 
 export interface categoriesAnswI {

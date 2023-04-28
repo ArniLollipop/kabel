@@ -23,14 +23,14 @@ import { useAppSelector } from "@/hooks/store";
 let cn = classNames.bind(cls);
 
 interface AddOrEditDeliveryProps {
-  className?: string;
-  setIsOpen?: (value: boolean) => void;
-  address?: String;
-  apartment?: Number;
-  floor?: Number;
-  house?: Number;
-  phone_number?: Number;
-  id?: Number;
+  className: string;
+  setIsOpen: any;
+  address: String;
+  apartment: Number;
+  floor: Number;
+  house: Number;
+  phone_number: Number;
+  id: Number;
 }
 
 export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
@@ -60,10 +60,13 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
       <Formik
         initialValues={{
           address: address ? address : "",
-          apartment: apartment ? apartment : "",
-          floor: floor ? floor : "",
-          house: house ? house : "",
+          apartment: apartment ? apartment : 0,
+          floor: floor ? floor : 0,
+          house: house ? house : 0,
           phone_number: phone_number ? phone_number : "",
+        }}
+        onSubmit={(values) => {
+          console.log(values);
         }}
         validationSchema={deliveryAddressSchema}
       >
@@ -125,7 +128,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   placeholder="Адрес"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.address}
+                  value={values.address as string}
                   errors={errors.address}
                   touched={touched.address}
                   className={cls.addressInput}
@@ -140,7 +143,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                     placeholder="Квартира"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.apartment}
+                    value={values.apartment as number}
                     errors={errors.apartment}
                     touched={touched.apartment}
                     className={cls.apartmentInput}
@@ -154,7 +157,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                     placeholder="Этаж"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.floor}
+                    value={values.floor as number}
                     errors={errors.floor}
                     touched={touched.floor}
                     className={cls.floorInput}
@@ -168,7 +171,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                     placeholder="Дом"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.house}
+                    value={values.house as number}
                     errors={errors.house}
                     touched={touched.house}
                     className={cls.homeInput}
@@ -184,7 +187,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   placeholder="+7 (___) ___ __ __"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.phone_number}
+                  value={values.phone_number as number}
                   errors={errors.phone_number}
                   touched={touched.phone_number}
                   className={cls.phoneNumberInput}

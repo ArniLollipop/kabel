@@ -10,5 +10,5 @@ export interface AboutAnswI {
   count: number;
   next: null | string;
   previous: null | string;
-  results: AboutI[];
+  results: any;
 }

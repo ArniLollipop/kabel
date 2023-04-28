@@ -14,7 +14,7 @@ interface CardPageProps {
 }
 
 export const CardPage: FC<CardPageProps> = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { className } = props;
 
   const { total_amount } = useAppSelector((state) => state.CartSlice);
@@ -29,9 +29,6 @@ export const CardPage: FC<CardPageProps> = (props) => {
 
   return (
     <div className={cn(cls.CardPage)}>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <AddOrEditDelivery setIsOpen={setIsOpen} />
-      </Modal>
       {total_amount > 0 ? (
         <div className={cls.CardPage_wrapper}>
           <h1 className={cls.CardPageTitle}>Корзина</h1>

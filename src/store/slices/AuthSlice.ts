@@ -11,6 +11,7 @@ interface authState {
   isLoading: boolean;
   isError: boolean;
   error: any;
+  cartSum: Number;
 }
 
 export interface RegisterI {
@@ -31,6 +32,7 @@ const initialState: authState = {
   isLoading: false,
   error: null,
   isError: false,
+  cartSum: 0,
 };
 
 // Slice

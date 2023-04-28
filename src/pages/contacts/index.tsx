@@ -32,7 +32,7 @@ export interface Coords {
 }
 
 function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
-  const [contacts, setContacts] = useState();
+  const [contacts, setContacts] = useState<any>();
   const { lat: latAlmaty, lng: lngAlmaty } = coordsAlmaty;
   const { lat: latAstana, lng: lngAstana } = coordsAstana;
 
@@ -50,7 +50,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
       <div className={cn(cls.contactsPage)}>
         <Title className={cls.contactsPage_title}>Контакты</Title>
         <div className={cls.contactsPage_wrapper}>
-          {contacts?.map((el) => {
+          {contacts?.map((el: any) => {
             return (
               <div className={cls.contactsPage_item}>
                 {/* Map implementation */}
@@ -106,7 +106,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
                       <IconContactsPhone />
                       <div>
                         <p className={cls.subtitle}>Прием заявок</p>
-                        {el.contacts?.map((phone) => {
+                        {el.contacts?.map((phone: any) => {
                           return (
                             <a
                               className={cls.descr}

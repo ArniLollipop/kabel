@@ -13,7 +13,7 @@ interface AboutServiceResponseI {
 
 export const AboutService = (ctx?: NextPageContext): AboutServiceResponseI => {
   const getAboutInfo = async (): Promise<AboutI[]> => {
-    const res = await useHttp().get<AboutI[]>(endpoints.getAboutInfo);
+    const res = await useHttp().get<AboutAnswI>(endpoints.getAboutInfo);
     return res.data.results[0];
   };
 
