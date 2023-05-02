@@ -4,9 +4,12 @@ import cls from "./politics.module.scss";
 import { ActivePayDelPageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
 import { Title } from "@/UI/Title/Title";
 import { useHttp } from "@/hooks/useHttp";
+import { useTranslation } from "react-i18next";
 
 function Politics() {
   const [politics, setPolitics] = useState<string>("");
+
+  const { t } = useTranslation();
 
   async function getPolitics() {
     try {
@@ -22,7 +25,7 @@ function Politics() {
     <>
       <MainLayout>
         <div className={cls.Politics}>
-          <Title>Политика конфиденциальности</Title>
+          <Title>{t("footer.politics")}</Title>
           <div className={cls.PoliticsBack}>
             <div
               className={cls.PoliticsText}

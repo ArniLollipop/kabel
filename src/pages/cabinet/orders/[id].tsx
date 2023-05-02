@@ -14,6 +14,8 @@ import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
+import { useTranslation } from "react-i18next";
+
 interface OrderCardProps {
   className?: string;
 }
@@ -22,6 +24,8 @@ export default function OrderCard(props: OrderCardProps) {
   const { className } = props;
   const router = useRouter();
   const [product, setProduct] = useState<any>();
+
+  const { t } = useTranslation();
 
   const {
     adress,
@@ -54,8 +58,7 @@ export default function OrderCard(props: OrderCardProps) {
       activePage={ActiveCabinetPageEnum.ORDERS}
     >
       <div className={cls.orders_wrapper}>
-        <h2 className={cls.orders_title}>Мои заказы</h2>
-        <span className={cls.orders_subTitle}>Свежие</span>
+        <h2 className={cls.orders_title}>{t("myOrders")}</h2>
         <div className={cn(cls.orderCard, className)}>
           <Image
             className={cls.orderCard_img}
@@ -68,27 +71,27 @@ export default function OrderCard(props: OrderCardProps) {
           <p className={cls.orderCard_descr}>{descr} </p>
 
           <div className={cls.orderCard_delivery}>
-            <span className={cn(cls.bold, cls.title)}>Адрес доставки</span>
+            <span className={cn(cls.bold, cls.title)}>{t("dostavka")}</span>
             <span>{name}</span>
             <span>{adress[0]}</span>
             <span>{adress[1]}</span>
             <span>{phoneNumber}</span>
-            <span className={cn(cls.bold, cls.title)}>Способ доставки</span>
+            <span className={cn(cls.bold, cls.title)}>{t("typeDostavka")}</span>
             <span>{deliveryMethod}</span>
-            <span className={cn(cls.bold, cls.title)}>Способ оплаты</span>
+            <span className={cn(cls.bold, cls.title)}>{t("typePay")}</span>
             <span>{paymentMethod}</span>
             <span className={cn(cls.bold, cls.title, cls.border)}>
-              Информация об оплате
+              {t("payInfo")}
             </span>
             <span>
-              Стоимость товара: <span className={cls.bold}>{goodCost} ₸</span>
+              {t("payTovar")}: <span className={cls.bold}>{goodCost} ₸</span>
             </span>
             <span>
-              Стоимость доставки:{" "}
+              {t("payDostavka")}:{" "}
               <span className={cls.bold}>{deliveryCost} ₸</span>
             </span>
             <span>
-              Статус оплаты: <span className={cls.bold}>{status}</span>
+              {t("payStatus")}: <span className={cls.bold}>{status}</span>
             </span>
 
             <span className={cls.date}>Дата: {date}</span>

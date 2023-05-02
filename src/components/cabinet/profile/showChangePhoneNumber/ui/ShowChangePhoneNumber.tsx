@@ -1,15 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
-import cls from './ShowChangePhoneNumber.module.scss';
-import { Form, Formik } from 'formik';
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { maskForPhone } from '@/helpers/masks';
-import { changePhoneNumberSchema } from '@/helpers/validation';
-import { AuthService } from '@/services/Auth.service';
-import { Register } from '@/store/slices/AuthSlice';
+import { useEffect, useRef, useState } from "react";
+import classNames from "classnames";
+import cls from "./ShowChangePhoneNumber.module.scss";
+import { Form, Formik } from "formik";
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { maskForPhone } from "@/helpers/masks";
+import { changePhoneNumberSchema } from "@/helpers/validation";
+import { AuthService } from "@/services/Auth.service";
+import { Register } from "@/store/slices/AuthSlice";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -21,16 +22,22 @@ interface ShowChangePhoneNumberProps {
 }
 
 export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
+  const { t } = useTranslation();
   const [countdown, setCountdown] = useState(60);
   const [isSmsCodeSend, setIsSmsCodeSend] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [phoneNumErrorBorder, setPhoneNumErrorBorder] = useState(false);
   const [codeErrorBorder, setCodeErrorBorder] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const [isResultOk, setIsResultOk] = useState(false);
 
   const inputRef = useRef(null);
-  const { className, setShowModal, setShowChangePhoneNumber, setNumberOrEmail } = props;
+  const {
+    className,
+    setShowModal,
+    setShowChangePhoneNumber,
+    setNumberOrEmail,
+  } = props;
 
   const funcCountDown = (value?: string) => {
     setInterval(() => {
@@ -50,37 +57,47 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
   return (
     <Formik
       initialValues={{
-        phone_number: '',
-        confirmSmsCode: '',
+        phone_number: "",
+        confirmSmsCode: "",
       }}
       validationSchema={changePhoneNumberSchema}
       onSubmit={(values) => {
-        console.log('values inside onSubmit / show change phone number is: ', {
+        console.log("values inside onSubmit / show change phone number is: ", {
           ...values,
         });
 
         // the last toggle to the cabinet if the number is changed
         if (isResultOk) {
-          setNumberOrEmail('Номер');
+          setNumberOrEmail("Номер");
           setShowChangePhoneNumber(false);
           setShowModal(true);
         }
       }}
     >
-      {({ values, touched, errors, setFieldValue, handleChange, handleBlur, dirty }) => {
+      {({
+        values,
+        touched,
+        errors,
+        setFieldValue,
+        handleChange,
+        handleBlur,
+        dirty,
+      }) => {
         const sendNewPhoneNumber = async () => {
           const numberPattern = /^\d{11}$/;
-          if (numberPattern.test(values.phone_number.replace(/\D+/g, ''))) {
+          if (numberPattern.test(values.phone_number.replace(/\D+/g, ""))) {
             try {
               const res = await AuthService().sendSms(values.phone_number);
-              console.log('res from backend is: ', res);
+              console.log("res from backend is: ", res);
               if (res.data.result === true) {
                 setPhoneNumErrorBorder(false);
-                setSuccessMessage(`Код отправлен на номер ${values.phone_number}`);
+                setSuccessMessage(
+                  `${t("smsSentToPhone")} ${values.phone_number}`
+                );
                 setTimeout(() => {
-                  setSuccessMessage('');
+                  setSuccessMessage("");
                 }, 2000);
-                setErrorMessage('');
+                setErrorMessage("");
                 setIsSmsCodeSend(true);
               }
             } catch (error: any) {
@@ -88,25 +105,25 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                 response: { data },
               } = error;
               if (data.sms_code) {
-                const [errMessage, restOfMessage] = data.sms_code[0].split(',');
+                const [errMessage, restOfMessage] = data.sms_code[0].split(",");
                 setErrorMessage(errMessage);
               } else if (data.error) {
-                const errMessage = data.error[0].split(',');
+                const errMessage = data.error[0].split(",");
                 setErrorMessage(errMessage);
               }
             }
           } else {
             setPhoneNumErrorBorder(true);
-            if (values.phone_number === '') {
-              setErrorMessage('Введите номер!');
+            if (values.phone_number === "") {
+              setErrorMessage(t("writeNumberPlease") || "");
             } else {
-              setErrorMessage('Неправильный номер!');
+              setErrorMessage(t("wrongPhoneNumber") || "");
             }
           }
         };
 
         const sendSmsCode = async () => {
-          if (values.confirmSmsCode !== '') {
+          if (values.confirmSmsCode !== "") {
             try {
               // send sms code to the backend
               // if response is success set setIsResultOk to true in order to toggle okModal
@@ -114,13 +131,13 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
               // console.log('res is: ', res);
               setIsResultOk(true);
               setCodeErrorBorder(false);
-              setErrorMessage('');
+              setErrorMessage("");
             } catch (error) {
-              console.log('error is: ', error);
+              console.log("error is: ", error);
             }
           } else {
             setCodeErrorBorder(true);
-            setErrorMessage('Введите код!');
+            setErrorMessage(t("wrongSmsCodePlease") || "");
           }
         };
 
@@ -128,7 +145,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
           <Form>
             <div className={cn(cls.ShowChangePhoneNumber)}>
               <div className={cn(cls.sendAgainContainer)}>
-                Вы не получили код? <br />
+                {t("notSms")} <br />
                 {countdown === 0 ? (
                   <Button
                     theme={ThemeButton.CLEAR}
@@ -136,11 +153,11 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                     type="button"
                     onClick={() => setCountdown(60)}
                   >
-                    Отправить повторно
+                    {t("again")}
                   </Button>
                 ) : (
                   <span className={cn(cls.sendAgainContainer_sendAgain)}>
-                    Отправить повторно через {countdown}
+                    {t("again2")} {countdown}
                   </span>
                 )}
               </div>
@@ -150,7 +167,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                 type="text"
                 id="phone_number"
                 name="phone_number"
-                placeholder="Новый телефон"
+                placeholder={t("newPhone") || ""}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.phone_number}
@@ -183,8 +200,12 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                 disabled={!isSmsCodeSend}
                 ref={inputRef}
               />
-              <p className={cn(cls.errorMessage)}>{errorMessage && errorMessage}</p>
-              <p className={cn(cls.successMessage)}>{successMessage && successMessage}</p>
+              <p className={cn(cls.errorMessage)}>
+                {errorMessage && errorMessage}
+              </p>
+              <p className={cn(cls.successMessage)}>
+                {successMessage && successMessage}
+              </p>
               {isSmsCodeSend ? (
                 <Button
                   onClick={sendSmsCode}
@@ -192,7 +213,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                   className={cn(cls.changePhoneNBtn)}
                   theme={ThemeButton.YELLOW}
                 >
-                  Подтвердить
+                  {t("aprove")}
                 </Button>
               ) : (
                 <Button
@@ -201,7 +222,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                   className={cn(cls.changePhoneNBtn)}
                   theme={ThemeButton.YELLOW}
                 >
-                  Получить код
+                  {t("code")}
                 </Button>
               )}
             </div>

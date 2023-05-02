@@ -5,6 +5,7 @@ import ReactPinInput from "react-pin-input";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ProfileService } from "@/services/Profile.service";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -19,6 +20,7 @@ interface SentToEmailProps {
 }
 
 export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
+  const { t } = useTranslation();
   const [smsCode, setSmsCode] = useState("");
   const [token, setToken] = useState("");
   const [countdown, setCountdown] = useState(60);
@@ -89,11 +91,11 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
             type="button"
             onClick={() => setCountdown(60)}
           >
-            Получить код снова
+            {t("getSmsAgain")}
           </Button>
         ) : (
           <span className={cn(cls.sendAgainContainer_sendAgain)}>
-            Получить код снова через {countdown} сек.
+            {t("getSmsAgain2")} {countdown} сек.
           </span>
         )}
       </div>

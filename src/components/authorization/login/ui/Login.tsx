@@ -9,6 +9,8 @@ import classNames from "classnames";
 // assets
 import cls from "./Login.module.scss";
 
+import { useTranslation } from "react-i18next";
+
 // helpers
 import { maskForPhone } from "@/helpers/masks";
 import { ActiveHeaderPage } from "@/components/header/Header";
@@ -48,6 +50,8 @@ export const Login: FC<LoginProps> = (props) => {
   );
   const router = useRouter();
 
+  const { t } = useTranslation();
+
   const { className } = props;
 
   useEffect(() => {
@@ -81,9 +85,7 @@ export const Login: FC<LoginProps> = (props) => {
         sms_code: smsInput,
       });
       setTab(4);
-    } catch (err) {
-      alert("ОШБИКА");
-    }
+    } catch {}
   }
 
   async function handleSavePass(password: String) {
@@ -92,9 +94,7 @@ export const Login: FC<LoginProps> = (props) => {
         phone_number: phone,
         password: password,
       });
-    } catch (err) {
-      alert("ОШИБКА");
-    }
+    } catch {}
   }
 
   return (
@@ -175,7 +175,7 @@ export const Login: FC<LoginProps> = (props) => {
                   </ErrorBorder>
 
                   <Button theme={ThemeButton.YELLOW} type="submit">
-                    Войти
+                    {t("go")}
                   </Button>
 
                   <div
@@ -185,7 +185,7 @@ export const Login: FC<LoginProps> = (props) => {
                     }}
                     className={cls.forget}
                   >
-                    Забыли пароль?
+                    {t("forgot")}
                   </div>
 
                   <p className={cls.error}>{isError && error[0]}</p>
@@ -233,7 +233,7 @@ export const Login: FC<LoginProps> = (props) => {
                     />
 
                     <Button theme={ThemeButton.YELLOW} type="submit">
-                      Отправить код
+                      {t("code")}
                     </Button>
 
                     <p className={cls.error}>{isError && error[0]}</p>
@@ -248,7 +248,7 @@ export const Login: FC<LoginProps> = (props) => {
         <>
           <div className={cn(cls.GetSmsCode)}>
             <div className={cn(cls.sendAgainContainer)}>
-              Вы не получили код? <br />
+              {t("notSms")} <br />
               {countdown === 0 ? (
                 <Button
                   theme={ThemeButton.CLEAR}
@@ -256,11 +256,13 @@ export const Login: FC<LoginProps> = (props) => {
                   type="button"
                   onClick={() => {}}
                 >
-                  Отправить повторно
+                  {t("again")}
                 </Button>
               ) : (
                 <span className={cn(cls.sendAgainContainer_sendAgain)}>
-                  Отправить повторно через {countdown}
+                  {t("again2")}
+
+                  {countdown}
                 </span>
               )}
             </div>
@@ -313,7 +315,7 @@ export const Login: FC<LoginProps> = (props) => {
                       theme={ThemeButton.YELLOW}
                       type="submit"
                     >
-                      Потдвердить
+                      {t("verify")}
                     </Button>
 
                     <p className={cls.error}>{isError && error[0]}</p>
@@ -417,7 +419,7 @@ export const Login: FC<LoginProps> = (props) => {
                       theme={ThemeButton.YELLOW}
                       type="submit"
                     >
-                      Сохранить пароль
+                      {t("save")}
                     </Button>
 
                     <p className={cls.error}>{isError && error[0]}</p>

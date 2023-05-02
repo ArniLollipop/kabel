@@ -68,26 +68,3 @@ export default function Home() {
     </MainLayout>
   );
 }
-
-// export async function getServerSideProps() {
-//     const offers = await OfferService().getOffers();
-//     const aboutInfo = await AboutService().getAboutInfo();
-//     const categories = await ProductService().getCategories();
-//     const sertificates = await SertificateService().getSertificate();
-//     const adventages = await AdventagesService().getAdventages();
-//     const news = await NewsService().getNews();
-//     const currencyRes = await GetCurrencyService().getCurrency();
-//     const metalRes = await GetCurrencyService().getMetal();
-//   return {
-//     props: {
-//       categories: categories.results,
-//       aboutInfo,
-//       sertificates,
-//       adventages,
-//       news,
-//       offers,
-//       currencyRes,
-//       metalRes,
-//     },
-//   };
-// }

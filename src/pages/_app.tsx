@@ -4,8 +4,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "@/store";
+import { useEffect } from "react";
+
+import "@/i18n";
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (localStorage.getItem("access_token") === undefined) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+    }
+  }, []);
+
   return (
     <Provider store={store}>
       <ToastContainer />

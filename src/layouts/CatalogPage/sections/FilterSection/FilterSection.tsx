@@ -16,6 +16,7 @@ import { ProductService } from "@/services/Product.servise";
 import { setProducts } from "@/store/slices/ProductSlice";
 import { queriesGenerator } from "@/helpers/queriesGenerator";
 import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -26,6 +27,7 @@ interface FilterSectionProps {
 }
 
 export const FilterSection: FC<FilterSectionProps> = (props) => {
+  const { t } = useTranslation();
   const { isOpened, closeFilters } = props;
   const { categories, cores, products } = useAppSelector(
     (state) => state.ProductSlice
@@ -99,7 +101,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                     dispatch(setProducts(res));
                   }}
                 >
-                  сбросить
+                  {t("clear")}
                 </Button>
               </div>
             </div>
@@ -110,7 +112,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
             {/* Availability filters */}
             <div className={cls.availability}>
               <h3 className={cn(cls.availability_title, cls.filterTitle)}>
-                Наличие
+                {t("nalichie")}
               </h3>
 
               <RadioInstance
@@ -139,7 +141,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
             {/* Categories filters */}
             <div className={cls.product}>
               <h3 className={cn(cls.product_title, cls.filterTitle)}>
-                Продукция
+                {t("list.product")}
               </h3>
 
               <Accordion className={cls.filtersAcc} alwaysOpen={true}>
@@ -283,10 +285,10 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 disabled={isSubmitting}
                 onClick={() => closeFilters && closeFilters(false)}
               >
-                Применить
+                {t("aprove2")}
               </Button>
               <a href="#top" className={cls.anchorUp}>
-                Наверх
+                {t("Наверх")}
               </a>
             </div>
           </Form>

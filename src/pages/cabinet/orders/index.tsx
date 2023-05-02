@@ -8,9 +8,12 @@ import cls from "./index.module.scss";
 import { SwiperProps } from "swiper/react";
 import Link from "next/link";
 
+import { useTranslation } from "react-i18next";
+
 const cn = classNames.bind(cls);
 
 export default function ordersPage() {
+  const { t } = useTranslation();
   const params: SwiperProps = {
     loop: true,
     speed: 500,
@@ -47,8 +50,7 @@ export default function ordersPage() {
       activePage={ActiveCabinetPageEnum.ORDERS}
     >
       <div className={cls.orders_wrapper}>
-        <h1 className={cls.orders_title}>Мои заказы</h1>
-        <span className={cls.orders_subTitle}>Свежие</span>
+        <h1 className={cls.orders_title}>{t("myOrders")}</h1>
 
         <HistoryOrdersSlider params={params} className={cls.orders_slider} />
       </div>

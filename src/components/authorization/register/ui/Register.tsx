@@ -25,6 +25,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 import { setUserName, setUserPhone } from "@/store/slices/AuthSlice";
 import { AuthService } from "@/services/Auth.service";
 import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -43,9 +44,16 @@ export const Register: FC<RegisterProps> = (props) => {
   const [error, setError] = useState("");
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
   const getSmsCode = (props: GetSmsCodeProps) => {
     const { touched, errors } = props;
-    if (touched.name && !errors.name && touched.phoneNumber && !errors.phoneNumber) {
+    if (
+      touched.name &&
+      !errors.name &&
+      touched.phoneNumber &&
+      !errors.phoneNumber
+    ) {
       setActive(2);
     }
   };
@@ -64,7 +72,15 @@ export const Register: FC<RegisterProps> = (props) => {
         });
       }}
     >
-      {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => {
+      {({
+        values,
+        touched,
+        errors,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+      }) => {
         return (
           <Form>
             <div className={cn(cls.Register)}>
@@ -102,7 +118,9 @@ export const Register: FC<RegisterProps> = (props) => {
                   theme={ThemeButton.YELLOW}
                   onClick={async () => {
                     try {
-                      const res = await AuthService().sendSms(values.phoneNumber);
+                      const res = await AuthService().sendSms(
+                        values.phoneNumber
+                      );
                       if (res.data.result) {
                         dispatch(setUserName(values.name));
                         dispatch(setUserPhone(values.phoneNumber));
@@ -114,7 +132,7 @@ export const Register: FC<RegisterProps> = (props) => {
                     }
                   }}
                 >
-                  Получить код
+                  {t("code")}
                 </Button>
 
                 <p className={cls.error}>{error}</p>

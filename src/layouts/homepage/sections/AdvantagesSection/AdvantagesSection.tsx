@@ -1,15 +1,16 @@
-import { FC } from 'react';
-import classNames from 'classnames/bind';
-import cls from './AdvantagesSection.module.scss';
-import { Title } from '@/UI/Title/Title';
-import Image from 'next/image';
-import IconAdvantagesCalendar from '@/assets/icons/IconAdvantagesCalendar.svg';
-import IconAdvantagesLike from '@/assets/icons/IconAdvantagesLike.svg';
-import IconAdvantagesGems from '@/assets/icons/IconAdvantagesGems.svg';
-import IconAdvantagesDelivery from '@/assets/icons/IconAdvantagesDelivery.svg';
-import IconAdvantagesHands from '@/assets/icons/IconAdvantagesHands.svg';
-import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
-import { adventagesI } from '@/types/AdventagesTypes';
+import { FC } from "react";
+import classNames from "classnames/bind";
+import cls from "./AdvantagesSection.module.scss";
+import { Title } from "@/UI/Title/Title";
+import Image from "next/image";
+import IconAdvantagesCalendar from "@/assets/icons/IconAdvantagesCalendar.svg";
+import IconAdvantagesLike from "@/assets/icons/IconAdvantagesLike.svg";
+import IconAdvantagesGems from "@/assets/icons/IconAdvantagesGems.svg";
+import IconAdvantagesDelivery from "@/assets/icons/IconAdvantagesDelivery.svg";
+import IconAdvantagesHands from "@/assets/icons/IconAdvantagesHands.svg";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { adventagesI } from "@/types/AdventagesTypes";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -20,6 +21,7 @@ interface AdvantagesSectionProps {
 
 export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
   const { className, adventages } = props;
+  const { t } = useTranslation();
   const params: SwiperProps = {
     loop: false,
     speed: 500,
@@ -46,7 +48,7 @@ export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
 
   return (
     <section className={cn(cls.AdvantagesSection)}>
-      <Title className={cls.AdvantagesSection_title}>Преимущества</Title>
+      <Title className={cls.AdvantagesSection_title}>{t("advantage")}</Title>
 
       <Swiper {...params}>
         {adventages?.map(({ advantage, icon, id }, i) => (

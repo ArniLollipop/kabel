@@ -1,24 +1,25 @@
 // packages
-import { FC, useState } from 'react';
-import classNames from 'classnames';
-import { Form, Formik } from 'formik';
+import { FC, useState } from "react";
+import classNames from "classnames";
+import { Form, Formik } from "formik";
 
 // assets
-import cls from './ShowEditProfile.module.scss';
+import cls from "./ShowEditProfile.module.scss";
 
 // validation
-import { profileSchema } from '@/helpers/validation';
+import { profileSchema } from "@/helpers/validation";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { EditProfilePhoto } from '../../editProfilePhoto';
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { EditProfilePhoto } from "../../editProfilePhoto";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 
 // mask
-import { maskForPhone } from '@/helpers/masks';
-import { useAppDispatch, useAppSelector } from '@/hooks/store';
-import { EditProfile } from '@/store/slices/ProfileSlice';
+import { maskForPhone } from "@/helpers/masks";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { EditProfile } from "@/store/slices/ProfileSlice";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -28,6 +29,7 @@ interface ShowEditProfileProps {
 }
 
 export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
+  const { t } = useTranslation();
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
   const [disabledBtn] = useState(!!authUser?.phone_number);
@@ -39,37 +41,47 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
       <Formik
         initialValues={{
           // @ts-ignore
-          phone_number: profileUser?.phone_number || authUser?.phone_number || '',
+          phone_number: profileUser?.phone_number || authUser?.phone_number,
           // @ts-ignore
-          email: profileUser?.email || authUser?.email || '',
+          email: profileUser?.email || authUser?.email || "",
           // @ts-ignore
-          first_name: profileUser?.first_name || authUser?.first_name || '',
+          first_name: profileUser?.first_name || authUser?.first_name || "",
           // @ts-ignore
-          last_name: profileUser?.last_name || authUser?.last_name || '',
+          last_name: profileUser?.last_name || authUser?.last_name || "",
           // @ts-ignore
-          middle_name: profileUser?.middle_name || authUser?.middle_name || '',
+          middle_name: profileUser?.middle_name || authUser?.middle_name || "",
           // @ts-ignore
           avatar: profileUser?.avatar || authUser?.avatar || null,
         }}
         validationSchema={profileSchema}
         onSubmit={(values) => {
-          console.log('values inside onSubmit is: ', {
+          console.log("values inside onSubmit is: ", {
             ...values,
           });
 
           const modifiedValues = {
-            phone_number: values.phone_number.match(/[\d+]+/g).join(''),
+            phone_number: values.phone_number.match(/[\d+]+/g).join(""),
             email: values.email,
             first_name: values.first_name,
             last_name: values.last_name,
             middle_name: values.middle_name,
           };
 
-          dispatch<any>(EditProfile({ userId: authUser?.id, values: modifiedValues }));
+          dispatch<any>(
+            EditProfile({ userId: authUser?.id, values: modifiedValues })
+          );
           setShowEditProfile(false);
         }}
       >
-        {({ values, touched, errors, setFieldValue, handleChange, handleBlur, dirty }) => {
+        {({
+          values,
+          touched,
+          errors,
+          setFieldValue,
+          handleChange,
+          handleBlur,
+          dirty,
+        }) => {
           return (
             <Form>
               <div className={cls.userCard}>
@@ -144,13 +156,15 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
 
                   <Button
                     className={
-                      disabledBtn && !dirty ? cls.userCard_disabledBtn : cls.userCard_saveBtn
+                      disabledBtn && !dirty
+                        ? cls.userCard_disabledBtn
+                        : cls.userCard_saveBtn
                     }
                     disabled={disabledBtn && !dirty}
                     type="submit"
                     theme={ThemeButton.YELLOW}
                   >
-                    Сохранить
+                    {t("saveMent")}
                   </Button>
                 </div>
               </div>

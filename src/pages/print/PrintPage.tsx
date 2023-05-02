@@ -12,9 +12,12 @@ import cls from "./PrintPage.module.scss";
 // data
 import { printData } from "@/data/PrintData";
 
+import { useTranslation } from "react-i18next";
+
 let cn = classNames.bind(cls);
 
 export default function PrintPage() {
+  const { t } = useTranslation();
   const printRef = useRef(null);
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -44,7 +47,7 @@ export default function PrintPage() {
   return (
     <>
       <Head>
-        <title>Принт</title>
+        <title>{t("print")}</title>
         <meta name="description" content="ТОО Almaty Kazkabel | Принт" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -62,12 +65,12 @@ export default function PrintPage() {
         </div>
         <hr />
 
-        <h2>Таблица веса кабеля</h2>
+        <h2>{t("tableWeight")}</h2>
         <div className={cn(cls.thContainer)}>
           <thead>
-            <th>Марка кабеля с сечением</th>
-            <th>Количество метров</th>
-            <th>Вес, кг</th>
+            <th>{t("markCabel")}</th>
+            <th>{t("lengthCabel")}</th>
+            <th>{t("weight")}</th>
           </thead>
           <tbody>
             {/* replace with real data */}
@@ -86,11 +89,11 @@ export default function PrintPage() {
         <div className={cn(cls.resultContainer)}>
           <div>
             {/* replace with real data */}
-            <p>Общая длина кабеля</p>
+            <p>{t("length")}</p>
             <strong>14.000 м</strong>
           </div>
           <div>
-            <p>Общий вес кабеля</p>
+            <p>{t("weight")}</p>
             <strong>58.310 кг</strong>
           </div>
         </div>

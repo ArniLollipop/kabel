@@ -31,6 +31,8 @@ export interface Coords {
   };
 }
 
+import { useTranslation } from "react-i18next";
+
 function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
   const [contacts, setContacts] = useState<any>();
   const { lat: latAlmaty, lng: lngAlmaty } = coordsAlmaty;
@@ -41,6 +43,8 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
     setContacts(res.data.results);
   }
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     getContacts();
   }, []);
@@ -48,7 +52,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
   return (
     <MainLayout activePage={ActiveHeaderPage.CONTACTS}>
       <div className={cn(cls.contactsPage)}>
-        <Title className={cls.contactsPage_title}>Контакты</Title>
+        <Title className={cls.contactsPage_title}>{t("list.contacts")}</Title>
         <div className={cls.contactsPage_wrapper}>
           {contacts?.map((el: any) => {
             return (
@@ -64,7 +68,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
                 {/* Text datas */}
                 <div className={cls.contactsPage_text}>
                   <span className={cls.contactsPage_city}>
-                    Город: {el.city}
+                    {t("city")}: {el.city}
                   </span>
                   <div className={cls.contactsPage_textItems}>
                     <div className={cls.contactsPage_textItem}>
@@ -78,7 +82,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
                     <div className={cls.contactsPage_textItem}>
                       <IconContactsGeo />
                       <div>
-                        <p className={cls.subtitle}>Адрес офиса</p>
+                        <p className={cls.subtitle}>{t("officeAddress")}</p>
                         <span className={cls.descr}>{el.address}</span>
                       </div>
                     </div>
@@ -105,7 +109,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
                     >
                       <IconContactsPhone />
                       <div>
-                        <p className={cls.subtitle}>Прием заявок</p>
+                        <p className={cls.subtitle}>{t("getZaiavka")}</p>
                         {el.contacts?.map((phone: any) => {
                           return (
                             <a
@@ -120,7 +124,7 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
                     </div>
 
                     <div className={cls.contactsPage_contactUs}>
-                      <p className={cls.subtitle}>Связаться с нами</p>
+                      <p className={cls.subtitle}>{t("contactUs")}</p>
                       <div>
                         <a href={el.telegram_url}>
                           <IconContactsTg />

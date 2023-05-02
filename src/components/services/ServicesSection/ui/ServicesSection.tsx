@@ -1,21 +1,22 @@
 // packages
-import { FC, useState } from 'react';
-import classNames from 'classnames';
-import { Form, Formik } from 'formik';
+import { FC, useState } from "react";
+import classNames from "classnames";
+import { Form, Formik } from "formik";
 
 // assets
-import cls from './ServicesSection.module.scss';
-import { ServicesDeleteIcon } from '@/assets/icons';
+import cls from "./ServicesSection.module.scss";
+import { ServicesDeleteIcon } from "@/assets/icons";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
 
 // data
-import { select1, select2 } from '@/data/ServicesData';
-import { ServicesToggleButtons } from '../../ServicesToggleButtons';
+import { select1, select2 } from "@/data/ServicesData";
+import { ServicesToggleButtons } from "../../ServicesToggleButtons";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -25,24 +26,33 @@ interface ServicesSectionProps {
 
 export const ServicesSection: FC<ServicesSectionProps> = (props) => {
   const { className } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={cn(cls.ServicesSection)}>
       <Formik
         initialValues={{
-          power: '',
-          quantity: '',
-          weight: '',
-          selectOfUsing: '',
-          selectOfWeight: '',
+          power: "",
+          quantity: "",
+          weight: "",
+          selectOfUsing: "",
+          selectOfWeight: "",
         }}
         onSubmit={(values) => {
-          console.log('values is: ', {
+          console.log("values is: ", {
             ...values,
           });
         }}
       >
-        {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => {
+        {({
+          values,
+          touched,
+          errors,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        }) => {
           return (
             <Form>
               <div className={cn(cls.ServicesSection)}>
@@ -58,7 +68,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                     value={values.power}
                     errors={errors.power}
                     touched={touched.power}
-                    labeltext={'Марка кабеля с сечение'}
+                    labeltext={"Марка кабеля с сечение"}
                     className={cls.markInput}
                   />
                 </div>
@@ -68,8 +78,8 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                     <label>Введите мощность (кВт)</label>
                     <ServicesToggleButtons
                       data={[
-                        { id: 1, children: '1-фазная (220 В)' },
-                        { id: 2, children: '3-фазная (380 В)' },
+                        { id: 1, children: "1-фазная (220 В)" },
+                        { id: 2, children: "3-фазная (380 В)" },
                       ]}
                     />
                   </div>
@@ -87,7 +97,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                         value={values.quantity}
                         errors={errors.quantity}
                         touched={touched.quantity}
-                        labeltext={'Кол-во метров'}
+                        labeltext={"Кол-во метров"}
                         className={cls.quantityInput}
                       />
                     </div>
@@ -104,7 +114,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                         value={values.weight}
                         errors={errors.weight}
                         touched={touched.weight}
-                        labeltext={'Вес, кг'}
+                        labeltext={"Вес, кг"}
                         className={cls.weightInput}
                       />
                     </div>
@@ -128,7 +138,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       value={values.selectOfUsing}
                       errors={errors.selectOfUsing}
                       touched={touched.selectOfUsing}
-                      labeltext={'Выберите применение'}
+                      labeltext={"Выберите применение"}
                       className={cls.weightInput}
                     >
                       {select1.map(({ id, title }) => (
@@ -150,7 +160,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       value={values.selectOfWeight}
                       errors={errors.selectOfWeight}
                       touched={touched.selectOfWeight}
-                      labeltext={'Вес, кг'}
+                      labeltext={"Вес, кг"}
                       className={cls.weightInput}
                     >
                       {select2.map(({ id, title }) => (
@@ -163,21 +173,21 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                 </div>
 
                 <div className={cn(cls.chooseBtn)}>
-                  <label>Выберите количество жил</label>
+                  <label>{t("choiceCount")}</label>
                   <ServicesToggleButtons
                     data={[
-                      { id: 1, children: '1' },
-                      { id: 2, children: '2 и более' },
+                      { id: 1, children: "1" },
+                      { id: 2, children: "2 и более" },
                     ]}
                   />
                 </div>
 
                 <div className={cn(cls.chooseBtn)}>
-                  <label>Выберите материал жилы</label>
+                  <label>{t("choiceMaterials")}</label>
                   <ServicesToggleButtons
                     data={[
-                      { id: 1, children: 'Медь (Cu)' },
-                      { id: 2, children: 'Алюминий (алюм. сплав)' },
+                      { id: 1, children: "Медь (Cu)" },
+                      { id: 2, children: "Алюминий (алюм. сплав)" },
                     ]}
                   />
                 </div>

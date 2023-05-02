@@ -4,6 +4,7 @@ import cls from "./OrderHistoryCard.module.scss";
 import { ordersDataI } from "@/data/OrdersData";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -14,6 +15,7 @@ interface orderHistoryCardProps extends ordersDataI {
 }
 
 export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
+  const { t } = useTranslation();
   const { className, img, name, descr, date, status, id, items, created_at } =
     props;
 
@@ -30,7 +32,7 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
         height={100}
       />
       <p className={cls.descr}>{items[0].product_info.name}</p>
-      <span className={cls.status}>Выполнен</span>
+      <span className={cls.status}>{t("dead")}</span>
       <span className={cls.date}>Дата: {created_at?.split("T")[0]}</span>
     </Link>
   );

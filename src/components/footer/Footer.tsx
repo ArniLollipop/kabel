@@ -7,6 +7,8 @@ import IconPaymentVisa from "@/assets/icons/IconPaymentVisa.svg";
 import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 import Image from "next/image";
 
+import { useTranslation } from "react-i18next";
+
 import {
   IconMobileMenuCard,
   IconMobileMenuHome,
@@ -28,6 +30,9 @@ interface FooterProps {
 
 export const Footer: FC<FooterProps> = (props) => {
   const { className, activePage } = props;
+
+  const { t } = useTranslation();
+
   const { isLoggedIn } = useAppSelector((state) => state.AuthSlice);
 
   return (
@@ -42,49 +47,49 @@ export const Footer: FC<FooterProps> = (props) => {
                 active: activePage === ActiveHeaderPage.ABOUT,
               })}
             >
-              <Link href="/about">О компании</Link>
+              <Link href="/about">{t("list.company")}</Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CATALOG,
               })}
             >
-              <Link href="/catalog">Продукция</Link>
+              <Link href="/catalog">{t("list.product")}</Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.SERVICES,
               })}
             >
-              <Link href="/services">Сервисы</Link>
+              <Link href="/services">{t("list.services")}</Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.NEWS,
               })}
             >
-              <Link href="/news">Новости</Link>
+              <Link href="/news">{t("list.news")}</Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.PAY_DEL,
               })}
             >
-              <Link href="/pay-del/payment">Оплата и доставка</Link>
+              <Link href="/pay-del/payment">{t("list.payment")}</Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CONTACTS,
               })}
             >
-              <Link href="/contacts">Контакты</Link>
+              <Link href="/contacts">{t("list.contacts")}</Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CONTACTS,
               })}
             >
-              <Link href="/politics">Политика конфиденциальности</Link>
+              <Link href="/politics">{t("footer.politics")}</Link>
             </li>
           </ul>
         </nav>
@@ -114,7 +119,9 @@ export const Footer: FC<FooterProps> = (props) => {
             </li>
 
             <li className={cls.footerInfo_tableCol}>
-              <h4 className={cls.footerInfo_tableColTitle}>Время работы</h4>
+              <h4 className={cls.footerInfo_tableColTitle}>
+                {t("footer.time")}
+              </h4>
               <span className={cls.footerInfo_tableColRow}>
                 Пн-пт с 9:00 до 18:00
               </span>
@@ -127,7 +134,9 @@ export const Footer: FC<FooterProps> = (props) => {
             </li>
 
             <li className={cls.footerInfo_tableCol}>
-              <h4 className={cls.footerInfo_tableColTitle}>Телефоны</h4>
+              <h4 className={cls.footerInfo_tableColTitle}>
+                {t("footer.phones")}
+              </h4>
               <div className={cls.footerInfo_tableColPhones}>
                 <a
                   href="tel:+77273014798"
@@ -155,11 +164,14 @@ export const Footer: FC<FooterProps> = (props) => {
                   +7 700 301 47 98
                 </a>
               </div>
-              <span> Бесплатно по РК</span>
+              <span> {t("footer.free")}</span>
             </li>
 
             <li className={cls.footerInfo_tableCol}>
-              <h4 className={cls.footerInfo_tableColTitle}>Способы оплаты</h4>
+              <h4 className={cls.footerInfo_tableColTitle}>
+                {" "}
+                {t("footer.pay")}
+              </h4>
 
               <div className={cls.footerInfo_payments}>
                 <Image src={IconPaymentVisa} alt="img" />
@@ -169,7 +181,8 @@ export const Footer: FC<FooterProps> = (props) => {
             </li>
           </ul>
           <span className={cls.footerInfo_protected}>
-            © 2023 Все права защищены
+            © 2023
+            {t("footer.private")}
           </span>
         </div>
       </div>
@@ -187,7 +200,7 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.MAIN ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>Главная</span>
+          <span> {t("footer.main")}</span>
         </Link>
 
         <Link
@@ -201,7 +214,7 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.CATALOG ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>Продукция</span>
+          <span>{t("list.product")}</span>
         </Link>
 
         <Link
@@ -215,7 +228,7 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.SERVICES ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>Сервисы</span>
+          <span>{t("list.services")}</span>
         </Link>
 
         <Link
@@ -229,7 +242,7 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.CARD ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>Корзина</span>
+          <span>{t("footer.cart")}</span>
         </Link>
 
         <Link
@@ -243,7 +256,7 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>Профиль </span>
+          <span>{t("footer.profile")} </span>
         </Link>
       </div>
     </>

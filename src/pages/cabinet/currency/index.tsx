@@ -1,9 +1,18 @@
 import classNames from "classnames";
 import cls from "./index.module.scss";
-import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
-import { ICurrencyResponse, IMetalResponse, ICurrencyResult } from "@/types/GetCurrencyTypes";
+import {
+  ActiveCabinetPageEnum,
+  CabinetLayout,
+} from "@/layouts/CabinetLayot/CabinetLayout";
+import {
+  ICurrencyResponse,
+  IMetalResponse,
+  ICurrencyResult,
+} from "@/types/GetCurrencyTypes";
 import { GetCurrencyService } from "@/services/GetCurrency";
 import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
+
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -15,12 +24,17 @@ interface ICurrencyNMetalResponse {
 export default function index(props: ICurrencyNMetalResponse) {
   const { currencyRes, metalRes } = props;
 
+  const { t } = useTranslation();
+
   return (
-    <CabinetLayout className={cn(cls.currency)} activePage={ActiveCabinetPageEnum.CURRENCY}>
-      <p>Валюта и Лондонская биржа металлов</p>
+    <CabinetLayout
+      className={cn(cls.currency)}
+      activePage={ActiveCabinetPageEnum.CURRENCY}
+    >
+      <p>{t("london")}</p>
       <div className={cn(cls.currency_header)}>
-        <span>Валюта</span>
-        <span>Казахстанский тенге</span>
+        <span>{t("valuta")}</span>
+        <span>{t("tenge")}</span>
       </div>
       <GetCurrency
         className={cn(cls.currencyContainerCabinet)}

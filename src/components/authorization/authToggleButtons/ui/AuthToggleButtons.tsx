@@ -1,12 +1,12 @@
 // hooks
-import { FC } from 'react';
-import { useState } from 'react';
+import { FC } from "react";
+import { useState } from "react";
 
 // packages
-import classNames from 'classnames';
+import classNames from "classnames";
 
 // assets
-import cls from './AuthToggleButtons.module.scss';
+import cls from "./AuthToggleButtons.module.scss";
 
 let cn = classNames.bind(cls);
 
@@ -23,15 +23,18 @@ interface ButtonsProps {
   onClick: (id: number) => void;
 }
 
+import { useTranslation } from "react-i18next";
+
 export const AuthToggleButtons: FC<AuthToggleButtonsProps> = (props) => {
+  const { t } = useTranslation();
   const [dataTabs] = useState([
     {
       id: 1,
-      children: 'Создать аккаунт',
+      children: t("createAccount"),
     },
     {
       id: 3,
-      children: 'Войти',
+      children: t("go"),
     },
   ]);
   const { className, setActive, active } = props;
@@ -42,7 +45,11 @@ export const AuthToggleButtons: FC<AuthToggleButtonsProps> = (props) => {
 
   const Buttons = ({ id, children, isActive, onClick }: ButtonsProps) => {
     return (
-      <a href="#nolink" onClick={() => navigate(id)} className={isActive ? cls.active : ''}>
+      <a
+        href="#nolink"
+        onClick={() => navigate(id)}
+        className={isActive ? cls.active : ""}
+      >
         {children}
       </a>
     );
@@ -57,7 +64,11 @@ export const AuthToggleButtons: FC<AuthToggleButtonsProps> = (props) => {
       <div className={cn(cls.buttons)}>
         {dataTabs.map((item) => (
           <li key={item.id}>
-            <Buttons {...item} isActive={buttonActive === item.id} onClick={navigate} />
+            <Buttons
+              {...item}
+              isActive={buttonActive === item.id}
+              onClick={navigate}
+            />
           </li>
         ))}
       </div>

@@ -19,6 +19,7 @@ import { deliveryAddressSchema } from "@/helpers/validation";
 
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector } from "@/hooks/store";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -34,6 +35,7 @@ interface AddOrEditDeliveryProps {
 }
 
 export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
+  const { t } = useTranslation();
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const {
     className,
@@ -118,7 +120,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
 
           return (
             <div className={cls.container}>
-              <p>{address ? "Изменить адрес" : "Новый адрес"}</p>
+              <p>{address ? t("changeAddress") : t("newAddress")}</p>
               <Form>
                 <InputInstance
                   theme={EInputInstanceTheme.PROFILE}
@@ -199,7 +201,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                     onClick={() => setIsOpen!(false)}
                     type="button"
                   >
-                    Отменить
+                    {t("otmena")}
                   </Button>
 
                   <Button
@@ -207,7 +209,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                     type="submit"
                     theme={ThemeButton.YELLOW}
                   >
-                    Сохранить
+                    {t("saveMent")}
                   </Button>
                 </div>
               </Form>

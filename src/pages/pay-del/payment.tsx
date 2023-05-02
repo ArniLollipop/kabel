@@ -28,6 +28,8 @@ const enum endpoints {
 
 let cn = classNames.bind(cls);
 
+import { useTranslation } from "react-i18next";
+
 interface paymentProps {
   payment: payDelI;
   delivery: payDelI;
@@ -56,13 +58,15 @@ export default function payment() {
     getDelivery();
   }, []);
 
+  const { t } = useTranslation();
+
   return (
     <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
       {/* PC Layout */}
       <DeliveryLayout
         className={cls.wrapper}
         activePage={ActivePayDelPageEnum.PAYMENT}
-        title="Оплата"
+        title={t("pay")}
       >
         <div
           className={cls.descrText}
@@ -81,7 +85,7 @@ export default function payment() {
 
       {/* Mobile Accordion */}
       <div className={cls.mobile}>
-        <Title className={cls.mobile_title}>Доставка и оплата</Title>
+        <Title className={cls.mobile_title}>{t("list.payment")}</Title>
         <div className={cls.mobile_wrapper}>
           <Accordion className={cls.mobile_accordion} alwaysOpen={true}>
             <AccordionItem>
@@ -90,13 +94,13 @@ export default function payment() {
                   <AccordionHeader
                     className={cn(cls.mobile_accItem, { active: open })}
                   >
-                    <span>Оплата</span>
+                    <span>{t("pay")}</span>
                     <IconCabinetArrow />
                   </AccordionHeader>
                   <AccordionBody
                     className={cn(cls.mobile_accBody, { active: open })}
                   >
-                    <span className={cls.mobile_accBodyTitle}>Оплата</span>
+                    <span className={cls.mobile_accBodyTitle}>{t("pay")}</span>
                     <div
                       className={cls.descrText}
                       dangerouslySetInnerHTML={{ __html: payment }}
@@ -120,13 +124,15 @@ export default function payment() {
                   <AccordionHeader
                     className={cn(cls.mobile_accItem, { active: open })}
                   >
-                    <span>Доставка</span>
+                    <span>{t("delivery")}</span>
                     <IconCabinetArrow />
                   </AccordionHeader>
                   <AccordionBody
                     className={cn(cls.mobile_accBody, { active: open })}
                   >
-                    <span className={cls.mobile_accBodyTitle}>Доставка</span>
+                    <span className={cls.mobile_accBodyTitle}>
+                      {t("delivery")}
+                    </span>
                     <div
                       className={cls.descrText}
                       dangerouslySetInnerHTML={{ __html: delivery }}

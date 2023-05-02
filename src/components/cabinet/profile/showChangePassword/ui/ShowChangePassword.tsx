@@ -13,6 +13,7 @@ import { InputInstance } from "@/shared/formElements/InputInstance";
 import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
 import { changePasswordsSchema } from "@/helpers/validation";
 import { ProfileService } from "@/services/Profile.service";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -24,7 +25,8 @@ interface ShowChangePasswordProps {
 }
 
 export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
-  const { className, setShowChangePassword, setShowModal, setNumberOrEmail } = props;
+  const { className, setShowChangePassword, setShowModal, setNumberOrEmail } =
+    props;
   const [showSentTo, setShowSentTo] = useState("");
   const [showChangePasswords, setShowChangePasswords] = useState(false);
 
@@ -35,6 +37,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
   const [changePassNew, setChangePassNew] = useState(false);
   const [changePassConfirm, setChangePassConfirm] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { t } = useTranslation();
 
   return (
     <div className={cn(cls.ShowChangePassword)}>
@@ -43,7 +46,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
           // @ts-ignore
           email: profileUser?.email || authUser?.email || null,
           // @ts-ignore
-          phone_number: profileUser?.phone_number || authUser?.phone_number || null,
+          phone_number: profileUser?.phone_number || authUser?.phone_number,
           changePassNew: "",
           changePassConfirm: "",
         }}
@@ -57,7 +60,10 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
         {({ values, touched, errors, handleBlur, handleChange }) => {
           const sendSmsCodeToPhone = async () => {
             try {
-              const res = await ProfileService().changePassByPhone(values.phone_number, true);
+              const res = await ProfileService().changePassByPhone(
+                values.phone_number,
+                true
+              );
               // @ts-ignore
               if (res.result) {
                 setShowSentTo("phone");
@@ -88,7 +94,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                 setErrorMessage(error);
               }
             } else {
-              setErrorMessage("Пароли не совподают!");
+              setErrorMessage(t("passErr") || "");
             }
           };
 
@@ -98,8 +104,8 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                 showSentTo === "email" ? (
                   <SentToEmailOrPhoneNumber
                     type={showSentTo}
-                    title={"Введите код из письма"}
-                    info={`Отправили его на почту ${hideEmail(authUser?.email)}`}
+                    title={t("writeCode")}
+                    info={`${t("sentTo")} ${hideEmail(authUser?.email)}`}
                     phone_number={values.phone_number}
                     setShowChangePasswords={setShowChangePasswords}
                     setShowSentTo={setShowSentTo}
@@ -107,8 +113,10 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                 ) : (
                   <SentToEmailOrPhoneNumber
                     type={showSentTo}
-                    title={"Введите код из сообщения"}
-                    info={`Отправили его на номер ${hidePhoneNumber(authUser?.phone_number)}`}
+                    title={t("getCode")}
+                    info={`${t("sentToPhone")} ${hidePhoneNumber(
+                      authUser?.phone_number
+                    )}`}
                     phone_number={values.phone_number}
                     setShowChangePasswords={setShowChangePasswords}
                     setShowSentTo={setShowSentTo}
@@ -172,24 +180,29 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
 
                   <p className={cn(cls.errorMessageCls)}>{errorMessage}</p>
 
-                  <Button onClick={changePasswordFinal} theme={ThemeButton.YELLOW} type="submit">
-                    Сохранить
+                  <Button
+                    onClick={changePasswordFinal}
+                    theme={ThemeButton.YELLOW}
+                    type="submit"
+                  >
+                    {t("saveMent")}
                   </Button>
                 </div>
               ) : (
                 <>
-                  <p className={cn(cls.title)}>Проверка аккаунта</p>
-                  <small className={cn(cls.info)}>
-                    Чтобы изменить пароль, выберите один из способов проверки аккаунта
-                  </small>
+                  <p className={cn(cls.title)}>{t("checkAccount")}</p>
+                  <small className={cn(cls.info)}>{t("forChange")}</small>
 
                   <div className={cn(cls.btnContainer)}>
-                    <div onClick={() => setShowSentTo("email")} className={cn(cls.btn)}>
-                      <p>По почте</p>
+                    <div
+                      onClick={() => setShowSentTo("email")}
+                      className={cn(cls.btn)}
+                    >
+                      <p>{t("bymail")}</p>
                       <IconCabinetArrow />
                     </div>
                     <div onClick={sendSmsCodeToPhone} className={cn(cls.btn)}>
-                      <p>По номеру телефона</p>
+                      <p>{t("byPhone")}</p>
                       <IconCabinetArrow />
                     </div>
                   </div>

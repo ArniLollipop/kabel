@@ -1,12 +1,15 @@
-import Head from 'next/head';
-import { MainLayout } from '@/layouts/MainLayout';
-import { Authorization } from '@/components/authorization/Authorization';
+import Head from "next/head";
+import { MainLayout } from "@/layouts/MainLayout";
+import { Authorization } from "@/components/authorization/Authorization";
+
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <>
       <Head>
-        <title>Авторизация</title>
+        <title>{t("auth")}</title>
         <meta name="description" content="ТОО Almaty Kazkabel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

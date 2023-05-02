@@ -1,13 +1,14 @@
-import { FC } from 'react';
-import cls from './RequestACall.module.scss';
-import { Form, Formik } from 'formik';
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { maskForPhone } from '@/helpers/masks';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { requestACallSchema } from '@/helpers/validation';
-import { toast } from 'react-toastify';
+import { FC } from "react";
+import cls from "./RequestACall.module.scss";
+import { Form, Formik } from "formik";
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { maskForPhone } from "@/helpers/masks";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { requestACallSchema } from "@/helpers/validation";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface RequestACallProps {
   className?: string;
@@ -16,33 +17,37 @@ interface RequestACallProps {
 
 export const RequestACall: FC<RequestACallProps> = (props) => {
   const { className, setIsOpen } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={cls.RequestACall}>
       <Formik
         initialValues={{
-          requestACallName: '',
-          requestACallPhoneNumber: '',
-          requestACallTextarea: '',
+          requestACallName: "",
+          requestACallPhoneNumber: "",
+          requestACallTextarea: "",
         }}
         validationSchema={requestACallSchema}
         onSubmit={(values) => {
-          console.log('values is: ', {
+          console.log("values is: ", {
             ...values,
-            requestACallPhoneNumber: values.requestACallPhoneNumber.replace(/\D+/g, ''),
+            requestACallPhoneNumber: values.requestACallPhoneNumber.replace(
+              /\D+/g,
+              ""
+            ),
           });
           // if it is success
-          toast('Заказ на звонок получен!', {
+          toast("Заказ на звонок получен!", {
             hideProgressBar: true,
             autoClose: 2000,
-            type: 'success',
+            type: "success",
           });
 
           // if it is error
-          toast('Ошибка!', {
+          toast("Ошибка!", {
             hideProgressBar: true,
             autoClose: 2000,
-            type: 'error',
+            type: "error",
           });
         }}
       >
@@ -91,7 +96,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
                   errors={errors.requestACallPhoneNumber}
                   touched={touched.requestACallPhoneNumber}
                   className={cls.requestACallPhoneNumber}
-                  labeltext={'Телефон'}
+                  labeltext={"Телефон"}
                 />
 
                 <InputInstance
@@ -106,7 +111,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
                   errors={errors.requestACallTextarea}
                   touched={touched.requestACallTextarea}
                   className={cls.requestACallTextarea}
-                  labeltext={'Сообщение'}
+                  labeltext={"Сообщение"}
                 />
 
                 <Button
@@ -115,7 +120,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
                   className={cls.requestACallBtn}
                   theme={ThemeButton.CLEAR}
                 >
-                  Отправить
+                  {t("Отправить")}
                 </Button>
               </Form>
             </>

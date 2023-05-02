@@ -8,16 +8,20 @@ import { NextPageContext } from "next";
 import { NewsService } from "@/services/News.service";
 import { newsI } from "@/types/NewsTypes";
 
+import { useTranslation } from "react-i18next";
+
 const cn = classNames.bind(cls);
 
 export default function articlePage(props: newsI) {
+  const { t } = useTranslation();
+
   const { newssection_set: sections, title, description, thumbnail } = props;
   console.log("sections is: ", sections);
 
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       <div className={cn(cls.articlePage)}>
-        <Title className={cls.articlePage_title}>Новости</Title>
+        <Title className={cls.articlePage_title}>{t("list.news")}</Title>
 
         <div className={cls.articlePage_wrapper}>
           <div className={cls.articlePage_content}>

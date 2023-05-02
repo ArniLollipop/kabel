@@ -1,21 +1,22 @@
 // packages
-import { FC } from 'react';
-import { Form, Formik } from 'formik';
-import classNames from 'classnames';
+import { FC } from "react";
+import { Form, Formik } from "formik";
+import classNames from "classnames";
 
 // assets
-import cls from './AddCard.module.scss';
+import cls from "./AddCard.module.scss";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 
 // validation
-import { addCardSchema } from '@/helpers/validation';
+import { addCardSchema } from "@/helpers/validation";
+import { useTranslation } from "react-i18next";
 
 // masks
-import { maskForCreditCard, maskForCVV, maskForDate } from '@/helpers/masks';
+import { maskForCreditCard, maskForCVV, maskForDate } from "@/helpers/masks";
 
 let cn = classNames.bind(cls);
 
@@ -25,20 +26,21 @@ interface AddCardProps {
 }
 
 export const AddCard: FC<AddCardProps> = (props) => {
+  const { t } = useTranslation();
   const { className, setShowAddCard } = props;
 
   return (
     <div className={cn(cls.AddCard, className)}>
       <Formik
         initialValues={{
-          numberOfCard: '',
-          dateOfCard: '',
-          CVV: '',
-          nameOfCardOwner: '',
+          numberOfCard: "",
+          dateOfCard: "",
+          CVV: "",
+          nameOfCardOwner: "",
         }}
         validationSchema={addCardSchema}
         onSubmit={(values) => {
-          console.log('values is: ', {
+          console.log("values is: ", {
             ...values,
           });
         }}
@@ -62,7 +64,7 @@ export const AddCard: FC<AddCardProps> = (props) => {
 
           return (
             <div className={cls.container}>
-              <p>Сохраненные карты</p>
+              <p>{t("saveCard")}</p>
               <Form>
                 <InputInstance
                   mask={maskForCreditCard}
@@ -131,7 +133,7 @@ export const AddCard: FC<AddCardProps> = (props) => {
                     onClick={() => setShowAddCard(false)}
                     type="button"
                   >
-                    Отменить
+                    {t("otmena")}
                   </Button>
 
                   <Button
@@ -140,7 +142,7 @@ export const AddCard: FC<AddCardProps> = (props) => {
                     type="submit"
                     theme={ThemeButton.YELLOW}
                   >
-                    Сохранить
+                    {t("saveMent")}
                   </Button>
                 </div>
               </Form>

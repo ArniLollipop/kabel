@@ -8,7 +8,11 @@ import { NextPageContext } from "next";
 import { ProductService } from "@/services/Product.servise";
 import { productI } from "@/types/ProductTypes";
 
+import { useTranslation } from "react-i18next";
+
 export default function item(props: productI) {
+  const { t } = useTranslation();
+
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
       <div className={cls.cardItem}>
@@ -16,7 +20,7 @@ export default function item(props: productI) {
           <CatalogItemPage {...props} />
 
           <div className={cls.slider}>
-            <h3 className={cls.slider_title}>СМОТРИТЕ ТАКЖЕ</h3>
+            <h3 className={cls.slider_title}>{t("watch")}</h3>
             <SeeMoreSlider slides={props.recommended_products} />
           </div>
         </div>

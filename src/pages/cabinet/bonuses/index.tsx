@@ -9,7 +9,11 @@ import ImageCabinetBonus from "@/assets/images/ImageCabinetBonus.png";
 import { useHttp } from "@/hooks/useHttp";
 import { useEffect, useState } from "react";
 
+import { useTranslation } from "react-i18next";
+
 export default function bonusesPage() {
+  const { t } = useTranslation();
+
   const [bonus, setBonus] = useState<any>();
 
   async function getBonus() {
@@ -35,12 +39,14 @@ export default function bonusesPage() {
       activePage={ActiveCabinetPageEnum.BONUSES}
       className={cls.bonuses}
     >
-      <h3>Накопленные бонусы</h3>
+      <h3>{t("bonuses")}</h3>
 
       <div className={cls.bonuses_info}>
-        <span>Номер карты: {bonus ? bonus.id : ""}</span>
         <span>
-          Персональная скидка:{" "}
+          {t("cardNumber")} {bonus ? bonus.id : ""}
+        </span>
+        <span>
+          {t("personalSale")}{" "}
           {bonus
             ? bonus.bonus_percentage
               ? bonus.bonus_percentage
@@ -48,7 +54,9 @@ export default function bonusesPage() {
             : "0"}
           %
         </span>
-        <span>Баланс: {bonus ? bonus.balance : "0"}</span>
+        <span>
+          {t("balance")}: {bonus ? bonus.balance : "0"}
+        </span>
       </div>
 
       <Image

@@ -1,29 +1,30 @@
 // hooks
-import { FC, useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '@/hooks/store';
-import { useRouter } from 'next/router';
+import { FC, useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/hooks/store";
+import { useRouter } from "next/router";
 
 // packages
-import classNames from 'classnames';
+import classNames from "classnames";
 
 // assets
-import cls from './GetSmsCode.module.scss';
-import { IconContactsMail } from '@/assets/icons';
+import cls from "./GetSmsCode.module.scss";
+import { IconContactsMail } from "@/assets/icons";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { Button } from '@/UI/Button';
-import { Field, Form, Formik } from 'formik';
-import { getSmsCodeSchema } from '@/helpers/validation';
-import { ErrorBorder } from '@/shared/formElements/errorBorder';
-import { HidePassword, ShowPassword } from '@/assets/icons';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { Button } from "@/UI/Button";
+import { Field, Form, Formik } from "formik";
+import { getSmsCodeSchema } from "@/helpers/validation";
+import { ErrorBorder } from "@/shared/formElements/errorBorder";
+import { HidePassword, ShowPassword } from "@/assets/icons";
 
 // themes
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
 
 // Actions
-import { Register } from '@/store/slices/AuthSlice';
+import { Register } from "@/store/slices/AuthSlice";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -32,14 +33,14 @@ interface GetSmsCodeProps {
 }
 
 export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
+  const { t } = useTranslation();
   const [countdown, setCountdown] = useState(60);
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { userName, userPhone, isError, error, isLoading, isLoggedIn } = useAppSelector(
-    (state) => state.AuthSlice
-  );
+  const { userName, userPhone, isError, error, isLoading, isLoggedIn } =
+    useAppSelector((state) => state.AuthSlice);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -47,11 +48,11 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
   const { className } = props;
 
   useEffect(() => {
-    if (!isError && isLoggedIn) router.push('/');
+    if (!isError && isLoggedIn) router.push("/");
   }, [isError, isLoggedIn]);
 
   const createAccount = () => {
-    console.log('createAccount is working!');
+    console.log("createAccount is working!");
   };
 
   const FuncCountDown = (value?: string) => {
@@ -72,10 +73,10 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
   return (
     <Formik
       initialValues={{
-        confirmSmsCode: '',
-        password: '',
-        confirmPassword: '',
-        email: '',
+        confirmSmsCode: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
         isEmail: true,
         isAgree: true,
       }}
@@ -86,7 +87,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
           return;
         } else {
           setIsPasswordMatch(false);
-          console.log('values GetSmsCode is: ', {
+          console.log("values GetSmsCode is: ", {
             ...values,
           });
 
@@ -100,7 +101,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
               // isAgree: values.isAgree,
             })
           );
-          !isError && router.push('/');
+          !isError && router.push("/");
         }
       }}
     >
@@ -110,7 +111,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
             <div className={cn(cls.GetSmsCode)}>
               <>
                 <div className={cn(cls.sendAgainContainer)}>
-                  Вы не получили код? <br />
+                  {t("notSms")} <br />
                   {countdown === 0 ? (
                     <Button
                       theme={ThemeButton.CLEAR}
@@ -118,11 +119,11 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                       type="button"
                       onClick={() => setCountdown(60)}
                     >
-                      Отправить повторно
+                      {t("again")}
                     </Button>
                   ) : (
                     <span className={cn(cls.sendAgainContainer_sendAgain)}>
-                      Отправить повторно через {countdown}
+                      {t("again2")} {countdown}
                     </span>
                   )}
                 </div>
@@ -139,10 +140,13 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   touched={touched.confirmSmsCode}
                   className={cls.confirmSmsCode}
                 />
-                <ErrorBorder touchedValue={touched.email} errorsValue={errors.email}>
+                <ErrorBorder
+                  touchedValue={touched.email}
+                  errorsValue={errors.email}
+                >
                   <IconContactsMail width={25} height={25} color="#C0C0C0" />
                   <InputInstance
-                    password={'password'}
+                    password={"password"}
                     theme={EInputInstanceTheme.AUTH}
                     type="email"
                     id="email"
@@ -156,7 +160,10 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     className={cls.email}
                   />
                 </ErrorBorder>
-                <ErrorBorder touchedValue={touched.password} errorsValue={errors.password}>
+                <ErrorBorder
+                  touchedValue={touched.password}
+                  errorsValue={errors.password}
+                >
                   <Button
                     theme={ThemeButton.CLEAR}
                     type="button"
@@ -165,9 +172,9 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     {showPassword ? <ShowPassword /> : <HidePassword />}
                   </Button>
                   <InputInstance
-                    password={'password'}
+                    password={"password"}
                     theme={EInputInstanceTheme.AUTH}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     placeholder="Новый пароль"
@@ -191,9 +198,9 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     {showConfirmPassword ? <ShowPassword /> : <HidePassword />}
                   </Button>
                   <InputInstance
-                    password={'password'}
+                    password={"password"}
                     theme={EInputInstanceTheme.AUTH}
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     id="confirmPassword"
                     name="confirmPassword"
                     placeholder="Повторить пароль"
@@ -206,12 +213,21 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   />
                 </ErrorBorder>
                 <label>
-                  <Field type="checkbox" id="isAgree" name="isAgree" className={cls.isAgree} />
-                  Согласен получать новости о скидках и акциях!
+                  <Field
+                    type="checkbox"
+                    id="isAgree"
+                    name="isAgree"
+                    className={cls.isAgree}
+                  />
+                  {t("agree")}
                 </label>
-                {isPasswordMatch && <p>Пароли не совпадают!</p>}
-                <Button type="submit" theme={ThemeButton.YELLOW} onClick={createAccount}>
-                  Создать
+                {isPasswordMatch && <p>{t("passErr")}</p>}
+                <Button
+                  type="submit"
+                  theme={ThemeButton.YELLOW}
+                  onClick={createAccount}
+                >
+                  {t("create")}
                 </Button>
               </>
             </div>

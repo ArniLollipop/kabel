@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { productI } from "@/types/ProductTypes";
 import nullImg from "@/assets/images/nullImg.webp";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -14,6 +15,7 @@ interface SeeMoreCardProps extends productI {
 }
 
 export const SeeMoreCard: FC<SeeMoreCardProps> = (props) => {
+  const { t } = useTranslation();
   const { className, name, image, description, code } = props;
 
   return (
@@ -36,7 +38,7 @@ export const SeeMoreCard: FC<SeeMoreCardProps> = (props) => {
             : ""}
         </p>
         <Link className={cls.SeeMoreCard_link} href={`/catalog/${code}`}>
-          Подробнее
+          {t("another")}
         </Link>
       </div>
     </div>

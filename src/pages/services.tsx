@@ -15,9 +15,13 @@ import { ServicesLayout } from "@/layouts/ServicesLayout";
 import { data } from "@/data/ServicesData";
 import { ActiveHeaderPage } from "@/components/header/Header";
 
+import { useTranslation } from "react-i18next";
+
 let cn = classNames.bind(cls);
 
 export default function Home() {
+  const { t } = useTranslation();
+
   const showArticles = data.map((article) => {
     const { articleId, title, desc, link, articleIcon: ArticleIcon } = article;
 
@@ -28,7 +32,7 @@ export default function Home() {
         <p>{desc}</p>
         <div className={cn(cls.detailsIconContainer)}>
           <Link href={`/services/${link}`}>
-            Подробнее <ServicesDetailsIcon textColor={"#00ABC2"} />
+            {t("another")} <ServicesDetailsIcon textColor={"#00ABC2"} />
           </Link>
         </div>
       </article>
@@ -38,7 +42,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Сервисы</title>
+        <title>{t("list.services")}</title>
         <meta name="description" content="ТОО Almaty Kazkabel | Сервисы" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

@@ -18,6 +18,10 @@ import { useHttp } from "@/hooks/useHttp";
 import { CartService } from "@/services/Cart.service";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 import KZ from "@/assets/images/kz.png";
+import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import { changeLanguage } from "i18next";
+
 const cn = classNames.bind(cls);
 
 export const enum ActiveHeaderPage {
@@ -58,6 +62,8 @@ export const Header: FC<HeaderProps> = (props) => {
 
   const [activeCat, setActiveCat] = useState<string>("");
   const { user: first_name } = useAppSelector((state) => state.ProfileSlice);
+
+  const { t } = useTranslation();
 
   async function getCart() {
     try {
@@ -108,13 +114,6 @@ export const Header: FC<HeaderProps> = (props) => {
     getCart();
   }, []);
 
-  useEffect(() => {
-    if (lang) {
-      localStorage.setItem("lang", lang);
-      location.reload();
-    }
-  }, [lang]);
-
   return (
     <div className={cls.Header} onClick={() => setResultOpen(false)}>
       <div className={cls.Header_wrapper}>
@@ -137,7 +136,7 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconPhone className={cls["icon"]} />
               <span className={cls["phone"]}>8 800 070 47 98</span>
             </a>
-            <span className={cls["phone-descr"]}>Бесплатно по РК</span>
+            <span className={cls["phone-descr"]}>{t("header.free")}</span>
 
             <a
               href="tel:+77273014798"
@@ -162,7 +161,6 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconWhatsApp />
             </a>
           </li>
-
           <li className={cls.contacts_list_card}>
             <Link href="/card" className={cls["card-link"]}>
               <IconCard className={cls["icon"]} />
@@ -178,7 +176,7 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconUserCabinet className={cls["icon"]} />
               {/* @ts-ignore */}
               <span>
-                {first_name || authUser?.first_name || "Личный кабинет"}
+                {first_name || authUser?.first_name || "Личный Кабинет"}
               </span>
             </Link>
           </li>
@@ -196,8 +194,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <div className={cls.language_choices}>
                 <button
                   onClick={() => {
-                    setLang("KZ");
-                    setOpen(!open);
+                    changeLanguage("kz");
+                    location.reload();
                   }}
                   className={cls.language_choice}
                 >
@@ -205,8 +203,8 @@ export const Header: FC<HeaderProps> = (props) => {
                 </button>
                 <button
                   onClick={() => {
-                    setLang("RU");
-                    setOpen(!open);
+                    changeLanguage("ru");
+                    location.reload();
                   }}
                   className={cls.language_choice}
                 >
@@ -228,11 +226,11 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.ABOUT,
               })}
             >
-              <Link href="/about">О компании</Link>
+              <Link href="/about">{t("list.company")}</Link>
             </li>
 
             <li className={cn(cls.nav_list_item, cls.catalogLink)}>
-              <Link href="/catalog">Продукция</Link>
+              <Link href="/catalog">{t("list.product")}</Link>
 
               <div className={cn(cls.hovered)}>
                 <nav className={cls.hovered_nav}>
@@ -273,7 +271,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.SERVICES,
               })}
             >
-              <Link href="/services">Сервисы</Link>
+              <Link href="/services">{t("list.services")}</Link>
             </li>
 
             <li
@@ -281,7 +279,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.NEWS,
               })}
             >
-              <Link href="/news">Новости</Link>
+              <Link href="/news">{t("list.news")}</Link>
             </li>
 
             <li
@@ -289,7 +287,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.PAY_DEL,
               })}
             >
-              <Link href="/pay-del/payment">Оплата и доставка</Link>
+              <Link href="/pay-del/payment">{t("list.payment")}</Link>
             </li>
 
             <li
@@ -297,7 +295,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.CONTACTS,
               })}
             >
-              <Link href="/contacts">Контакты</Link>
+              <Link href="/contacts">{t("list.contacts")}</Link>
             </li>
           </ul>
           <div className={cls.search}>

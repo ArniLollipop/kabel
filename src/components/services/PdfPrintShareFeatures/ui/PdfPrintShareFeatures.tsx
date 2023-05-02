@@ -1,18 +1,19 @@
 // packages
-import { FC } from 'react';
-import classNames from 'classnames';
-import { jsPDF } from 'jspdf';
-import { toast } from 'react-toastify';
-import Link from 'next/link';
-import 'jspdf-autotable';
-import { UserOptions } from 'jspdf-autotable';
+import { FC } from "react";
+import classNames from "classnames";
+import { jsPDF } from "jspdf";
+import { toast } from "react-toastify";
+import Link from "next/link";
+import "jspdf-autotable";
+import { UserOptions } from "jspdf-autotable";
+import { useTranslation } from "react-i18next";
 
 // assets
-import cls from './PdfPrintShareFeatures.module.scss';
+import cls from "./PdfPrintShareFeatures.module.scss";
 
 // components
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 
 let cn = classNames.bind(cls);
 
@@ -20,8 +21,11 @@ interface PdfPrintShareFeaturesProps {
   className?: string;
 }
 
-export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => {
+export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (
+  props
+) => {
   const { className } = props;
+  const { t } = useTranslation();
 
   interface jsPDFCustom extends jsPDF {
     autoTable: (options: UserOptions) => void;
@@ -29,18 +33,20 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => 
 
   // for PDF
   const savePDFPage = () => {
-    console.log('savePDFPage is working!');
+    console.log("savePDFPage is working!");
     const doc = new jsPDF() as jsPDFCustom;
 
     // Set font to a Unicode-compatible font that supports Cyrillic characters
-    doc.setFont('helvetica', '', 'normal');
+    doc.setFont("helvetica", "", "normal");
 
     // replace with real data
-    const tableHead = [['Марка кабеля с сечением', 'Количество метров', 'Вес, кг']];
+    const tableHead = [
+      ["Марка кабеля с сечением", "Количество метров", "Вес, кг"],
+    ];
     const tableBody = [
-      ['Кабель АБВГ', '100', '10'],
-      ['Кабель ГВП', '50', '5'],
-      ['Кабель ПВ1', '25', '3'],
+      ["Кабель АБВГ", "100", "10"],
+      ["Кабель ГВП", "50", "5"],
+      ["Кабель ПВ1", "25", "3"],
     ];
 
     doc.setLineWidth(0.5);
@@ -52,14 +58,14 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => 
       body: tableBody,
 
       headStyles: {
-        font: 'helvetica',
-        fontStyle: 'normal',
-        halign: 'center',
+        font: "helvetica",
+        fontStyle: "normal",
+        halign: "center",
       },
       bodyStyles: {
-        font: 'helvetica',
-        fontStyle: 'normal',
-        halign: 'center',
+        font: "helvetica",
+        fontStyle: "normal",
+        halign: "center",
         cellPadding: 6,
       },
     });
@@ -68,7 +74,7 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => 
     doc.setDrawColor(0);
     doc.line(20, 70, 190, 70);
 
-    doc.save('kazkabel.pdf');
+    doc.save("kazkabel.pdf");
   };
 
   // for SHARE
@@ -76,14 +82,18 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => 
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl).then(
       () => {
-        toast('Ссылка скопирована в буфер обмена!', {
+        toast("Ссылка скопирована в буфер обмена!", {
           hideProgressBar: true,
           autoClose: 2000,
-          type: 'success',
+          type: "success",
         });
       },
       () => {
-        toast('Ошибка при копирований!', { hideProgressBar: true, autoClose: 2000, type: 'error' });
+        toast("Ошибка при копирований!", {
+          hideProgressBar: true,
+          autoClose: 2000,
+          type: "error",
+        });
       }
     );
   };
@@ -96,11 +106,11 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => 
         onClick={savePDFPage}
         theme={ThemeButton.CLEAR}
       >
-        Сохранить результат в PDF
+        {t("savePdf")}
       </Button>
 
-      <Link className={cn(cls.printBtn)} href={'/print/PrintPage'}>
-        Распечатать результаты
+      <Link className={cn(cls.printBtn)} href={"/print/PrintPage"}>
+        {t("getResults")}
       </Link>
 
       <Button
@@ -109,7 +119,7 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (props) => 
         onClick={sharePage}
         theme={ThemeButton.CLEAR}
       >
-        Поделиться
+        {t("share")}
       </Button>
     </div>
   );

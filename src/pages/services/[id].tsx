@@ -21,10 +21,12 @@ import { useEffect, useState } from "react";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ActiveHeaderPage } from "@/components/header/Header";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
 export default function Home() {
+  const { t } = useTranslation();
   const router = useRouter();
   let { id } = router.query;
 
@@ -35,7 +37,10 @@ export default function Home() {
     return (
       <article
         key={articleId}
-        className={cn(cls.servicesArticleIntro, isActive ? cls.active : cls.default)}
+        className={cn(
+          cls.servicesArticleIntro,
+          isActive ? cls.active : cls.default
+        )}
       >
         <Link href={`/services/${link}`}>
           <ArticleIcon
@@ -52,7 +57,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Сервисы</title>
+        <title>{t("list.services")}</title>
         <meta name="description" content="ТОО Almaty Kazkabel | Сервисы" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -69,7 +74,9 @@ export default function Home() {
             <Link href={"/services"} className={cn(cls.backBtn)}>
               <ServicesBackIcon />
             </Link>
-            <div className={cn(cls.serviceArticleIntroContainer)}>{showArticles}</div>
+            <div className={cn(cls.serviceArticleIntroContainer)}>
+              {showArticles}
+            </div>
 
             <div className={cn(cls.serviceArticleIntroContent)}>
               {id === "weight" ? (

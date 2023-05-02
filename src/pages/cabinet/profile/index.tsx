@@ -32,6 +32,8 @@ import { OkModal } from "@/components/cabinet/profile/okModal";
 import { ShowChangePassword } from "@/components/cabinet/profile/showChangePassword";
 import { ProfileService } from "@/services/Profile.service";
 
+import { useTranslation } from "react-i18next";
+
 export default function profilePage() {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showChangePhoneNumber, setShowChangePhoneNumber] = useState(false);
@@ -39,6 +41,7 @@ export default function profilePage() {
   const [numberOrEmail, setNumberOrEmail] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState(undefined);
+  const { t } = useTranslation();
   // DON'T FORGET TO USE GET USER ID IN ORDER TO SHOW EXACT USERS DATA INSTEAD OF USING PROFILE USER OR AUTH USER AND EVERYWHERE YOU HAVE THESE TWO IMPORTS
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
@@ -104,20 +107,20 @@ export default function profilePage() {
                     />
                     <div className={cls.userCard_datas}>
                       <p>
-                        <span>Имя: </span>
+                        <span>{t("name")}: </span>
                         {/* @ts-ignore */}
                         {user
                           ? user?.first_name + " " + user?.last_name
                           : authUser?.first_name + " " + authUser?.last_name}
                         {/* @ts-ignore */}
                         {}
-                        {!user && !authUser && "Ваше имя"}
+                        {!user && !authUser && t("yourName")}
                       </p>
                       <p>
                         <span>Email: </span>
                         {/* @ts-ignore */}
                         {user ? user?.email : authUser?.email}{" "}
-                        {!user && !authUser && "Ваш email"}
+                        {!user && !authUser && t("yourMail")}
                       </p>
                       <p>
                         <span>Номер телефона: </span>
@@ -125,7 +128,7 @@ export default function profilePage() {
                         {user
                           ? user?.phone_number
                           : authUser?.phone_number}{" "}
-                        {!user && !authUser && "Ваш номер"}
+                        {!user && !authUser && t("yourPhone")}
                       </p>
                     </div>
                   </div>
@@ -136,21 +139,21 @@ export default function profilePage() {
                       theme={ThemeButton.CLEAR}
                     >
                       <IconCabinetPassword />
-                      Сменить пароль
+                      {t("changePass")}
                     </Button>
                     <Button
                       onClick={() => setShowEditProfile(true)}
                       className={cls.userCard_btn}
                       theme={ThemeButton.CLEAR}
                     >
-                      <IconCabinetEdit /> Редактировать профиль
+                      <IconCabinetEdit /> {t("changeProfile")}
                     </Button>
                     <Button
                       onClick={() => setShowChangePhoneNumber(true)}
                       className={cls.userCard_btn}
                       theme={ThemeButton.CLEAR}
                     >
-                      <IconCabinetChangePhoneNumber /> Сменить телефон
+                      <IconCabinetChangePhoneNumber /> {t("changePhone")}
                     </Button>
                   </div>
                 </div>
@@ -161,7 +164,7 @@ export default function profilePage() {
       )}
 
       <div className={cls.recommended}>
-        <h2 className={cls.recommended_title}>Рекомендуем к покупке</h2>
+        <h2 className={cls.recommended_title}>{t("recom")}</h2>
         {/* <ul>
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />

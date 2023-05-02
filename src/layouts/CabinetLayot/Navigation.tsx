@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import classNames from 'classnames/bind';
-import cls from './CabinetLayout.module.scss';
-import Link from 'next/link';
+import { FC } from "react";
+import classNames from "classnames/bind";
+import cls from "./CabinetLayout.module.scss";
+import Link from "next/link";
 
 import {
   IconCabinetBonuses,
@@ -13,14 +13,16 @@ import {
   IconCabinetSupport,
   IconCabinetArrow,
   IconCabinetFlag,
-} from '@/assets/icons';
-import { ActiveCabinetPageEnum } from '@/layouts/CabinetLayot/CabinetLayout';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
+} from "@/assets/icons";
+import { ActiveCabinetPageEnum } from "@/layouts/CabinetLayot/CabinetLayout";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
 
-import { logOut } from '@/store/slices/AuthSlice';
-import { useAppDispatch } from '@/hooks/store';
-import { useRouter } from 'next/router';
+import { logOut } from "@/store/slices/AuthSlice";
+import { useAppDispatch } from "@/hooks/store";
+import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import { setAmount, setItems } from "@/store/slices/CartSlice";
 
 const cn = classNames.bind(cls);
 
@@ -31,70 +33,90 @@ interface NavigationProps {
 }
 
 export const enum ThemeNavigation {
-  MOBILE = 'mobile',
+  MOBILE = "mobile",
 }
 
 export const Navigation: FC<NavigationProps> = (props) => {
   const { className, activePage, theme } = props;
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const logoutHandler = () => {
     dispatch(logOut());
-    router.push('/');
+    dispatch(setAmount(0));
+    dispatch(setItems([]));
+    localStorage.clear();
+    router.push("/");
   };
 
   return (
-    <nav className={cn(cls.nav, className, { mobile: theme === ThemeNavigation.MOBILE })}>
+    <nav
+      className={cn(cls.nav, className, {
+        mobile: theme === ThemeNavigation.MOBILE,
+      })}
+    >
       <Link
         href="/cabinet/profile"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.PROFILE })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.PROFILE,
+        })}
       >
         <IconCabinetProfile />
-        <span>Мой профиль</span>
+        <span>{t("myProfile")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
         href="/cabinet/orders"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.ORDERS })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.ORDERS,
+        })}
       >
         <IconCabinetOrder />
-        <span>Мои заказы</span>
+        <span>{t("myOrders")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
         href="/cabinet/delivery"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.DELIVERY })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.DELIVERY,
+        })}
       >
         <IconCabinetDelivery />
-        <span>Адреса доставки</span>
+        <span>{t("addresses")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
         href="/cabinet/cards"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.CARDS })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.CARDS,
+        })}
       >
         <IconCabinetCards />
-        <span>Сохраненные карты</span>
+        <span>{t("saveCard")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
         href="/cabinet/bonuses"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.BONUSES })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.BONUSES,
+        })}
       >
         <IconCabinetBonuses />
-        <span>Накопленные бонусы</span>
+        <span>{t("bonuses")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
         href="/cabinet/currency"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.CURRENCY })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.CURRENCY,
+        })}
       >
         <IconCabinetFlag />
         <span>Валюта и ЛБМ</span>
@@ -103,22 +125,27 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
       <Link
         href="/cabinet/support"
-        className={cn(cls.nav_link, { active: activePage === ActiveCabinetPageEnum.SUPPORT })}
+        className={cn(cls.nav_link, {
+          active: activePage === ActiveCabinetPageEnum.SUPPORT,
+        })}
       >
         <IconCabinetSupport />
-        <span>Служба поддержки</span>
+        <span>{t("support")}</span>
         <IconCabinetArrow />
       </Link>
 
       <div className={cn(cls.nav_logoutBtnContainer)}>
         <IconCabinetLogout fillColor="#F6BF0C" />
         <Button theme={ThemeButton.CLEAR} onClick={logoutHandler}>
-          Выйти
+          {t("leave")}
         </Button>
       </div>
 
-      <Button className={cn(cls.nav_deleteAccountBtn)} theme={ThemeButton.CLEAR}>
-        Удалить аккаунт
+      <Button
+        className={cn(cls.nav_deleteAccountBtn)}
+        theme={ThemeButton.CLEAR}
+      >
+        {t("deleteAccount")}
       </Button>
     </nav>
   );

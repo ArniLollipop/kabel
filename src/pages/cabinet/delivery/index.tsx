@@ -26,7 +26,10 @@ import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
+import { useTranslation } from "react-i18next";
+
 export default function deliveryPage() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [addresses, setAddresses] = useState<any>();
@@ -94,14 +97,14 @@ export default function deliveryPage() {
             theme={ThemeButton.CLEAR}
           >
             <IconCardCounterPlus />
-            Добавить
+            {t("add")}
           </Button>
 
           <ul className={cls.delivery_adressList}>
             {addresses?.map((el: any) => {
               return (
                 <li key={el.id} className={cls.delivery_adressListItem}>
-                  <h2>Адрес доставки</h2>
+                  <h2>{t("dostavka")}</h2>
                   <span>
                     <IconCabinetProfile fillColor="#F6BF0C" />
                     {name}
@@ -126,7 +129,7 @@ export default function deliveryPage() {
                         name="default"
                         checked={el.is_default}
                       />
-                      По умолчанию
+                      {t("default")}
                     </label>
                     <Button
                       onClick={() => {
@@ -139,7 +142,7 @@ export default function deliveryPage() {
                       )}
                       theme={ThemeButton.CLEAR}
                     >
-                      <IconCabinetEdit /> Редактировать
+                      <IconCabinetEdit /> {t("update")}
                     </Button>
                     <Button
                       onClick={() => {
@@ -151,7 +154,7 @@ export default function deliveryPage() {
                       )}
                       theme={ThemeButton.CLEAR}
                     >
-                      Удалить
+                      {t("delete")}
                     </Button>
                   </div>
                 </li>

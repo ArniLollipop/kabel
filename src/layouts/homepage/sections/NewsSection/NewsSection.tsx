@@ -1,13 +1,14 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames/bind';
-import cls from './NewsSection.module.scss';
-import { Title } from '@/UI/Title/Title';
-import { NewsCard, ThemeNewsCard } from '@/components/newsCard/NewsCard';
-import ImageMockNewsCard from '@/assets/images/ImageMockNewsCard.png';
-import { newsI } from '@/types/NewsTypes';
-import { SwiperProps, SwiperSlide, Swiper } from 'swiper/react';
-import { Button } from '@/UI/Button';
-import { ThemeButton } from '@/UI/Button/ui/Button';
+import { FC, useState } from "react";
+import classNames from "classnames/bind";
+import cls from "./NewsSection.module.scss";
+import { Title } from "@/UI/Title/Title";
+import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
+import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
+import { newsI } from "@/types/NewsTypes";
+import { SwiperProps, SwiperSlide, Swiper } from "swiper/react";
+import { Button } from "@/UI/Button";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -27,10 +28,11 @@ interface NewsSectionProps {
 export const NewsSection: FC<NewsSectionProps> = (props) => {
   const { className, news } = props;
   const [myswiper, setSwiper] = useState<any>();
+  const { t } = useTranslation();
 
   return (
     <section className={cn(cls.NewsSection)}>
-      <Title className={cls.NewsSection_title}>Новости</Title>
+      <Title className={cls.NewsSection_title}>{t("list.news")}</Title>
 
       <div className={cls.NewsSection_slider}>
         <Swiper
@@ -48,7 +50,10 @@ export const NewsSection: FC<NewsSectionProps> = (props) => {
         <Button
           theme={ThemeButton.CLEAR}
           onClick={() => myswiper.slidePrev()}
-          className={cn(cls.NewsSection_sliderBtn, cls.NewsSection_sliderBtnPrev)}
+          className={cn(
+            cls.NewsSection_sliderBtn,
+            cls.NewsSection_sliderBtnPrev
+          )}
         >
           <svg
             width="11"
@@ -70,7 +75,10 @@ export const NewsSection: FC<NewsSectionProps> = (props) => {
         <Button
           theme={ThemeButton.CLEAR}
           onClick={() => myswiper.slideNext()}
-          className={cn(cls.NewsSection_sliderBtn, cls.NewsSection_sliderBtnNext)}
+          className={cn(
+            cls.NewsSection_sliderBtn,
+            cls.NewsSection_sliderBtnNext
+          )}
         >
           <svg
             width="11"

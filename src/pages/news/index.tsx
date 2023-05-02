@@ -1,20 +1,22 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames/bind';
-import cls from './index.module.scss';
-import { Title } from '@/UI/Title/Title';
-import { MainLayout } from '@/layouts/MainLayout';
-import { NewsCard, ThemeNewsCard } from '@/components/newsCard/NewsCard';
-import ImageMockNewsCard from '@/assets/images/ImageMockNewsCard.png';
-import { SwiperSlide, Swiper, SwiperProps } from 'swiper/react';
+import { FC, useState } from "react";
+import classNames from "classnames/bind";
+import cls from "./index.module.scss";
+import { Title } from "@/UI/Title/Title";
+import { MainLayout } from "@/layouts/MainLayout";
+import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
+import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
+import { SwiperSlide, Swiper, SwiperProps } from "swiper/react";
 
-import 'swiper/css';
-import Link from 'next/link';
-import { ActiveHeaderPage } from '@/components/header/Header';
-import { NewsService } from '@/services/News.service';
-import { newsI, NewsResponseI } from '@/types/NewsTypes';
-import { dateConverter } from '@/helpers/dateConverter';
+import "swiper/css";
+import Link from "next/link";
+import { ActiveHeaderPage } from "@/components/header/Header";
+import { NewsService } from "@/services/News.service";
+import { newsI, NewsResponseI } from "@/types/NewsTypes";
+import { dateConverter } from "@/helpers/dateConverter";
 
 const cn = classNames.bind(cls);
+
+import { useTranslation } from "react-i18next";
 
 const params: SwiperProps = {
   autoplay: {
@@ -58,18 +60,19 @@ interface newsPageI {
 
 export default function newsPage(props: newsPageI) {
   const { news } = props;
-  console.log('news is: ', news);
+  const { t } = useTranslation();
+  console.log("news is: ", news);
 
   const [myswiper, setSwiper] = useState<any>();
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       {/* PC implementation */}
       <div className={cn(cls.news)}>
-        <Title className={cls.news_title}>Новости</Title>
+        <Title className={cls.news_title}>{t("list.news")}</Title>
 
         <div className={cls.news_wrapper}>
           <div className={cls.news_content}>
-            <h3 className={cls.news_innerTitle}>Последние новости</h3>
+            <h3 className={cls.news_innerTitle}>{t("lastNews")}</h3>
 
             <Swiper
               className={cls.news_slider}
@@ -94,7 +97,11 @@ export default function newsPage(props: newsPageI) {
       <div className={cls.newsMobile}>
         {news.map((news) => (
           <div key={news.id}>
-            <NewsCard className={cls.news_newsCardMobile} theme={ThemeNewsCard.BLUE_BG} {...news} />
+            <NewsCard
+              className={cls.news_newsCardMobile}
+              theme={ThemeNewsCard.BLUE_BG}
+              {...news}
+            />
           </div>
         ))}
       </div>

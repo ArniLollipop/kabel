@@ -6,6 +6,7 @@ import { Modal } from "@/shared/modal/Modal";
 import { AddOrEditDelivery } from "../../components/cabinet/delivery/AddOrEditDelivery";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/store";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -16,6 +17,7 @@ interface CardPageProps {
 export const CardPage: FC<CardPageProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { className } = props;
+  const { t } = useTranslation();
 
   const { total_amount } = useAppSelector((state) => state.CartSlice);
 
@@ -31,7 +33,7 @@ export const CardPage: FC<CardPageProps> = (props) => {
     <div className={cn(cls.CardPage)}>
       {total_amount > 0 ? (
         <div className={cls.CardPage_wrapper}>
-          <h1 className={cls.CardPageTitle}>Корзина</h1>
+          <h1 className={cls.CardPageTitle}>{t("footer.cart")}</h1>
           <div className={cls.CardPageContent}>
             <GoodsList />
             <SideBar setIsOpen={setIsOpen} />
@@ -40,7 +42,7 @@ export const CardPage: FC<CardPageProps> = (props) => {
         </div>
       ) : (
         <div className={cls.Empty}>
-          <p className={cls.EmptyText}>У вас в корзине ничего нету...</p>
+          <p className={cls.EmptyText}>{t("nothing")}</p>
         </div>
       )}
     </div>

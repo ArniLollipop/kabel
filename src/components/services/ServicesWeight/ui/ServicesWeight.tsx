@@ -1,19 +1,20 @@
 // packages
-import { FC } from 'react';
-import classNames from 'classnames';
+import { FC } from "react";
+import classNames from "classnames";
 
 // assets
-import cls from './ServicesWeight.module.scss';
-import { Form, Formik } from 'formik';
-import { ServicesDeleteIcon } from '@/assets/icons';
+import cls from "./ServicesWeight.module.scss";
+import { Form, Formik } from "formik";
+import { ServicesDeleteIcon } from "@/assets/icons";
 
 // components
-import { InputInstance } from '@/shared/formElements/InputInstance';
-import { Button } from '@/UI/Button';
-import { EInputInstanceTheme } from '@/shared/formElements/InputInstance/ui/InputInstance';
-import { ThemeButton } from '@/UI/Button/ui/Button';
-import { ServicesToggleButtons } from '../../ServicesToggleButtons';
-import { PdfPrintShareFeatures } from '../../PdfPrintShareFeatures';
+import { InputInstance } from "@/shared/formElements/InputInstance";
+import { Button } from "@/UI/Button";
+import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
+import { ThemeButton } from "@/UI/Button/ui/Button";
+import { ServicesToggleButtons } from "../../ServicesToggleButtons";
+import { PdfPrintShareFeatures } from "../../PdfPrintShareFeatures";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -23,33 +24,42 @@ interface ServicesWeightProps {
 
 export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
   const { className } = props;
+  const { t } = useTranslation();
 
   return (
     <Formik
       initialValues={{
-        mark: '',
-        quantity: '',
-        weight: '',
+        mark: "",
+        quantity: "",
+        weight: "",
       }}
       onSubmit={(values) => {
-        console.log('values is: ', {
+        console.log("values is: ", {
           ...values,
         });
       }}
     >
-      {({ values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit }) => {
+      {({
+        values,
+        touched,
+        errors,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+      }) => {
         return (
           <Form>
             <div className={cn(cls.ServicesWeight)}>
               <div className={cn(cls.unit)}>
-                <h4>Единица измерения</h4>
+                <h4>{t("ediniza")}</h4>
 
                 <div className={cn(cls.unitToggleBtnContainer)}>
                   <ServicesToggleButtons
-                    weight={'weight'}
+                    weight={"weight"}
                     data={[
-                      { id: 1, children: 'Метры' },
-                      { id: 2, children: 'Килограммы' },
+                      { id: 1, children: "Метры" },
+                      { id: 2, children: "Килограммы" },
                     ]}
                   />
                 </div>
@@ -68,7 +78,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                     value={values.mark}
                     errors={errors.mark}
                     touched={touched.mark}
-                    labeltext={'Марка кабеля с сечение'}
+                    labeltext={"Марка кабеля с сечение"}
                     className={cls.markInput}
                   />
                 </div>
@@ -85,7 +95,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                     value={values.quantity}
                     errors={errors.quantity}
                     touched={touched.quantity}
-                    labeltext={'Кол-во метров'}
+                    labeltext={"Кол-во метров"}
                     className={cls.quantityInput}
                   />
                 </div>
@@ -102,7 +112,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                     value={values.weight}
                     errors={errors.weight}
                     touched={touched.weight}
-                    labeltext={'Вес, кг'}
+                    labeltext={"Вес, кг"}
                     className={cls.weightInput}
                   />
                 </div>
@@ -113,11 +123,15 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
               </div>
 
               <div className={cn(cls.addCableBtn)}>
-                <Button className={cn(cls.addCableBGIcon)} type="button" theme={ThemeButton.CLEAR}>
-                  Добавить кабель
+                <Button
+                  className={cn(cls.addCableBGIcon)}
+                  type="button"
+                  theme={ThemeButton.CLEAR}
+                >
+                  {t("addCabel")}
                 </Button>
-                <p>Общая длина кабеля: </p>
-                <p>Общий вес кабеля: </p>
+                <p>{t("length")}: </p>
+                <p>{t("weight")}: </p>
 
                 {/* <div className={cn(cls.resultContainer)}>
                 SHOW RESULT HERE

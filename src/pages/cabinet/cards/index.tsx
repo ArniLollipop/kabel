@@ -9,16 +9,26 @@ import IconPaymentVisa from "@/assets/icons/IconPaymentVisa.svg";
 import IconPaymentMC from "@/assets/icons/IconPaymentMC.svg";
 
 // components
-import { ActiveCabinetPageEnum, CabinetLayout } from "@/layouts/CabinetLayot/CabinetLayout";
+import {
+  ActiveCabinetPageEnum,
+  CabinetLayout,
+} from "@/layouts/CabinetLayot/CabinetLayout";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { AddCard } from "@/components/cabinet/cards/AddCard";
 
+import { useTranslation } from "react-i18next";
+
 export default function cardsPage() {
   const [showAddCard, setShowAddCard] = useState(false);
 
+  const { t } = useTranslation();
+
   return (
-    <CabinetLayout className={cls.cards_wrapper} activePage={ActiveCabinetPageEnum.CARDS}>
+    <CabinetLayout
+      className={cls.cards_wrapper}
+      activePage={ActiveCabinetPageEnum.CARDS}
+    >
       {showAddCard ? (
         <AddCard className={cls.form} setShowAddCard={setShowAddCard} />
       ) : (
@@ -29,15 +39,15 @@ export default function cardsPage() {
             theme={ThemeButton.CLEAR}
           >
             <IconCardCounterPlus />
-            Добавить
+            {t("add")}
           </Button>
           <div className={cls.cards}>
-            <h2>Сохраненные карты</h2>
+            <h2>{t("saveCard")}</h2>
 
             <ul className={cls.cards_list}>
               <li className={cls.cards_listItem}>
                 <div className={cls.cards_cardSkeleton}>
-                  <h3>Номер карты</h3>
+                  <h3>{t("cardNumber")}</h3>
 
                   <span className={cls.cards_cardNumber}>•••• 7777</span>
 
@@ -49,17 +59,21 @@ export default function cardsPage() {
 
                 <div className={cls.cards_btns}>
                   <label htmlFor="">
-                    <input type="radio" name="card" /> По умолчанию
+                    <input type="radio" name="card" />
+                    {t("default")}
                   </label>
 
-                  <Button className={cls.delivery_removeBtn} theme={ThemeButton.CLEAR}>
-                    Удалить
+                  <Button
+                    className={cls.delivery_removeBtn}
+                    theme={ThemeButton.CLEAR}
+                  >
+                    {t("delete")}
                   </Button>
                 </div>
               </li>
               <li className={cls.cards_listItem}>
                 <div className={cls.cards_cardSkeleton}>
-                  <h3>Номер карты</h3>
+                  <h3> {t("cardNumber")}</h3>
 
                   <span className={cls.cards_cardNumber}>•••• 7777</span>
 
@@ -71,11 +85,14 @@ export default function cardsPage() {
 
                 <div className={cls.cards_btns}>
                   <label htmlFor="">
-                    <input type="radio" name="card" /> По умолчанию
+                    <input type="radio" name="card" /> {t("default")}
                   </label>
 
-                  <Button className={cls.delivery_removeBtn} theme={ThemeButton.CLEAR}>
-                    Удалить
+                  <Button
+                    className={cls.delivery_removeBtn}
+                    theme={ThemeButton.CLEAR}
+                  >
+                    {t("delete")}
                   </Button>
                 </div>
               </li>

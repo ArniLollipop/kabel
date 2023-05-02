@@ -16,6 +16,7 @@ import { productI } from "@/types/ProductTypes";
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -30,6 +31,7 @@ interface ProductCardItemProps extends productI {
 }
 
 export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
+  const { t } = useTranslation();
   const { className, theme = ThemeProductCard.CATALOG } = props;
   const dispatch = useAppDispatch();
   const [cart, setCart] = useState<number>(0);
@@ -53,7 +55,9 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
       );
       dispatch(setAmount(res.data.result.total_amount));
       dispatch(setItems(res.data.result.items));
-    } catch (err) {}
+    } catch (err) {
+      window.location.replace("/auth");
+    }
   }
 
   async function handleMinus() {
@@ -144,7 +148,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
             theme={ThemeButton.CARD}
             className={cls.cardAddBtn}
           >
-            В&nbsp;корзину
+            В&nbsp;{t("toCart")}
           </Button>
         ) : (
           <div className={cls.cartBtn}>
@@ -192,7 +196,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
           </div>
         )}
         <Link href={`/catalog/${props.code}`} className={cls.cardMoreBtn}>
-          Подробнее
+          {t("another")}
         </Link>
       </div>
     </li>
