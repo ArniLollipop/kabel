@@ -1,16 +1,17 @@
-import { FC, useState } from 'react';
-import classNames from 'classnames/bind';
-import cls from './SertificatesSection.module.scss';
-import { Title } from '@/UI/Title/Title';
-import Link from 'next/link';
-import Image from 'next/image';
-import ImageMockSertificate from '@/assets/images/ImageMockSertificate.png';
-import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react';
+import { FC, useState } from "react";
+import classNames from "classnames/bind";
+import cls from "./SertificatesSection.module.scss";
+import { Title } from "@/UI/Title/Title";
+import Link from "next/link";
+import Image from "next/image";
+import ImageMockSertificate from "@/assets/images/ImageMockSertificate.png";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { useTranslation } from "react-i18next";
 
-import 'swiper/css';
+import "swiper/css";
 
-import { Button, ThemeButton } from '@/UI/Button/ui/Button';
-import { sertificateI } from '@/types/SertificateTypes';
+import { Button, ThemeButton } from "@/UI/Button/ui/Button";
+import { sertificateI } from "@/types/SertificateTypes";
 
 const cn = classNames.bind(cls);
 
@@ -21,6 +22,7 @@ interface ServicesSectionProps {
 
 export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
   const { sertificates } = props;
+  const { t } = useTranslation();
 
   const [myswiper, setSwiper] = useState<any>({});
 
@@ -62,12 +64,23 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
 
   return (
     <section className={cn(cls.SertificatesSection)}>
-      <Title className={cls.SertificatesSection_title}>Сертификаты</Title>
+      <Title className={cls.SertificatesSection_title}>
+        {t("sertificates")}
+      </Title>
 
-      <Swiper {...params} className={cls.slider} onSwiper={(swiper) => setSwiper(swiper)}>
+      <Swiper
+        {...params}
+        className={cls.slider}
+        onSwiper={(swiper) => setSwiper(swiper)}
+      >
         {sertificates?.map((sert) => (
           <SwiperSlide key={sert.id}>
-            <Image src={sert.image} alt="Sertificate" width={234} height={351} />
+            <Image
+              src={sert.image}
+              alt="Sertificate"
+              width={234}
+              height={351}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -24,7 +24,16 @@ export const useHttp = (ctx?: NextPageContext) => {
 
       if (token) config.headers["Authorization"] = `Bearer ${token}`;
 
-      const lang = localStorage.getItem("lang") || "";
+      let b = document.cookie;
+
+      let lang = "";
+
+      if (b.includes("ru")) {
+        lang = "ru";
+      } else if (b.includes("kz")) {
+        lang = "kz";
+      }
+
       if (lang) config.headers["Accept-Language"] = lang.toLowerCase();
     }
     return config;

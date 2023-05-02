@@ -4,10 +4,8 @@
 const nextConfig = {
   reactStrictMode: true,
   i18n: {
-    lng: "ru",
-
-    defaultLocale: "ru",
     locales: ["ru", "kz"],
+    defaultLocale: "ru",
   },
   images: {
     domains: ["api.cable.kz", "kazkabel-back.zoom-app.kz"],

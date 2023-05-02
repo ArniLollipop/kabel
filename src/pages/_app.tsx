@@ -14,6 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
     }
+    const lng = document.cookie;
+    if (!lng.includes("ru") && !lng.includes("kz")) {
+      document.cookie = "i18next=ru";
+    }
   }, []);
 
   return (

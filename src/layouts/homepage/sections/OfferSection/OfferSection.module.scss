@@ -88,6 +88,9 @@
   position: absolute;
   bottom: 30%;
   left: 10;
+  @media (max-width: 640px) {
+    bottom: 15%;
+  }
 }
 
 .offerPagination {

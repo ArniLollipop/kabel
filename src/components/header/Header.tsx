@@ -176,7 +176,7 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconUserCabinet className={cls["icon"]} />
               {/* @ts-ignore */}
               <span>
-                {first_name || authUser?.first_name || "Личный Кабинет"}
+                {first_name || authUser?.first_name || t("header.account")}
               </span>
             </Link>
           </li>
