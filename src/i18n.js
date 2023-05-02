@@ -8,6 +8,8 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    lng: "ru",
+    defaultLocale: "ru",
     debug: true,
     whitelist: ["kz", "ru"],
     debug: false,
