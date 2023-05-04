@@ -49,6 +49,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
         location: location === "В воздухе" ? "в воздухе" : "в земле",
       });
       setPowers(res.data.powers);
+      setPower(res.data.powers[0]);
     } catch {}
   }
 
@@ -185,13 +186,16 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       theme={EInputInstanceTheme.SERVICES}
                       id="selectOfUsing"
                       name="selectOfUsing"
-                      labeltext={"Результат:"}
+                      labeltext={"Расчет сечения кабеля:"}
                       onChange={(e) => setRes(parseFloat(e.target.value))}
                       value={res}
                       disabled
                     >
                       <option key={res} value={res}>
-                        {res}
+                        {res} мм
+                        <sup>
+                          <small>2</small>
+                        </sup>
                       </option>
                     </InputInstance>
                   </div>
