@@ -13,7 +13,6 @@ export const ServicesLayout: FC<PropsWithChildren> = ({ children }) => {
     <>
       <div className={cn(cls.Services)}>
         <Title className={cn(cls.servicesTitle)}>{t("list.services")}</Title>
-
         <section className={cn(cls.container)}>{children}</section>
       </div>
     </>

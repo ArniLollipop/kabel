@@ -1,10 +1,10 @@
 .container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-gap: 25px;
-  max-width: 1800px;
+  max-width: 1440px;
   height: auto;
-  margin: 77px 30px 120px 30px;
+  margin: 100px auto;
   padding: 90px 39px;
   background-color: var(--services-bg-color);
   border-radius: 20px;
