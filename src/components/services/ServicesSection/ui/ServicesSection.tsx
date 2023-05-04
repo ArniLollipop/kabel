@@ -34,9 +34,9 @@ const selectKvt = [10, 11, 12];
 export const ServicesSection: FC<ServicesSectionProps> = (props) => {
   const { className } = props;
   const { t } = useTranslation();
-  const [metal, setMetal] = useState<string>();
-  const [voltage, setVoltage] = useState<string>();
-  const [location, setLocation] = useState<string>();
+  const [metal, setMetal] = useState<string>("Медь (Cu)");
+  const [voltage, setVoltage] = useState<string>("1-фазная (220 В)");
+  const [location, setLocation] = useState<string>("В воздухе");
   const [powers, setPowers] = useState<any>();
   const [power, setPower] = useState<any>();
   const [res, setRes] = useState<any>();

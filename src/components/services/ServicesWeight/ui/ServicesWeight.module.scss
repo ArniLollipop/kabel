@@ -42,6 +42,9 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       background-color: white;
       padding: 19px 24px;
+      @media (max-width: 768px) {
+        padding: 9px 12px;
+      }
 
       &:nth-child(2n + 2) {
         background-color: #f7f6fe;
@@ -55,6 +58,8 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e6e6e7;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .tablesScroll input[type="radio"] + label {
@@ -68,6 +73,12 @@
   padding-top: 0px;
   position: relative;
   cursor: pointer;
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+  @media (max-width: 640px) {
+    font-size: 14px;
+  }
 }
 
 .tablesScroll input[type="radio"]:checked + label {
@@ -100,4 +111,11 @@
 
 .end {
   text-align: end;
+}
+
+.widthLong {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

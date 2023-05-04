@@ -139,7 +139,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                         item;
                       return (
                         <div key={id} className={cls.items}>
-                          <p>{cable_type} кг</p>
+                          <p className={cls.widthLong}>{cable_type} кг</p>
                           <p className={cls.center}>{weight_660v} кг</p>
                           <p className={cls.center}>{weight_1000v}</p>
                         </div>
