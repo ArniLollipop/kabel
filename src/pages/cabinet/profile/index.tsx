@@ -35,29 +35,35 @@ import { ProfileService } from "@/services/Profile.service";
 import { useTranslation } from "react-i18next";
 
 export default function profilePage() {
-  const [showEditProfile, setShowEditProfile] = useState(false);
-  const [showChangePhoneNumber, setShowChangePhoneNumber] = useState(false);
-  const [showChangePassword, setShowChangePassword] = useState(false);
-  const [numberOrEmail, setNumberOrEmail] = useState("");
+  const [showEditProfile, setShowEditProfile] = useState<boolean>(false);
+  const [showChangePhoneNumber, setShowChangePhoneNumber] =
+    useState<boolean>(false);
+  const [showChangePassword, setShowChangePassword] = useState<boolean>(false);
+  const [numberOrEmail, setNumberOrEmail] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState<any>();
+  const { user: authUser } = useAppSelector((state) => state.AuthSlice);
+
   const { t } = useTranslation();
   // DON'T FORGET TO USE GET USER ID IN ORDER TO SHOW EXACT USERS DATA INSTEAD OF USING PROFILE USER OR AUTH USER AND EVERYWHERE YOU HAVE THESE TWO IMPORTS
-  const { user: authUser } = useAppSelector((state) => state.AuthSlice);
-  const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
 
   const getUser = async () => {
-    if (authUser?.id) {
-      const res = await ProfileService().getExactUser(authUser?.id);
+    let temp = JSON.parse(localStorage.getItem("user"));
+    if (temp) {
+      const res = await ProfileService().getExactUser(temp.id);
       setUser(res);
-      console.log("exact user is: ", res);
-      console.log("exact user avatar is: ", res.avatar);
     }
   };
 
   useEffect(() => {
     getUser();
-  }, [authUser]);
+  }, [
+    showEditProfile,
+    showChangePhoneNumber,
+    showChangePassword,
+    numberOrEmail,
+    showModal,
+  ]);
 
   return (
     <CabinetLayout
@@ -70,7 +76,7 @@ export default function profilePage() {
         </Modal>
       )}
       {showEditProfile ? (
-        <ShowEditProfile setShowEditProfile={setShowEditProfile} />
+        <ShowEditProfile user={user} setShowEditProfile={setShowEditProfile} />
       ) : showChangePhoneNumber ? (
         <ShowChangePhoneNumber
           setNumberOrEmail={setNumberOrEmail}
@@ -87,7 +93,7 @@ export default function profilePage() {
         <Formik
           initialValues={{
             // @ts-ignore
-            avatar: user?.avatar,
+            avatar: user && user?.avatar,
           }}
           onSubmit={(values) => {
             console.log("values is: ", {
@@ -108,27 +114,16 @@ export default function profilePage() {
                     <div className={cls.userCard_datas}>
                       <p>
                         <span>{t("name")}: </span>
-                        {/* @ts-ignore */}
-                        {user
-                          ? user?.first_name + " " + user?.last_name
-                          : authUser?.first_name + " " + authUser?.last_name}
-                        {/* @ts-ignore */}
-                        {}
-                        {!user && !authUser && t("yourName")}
+                        {user && user?.first_name + " " + user?.last_name}
+                        {!user && t("yourName")}
                       </p>
                       <p>
                         <span>Email: </span>
-                        {/* @ts-ignore */}
-                        {user ? user?.email : authUser?.email}{" "}
-                        {!user && !authUser && t("yourMail")}
+                        {user && user?.email} {!user && t("yourMail")}
                       </p>
                       <p>
                         <span>Номер телефона: </span>
-                        {/* @ts-ignore */}
-                        {user
-                          ? user?.phone_number
-                          : authUser?.phone_number}{" "}
-                        {!user && !authUser && t("yourPhone")}
+                        {user && user?.phone_number} {!user && t("yourPhone")}
                       </p>
                     </div>
                   </div>
@@ -163,14 +158,14 @@ export default function profilePage() {
         </Formik>
       )}
 
-      <div className={cls.recommended}>
+      {/* <div className={cls.recommended}>
         <h2 className={cls.recommended_title}>{t("recom")}</h2>
-        {/* <ul>
+        <ul>
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
           <ProductCardItem className={cls.recommended_item} theme={ThemeProductCard.MINI} />
-        </ul> */}
-      </div>
+        </ul>
+      </div> */}
     </CabinetLayout>
   );
 }

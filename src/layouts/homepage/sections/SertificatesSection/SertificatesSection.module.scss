@@ -51,4 +51,11 @@
     text-underline-offset: 3px;
     text-decoration-thickness: 2px;
   }
+
+  @media (max-width: 425px) {
+    &__img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
 }

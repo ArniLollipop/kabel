@@ -91,17 +91,6 @@ export const Navigation: FC<NavigationProps> = (props) => {
       </Link>
 
       <Link
-        href="/cabinet/cards"
-        className={cn(cls.nav_link, {
-          active: activePage === ActiveCabinetPageEnum.CARDS,
-        })}
-      >
-        <IconCabinetCards />
-        <span>{t("saveCard")}</span>
-        <IconCabinetArrow />
-      </Link>
-
-      <Link
         href="/cabinet/bonuses"
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.BONUSES,

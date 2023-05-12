@@ -66,7 +66,9 @@ export const useHttp = (ctx?: NextPageContext) => {
           nookies.set(ctx, "token", response.data.access_token);
           return http.request(originalRequest);
         } catch (e) {
-          console.error(`Error from Http`, e);
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+          location.reload();
         }
       }
 

@@ -102,8 +102,8 @@ export const ProfileService = (
     sms_code: string,
     token: string
   ): Promise<AxiosResponse<any>> => {
-    const res = await axios.post<any>(
-      "https://kazkabel-back.zoom-app.kz/users/sms_code_verification/",
+    const res = await useHttp().post(
+      endpoints.compareSmsCodes,
       {
         sms_code,
       },

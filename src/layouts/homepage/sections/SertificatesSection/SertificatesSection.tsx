@@ -56,8 +56,8 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
       },
       320: {
         slidesPerView: 1,
-        spaceBetween: 10,
-        centeredSlides: true,
+        spaceBetween: 0,
+        centeredSlides: false,
       },
     },
   };
@@ -76,6 +76,7 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
         {sertificates?.map((sert) => (
           <SwiperSlide key={sert.id}>
             <Image
+              className={cls.slider__img}
               src={sert.image}
               alt="Sertificate"
               width={234}

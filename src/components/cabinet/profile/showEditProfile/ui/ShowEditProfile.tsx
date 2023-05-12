@@ -26,6 +26,7 @@ let cn = classNames.bind(cls);
 interface ShowEditProfileProps {
   className?: string;
   setShowEditProfile: (value: boolean) => void;
+  user?: any;
 }
 
 export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
@@ -34,24 +35,24 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
   const [disabledBtn] = useState(!!authUser?.phone_number);
   const dispatch = useAppDispatch();
-  const { className, setShowEditProfile } = props;
+  const { className, setShowEditProfile, user } = props;
 
   return (
     <div className={cn(cls.ShowEditProfile)}>
       <Formik
         initialValues={{
           // @ts-ignore
-          phone_number: profileUser?.phone_number || authUser?.phone_number,
+          phone_number: user?.phone_number || authUser?.phone_number,
           // @ts-ignore
-          email: profileUser?.email || authUser?.email || "",
+          email: user?.email || authUser?.email || "",
           // @ts-ignore
-          first_name: profileUser?.first_name || authUser?.first_name || "",
+          first_name: user?.first_name || authUser?.first_name || "",
           // @ts-ignore
-          last_name: profileUser?.last_name || authUser?.last_name || "",
+          last_name: user?.last_name || authUser?.last_name || "",
           // @ts-ignore
-          middle_name: profileUser?.middle_name || authUser?.middle_name || "",
+          middle_name: user?.middle_name || authUser?.middle_name || "",
           // @ts-ignore
-          avatar: profileUser?.avatar || authUser?.avatar || null,
+          avatar: user?.avatar || authUser?.avatar || null,
         }}
         validationSchema={profileSchema}
         onSubmit={(values) => {

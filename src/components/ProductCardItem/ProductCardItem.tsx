@@ -128,7 +128,11 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
 
       <div className={cls.cardInfo}>
         <Link href={`/catalog/${props.code}`} className={cls.link}>
-          <h3 className={cls.cardTitle}>{props.name}</h3>
+          <h3 className={cls.cardTitle}>
+            {props.name.length > 20
+              ? `${props.name.slice(0, 17)}...`
+              : props.name}
+          </h3>
         </Link>
         <p className={cls.cardDescr}>
           {props.description
