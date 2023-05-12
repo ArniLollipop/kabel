@@ -100,6 +100,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                 setErrorMessage("");
                 setIsSmsCodeSend(true);
               }
+              location.reload();
             } catch (error: any) {
               const {
                 response: { data },

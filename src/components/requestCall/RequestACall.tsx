@@ -9,6 +9,7 @@ import { ThemeButton } from "@/UI/Button/ui/Button";
 import { requestACallSchema } from "@/helpers/validation";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { useHttp } from "@/hooks/useHttp";
 
 interface RequestACallProps {
   className?: string;
@@ -19,6 +20,8 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
   const { className, setIsOpen } = props;
   const { t } = useTranslation();
 
+  async function callRequest() {}
+
   return (
     <div className={cls.RequestACall}>
       <Formik
@@ -28,27 +31,31 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
           requestACallTextarea: "",
         }}
         validationSchema={requestACallSchema}
-        onSubmit={(values) => {
-          console.log("values is: ", {
-            ...values,
-            requestACallPhoneNumber: values.requestACallPhoneNumber.replace(
-              /\D+/g,
-              ""
-            ),
-          });
+        onSubmit={async (values) => {
+          try {
+            const res = await useHttp().post("main/call_requests/", {
+              full_name: values.requestACallName,
+              phone_number: values.requestACallPhoneNumber,
+              message: values.requestACallTextarea,
+            });
+            toast("Заказ на звонок получен!", {
+              hideProgressBar: true,
+              autoClose: 2000,
+              type: "success",
+            });
+            values.requestACallName = "";
+            values.requestACallPhoneNumber = "";
+            values.requestACallTextarea = "";
+          } catch {
+            toast("Ошибка!", {
+              hideProgressBar: true,
+              autoClose: 2000,
+              type: "error",
+            });
+          }
           // if it is success
-          toast("Заказ на звонок получен!", {
-            hideProgressBar: true,
-            autoClose: 2000,
-            type: "success",
-          });
 
           // if it is error
-          toast("Ошибка!", {
-            hideProgressBar: true,
-            autoClose: 2000,
-            type: "error",
-          });
         }}
       >
         {({ values, touched, errors, handleChange, handleBlur }) => {

@@ -51,19 +51,16 @@ export default function profilePage() {
     let temp = JSON.parse(localStorage.getItem("user"));
     if (temp) {
       const res = await ProfileService().getExactUser(temp.id);
+      console.log("====================================");
+      console.log(res);
+      console.log("====================================");
       setUser(res);
     }
   };
 
   useEffect(() => {
     getUser();
-  }, [
-    showEditProfile,
-    showChangePhoneNumber,
-    showChangePassword,
-    numberOrEmail,
-    showModal,
-  ]);
+  }, [authUser]);
 
   return (
     <CabinetLayout
@@ -76,7 +73,7 @@ export default function profilePage() {
         </Modal>
       )}
       {showEditProfile ? (
-        <ShowEditProfile user={user} setShowEditProfile={setShowEditProfile} />
+        <ShowEditProfile setShowEditProfile={setShowEditProfile} />
       ) : showChangePhoneNumber ? (
         <ShowChangePhoneNumber
           setNumberOrEmail={setNumberOrEmail}

@@ -15,18 +15,31 @@ import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { HistoryOrdersSlider } from "@/components/HistoryOrdersSlider/HistoryOrdersSlider";
 import { SwiperProps } from "swiper/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "@/shared/modal/Modal";
 import { RequestACall } from "@/components/requestCall/RequestACall";
 
 import { useTranslation } from "react-i18next";
+import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
 export default function supportPage() {
   const { t } = useTranslation();
+  const [question, setQuestion] = useState<any>();
 
   const [isOpen, setIsOpen] = useState(false);
+
+  async function getQuestions() {
+    try {
+      const res = await useHttp().get("main/problem_qas/");
+      setQuestion(res.data.results);
+    } catch {}
+  }
+
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
   const params: SwiperProps = {
     loop: true,
@@ -74,138 +87,41 @@ export default function supportPage() {
             <div className={cls.support_accordion}>
               <h3>Проблема</h3>
               <Accordion alwaysOpen={true}>
-                <AccordionItem>
-                  {({ open }: { open: boolean }) => (
-                    <>
-                      <AccordionHeader className={cls.support_accHeader}>
-                        <h4>{t("brak")}</h4>
-                        <svg
-                          className={cn(cls.support_accHeader_arrow, {
-                            support_accHeader_arrowActive: open,
-                          })}
-                          width="15"
-                          height="9"
-                          viewBox="0 0 15 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                            stroke="#39424B"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </AccordionHeader>
-                      <AccordionBody className={cls.support_accDescr}>
-                        <p>{t("ribaText")}</p>
-                      </AccordionBody>
-                    </>
-                  )}
-                </AccordionItem>
-
-                <AccordionItem>
-                  {({ open }: { open: boolean }) => (
-                    <>
-                      <AccordionHeader className={cls.support_accHeader}>
-                        <h4>{t("notDelivery")}</h4>
-                        <svg
-                          className={cn(cls.support_accHeader_arrow, {
-                            support_accHeader_arrowActive: open,
-                          })}
-                          width="15"
-                          height="9"
-                          viewBox="0 0 15 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                            stroke="#39424B"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </AccordionHeader>
-                      <AccordionBody className={cls.support_accDescr}>
-                        <p>{t("ribaText")}</p>
-                      </AccordionBody>
-                    </>
-                  )}
-                </AccordionItem>
-
-                <AccordionItem>
-                  {({ open }: { open: boolean }) => (
-                    <>
-                      <AccordionHeader className={cls.support_accHeader}>
-                        <h4>{t("notTovar")}</h4>
-                        <svg
-                          className={cn(cls.support_accHeader_arrow, {
-                            support_accHeader_arrowActive: open,
-                          })}
-                          width="15"
-                          height="9"
-                          viewBox="0 0 15 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                            stroke="#39424B"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </AccordionHeader>
-                      <AccordionBody className={cls.support_accDescr}>
-                        <p>{t("ribaText")}</p>
-                      </AccordionBody>
-                    </>
-                  )}
-                </AccordionItem>
-
-                <AccordionItem>
-                  {({ open }: { open: boolean }) => (
-                    <>
-                      <AccordionHeader
-                        className={cn(cls.support_accHeader, {
-                          support_accHeader_active: open,
-                        })}
-                      >
-                        <h4>{t("notAll")}</h4>
-                        <svg
-                          className={cn(cls.support_accHeader_arrow, {
-                            support_accHeader_arrowActive: open,
-                          })}
-                          width="15"
-                          height="9"
-                          viewBox="0 0 15 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                            stroke="#39424B"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </AccordionHeader>
-
-                      <AccordionBody
-                        className={cn(cls.support_accDescr, {
-                          support_accDescr_active: open,
-                        })}
-                      >
-                        <p>{t("ribaText")}</p>
-                      </AccordionBody>
-                    </>
-                  )}
-                </AccordionItem>
+                {question &&
+                  question?.map((el: any) => {
+                    return (
+                      <AccordionItem>
+                        {({ open }: { open: boolean }) => (
+                          <>
+                            <AccordionHeader className={cls.support_accHeader}>
+                              <h4>{el.question}</h4>
+                              <svg
+                                className={cn(cls.support_accHeader_arrow, {
+                                  support_accHeader_arrowActive: open,
+                                })}
+                                width="15"
+                                height="9"
+                                viewBox="0 0 15 9"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
+                                  stroke="#39424B"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </AccordionHeader>
+                            <AccordionBody className={cls.support_accDescr}>
+                              <p>{el.answer}</p>
+                            </AccordionBody>
+                          </>
+                        )}
+                      </AccordionItem>
+                    );
+                  })}
               </Accordion>
 
               <Button

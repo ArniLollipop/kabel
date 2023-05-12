@@ -87,6 +87,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                   setShowChangePassword(false);
                   setShowModal(true);
                 }
+                location.reload();
               } catch (error) {
                 console.log("error inside changePasswordFinal is: ", error);
                 // @ts-ignore

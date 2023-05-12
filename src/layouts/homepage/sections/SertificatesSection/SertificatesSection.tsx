@@ -26,6 +26,8 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
 
   const [myswiper, setSwiper] = useState<any>({});
 
+  const [choice, setChoice] = useState<any>();
+
   const params: SwiperProps = {
     autoplay: {
       delay: 3000,
@@ -63,67 +65,88 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
   };
 
   return (
-    <section className={cn(cls.SertificatesSection)}>
-      <Title className={cls.SertificatesSection_title}>
-        {t("sertificates")}
-      </Title>
-
-      <Swiper
-        {...params}
-        className={cls.slider}
-        onSwiper={(swiper) => setSwiper(swiper)}
-      >
-        {sertificates?.map((sert) => (
-          <SwiperSlide key={sert.id}>
+    <>
+      {choice && (
+        <>
+          <div onClick={() => setChoice("")} className={cls.modal}></div>
+          <div className={cls.modalInner}>
+            <button onClick={() => setChoice("")} className={cls.modalClose}>
+              X
+            </button>
             <Image
               className={cls.slider__img}
-              src={sert.image}
+              src={sertificates[0]?.image}
               alt="Sertificate"
-              width={234}
-              height={351}
+              width={500}
+              height={700}
             />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          </div>
+        </>
+      )}
 
-      <Button
-        className={cls.slider_next}
-        theme={ThemeButton.CLEAR}
-        onClick={() => myswiper.slideNext()}
-      >
-        <svg
-          width="7"
-          height="11"
-          viewBox="0 0 7 11"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      <section className={cn(cls.SertificatesSection)}>
+        <Title className={cls.SertificatesSection_title}>
+          {t("sertificates")}
+        </Title>
+
+        <Swiper
+          {...params}
+          className={cls.slider}
+          onSwiper={(swiper) => setSwiper(swiper)}
         >
-          <path
-            d="M0.966797 10.1004L5.5668 5.50039L0.966797 0.900391"
-            stroke="#F6BF0C"
-            strokeLinecap="square"
-          />
-        </svg>
-      </Button>
-      <Button
-        className={cls.slider_prev}
-        theme={ThemeButton.CLEAR}
-        onClick={() => myswiper.slidePrev()}
-      >
-        <svg
-          width="7"
-          height="11"
-          viewBox="0 0 7 11"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          {sertificates?.map((sert) => (
+            <SwiperSlide key={sert.id}>
+              <Image
+                onClick={() => setChoice(sert.image)}
+                className={cls.slider__img}
+                src={sert.image}
+                alt="Sertificate"
+                width={234}
+                height={351}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <Button
+          className={cls.slider_next}
+          theme={ThemeButton.CLEAR}
+          onClick={() => myswiper.slideNext()}
         >
-          <path
-            d="M6.0332 10.1004L1.4332 5.50039L6.0332 0.900391"
-            stroke="#F6BF0C"
-            strokeLinecap="square"
-          />
-        </svg>
-      </Button>
-    </section>
+          <svg
+            width="7"
+            height="11"
+            viewBox="0 0 7 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.966797 10.1004L5.5668 5.50039L0.966797 0.900391"
+              stroke="#F6BF0C"
+              strokeLinecap="square"
+            />
+          </svg>
+        </Button>
+        <Button
+          className={cls.slider_prev}
+          theme={ThemeButton.CLEAR}
+          onClick={() => myswiper.slidePrev()}
+        >
+          <svg
+            width="7"
+            height="11"
+            viewBox="0 0 7 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.0332 10.1004L1.4332 5.50039L6.0332 0.900391"
+              stroke="#F6BF0C"
+              strokeLinecap="square"
+            />
+          </svg>
+        </Button>
+      </section>
+    </>
   );
 };
