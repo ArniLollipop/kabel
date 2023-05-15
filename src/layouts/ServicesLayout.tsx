@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react";
 import { Title } from "@/UI/Title/Title";
 import classNames from "classnames";
 import cls from "../components/services/ServicesLayout.module.scss";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

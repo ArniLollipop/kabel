@@ -32,7 +32,7 @@ import { OkModal } from "@/components/cabinet/profile/okModal";
 import { ShowChangePassword } from "@/components/cabinet/profile/showChangePassword";
 import { ProfileService } from "@/services/Profile.service";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function profilePage() {
   const [showEditProfile, setShowEditProfile] = useState<boolean>(false);

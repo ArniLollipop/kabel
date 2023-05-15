@@ -5,7 +5,7 @@ import ReactPinInput from "react-pin-input";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ProfileService } from "@/services/Profile.service";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

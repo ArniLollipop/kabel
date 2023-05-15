@@ -136,7 +136,11 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconPhone className={cls["icon"]} />
               <span className={cls["phone"]}>8 800 070 47 98</span>
             </a>
-            <span className={cls["phone-descr"]}>{t("header.free")}</span>
+            <span className={cls["phone-descr"]}>
+              {t("header.free") ? t("header.free") : ""}
+
+              {}
+            </span>
 
             <a
               href="tel:+77273014798"
@@ -176,7 +180,9 @@ export const Header: FC<HeaderProps> = (props) => {
               <IconUserCabinet className={cls["icon"]} />
               {/* @ts-ignore */}
               <span>
-                {first_name || authUser?.first_name || t("header.account")}
+                {}
+
+                {first_name || authUser?.first_name || t("header.free")}
               </span>
             </Link>
           </li>
@@ -226,18 +232,37 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.ABOUT,
               })}
             >
-              <Link href="/about">{t("list.company")}</Link>
+              <Link href="/about">
+                {t("list.company") ? t("list.company") : ""}
+                {}
+              </Link>
             </li>
 
             <li className={cn(cls.nav_list_item, cls.catalogLink)}>
-              <Link href="/catalog">{t("list.product")}</Link>
+              <Link
+                onMouseEnter={() => setActiveCat(categories[0].name)}
+                href="/catalog"
+              >
+                {t("list.product") ? t("list.product") : ""}
+
+                {}
+              </Link>
 
               <div className={cn(cls.hovered)}>
                 <nav className={cls.hovered_nav}>
                   {categories?.map((cat: any) => (
                     <Link
+                      onClick={() => {
+                        localStorage.setItem(
+                          "cat",
+                          JSON.stringify({
+                            cat: cat.name,
+                            subcat: "",
+                          })
+                        );
+                      }}
                       className={cls.hovered_navLink}
-                      href={"/catalog/" + cat.name}
+                      href={"/catalog"}
                       onMouseEnter={() => setActiveCat(cat.name)}
                       key={cat.name}
                     >
@@ -252,8 +277,17 @@ export const Header: FC<HeaderProps> = (props) => {
                       >
                         {cat.subcategory_set.map((subcat: any) => (
                           <Link
+                            onClick={() => {
+                              localStorage.setItem(
+                                "cat",
+                                JSON.stringify({
+                                  cat: cat.name,
+                                  subcat: subcat.name,
+                                })
+                              );
+                            }}
                             className={cls.hovered_contentLink}
-                            href="/catalog"
+                            href={`/catalog`}
                             key={subcat.name}
                           >
                             {subcat.name}
@@ -271,7 +305,11 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.SERVICES,
               })}
             >
-              <Link href="/services">{t("list.services")}</Link>
+              <Link href="/services">
+                {t("list.services") ? t("list.services") : ""}
+
+                {}
+              </Link>
             </li>
 
             <li
@@ -279,7 +317,11 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.NEWS,
               })}
             >
-              <Link href="/news">{t("list.news")}</Link>
+              <Link href="/news">
+                {t("list.news") ? t("list.news") : ""}
+
+                {}
+              </Link>
             </li>
 
             <li
@@ -287,7 +329,11 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.PAY_DEL,
               })}
             >
-              <Link href="/pay-del/payment">{t("list.payment")}</Link>
+              <Link href="/pay-del/payment">
+                {t("list.payment") ? t("list.payment") : ""}
+
+                {}
+              </Link>
             </li>
 
             <li
@@ -295,7 +341,11 @@ export const Header: FC<HeaderProps> = (props) => {
                 active: activePage === ActiveHeaderPage.CONTACTS,
               })}
             >
-              <Link href="/contacts">{t("list.contacts")}</Link>
+              <Link href="/contacts">
+                {t("list.contacts") ? t("list.contacts") : ""}
+
+                {}
+              </Link>
             </li>
           </ul>
           <div className={cls.search}>

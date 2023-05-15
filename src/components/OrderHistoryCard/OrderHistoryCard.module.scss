@@ -8,11 +8,10 @@
   color: var(--color-font-title);
   font-size: 13px;
 
-  max-width: 200px;
+  max-width: 250px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   transition: all 0.3s ease;
 
   &:hover {
@@ -39,4 +38,43 @@
 .date {
   align-self: flex-start;
   font-weight: 400;
+}
+
+.number {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #39424b;
+  text-align: start;
+}
+
+.weight__text {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  color: #39424b;
+  margin-top: 9px;
+  margin-bottom: 5px;
+}
+
+.text {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #39424b;
+}
+
+.order_info {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid #c9d0d9;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

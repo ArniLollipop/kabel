@@ -26,7 +26,7 @@ import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function deliveryPage() {
   const { t } = useTranslation();

@@ -48,48 +48,50 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
 
   return (
     <section className={cn(cls.OfferSection)}>
-      <Swiper
-        modules={[Autoplay, EffectFade, Pagination]}
-        className={cls.slider}
-        effect="fade"
-        pagination={{ clickable: true }}
-        autoplay
-        onSwiper={(swiper) => {
-          setSwiper(swiper);
-        }}
-        {...params}
-      >
-        {offers?.map((sect) => {
-          const { button_text, button_url, id, image, text, title } = sect;
-          return (
-            <SwiperSlide key={id}>
-              <div className={cls.offerInner}>
-                <h1 className={cn(cls.offerTitle, "title")}>{title}</h1>
+      {offers && (
+        <Swiper
+          modules={[Autoplay, EffectFade, Pagination]}
+          className={cls.slider}
+          effect="fade"
+          pagination={{ clickable: true }}
+          autoplay
+          onSwiper={(swiper) => {
+            setSwiper(swiper);
+          }}
+          {...params}
+        >
+          {offers?.map((sect) => {
+            const { button_text, button_url, id, image, text, title } = sect;
+            return (
+              <SwiperSlide key={id}>
+                <div className={cls.offerInner}>
+                  <h1 className={cn(cls.offerTitle, "title")}>{title}</h1>
 
-                <p className={cls.offerDescr}>{text}</p>
+                  <p className={cls.offerDescr}>{text}</p>
 
-                <Link href={`${button_url}`} className={cls.offerBtn}>
-                  {button_text}
-                </Link>
-                <p className={cls.offerLabel}>
-                  Используя высокие технологии и современное оборудование, мы
-                  представляем кабельную продукцию отвечающую всем международным
-                  стандартам и нормам
-                </p>
-              </div>
+                  <Link href={`${button_url}`} className={cls.offerBtn}>
+                    {button_text}
+                  </Link>
+                  <p className={cls.offerLabel}>
+                    Используя высокие технологии и современное оборудование, мы
+                    представляем кабельную продукцию отвечающую всем
+                    международным стандартам и нормам
+                  </p>
+                </div>
 
-              <Image
-                className={cls.sliderImage}
-                src={image}
-                width={1920}
-                height={1080}
-                alt="Offer img"
-              />
-            </SwiperSlide>
-          );
-        })}
-        <div className={cn(cls.offerPagination, "pagination")}></div>
-      </Swiper>
+                <Image
+                  className={cls.sliderImage}
+                  src={image}
+                  width={1920}
+                  height={1080}
+                  alt="Offer img"
+                />
+              </SwiperSlide>
+            );
+          })}
+          <div className={cn(cls.offerPagination, "pagination")}></div>
+        </Swiper>
+      )}
     </section>
   );
 };

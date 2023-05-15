@@ -76,9 +76,14 @@
 // Catalog Theme
 .catalog {
   padding: 20px 30px;
+  gap: 10px;
   border-radius: 30px;
   align-items: center;
   box-shadow: 1px 5px 19px -3px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 640px) {
+    gap: 5px;
+  }
 
   .cardImg {
     @include adaptive-size(137, 90, width);
@@ -271,6 +276,19 @@
 
 .cartMinus {
   margin-top: -7.5px;
+}
+
+.skeleton_img {
+  width: 130px;
+  height: 130px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 }
 
 @media (max-width: 1400px) {

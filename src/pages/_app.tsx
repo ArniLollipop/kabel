@@ -5,10 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "@/store";
 import { useEffect } from "react";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../i18n";
+import { appWithTranslation } from "next-i18next";
 
-import "@/i18n";
-
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (localStorage.getItem("access_token") === undefined) {
       localStorage.removeItem("access_token");
@@ -22,8 +23,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
-      <ToastContainer />
-      <Component {...pageProps} />
+      <I18nextProvider i18n={i18n} defaultNS={"translation"}>
+        <ToastContainer />
+        <Component {...pageProps} />
+      </I18nextProvider>
     </Provider>
   );
 }
+
+export default appWithTranslation(App);

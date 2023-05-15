@@ -19,7 +19,7 @@ import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { maskForPhone } from "@/helpers/masks";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { EditProfile } from "@/store/slices/ProfileSlice";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

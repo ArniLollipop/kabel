@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { productI } from "@/types/ProductTypes";
 import nullImg from "@/assets/images/nullImg.webp";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 

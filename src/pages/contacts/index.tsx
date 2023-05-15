@@ -31,7 +31,7 @@ export interface Coords {
   };
 }
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
   const [contacts, setContacts] = useState<any>();

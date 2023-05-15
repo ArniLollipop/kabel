@@ -12,7 +12,7 @@ import {
 import { GetCurrencyService } from "@/services/GetCurrency";
 import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

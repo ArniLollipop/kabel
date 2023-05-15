@@ -9,7 +9,7 @@ import ImageCabinetBonus from "@/assets/images/ImageCabinetBonus.png";
 import { useHttp } from "@/hooks/useHttp";
 import { useEffect, useState } from "react";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function bonusesPage() {
   const { t } = useTranslation();

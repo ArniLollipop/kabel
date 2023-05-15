@@ -13,7 +13,7 @@ import { InputInstance } from "@/shared/formElements/InputInstance";
 import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
 import { changePasswordsSchema } from "@/helpers/validation";
 import { ProfileService } from "@/services/Profile.service";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -68,6 +68,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
               if (res.result) {
                 setShowSentTo("phone");
               }
+              location.reload();
             } catch (e: any) {
               setErrorMessage(e);
             }

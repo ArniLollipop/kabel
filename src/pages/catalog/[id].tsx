@@ -8,7 +8,7 @@ import { NextPageContext } from "next";
 import { ProductService } from "@/services/Product.servise";
 import { productI } from "@/types/ProductTypes";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function item(props: productI) {
   const { t } = useTranslation();

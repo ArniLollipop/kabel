@@ -2,7 +2,7 @@ import Head from "next/head";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Authorization } from "@/components/authorization/Authorization";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function Home() {
   const { t } = useTranslation();

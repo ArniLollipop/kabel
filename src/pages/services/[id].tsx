@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ActiveHeaderPage } from "@/components/header/Header";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

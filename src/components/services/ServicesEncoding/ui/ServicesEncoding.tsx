@@ -4,7 +4,7 @@ import cls from "./ServicesEncoding.module.scss";
 import { Form, Formik } from "formik";
 import { InputInstance } from "@/shared/formElements/InputInstance";
 import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import Image from "next/image";
 import ImageMockProduct from "@/assets/images/ImageMockProduct.png";

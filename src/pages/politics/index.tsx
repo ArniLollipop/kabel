@@ -4,7 +4,7 @@ import cls from "./politics.module.scss";
 import { ActivePayDelPageEnum, DeliveryLayout } from "@/layouts/DeliveryLayout";
 import { Title } from "@/UI/Title/Title";
 import { useHttp } from "@/hooks/useHttp";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 function Politics() {
   const [politics, setPolitics] = useState<string>("");

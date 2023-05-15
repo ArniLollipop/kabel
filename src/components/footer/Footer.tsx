@@ -47,49 +47,74 @@ export const Footer: FC<FooterProps> = (props) => {
                 active: activePage === ActiveHeaderPage.ABOUT,
               })}
             >
-              <Link href="/about">{t("list.company")}</Link>
+              <Link href="/about">
+                {t("list.company") ? t("list.company") : ""}
+              </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CATALOG,
               })}
             >
-              <Link href="/catalog">{t("list.product")}</Link>
+              <Link href="/catalog">
+                {t("list.product") ? t("list.product") : ""}
+                {}
+              </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.SERVICES,
               })}
             >
-              <Link href="/services">{t("list.services")}</Link>
+              <Link href="/services">
+                {t("list.services") ? t("list.services") : ""}
+
+                {}
+              </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.NEWS,
               })}
             >
-              <Link href="/news">{t("list.news")}</Link>
+              <Link href="/news">
+                {t("list.news") ? t("list.news") : ""}
+
+                {}
+              </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.PAY_DEL,
               })}
             >
-              <Link href="/pay-del/payment">{t("list.payment")}</Link>
+              <Link href="/pay-del/payment">
+                {t("list.payment") ? t("list.payment") : ""}
+
+                {}
+              </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CONTACTS,
               })}
             >
-              <Link href="/contacts">{t("list.contacts")}</Link>
+              <Link href="/contacts">
+                {t("list.contacts") ? t("list.contacts") : ""}
+
+                {}
+              </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CONTACTS,
               })}
             >
-              <Link href="/politics">{t("footer.politics")}</Link>
+              <Link href="/politics">
+                {t("footer.politics") ? t("footer.politics") : ""}
+
+                {}
+              </Link>
             </li>
           </ul>
         </nav>
@@ -120,7 +145,9 @@ export const Footer: FC<FooterProps> = (props) => {
 
             <li className={cls.footerInfo_tableCol}>
               <h4 className={cls.footerInfo_tableColTitle}>
-                {t("footer.time")}
+                {t("footer.time") ? t("footer.time") : ""}
+
+                {}
               </h4>
               <span className={cls.footerInfo_tableColRow}>
                 Пн-пт с 9:00 до 18:00
@@ -135,7 +162,9 @@ export const Footer: FC<FooterProps> = (props) => {
 
             <li className={cls.footerInfo_tableCol}>
               <h4 className={cls.footerInfo_tableColTitle}>
-                {t("footer.phones")}
+                {t("footer.phones") ? t("footer.phones") : ""}
+
+                {}
               </h4>
               <div className={cls.footerInfo_tableColPhones}>
                 <a
@@ -164,13 +193,18 @@ export const Footer: FC<FooterProps> = (props) => {
                   +7 700 301 47 98
                 </a>
               </div>
-              <span> {t("footer.free")}</span>
+              <span>
+                {t("footer.free") ? t("footer.free") : ""}
+
+                {}
+              </span>
             </li>
 
             <li className={cls.footerInfo_tableCol}>
               <h4 className={cls.footerInfo_tableColTitle}>
                 {" "}
-                {t("footer.pay")}
+                {t("footer.pay") ? t("footer.pay") : ""}
+                {}
               </h4>
 
               <div className={cls.footerInfo_payments}>
@@ -181,8 +215,8 @@ export const Footer: FC<FooterProps> = (props) => {
             </li>
           </ul>
           <span className={cls.footerInfo_protected}>
-            © 2023
-            {t("footer.private")}
+            © 2023 {t("footer.private") ? t("footer.private") : ""}
+            {}
           </span>
         </div>
       </div>
@@ -200,7 +234,11 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.MAIN ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span> {t("footer.main")}</span>
+          <span>
+            {t("footer.main") ? t("footer.main") : ""}
+
+            {}
+          </span>
         </Link>
 
         <Link
@@ -214,7 +252,11 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.CATALOG ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>{t("list.product")}</span>
+          <span>
+            {t("list.product") ? t("list.product") : ""}
+
+            {}
+          </span>
         </Link>
 
         <Link
@@ -228,7 +270,11 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.SERVICES ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>{t("list.services")}</span>
+          <span>
+            {t("list.services") ? t("list.services") : ""}
+
+            {}
+          </span>
         </Link>
 
         <Link
@@ -242,7 +288,11 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.CARD ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>{t("footer.cart")}</span>
+          <span>
+            {t("footer.cart") ? t("footer.cart") : ""}
+
+            {}
+          </span>
         </Link>
 
         <Link
@@ -256,7 +306,10 @@ export const Footer: FC<FooterProps> = (props) => {
               activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"
             }
           />
-          <span>{t("footer.profile")} </span>
+          <span>
+            {t("footer.profile") ? t("footer.profile") : ""}
+            {}{" "}
+          </span>
         </Link>
       </div>
     </>

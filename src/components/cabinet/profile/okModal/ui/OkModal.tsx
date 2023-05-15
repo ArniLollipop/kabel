@@ -6,7 +6,7 @@ import { ThemeButton } from "@/UI/Button/ui/Button";
 
 let cn = classNames.bind(cls);
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface OkModalProps {
   className?: string;

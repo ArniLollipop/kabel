@@ -8,7 +8,7 @@ import { newsI } from "@/types/NewsTypes";
 import { SwiperProps, SwiperSlide, Swiper } from "swiper/react";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 

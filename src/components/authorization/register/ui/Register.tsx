@@ -25,7 +25,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 import { setUserName, setUserPhone } from "@/store/slices/AuthSlice";
 import { AuthService } from "@/services/Auth.service";
 import { AxiosError } from "axios";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

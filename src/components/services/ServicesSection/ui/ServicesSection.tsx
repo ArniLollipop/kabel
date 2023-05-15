@@ -15,7 +15,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 
 // data
 import { ServicesToggleButtons } from "../../ServicesToggleButtons";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useHttp } from "@/hooks/useHttp";
 
 let cn = classNames.bind(cls);

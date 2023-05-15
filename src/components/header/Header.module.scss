@@ -326,6 +326,9 @@ $margins_mob: 5;
 .language_block {
   position: relative;
   margin-top: 2px;
+  @media (max-width: 640px) {
+    display: none;
+  }
 }
 
 .language_choices {
@@ -333,6 +336,7 @@ $margins_mob: 5;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1111;
 }
 
 .language_choice {

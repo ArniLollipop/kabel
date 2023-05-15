@@ -9,7 +9,7 @@ import classNames from "classnames";
 // assets
 import cls from "./Login.module.scss";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 // helpers
 import { maskForPhone } from "@/helpers/masks";

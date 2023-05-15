@@ -14,6 +14,8 @@ import { HomeProps } from "@/pages";
 import Link from "next/link";
 
 export const Homepage: FC<HomeProps> = (props) => {
+  const [isModal, setModal] = useState<any>({ img: "", isOpen: false });
+
   const {
     metalRes,
     aboutInfo,

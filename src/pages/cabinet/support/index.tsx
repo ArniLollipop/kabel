@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "@/shared/modal/Modal";
 import { RequestACall } from "@/components/requestCall/RequestACall";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);

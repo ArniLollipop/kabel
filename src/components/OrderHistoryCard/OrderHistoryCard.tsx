@@ -4,7 +4,7 @@ import cls from "./OrderHistoryCard.module.scss";
 import { ordersDataI } from "@/data/OrdersData";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -12,28 +12,57 @@ interface orderHistoryCardProps extends ordersDataI {
   className?: string;
   items?: any;
   created_at?: string;
+  pay_type?: string;
+  delivery_type?: string;
+  order_date?: any;
+  order_time_from?: string;
+  is_delivered?: boolean;
 }
 
 export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
   const { t } = useTranslation();
-  const { className, img, name, descr, date, status, id, items, created_at } =
-    props;
+  const {
+    className,
+    img,
+    name,
+    descr,
+    date,
+    status,
+    id,
+    items,
+    created_at,
+    pay_type,
+    delivery_type,
+    order_date,
+    order_time_from,
+    is_delivered,
+  } = props;
 
   return (
     <Link
       href={`/cabinet/orders/${id}`}
       className={cn(cls.orderHistoryCard, className)}
     >
-      <Image
-        className={cls.img}
-        src={items[0].product_info.image ? items[0].product_info.image : ""}
-        alt="order img"
-        width={100}
-        height={100}
-      />
-      <p className={cls.descr}>{items[0].product_info.name}</p>
-      <span className={cls.status}>{t("dead")}</span>
-      <span className={cls.date}>Дата: {created_at?.split("T")[0]}</span>
+      <p className={cls.number}>Номер заказа: №{id}</p>
+      {order_date ? order_date : "asdasd"}
+      <p className={cls.weight__text}>Способ оплаты и доставки</p>
+      <p className={cls.text}>
+        Оплата: {pay_type === "card" ? "Картой (онлайн)" : "Наличными"}{" "}
+      </p>
+      <p className={cls.text}>
+        {delivery_type === "pickup" ? "Самовывоз" : "Доставка: Курьер"}
+      </p>
+      <p className={cls.weight__text}>Адрес доставки</p>
+      <p className={cls.text}>Доставка: Курьер</p>
+      <p className={cls.weight__text}>Товары</p>
+      <p className={cls.text}>{items.length} шт.</p>
+      <div className={cls.order_info}>
+        <p className={cls.text}>
+          Статус: {is_delivered ? "Выполнен" : "Не Выполнен"}{" "}
+        </p>
+        <p className={cls.text}>Время: {order_time_from}</p>
+        <p className={cls.text}>Дата: {order_date} </p>
+      </div>
     </Link>
   );
 };

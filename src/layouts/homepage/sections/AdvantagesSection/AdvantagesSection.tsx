@@ -10,7 +10,7 @@ import IconAdvantagesDelivery from "@/assets/icons/IconAdvantagesDelivery.svg";
 import IconAdvantagesHands from "@/assets/icons/IconAdvantagesHands.svg";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import { adventagesI } from "@/types/AdventagesTypes";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 

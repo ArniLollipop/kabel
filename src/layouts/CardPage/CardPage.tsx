@@ -6,7 +6,7 @@ import { Modal } from "@/shared/modal/Modal";
 import { AddOrEditDelivery } from "../../components/cabinet/delivery/AddOrEditDelivery";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/store";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 

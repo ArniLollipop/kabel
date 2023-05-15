@@ -17,7 +17,7 @@ import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { AddCard } from "@/components/cabinet/cards/AddCard";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function cardsPage() {
   const [showAddCard, setShowAddCard] = useState(false);

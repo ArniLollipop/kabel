@@ -23,6 +23,7 @@
 
   &_item {
     @include adaptive-size(395, 115, max-width);
+    margin: 0 auto;
   }
 
   &_link {

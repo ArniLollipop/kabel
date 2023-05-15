@@ -6,7 +6,8 @@ import Image from "next/image";
 import IconServicesCalc from "@/assets/icons/IconServicesCalc.svg";
 import IconServicesCalcWeight from "@/assets/icons/IconServicesCalcWeight.svg";
 import IconServicesDecoding from "@/assets/icons/IconServicesDecoding.svg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
 
 const cn = classNames.bind(cls);
 
@@ -23,31 +24,37 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
       <Title className={cls.ServicesSection_title}>{t("list.services")}</Title>
 
       <ul className={cls.ServicesSection_list}>
-        <li className={cls.ServicesSection_item}>
-          <div className={cls.ServicesSection_itemImg}>
-            <Image src={IconServicesCalcWeight} alt="Services icon" />
-          </div>
-          <span className={cls.ServicesSection_itemTitle}>
-            {t("tableWeight")}
-          </span>
+        <li>
+          <Link href="/services" className={cls.ServicesSection_item}>
+            <div className={cls.ServicesSection_itemImg}>
+              <Image src={IconServicesCalcWeight} alt="Services icon" />
+            </div>
+            <span className={cls.ServicesSection_itemTitle}>
+              {t("tableWeight")}
+            </span>
+          </Link>
         </li>
 
-        <li className={cls.ServicesSection_item}>
-          <div className={cls.ServicesSection_itemImg}>
-            <Image src={IconServicesCalc} alt="Services icon" />
-          </div>
-          <span className={cls.ServicesSection_itemTitle}>
-            {t("raschetCabel")}
-          </span>
+        <li>
+          <Link href="/services" className={cls.ServicesSection_item}>
+            <div className={cls.ServicesSection_itemImg}>
+              <Image src={IconServicesCalc} alt="Services icon" />
+            </div>
+            <span className={cls.ServicesSection_itemTitle}>
+              {t("raschetCabel")}
+            </span>
+          </Link>
         </li>
 
-        <li className={cls.ServicesSection_item}>
-          <div className={cls.ServicesSection_itemImg}>
-            <Image src={IconServicesDecoding} alt="Services icon" />
-          </div>
-          <span className={cls.ServicesSection_itemTitle}>
-            {t("rashifrovka")}
-          </span>
+        <li>
+          <Link href="/services" className={cls.ServicesSection_item}>
+            <div className={cls.ServicesSection_itemImg}>
+              <Image src={IconServicesDecoding} alt="Services icon" />
+            </div>
+            <span className={cls.ServicesSection_itemTitle}>
+              {t("rashifrovka")}
+            </span>
+          </Link>
         </li>
       </ul>
     </section>

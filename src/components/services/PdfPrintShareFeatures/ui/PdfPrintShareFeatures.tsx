@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import "jspdf-autotable";
 import { UserOptions } from "jspdf-autotable";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 // assets
 import cls from "./PdfPrintShareFeatures.module.scss";

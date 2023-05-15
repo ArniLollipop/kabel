@@ -11,10 +11,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useHttp } from "@/hooks/useHttp";
+import ImageMockProduct2 from "../../../../public/ImageMockProduct2.png";
 
 const cn = classNames.bind(cls);
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface OrderCardProps {
   className?: string;
@@ -26,20 +27,6 @@ export default function OrderCard(props: OrderCardProps) {
   const [product, setProduct] = useState<any>();
 
   const { t } = useTranslation();
-
-  const {
-    adress,
-    date,
-    deliveryCost,
-    deliveryMethod,
-    descr,
-    goodCost,
-    img,
-    name,
-    paymentMethod,
-    phoneNumber,
-    status,
-  } = ordersData.filter((or) => or.id === 3)[0];
 
   async function getProductId() {
     try {
@@ -58,63 +45,46 @@ export default function OrderCard(props: OrderCardProps) {
       activePage={ActiveCabinetPageEnum.ORDERS}
     >
       <div className={cls.orders_wrapper}>
-        <h2 className={cls.orders_title}>{t("myOrders")}</h2>
-        <div className={cn(cls.orderCard, className)}>
-          <Image
-            className={cls.orderCard_img}
-            src={img}
-            alt="order img"
-            width={100}
-            height={100}
-          />
-          <h1 className={cls.orderCard_title}>{name}</h1>
-          <p className={cls.orderCard_descr}>{descr} </p>
-
-          <div className={cls.orderCard_delivery}>
-            <span className={cn(cls.bold, cls.title)}>{t("dostavka")}</span>
-            <span>{name}</span>
-            <span>{adress[0]}</span>
-            <span>{adress[1]}</span>
-            <span>{phoneNumber}</span>
-            <span className={cn(cls.bold, cls.title)}>{t("typeDostavka")}</span>
-            <span>{deliveryMethod}</span>
-            <span className={cn(cls.bold, cls.title)}>{t("typePay")}</span>
-            <span>{paymentMethod}</span>
-            <span className={cn(cls.bold, cls.title, cls.border)}>
-              {t("payInfo")}
-            </span>
-            <span>
-              {t("payTovar")}: <span className={cls.bold}>{goodCost} ₸</span>
-            </span>
-            <span>
-              {t("payDostavka")}:{" "}
-              <span className={cls.bold}>{deliveryCost} ₸</span>
-            </span>
-            <span>
-              {t("payStatus")}: <span className={cls.bold}>{status}</span>
-            </span>
-
-            <span className={cls.date}>Дата: {date}</span>
+        <Link className={cls.backLink} href="/cabinet/orders">
+          <svg
+            width="10"
+            height="18"
+            viewBox="0 0 10 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.75 16.5L1.25 9L8.75 1.5"
+              stroke="#00ABC2"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+        {
+          <div className={cls.items__grid}>
+            {product &&
+              product.items?.map((el: any) => {
+                return (
+                  <div className={cls.item__grid}>
+                    <div className={cls.item_box}>
+                      <Image
+                        src={el.product_info.image || ImageMockProduct2}
+                        alt="asdasd"
+                        className={cls.image}
+                      />
+                      <p className={cls.weight__text}>{el.product_info.name}</p>
+                      <p className={cls.text}>
+                        Выполнен <br />
+                        Дата: 03.02.23
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
-
-          <Link className={cls.backLink} href="/cabinet/orders">
-            <svg
-              width="10"
-              height="18"
-              viewBox="0 0 10 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.75 16.5L1.25 9L8.75 1.5"
-                stroke="#00ABC2"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div>
+        }
       </div>
     </CabinetLayout>
   );

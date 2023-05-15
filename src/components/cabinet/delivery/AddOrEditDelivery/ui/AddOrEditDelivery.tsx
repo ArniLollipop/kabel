@@ -19,7 +19,7 @@ import { deliveryAddressSchema } from "@/helpers/validation";
 
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector } from "@/hooks/store";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

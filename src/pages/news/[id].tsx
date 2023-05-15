@@ -8,7 +8,7 @@ import { NextPageContext } from "next";
 import { NewsService } from "@/services/News.service";
 import { newsI } from "@/types/NewsTypes";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 

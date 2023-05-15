@@ -9,7 +9,7 @@ import ImageMockCard3 from "@/assets/images/ImageMockCard3.png";
 import Link from "next/link";
 import { categoryI } from "@/types/ProductTypes";
 import { useHttp } from "@/hooks/useHttp";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 interface ProductsSectionProps {

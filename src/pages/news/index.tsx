@@ -68,11 +68,15 @@ export default function newsPage(props: newsPageI) {
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       {/* PC implementation */}
       <div className={cn(cls.news)}>
-        <Title className={cls.news_title}>{t("list.news")}</Title>
+        <Title className={cls.news_title}>
+          {t("list.news") ? t("list.news") : ""}
+        </Title>
 
         <div className={cls.news_wrapper}>
           <div className={cls.news_content}>
-            <h3 className={cls.news_innerTitle}>{t("lastNews")}</h3>
+            <h3 className={cls.news_innerTitle}>
+              {t("lastNews") ? t("lastNews") : ""}
+            </h3>
 
             <Swiper
               className={cls.news_slider}

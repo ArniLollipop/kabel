@@ -12,7 +12,7 @@ import cls from "./PrintPage.module.scss";
 // data
 import { printData } from "@/data/PrintData";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 let cn = classNames.bind(cls);
 

@@ -8,7 +8,7 @@ import cls from "./index.module.scss";
 import { SwiperProps } from "swiper/react";
 import Link from "next/link";
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);
 

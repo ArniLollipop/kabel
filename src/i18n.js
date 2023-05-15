@@ -8,17 +8,6 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    debug: true,
-    fallbackLng: "ru",
-    whitelist: ["kz", "ru"],
-    debug: false,
-    detection: {
-      order: ["localstorage", "cookie"],
-      caches: ["localstorage", "cookie"],
-    },
-    interpollation: {
-      escapeValue: false,
-    },
     resources: {
       kz: {
         translation: {
@@ -305,7 +294,7 @@ i18n
           newPhone: "Новый телефон",
           aprove: "Подтвердить",
           dead: "Выполнен",
-          toCart: "корзину",
+          toCart: "В корзину",
           send: "Отправить",
           savePdf: "Сохранить результат в PDF",
           getResults: "Распечатать результаты",
@@ -354,4 +343,17 @@ i18n
         },
       },
     },
+    debug: true,
+    fallbackLng: "ru",
+    whitelist: ["kz", "ru"],
+    debug: false,
+    detection: {
+      order: ["localstorage", "cookie"],
+      caches: ["localstorage", "cookie"],
+    },
+    interpollation: {
+      escapeValue: false,
+    },
   });
+
+export default i18n;

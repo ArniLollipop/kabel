@@ -21,7 +21,7 @@ import { ThemeButton } from "@/UI/Button/ui/Button";
 import { logOut } from "@/store/slices/AuthSlice";
 import { useAppDispatch } from "@/hooks/store";
 import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 
 const cn = classNames.bind(cls);

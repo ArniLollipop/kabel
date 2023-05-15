@@ -77,11 +77,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
   }, [items, total_amount]);
 
   useEffect(() => {
-    let date = new Date();
-    console.log(date);
-    const year = date.getFullYear();
-    console.log(year - 1994, "Возраст Димы");
-
     getTime();
     getAddresses();
     getSalePoints();
@@ -123,7 +118,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
         dispatch(setAmount(0));
         dispatch(setItems(null));
       }
-      const res = await useHttp().post("/orders/orders/create_order/");
     } catch (error) {}
   }
 

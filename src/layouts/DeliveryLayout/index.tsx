@@ -6,6 +6,8 @@ import Link from "next/link";
 import { IconCabinetArrow } from "@/assets/icons";
 import { Title } from "@/UI/Title/Title";
 
+import { useTranslation } from "next-i18next";
+
 const cn = classNames.bind(cls);
 
 export const enum ActivePayDelPageEnum {
@@ -23,9 +25,11 @@ interface DeliveryLayoutProps {
 export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
   const { className, children, activePage, title } = props;
 
+  const { t } = useTranslation();
+
   return (
     <div className={cn(cls.deliveryLayout)}>
-      <Title>Оплата и доставка</Title>
+      <Title>{t("list.payment")}</Title>
 
       <div className={cls.deliveryLayout_wrapper}>
         <nav className={cls.deliveryLayout_nav}>
@@ -55,7 +59,9 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
         <div className={cls.deliveryLayout_content}>
           <span className={cls.deliveryLayout_title}>{title}</span>
 
-          <div className={cn(cls.deliveryLayout_contentWrapper, className)}>{children}</div>
+          <div className={cn(cls.deliveryLayout_contentWrapper, className)}>
+            {children}
+          </div>
         </div>
       </div>
     </div>
