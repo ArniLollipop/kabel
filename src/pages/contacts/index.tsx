@@ -33,10 +33,8 @@ export interface Coords {
 
 import { useTranslation } from "next-i18next";
 
-function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
+function contactsPage() {
   const [contacts, setContacts] = useState<any>();
-  const { lat: latAlmaty, lng: lngAlmaty } = coordsAlmaty;
-  const { lat: latAstana, lng: lngAstana } = coordsAstana;
 
   async function getContacts() {
     const res = await useHttp().get(`${endpoints.getContacts}`);
@@ -145,27 +143,27 @@ function contactsPage({ coordsAlmaty, coordsAstana }: Coords) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await useHttp().get(`${endpoints.getContacts}`);
-  const urlAlmaty = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
-  const urlAstana = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94a"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
-  const resAlmaty = await fetch(urlAlmaty);
-  const resAstana = await fetch(urlAstana);
-  const dataAlmaty = await resAlmaty.json();
-  const dataAstana = await resAstana.json();
-  if (dataAlmaty.status && dataAstana.status === "OK") {
-    const coordsAlmaty = dataAlmaty.results[0].geometry.location;
-    const coordsAstana = dataAstana.results[0].geometry.location;
-    return {
-      props: {
-        coordsAlmaty,
-        coordsAstana,
-        contacts: res.data.results,
-      },
-    };
-  } else {
-    throw new Error("Ошибка при получений кординатов!");
-  }
-}
+// export async function getServerSideProps() {
+//   const res = await useHttp().get(`${endpoints.getContacts}`);
+//   const urlAlmaty = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
+//   const urlAstana = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94a"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
+//   const resAlmaty = await fetch(urlAlmaty);
+//   const resAstana = await fetch(urlAstana);
+//   const dataAlmaty = await resAlmaty.json();
+//   const dataAstana = await resAstana.json();
+//   if (dataAlmaty.status && dataAstana.status === "OK") {
+//     const coordsAlmaty = dataAlmaty.results[0].geometry.location;
+//     const coordsAstana = dataAstana.results[0].geometry.location;
+//     return {
+//       props: {
+//         coordsAlmaty,
+//         coordsAstana,
+//         contacts: res.data.results,
+//       },
+//     };
+//   } else {
+//     throw new Error("Ошибка при получений кординатов!");
+//   }
+// }
 
 export default contactsPage;

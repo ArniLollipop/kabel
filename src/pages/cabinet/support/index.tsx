@@ -147,16 +147,6 @@ export default function supportPage() {
               </span>
             </div>
           </div>
-
-          <div className={cls.support_orders}>
-            <h2 className={cls.support_ordersTitle}>{t("hello")}</h2>
-            <p className={cls.support_ordersTitle}>{t("question")}</p>
-            <HistoryOrdersSlider
-              className={cls.support_slider}
-              params={params}
-            />
-            <div className={cls.support_slider}></div>
-          </div>
         </div>
       </div>
     </CabinetLayout>

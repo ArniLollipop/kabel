@@ -1,10 +1,12 @@
 @import "/src/styles/globalMixins.scss";
 
 .support {
+  width: 100%;
   &_wrapper {
     background-color: var(--color-bg-white);
     padding: 15px 40px 135px 15px;
     border-radius: 15px;
+    width: 100%;
   }
 
   &_title {
@@ -20,14 +22,13 @@
 
   &_content {
     display: grid;
-    grid-template-columns: 1fr 2fr;
     // justify-content: space-between;
     // align-items: flex-start;
-    gap: 40px;
   }
 
   &_problems {
     padding-top: 35px;
+    width: 100%;
   }
 
   &_accordion {
@@ -38,6 +39,7 @@
 
     display: flex;
     flex-direction: column;
+    max-width: 400px;
 
     h3 {
       font-weight: 500;
