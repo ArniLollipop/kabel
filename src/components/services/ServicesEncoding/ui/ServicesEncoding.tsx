@@ -26,7 +26,7 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
       const res = await useHttp().post("services/get_decoding/", {
         cable_type: cable_type,
       });
-      setResult(res.data.results[0].decodings);
+      setResult(res.data.results);
     } catch {}
   }
 
@@ -64,26 +64,28 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
                 touched={touched.decoding}
                 className={cls.decoding}
               />
-              {result && (
-                <div className={cls.encoding}>
-                  <Image
-                    src={ImageMockProduct}
-                    alt="asd"
-                    className={cls.encodingImage}
-                  />
-                  <div>
-                    {result.map((el: any) => {
-                      return (
-                        <div className={cls.encodingFlex}>
-                          <h4 className={cls.key}>{el.key}</h4>
-                          <br />
-                          <p>{el.value}</p>
-                        </div>
-                      );
-                    })}
+              {result?.map((res: any) => {
+                return (
+                  <div className={cls.encoding}>
+                    <Image
+                      src={ImageMockProduct}
+                      alt="asd"
+                      className={cls.encodingImage}
+                    />
+                    <div>
+                      {res.decodings?.map((el: any) => {
+                        return (
+                          <div className={cls.encodingFlex}>
+                            <h4 className={cls.key}>{el.key}</h4>
+                            <br />
+                            <p>{el.value}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })}
             </Form>
           );
         }}

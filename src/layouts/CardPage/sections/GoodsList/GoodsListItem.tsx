@@ -94,17 +94,21 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
   return (
     <li className={cn(cls.GoodsListItem)}>
-      <img
-        src={
-          element.product_info
-            ? element.product_info.image
+      {element.product_info.image ? (
+        <img
+          src={
+            element.product_info
               ? element.product_info.image
+                ? element.product_info.image
+                : ""
               : ""
-            : ""
-        }
-        alt="Product image"
-        className={cls.img}
-      />
+          }
+          alt="Product image "
+          className={cls.img}
+        />
+      ) : (
+        <div className={cls.skeleton_image}>Нету...</div>
+      )}
 
       <div className={cls.GoodsDescr}>
         <Link

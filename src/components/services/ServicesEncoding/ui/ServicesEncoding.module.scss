@@ -85,7 +85,8 @@
   background: #ffffff;
   box-shadow: 1px 5px 19px -3px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   gap: 15px;
   @media (max-width: 640px) {
@@ -97,7 +98,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 5px;
   margin-top: 15px;
   @media (max-width: 640px) {
     gap: 7px;
@@ -106,17 +107,16 @@
 
 .key {
   text-align: center;
-  width: 44px;
   padding: 4px 10px;
   border: 1px solid #c7c8de;
   border-radius: 2px;
 }
 
 .encodingImage {
-  width: 50%;
-  height: 50%;
+  grid-column: span 1 / span 1;
 }
 
 .description_text {
   margin-top: 15px;
+  grid-column: span 1 / span 1;
 }

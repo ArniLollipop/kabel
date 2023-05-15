@@ -96,14 +96,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
               : "pickup",
           pay_type:
             values.selectedPayOption === "Kaspi Pay" ? "card" : "kaspi_pay",
-          order_date:
-            values.selectedDeliveryOption === "Доставка" ? date.date : null,
-          order_time_from:
-            values.selectedDeliveryOption === "Доставка"
-              ? time.time_from
-              : null,
-          order_time_to:
-            values.selectedDeliveryOption === "Доставка" ? time.time_to : null,
           user: userId.id,
           user_addresses:
             values.selectedDeliveryOption === "Доставка"
@@ -117,6 +109,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
         });
         dispatch(setAmount(0));
         dispatch(setItems(null));
+        window.location.href = res.data.equiring_page_url;
       }
     } catch (error) {}
   }
@@ -137,7 +130,9 @@ export const SideBar: FC<SideBarProps> = (props) => {
         // user: 0,
       }}
       onSubmit={(values) => {
-        handleOrder(values);
+        console.log("====================================");
+        console.log(values);
+        console.log("====================================");
       }}
     >
       {({ handleSubmit, handleChange, values }) => (
@@ -304,7 +299,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
 
               <hr />
 
-              {values.selectedDeliveryOption.includes("Доставка") && (
+              {/* {values.selectedDeliveryOption.includes("Доставка") && (
                 <div className={cls.SideBar_payment_datePicker}>
                   <h4>Дата доставки</h4>
                   <div className={cls.dateSelect}>
@@ -378,7 +373,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     </div>
                   )}
                 </div>
-              )}
+              )} */}
 
               <Button
                 disabled={total_amount === 0}
