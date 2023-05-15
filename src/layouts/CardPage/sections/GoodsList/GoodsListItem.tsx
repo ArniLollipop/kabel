@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
+import NullImg from "@/assets/images/nullImg.webp";
 
 const cn = classNames.bind(cls);
 
@@ -94,21 +95,11 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
   return (
     <li className={cn(cls.GoodsListItem)}>
-      {element.product_info.image ? (
-        <img
-          src={
-            element.product_info
-              ? element.product_info.image
-                ? element.product_info.image
-                : ""
-              : ""
-          }
-          alt="Product image "
-          className={cls.img}
-        />
-      ) : (
-        <div className={cls.skeleton_image}>Нету...</div>
-      )}
+      <Image
+        src={element.product_info.image || NullImg}
+        alt="Product image"
+        className={cls.img}
+      />
 
       <div className={cls.GoodsDescr}>
         <Link

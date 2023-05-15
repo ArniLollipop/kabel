@@ -61,6 +61,13 @@
     margin-bottom: 20px;
   }
 
+  .newPrice {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+
   .cardInfoIcons {
     flex-direction: column;
     gap: 8px;
@@ -123,6 +130,15 @@
   }
 
   .cardPrice {
+    @include adaptive-size(20, 16, font-size);
+    @include adaptive-size(22, 18, line-height);
+    margin-top: -10px;
+    font-weight: 600;
+
+    color: #000000;
+  }
+
+  .newPrice {
     @include adaptive-size(20, 16, font-size);
     @include adaptive-size(22, 18, line-height);
     margin-top: -10px;

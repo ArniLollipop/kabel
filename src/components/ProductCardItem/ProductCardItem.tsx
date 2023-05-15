@@ -26,6 +26,7 @@ export const enum ThemeProductCard {
 }
 
 interface ProductCardItemProps extends productI {
+  promo_cost: number;
   className?: string;
   theme?: ThemeProductCard;
 }
@@ -105,6 +106,9 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         }
       });
     }
+    console.log("====================================");
+    console.log(props);
+    console.log("====================================");
   }, [items]);
 
   return (
@@ -118,17 +122,13 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         )}
       </div>
 
-      {props.image ? (
-        <Image
-          src={props.image || nullImg}
-          alt="product"
-          className={cls.cardImg}
-          width={137}
-          height={137}
-        />
-      ) : (
-        <div className={cls.skeleton_img}>Нету...</div>
-      )}
+      <Image
+        src={props.image || nullImg}
+        alt="product"
+        className={cls.cardImg}
+        width={137}
+        height={137}
+      />
 
       <div className={cls.cardInfo}>
         <Link href={`/catalog/${props.code}`} className={cls.link}>
@@ -147,6 +147,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         </p>
 
         <span className={cls.cardPrice}>{props.cost} ₸</span>
+        {/* <span className={cls.newPrice}>{props.promo_cost} ₸</span> */}
       </div>
 
       <div className={cls.cardBtns}>
