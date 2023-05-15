@@ -26,7 +26,6 @@ export const enum ThemeProductCard {
 }
 
 interface ProductCardItemProps extends productI {
-  promo_cost: number;
   className?: string;
   theme?: ThemeProductCard;
 }
