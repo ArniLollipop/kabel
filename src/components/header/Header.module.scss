@@ -1,5 +1,4 @@
 @import "@/styles/globalMixins.scss";
-
 $fz: 18;
 $fz_mob: 14;
 
@@ -165,6 +164,19 @@ $margins_mob: 5;
       &:hover {
         color: var(--color-accent);
       }
+      &:hover + .hovered_navLink {
+        .hovered_arrowIcon path {
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          background-color: #f6bf0c;
+
+          & .hovered_arrowIcon path {
+            stroke: var(--color-bg-white);
+          }
+        }
+      }
     }
 
     &_item:not(:last-child) {
@@ -196,7 +208,7 @@ $margins_mob: 5;
 }
 
 .catalogLink:hover .hovered {
-  transform: translateY(100%) !important;
+  transform: translateY(100%);
 }
 
 .hovered {

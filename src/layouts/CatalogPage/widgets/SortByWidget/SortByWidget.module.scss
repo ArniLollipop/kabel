@@ -1,13 +1,14 @@
 .SortByWidget {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 
   &_selector {
     border: none;
     color: var(--color-accent);
     font-weight: 500;
+    margin-left: -3px;
   }
 
   &_option {

@@ -17,6 +17,7 @@ import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
 
@@ -28,6 +29,7 @@ export const enum ThemeProductCard {
 interface ProductCardItemProps extends productI {
   className?: string;
   theme?: ThemeProductCard;
+  promo_cost?: number;
 }
 
 export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
@@ -36,11 +38,13 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
   const dispatch = useAppDispatch();
   const [cart, setCart] = useState<number>(0);
   const { items } = useAppSelector((state) => state.CartSlice);
+  const router = useRouter();
 
   const plus = () => setCart((prev) => prev + 1);
   const minus = () => cart > 1 && setCart((prev) => prev - 1);
 
-  async function handleAddCart() {
+  async function handleAddCart(e: any) {
+    e.stopPropagation();
     try {
       const res = await useHttp().post(
         "orders/carts/add_to_cart/",
@@ -60,7 +64,8 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
     }
   }
 
-  async function handleMinus() {
+  async function handleMinus(e: any) {
+    e.stopPropagation();
     try {
       const res = await useHttp().post(
         "orders/carts/reduce_from_cart/",
@@ -78,7 +83,8 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
     } catch (err) {}
   }
 
-  async function handlePlus() {
+  async function handlePlus(e: any) {
+    e.stopPropagation();
     try {
       const res = await useHttp().post(
         "orders/carts/add_to_cart/",
@@ -96,6 +102,10 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
     } catch (err) {}
   }
 
+  function handleStop(e: any) {
+    e.stopPropagation();
+  }
+
   useEffect(() => {
     setCart(0);
     if (items) {
@@ -105,13 +115,17 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         }
       });
     }
-    console.log("====================================");
-    console.log(props);
-    console.log("====================================");
   }, [items]);
 
+  function handleClick() {
+    router.push("/catalog/" + props.code);
+  }
+
   return (
-    <li className={cn(cls.ProductCardItem, cls[theme], className)}>
+    <li
+      onClick={handleClick}
+      className={cn(cls.ProductCardItem, cls[theme], className) + " itemShadow"}
+    >
       <div className={cls.cardInfoIcons}>
         <IconCardItemDelivery />
         {props.availability === "в наличии" ? (
@@ -132,20 +146,28 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
       <div className={cls.cardInfo}>
         <Link href={`/catalog/${props.code}`} className={cls.link}>
           <h3 className={cls.cardTitle}>
-            {props.name.length > 20
+            {/* {props.name.length > 20
               ? `${props.name.slice(0, 17)}...`
-              : props.name}
+              : props.name} */}
+            {props.name}
           </h3>
         </Link>
         <p className={cls.cardDescr}>
-          {props.description
+          {/* {props.description
             ? props.description.length < 77
               ? props.description
               : `${props.description?.slice(0, 77)}...`
-            : ""}
+            : ""} */}
+          {props.description}
         </p>
-
-        <span className={cls.cardPrice}>{props.cost} ₸</span>
+        {props.promo_cost ? (
+          <div>
+            <span className={cls.cardPrice__old}>{props.cost} ₸</span>
+            <span className={cls.cardPrice}>{props.promo_cost}</span>
+          </div>
+        ) : (
+          <span className={cls.cardPrice}>{props.cost} ₸</span>
+        )}
         {/* <span className={cls.newPrice}>{props.promo_cost} ₸</span> */}
       </div>
 
@@ -159,7 +181,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
             {t("toCart")}
           </Button>
         ) : (
-          <div className={cls.cartBtn}>
+          <div onClick={handleStop} className={cls.cartBtn}>
             <button onClick={handleMinus} className={cls.cartMinus}>
               <svg
                 width="20"
@@ -176,7 +198,15 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
                 />
               </svg>
             </button>
-            <p className={cls.cartCounter}>{cart} м</p>
+            <div className="flex items-center">
+              <input
+                className="w-[15px] outline-none border-none"
+                type="number"
+                value={cart}
+                onChange={(e) => setCart(parseInt(e.target.value))}
+              />
+              <p className={cls.cartCounter}> м</p>
+            </div>
             <button onClick={handlePlus} className={cls.cartPlus}>
               <svg
                 width="24"

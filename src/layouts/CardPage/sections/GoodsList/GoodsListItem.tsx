@@ -47,7 +47,6 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       dispatch(setAmount(res.data.result.total_amount));
       dispatch(setItems(res.data.result.items));
       minus();
-      getCart();
     } catch (err) {}
   }
 
@@ -67,7 +66,6 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       dispatch(setAmount(res.data.result.total_amount));
       dispatch(setItems(res.data.result.items));
       plus();
-      getCart();
     } catch (err) {}
   }
 
@@ -92,6 +90,10 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       console.log("====================================");
     }
   }
+
+  console.log("====================================");
+  console.log();
+  console.log("====================================");
 
   return (
     <li className={cn(cls.GoodsListItem)}>

@@ -19,7 +19,8 @@ import {
   IconSideBarCard,
   IconSideBarKaspi,
   IconCardTenge,
-} from "@/assets/icons";
+  IconCash,
+} from "@/assets/icons/cardIcons";
 
 const cn = classNames.bind(cls);
 
@@ -95,7 +96,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
               ? "delivery"
               : "pickup",
           pay_type:
-            values.selectedPayOption === "Kaspi Pay" ? "card" : "kaspi_pay",
+            values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
           user: userId.id,
           user_addresses:
             values.selectedDeliveryOption === "Доставка"
@@ -117,9 +118,9 @@ export const SideBar: FC<SideBarProps> = (props) => {
   return (
     <Formik
       initialValues={{
-        selectedDeliveryOption: "Улица Шевченко",
-        selectedPayOption: "Kaspi Pay",
-        selectedAddress: "фыв",
+        selectedDeliveryOption: "",
+        selectedPayOption: "",
+        selectedAddress: "",
         // address: "",
         // apartment: 0,
         // floor: 0,
@@ -161,7 +162,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   <IconCardGeoTag />
                   Самовывоз&nbsp;
                 </a>
-                из 2 пунктов
+                из {salePoints && salePoints.length - 1} пунктов
               </span>
 
               {salePoints?.map((option: any) => {
@@ -202,6 +203,23 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 />
                 Способы оплаты
               </span>
+              {!(values.selectedDeliveryOption === "Доставка") && (
+                <span
+                  className={(cls.SideBar_paymentMethods_cards, cls.radioBtn)}
+                >
+                  <label className={cls.SideBar_paymentMethods_label}>
+                    <IconCash className={cls.SideBar_paymentMethods_icon} />
+                    <Field
+                      type="radio"
+                      name="selectedPayOption"
+                      value={"Наличными"}
+                      checked={values.selectedPayOption === "Наличными"}
+                      onChange={handleChange}
+                    />
+                    Наличными
+                  </label>
+                </span>
+              )}
 
               {CardPayData.map((option) => {
                 const { id, text, cardPayIcon: CardPayIcon } = option;
@@ -235,23 +253,31 @@ export const SideBar: FC<SideBarProps> = (props) => {
               <div className={cls.SideBar_payment_table}>
                 {/* <span>Название</span>
                 <span className={cls.SideBar_payment_sum}>Провод ПуГВнг (А)- LS</span> */}
-                <span>Количество</span>
-                <span className={cls.SideBar_payment_sum}>
-                  {items ? items.length : 0}
-                </span>
-                <span>Общая Длина</span>
-                <span className={cls.SideBar_payment_sum}>{length}</span>
-                <span>Сумма к оплате</span>
-                <span className={cls.SideBar_payment_sum}>
-                  {total_amount} ₸
-                </span>
-                <span>Стоимость доставки</span>
-                <span className={cls.SideBar_payment_sum}>
-                  {values.selectedDeliveryOption.includes("Доставка")
-                    ? "500"
-                    : 0}{" "}
-                  ₸
-                </span>
+                <div className="flex">
+                  <span>Количество</span>
+                  <span className={cls.SideBar_payment_sum}>
+                    {items ? items.length : 0}
+                  </span>
+                </div>
+                <div className="flex">
+                  <span>Общая Длина</span>
+                  <span className={cls.SideBar_payment_sum}>{length}</span>
+                </div>
+                <div className="flex">
+                  <span>Сумма к оплате</span>
+                  <span className={cls.SideBar_payment_sum}>
+                    {total_amount} ₸
+                  </span>
+                </div>
+                <div className="flex">
+                  <span>Стоимость доставки</span>
+                  <span className={cls.SideBar_payment_sum}>
+                    {values.selectedDeliveryOption.includes("Доставка")
+                      ? "500"
+                      : 0}{" "}
+                    ₸
+                  </span>
+                </div>
               </div>
 
               {values.selectedDeliveryOption.includes("Доставка") && (

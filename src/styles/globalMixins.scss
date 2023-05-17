@@ -4,6 +4,9 @@
   );
 }
 
+@tailwind components;
+@tailwind utilities;
+
 @mixin adaptive-768($pcSize, $mobSize, $sizeValue) {
   #{$sizeValue}: clamp(
     #{$mobSize + px},

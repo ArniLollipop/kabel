@@ -37,7 +37,7 @@ export const ProductsSection: FC<ProductsSectionProps> = (props) => {
 
       <ul className={cls.ProductsSection_list}>
         {categories?.map((cat: any) => (
-          <li className={cls.ProductsSection_item} key={cat.name}>
+          <li className={cls.ProductsSection_item + " scale"} key={cat.name}>
             <Link href="/catalog" className={cls.ProductsSection_link}>
               <Image
                 src={cat.image}

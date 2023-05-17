@@ -98,7 +98,7 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
             <SwiperSlide key={sert.id}>
               <Image
                 onClick={() => setChoice(sert.image)}
-                className={cls.slider__img}
+                className={cls.slider__img + " scale"}
                 src={sert.image}
                 alt="Sertificate"
                 width={234}

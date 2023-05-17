@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { Title } from "@/UI/Title/Title";
@@ -7,7 +7,10 @@ import { NewsCard, ThemeNewsCard } from "@/components/newsCard/NewsCard";
 import ImageMockNewsCard from "@/assets/images/ImageMockNewsCard.png";
 import { SwiperSlide, Swiper, SwiperProps } from "swiper/react";
 
+import { Navigation } from "swiper";
+
 import "swiper/css";
+import "swiper/css/navigation";
 import Link from "next/link";
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { NewsService } from "@/services/News.service";
@@ -19,14 +22,6 @@ const cn = classNames.bind(cls);
 import { useTranslation } from "react-i18next";
 
 const params: SwiperProps = {
-  autoplay: {
-    delay: 3000,
-  },
-  loop: false,
-  spaceBetween: 50,
-  speed: 500,
-  centeredSlides: false,
-
   breakpoints: {
     1500: {
       centeredSlides: false,
@@ -77,22 +72,53 @@ export default function newsPage(props: newsPageI) {
             <h3 className={cls.news_innerTitle}>
               {t("lastNews") ? t("lastNews") : ""}
             </h3>
-
-            <Swiper
-              className={cls.news_slider}
-              {...params}
-              onSwiper={(swiper) => setSwiper(swiper)}
-            >
-              {news.map((news) => (
-                <SwiperSlide className={cls.news_sliderSlide} key={news.id}>
-                  <NewsCard
-                    className={cls.news_newsCard}
-                    theme={ThemeNewsCard.WHITE_BG}
-                    {...news}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            {news && (
+              <Swiper
+                className={cls.news_slider}
+                navigation={true}
+                loop={false}
+                spaceBetween={50}
+                speed={500}
+                centeredSlides={false}
+                onSwiper={(swiper) => setSwiper(swiper)}
+                modules={[Navigation]}
+                breakpoints={{
+                  1500: {
+                    centeredSlides: false,
+                    slidesPerView: 4.2,
+                    spaceBetween: 20,
+                  },
+                  1024: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 15,
+                    centeredSlides: false,
+                  },
+                  768: {
+                    slidesPerView: 1.8,
+                    spaceBetween: 10,
+                    centeredSlides: false,
+                  },
+                  425: {
+                    slidesPerView: 1.2,
+                  },
+                  320: {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                    centeredSlides: true,
+                  },
+                }}
+              >
+                {news.map((news) => (
+                  <SwiperSlide className={cls.news_sliderSlide} key={news.id}>
+                    <NewsCard
+                      className={cls.news_newsCard}
+                      theme={ThemeNewsCard.WHITE_BG}
+                      {...news}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
           </div>
         </div>
       </div>

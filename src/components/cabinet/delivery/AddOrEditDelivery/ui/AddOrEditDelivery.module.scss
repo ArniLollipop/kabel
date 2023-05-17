@@ -5,6 +5,7 @@
   background-color: white;
   border-radius: 15px;
   margin-bottom: 20px;
+  width: 100%;
 
   input {
     width: 100%;
@@ -12,6 +13,7 @@
   }
 
   .container {
+    width: 100%;
     &_ApNFlNHmInputs {
       display: flex;
       gap: 13px;
@@ -24,4 +26,11 @@
       margin-top: 34px;
     }
   }
+}
+
+.warning {
+  color: gray;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
 }

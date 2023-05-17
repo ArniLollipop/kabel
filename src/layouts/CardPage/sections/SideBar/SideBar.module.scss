@@ -155,6 +155,7 @@ $pathToIcon: "../../../../assets/icons";
 
     &_address {
       display: flex;
+      align-items: center;
       gap: 13px;
       margin-bottom: 31px;
     }
@@ -169,8 +170,6 @@ $pathToIcon: "../../../../assets/icons";
     }
 
     &_table {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
       span {
         margin-bottom: 22px;
       }

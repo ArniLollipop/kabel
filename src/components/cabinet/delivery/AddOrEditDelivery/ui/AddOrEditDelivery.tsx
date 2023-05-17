@@ -75,18 +75,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
         {({ values, touched, errors, handleChange, handleBlur }) => {
           const handleSaveAddOrDelivery = async () => {
             const { address, apartment, floor, house, phone_number } = touched;
-            if (
-              address &&
-              apartment &&
-              floor &&
-              house &&
-              phone_number &&
-              !errors?.address &&
-              !errors?.apartment &&
-              !errors?.floor &&
-              !errors?.house &&
-              !errors?.phone_number
-            ) {
+            if (address && !errors?.address) {
               if (address && authUser?.id) {
                 await useHttp()
                   .put("users/user_addresses/" + id + "/", {
@@ -135,65 +124,11 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   touched={touched.address}
                   className={cls.addressInput}
                 />
-
-                <div className={cls.container_ApNFlNHmInputs}>
-                  <InputInstance
-                    theme={EInputInstanceTheme.PROFILE}
-                    type="number"
-                    id="apartment"
-                    name="apartment"
-                    placeholder="Квартира"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.apartment as number}
-                    errors={errors.apartment}
-                    touched={touched.apartment}
-                    className={cls.apartmentInput}
-                  />
-
-                  <InputInstance
-                    theme={EInputInstanceTheme.PROFILE}
-                    type="number"
-                    id="floor"
-                    name="floor"
-                    placeholder="Этаж"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.floor as number}
-                    errors={errors.floor}
-                    touched={touched.floor}
-                    className={cls.floorInput}
-                  />
-
-                  <InputInstance
-                    theme={EInputInstanceTheme.PROFILE}
-                    type="number"
-                    id="house"
-                    name="house"
-                    placeholder="Дом"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.house as number}
-                    errors={errors.house}
-                    touched={touched.house}
-                    className={cls.homeInput}
-                  />
-                </div>
-
-                <InputInstance
-                  mask={maskForPhone}
-                  theme={EInputInstanceTheme.PROFILE}
-                  type="text"
-                  id="phone_number"
-                  name="phone_number"
-                  placeholder="+7 (___) ___ __ __"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.phone_number as number}
-                  errors={errors.phone_number}
-                  touched={touched.phone_number}
-                  className={cls.phoneNumberInput}
-                />
+                <p className={cls.warning}>
+                  Пример: Алматы, проспект Аль-Фараби, 21/1
+                  <br />
+                  Можете посмотреть в картах 2гис
+                </p>
 
                 <div className={cls.container_BtnContainer}>
                   <Button

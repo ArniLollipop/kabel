@@ -1,3 +1,5 @@
+@tailwind components;
+@tailwind utilities;
 :root {
   /* fonts */
   --font-family-main: "Montserrat", serif;
@@ -81,6 +83,40 @@ body {
   overflow: hidden;
 }
 
+.scale {
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.scale:hover {
+  z-index: 1000;
+  transform: scale(1.03);
+}
+
+.itemUp {
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.itemUp:hover {
+  transform: translateY(-5px);
+}
+
+.itemShadow {
+  transition: all;
+  transition-duration: 300ms;
+}
+
+.itemShadow:hover {
+  transform: scale(1.03);
+  box-shadow: 1px 5px 19px 7px rgba(73, 75, 81, 0.2);
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 a,
 span {
   color: inherit;
@@ -128,6 +164,34 @@ input:-webkit-autofill {
 
 img {
   object-fit: cover;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: "" !important;
+  background-image: url("../assets/icons/chevron-left.svg") !important;
+  height: 35px;
+  width: 35px;
+  font-family: none !important;
+}
+
+.swiper-button-next {
+  transform: rotate(180deg);
+}
+
+.swiper-button-prev {
+  left: -10px !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.swiper-button-next {
+  right: -10px !important;
 }
 
 .navBtn__main {

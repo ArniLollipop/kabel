@@ -25,7 +25,10 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 
       <ul className={cls.ServicesSection_list}>
         <li>
-          <Link href="/services" className={cls.ServicesSection_item}>
+          <Link
+            href="/services"
+            className={cls.ServicesSection_item + " itemUp"}
+          >
             <div className={cls.ServicesSection_itemImg}>
               <Image src={IconServicesCalcWeight} alt="Services icon" />
             </div>
@@ -36,7 +39,10 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
         </li>
 
         <li>
-          <Link href="/services" className={cls.ServicesSection_item}>
+          <Link
+            href="/services"
+            className={cls.ServicesSection_item + " itemUp"}
+          >
             <div className={cls.ServicesSection_itemImg}>
               <Image src={IconServicesCalc} alt="Services icon" />
             </div>
@@ -47,7 +53,10 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
         </li>
 
         <li>
-          <Link href="/services" className={cls.ServicesSection_item}>
+          <Link
+            href="/services"
+            className={cls.ServicesSection_item + " itemUp"}
+          >
             <div className={cls.ServicesSection_itemImg}>
               <Image src={IconServicesDecoding} alt="Services icon" />
             </div>

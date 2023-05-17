@@ -3,8 +3,10 @@ import {
   IconSideBarCard,
   IconSideBarKaspi,
   IconCardTenge,
-} from "@/assets/icons";
+  IconCash,
+} from "@/assets/icons/cardIcons";
 import { useHttp } from "@/hooks/useHttp";
+import Cash from "@/assets/icons/Cash.svg";
 
 export const CardDeliveryData = [
   {

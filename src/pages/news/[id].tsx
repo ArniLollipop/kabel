@@ -47,8 +47,6 @@ export default function articlePage(props: newsI) {
                     <Image
                       className={cls.articlePage_img}
                       src={image}
-                      width={1146}
-                      height={460}
                       alt="image"
                     />
                   )}

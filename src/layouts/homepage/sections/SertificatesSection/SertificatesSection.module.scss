@@ -52,6 +52,10 @@
     text-decoration-thickness: 2px;
   }
 
+  &__img {
+    cursor: pointer;
+  }
+
   @media (max-width: 425px) {
     &__img {
       width: 100%;

@@ -237,8 +237,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 {}
               </Link>
             </li>
-
-            <li className={cn(cls.nav_list_item, cls.catalogLink)}>
+            <li className={cn(cls.nav_list_item, cls.catalogLink) + " group"}>
               <Link
                 onMouseEnter={() => setActiveCat(categories[0].name)}
                 href="/catalog"
@@ -247,8 +246,13 @@ export const Header: FC<HeaderProps> = (props) => {
 
                 {}
               </Link>
-
-              <div className={cn(cls.hovered)}>
+              <div
+                className={
+                  activeCat === ""
+                    ? cn(cls.hovered) + " !-translate-y-[100%]"
+                    : cn(cls.hovered) + ""
+                }
+              >
                 <nav className={cls.hovered_nav}>
                   {categories?.map((cat: any) => (
                     <Link
@@ -260,6 +264,7 @@ export const Header: FC<HeaderProps> = (props) => {
                             subcat: "",
                           })
                         );
+                        setActiveCat("");
                       }}
                       className={cls.hovered_navLink}
                       href={"/catalog"}
@@ -285,6 +290,7 @@ export const Header: FC<HeaderProps> = (props) => {
                                   subcat: subcat.name,
                                 })
                               );
+                              setActiveCat("");
                             }}
                             className={cls.hovered_contentLink}
                             href={`/catalog`}

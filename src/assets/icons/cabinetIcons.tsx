@@ -1,4 +1,4 @@
-import { FC, SVGProps } from 'react';
+import { FC, SVGProps } from "react";
 
 interface CabinetIconsProps extends SVGProps<SVGSVGElement> {
   className?: string;
@@ -9,7 +9,13 @@ export const IconCabinetFlag: FC<CabinetIconsProps> = (props) => {
   const { className, fillColor } = props;
 
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g clipPath="url(#clip0_1906_33174)">
         <mask
           id="mask0_1906_33174"
@@ -23,7 +29,12 @@ export const IconCabinetFlag: FC<CabinetIconsProps> = (props) => {
           <circle cx="12" cy="12" r="12" fill="#D9D9D9" />
         </mask>
         <g mask="url(#mask0_1906_33174)">
-          <path fillRule="evenodd" clipRule="evenodd" d="M-7 -1H26.3333V24H-7V-1Z" fill="#00ABC2" />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M-7 -1H26.3333V24H-7V-1Z"
+            fill="#00ABC2"
+          />
           <path
             d="M15.9963 9.72833C15.9963 7.25232 13.8784 5.24512 11.2657 5.24512C8.65311 5.24512 6.53516 7.25232 6.53516 9.72833C6.53516 12.2043 8.65311 14.2115 11.2657 14.2115C13.8784 14.2115 15.9963 12.2043 15.9963 9.72833Z"
             fill="#FFEC2D"
@@ -74,20 +85,20 @@ export const IconCabinetProfile: FC<CabinetIconsProps> = (props) => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill={fillColor || 'none'}
+      fill={fillColor || "none"}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
       <path
         d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-        stroke={fillColor || '#00ABC2'}
+        stroke={fillColor || "#00ABC2"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-        stroke={fillColor || '#00ABC2'}
+        stroke={fillColor || "#00ABC2"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -97,7 +108,7 @@ export const IconCabinetProfile: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetOrder: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#00ABC2' } = props;
+  const { className, fillColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -143,7 +154,7 @@ export const IconCabinetOrder: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetDelivery: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#00ABC2' } = props;
+  const { className, fillColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -173,7 +184,7 @@ export const IconCabinetDelivery: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetCards: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#00ABC2' } = props;
+  const { className, fillColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -203,7 +214,7 @@ export const IconCabinetCards: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetBonuses: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#00ABC2' } = props;
+  const { className, fillColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -224,7 +235,7 @@ export const IconCabinetBonuses: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetSupport: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#00ABC2' } = props;
+  const { className, fillColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -254,7 +265,7 @@ export const IconCabinetSupport: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetLogout: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#00ABC2' } = props;
+  const { className, fillColor = "#00ABC2" } = props;
 
   return (
     <svg
@@ -291,7 +302,7 @@ export const IconCabinetLogout: FC<CabinetIconsProps> = (props) => {
 };
 
 export const IconCabinetArrow: FC<CabinetIconsProps> = (props) => {
-  const { className, fillColor = '#39424B' } = props;
+  const { className, fillColor = "#39424B" } = props;
 
   return (
     <svg
@@ -304,7 +315,7 @@ export const IconCabinetArrow: FC<CabinetIconsProps> = (props) => {
     >
       <path
         d="M1 13L7 7L1 1"
-        stroke={fillColor}
+        stroke={className}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -377,7 +388,13 @@ export const IconCabinetEditPhoto: FC<CabinetIconsProps> = (props) => {
   const { className } = props;
 
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <circle cx="20" cy="20" r="20" fill="#00ABC2" />
       <path
         d="M20 13V27"
@@ -401,7 +418,13 @@ export const IconCabinetChangePhoneNumber: FC<CabinetIconsProps> = (props) => {
   const { className } = props;
 
   return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M20.9999 15.92V18.92C21.0011 19.1985 20.944 19.4741 20.8324 19.7293C20.7209 19.9845 20.5572 20.2136 20.352 20.4018C20.1468 20.5901 19.9045 20.7335 19.6407 20.8227C19.3769 20.9119 19.0973 20.945 18.8199 20.92C15.7428 20.5856 12.7869 19.5341 10.1899 17.85C7.77376 16.3146 5.72527 14.2661 4.18993 11.85C2.49991 9.24118 1.44818 6.27097 1.11993 3.17997C1.09494 2.90344 1.12781 2.62474 1.21643 2.3616C1.30506 2.09846 1.4475 1.85666 1.6347 1.6516C1.82189 1.44653 2.04974 1.28268 2.30372 1.1705C2.55771 1.05831 2.83227 1.00024 3.10993 0.999975H6.10993C6.59524 0.995198 7.06572 1.16705 7.43369 1.48351C7.80166 1.79996 8.04201 2.23942 8.10993 2.71997C8.23656 3.68004 8.47138 4.6227 8.80993 5.52997C8.94448 5.8879 8.9736 6.27689 8.89384 6.65086C8.81408 7.02482 8.6288 7.36809 8.35993 7.63998L7.08993 8.90997C8.51349 11.4135 10.5864 13.4864 13.0899 14.91L14.3599 13.64C14.6318 13.3711 14.9751 13.1858 15.3491 13.1061C15.723 13.0263 16.112 13.0554 16.4699 13.19C17.3772 13.5285 18.3199 13.7634 19.2799 13.89C19.7657 13.9585 20.2093 14.2032 20.5265 14.5775C20.8436 14.9518 21.0121 15.4296 20.9999 15.92Z"
         stroke="#00ABC2"

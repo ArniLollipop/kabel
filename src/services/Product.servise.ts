@@ -13,7 +13,7 @@ import { NextPageContext } from "next";
 const enum endpoints {
   getCategories = "/products/categories/",
   getCores = "/products/cores_sections/",
-  getProducts = "/products/products/",
+  getProducts = "/products/products",
 }
 
 interface ProductServiceResponseI {
