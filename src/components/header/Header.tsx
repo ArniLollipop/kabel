@@ -237,10 +237,11 @@ export const Header: FC<HeaderProps> = (props) => {
                 {}
               </Link>
             </li>
-            <li className={cn(cls.nav_list_item, cls.catalogLink) + " group"}>
+            <li className={cn(cls.nav_list_item, cls.catalogLink)}>
               <Link
-                onMouseEnter={() => setActiveCat(categories[0].name)}
+                onMouseEnter={() => setActiveCat(categories[0].name || "")}
                 href="/catalog"
+                className="peer"
               >
                 {t("list.product") ? t("list.product") : ""}
 
@@ -250,7 +251,7 @@ export const Header: FC<HeaderProps> = (props) => {
                 className={
                   activeCat === ""
                     ? cn(cls.hovered) + " !-translate-y-[100%]"
-                    : cn(cls.hovered) + ""
+                    : cn(cls.hovered) + " "
                 }
               >
                 <nav className={cls.hovered_nav}>
@@ -266,14 +267,24 @@ export const Header: FC<HeaderProps> = (props) => {
                         );
                         setActiveCat("");
                       }}
-                      className={cls.hovered_navLink}
+                      className={
+                        activeCat === cat.name
+                          ? cls.hovered_navLink + " bg-[#f6bf0c]"
+                          : cls.hovered_navLink
+                      }
                       href={"/catalog"}
                       onMouseEnter={() => setActiveCat(cat.name)}
                       key={cat.name}
                     >
                       <Image src={cat.icon} alt="icon" width={10} height={15} />
                       <p className={cls.text}> {cat.name} </p>
-                      <IconCabinetArrow className={cls.hovered_arrowIcon} />
+                      <IconCabinetArrow
+                        className={
+                          activeCat === cat.name
+                            ? cls.hovered_arrowIcon + " !stroke-[#fff]"
+                            : cls.hovered_arrowIcon
+                        }
+                      />
 
                       <div
                         className={cn(cls.hovered_content, {

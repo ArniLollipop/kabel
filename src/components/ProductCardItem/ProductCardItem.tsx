@@ -37,6 +37,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
   const { className, theme = ThemeProductCard.CATALOG } = props;
   const dispatch = useAppDispatch();
   const [cart, setCart] = useState<number>(0);
+  const [cartChange, setCartChange] = useState<number>(0);
   const { items } = useAppSelector((state) => state.CartSlice);
   const router = useRouter();
 
@@ -83,6 +84,28 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
     } catch (err) {}
   }
 
+  async function handleChangeCount(count: any) {
+    try {
+      if (parseInt(count) > 0) {
+        const res = await useHttp().post(
+          "orders/carts/add_to_cart/",
+          {
+            product: props.code,
+            length: count,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        );
+        setCart(parseInt(count));
+        dispatch(setAmount(res.data.result.total_amount));
+      }
+      setCartChange(parseInt(count));
+    } catch {}
+  }
+
   async function handlePlus(e: any) {
     e.stopPropagation();
     try {
@@ -116,6 +139,10 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
       });
     }
   }, [items]);
+
+  useEffect(() => {
+    setCartChange(cart);
+  }, [cart]);
 
   function handleClick() {
     router.push("/catalog/" + props.code);
@@ -200,10 +227,14 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
             </button>
             <div className="flex items-center">
               <input
-                className="w-[15px] outline-none border-none"
+                className={
+                  cls.cartCounter + " w-[20px] outline-none border-none"
+                }
+                min={1}
+                max={50}
                 type="number"
-                value={cart}
-                onChange={(e) => setCart(parseInt(e.target.value))}
+                value={cartChange}
+                onChange={(e: any) => handleChangeCount(e.target.value)}
               />
               <p className={cls.cartCounter}> м</p>
             </div>

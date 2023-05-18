@@ -68,6 +68,7 @@ export const useHttp = (ctx?: NextPageContext) => {
         } catch (e) {
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");
+          localStorage.removeItem("user");
           location.reload();
         }
       }

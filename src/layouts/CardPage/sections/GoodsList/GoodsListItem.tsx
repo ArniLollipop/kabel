@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListItem.module.scss";
 import Image, { StaticImageData } from "next/image";
@@ -27,11 +27,13 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const [amount, setCount] = useState<number>(element.length);
+  const [cartChange, setCartChange] = useState<number>();
 
   const plus = () => setCount((prev) => prev + 1);
   const minus = () => amount > 1 && setCount((prev) => prev - 1);
 
-  async function handleMinus() {
+  async function handleMinus(e: any) {
+    e.stopPropagation();
     try {
       const res = await useHttp().post(
         "orders/carts/reduce_from_cart/",
@@ -45,12 +47,35 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         }
       );
       dispatch(setAmount(res.data.result.total_amount));
-      dispatch(setItems(res.data.result.items));
       minus();
     } catch (err) {}
   }
 
-  async function handlePlus() {
+  async function handleChangeCount(count: any) {
+    try {
+      if (parseInt(count) > 0) {
+        const res = await useHttp().post(
+          "orders/carts/add_to_cart/",
+          {
+            product: element.product_info.code,
+            length: count,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        );
+        setCount(parseInt(count));
+        dispatch(setAmount(res.data.result.total_amount));
+        getCart();
+      }
+      setCartChange(parseInt(count));
+    } catch {}
+  }
+
+  async function handlePlus(e: any) {
+    e.stopPropagation();
     try {
       const res = await useHttp().post(
         "orders/carts/add_to_cart/",
@@ -64,10 +89,12 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         }
       );
       dispatch(setAmount(res.data.result.total_amount));
-      dispatch(setItems(res.data.result.items));
       plus();
     } catch (err) {}
   }
+  useEffect(() => {
+    setCartChange(amount);
+  }, [amount]);
 
   async function handleDelete() {
     try {
@@ -119,7 +146,14 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
           >
             <IconCardCounterMinus className={cls.GoodsDescr_counterBtn} />
           </Button>
-          <input type="еуче" readOnly value={amount} />М
+          <input
+            type="number"
+            min={1}
+            max={50}
+            value={cartChange}
+            onChange={(e) => handleChangeCount(e.target.value)}
+          />
+          М
           <Button onClick={handlePlus} theme={ThemeButton.CLEAR}>
             <IconCardCounterPlus className={cls.GoodsDescr_counterBtn} />
           </Button>

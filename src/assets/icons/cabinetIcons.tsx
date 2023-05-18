@@ -312,13 +312,15 @@ export const IconCabinetArrow: FC<CabinetIconsProps> = (props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      stroke="#fff"
     >
       <path
         d="M1 13L7 7L1 1"
-        stroke={className}
+        stroke="#fff"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        className={className}
       />
     </svg>
   );
