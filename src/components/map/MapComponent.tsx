@@ -2,6 +2,8 @@ import classNames from "classnames";
 import cls from "./MapComponent.module.scss";
 import GoogleMapReact from "google-map-react";
 import ReactDOMServer from "react-dom/server";
+import Script from "next/script";
+import { useEffect } from "react";
 
 let cn = classNames.bind(cls);
 
@@ -55,13 +57,14 @@ export const MapComponent = (props: MapComponentProps) => {
   return (
     <div className={cn(cls.MapComponent)}>
       <div className={cn(cls.MapComponent_map)}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k" }}
-          defaultCenter={{ lat: lat, lng: lon }}
-          defaultZoom={12}
-          yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }: any) => renderMarker(map, maps)}
-        ></GoogleMapReact>
+        <div id="map" className="w-full h-full"></div>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
+                getMap(${lat}, ${lon})
+              `,
+          }}
+        ></Script>
       </div>
     </div>
   );
