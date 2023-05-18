@@ -36,7 +36,7 @@ export const ProductService = (
 
   const getProductById = async (id: string): Promise<productI> => {
     const res = await useHttp(ctx).get<productI>(
-      `${endpoints.getProducts}${id}/`
+      `${endpoints.getProducts}/${id}/`
     );
     return res.data;
   };
