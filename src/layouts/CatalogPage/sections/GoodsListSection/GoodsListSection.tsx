@@ -28,9 +28,6 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
 
   useEffect(() => {
     setProductState(products);
-    console.log("====================================");
-    console.log(products);
-    console.log("====================================");
   }, [products]);
 
   const [onLoad, setOnLoad] = useState<boolean>(false);
@@ -98,7 +95,7 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
         )}
       </button>
 
-      {productsState?.results.length ? (
+      {productsState ? (
         <div>
           <div>
             <div
@@ -117,20 +114,24 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
                 />
               ))}
             </ul>
-            <div className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}>
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel=">"
-                onPageChange={handleChangePage}
-                pageRangeDisplayed={2}
-                pageCount={pagesCount as number}
-                className="flex items-center pagination"
-                previousLabel="<"
-                renderOnZeroPageCount={null}
-                activeClassName="pagination__active"
-                pageClassName="cursor-pointer hover:text-[#00abc2] transition-all duration-300"
-              />
-            </div>
+            {productsState?.results.length >= 50 && (
+              <div
+                className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}
+              >
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel=">"
+                  onPageChange={handleChangePage}
+                  pageRangeDisplayed={2}
+                  pageCount={pagesCount as number}
+                  className="flex items-center pagination"
+                  previousLabel="<"
+                  renderOnZeroPageCount={null}
+                  activeClassName="pagination__active"
+                  pageClassName="cursor-pointer hover:text-[#00abc2] transition-all duration-300"
+                />
+              </div>
+            )}
           </div>
         </div>
       ) : (
