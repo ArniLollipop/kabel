@@ -36,7 +36,7 @@ export default function deliveryPage() {
   const [address, setAddress] = useState<any>({});
 
   async function getAddresses() {
-    const res = await useHttp().get("users/user_addresses/");
+    const res = await useHttp().get("users/user_addresses/my_addresses/");
     setAddresses(res.data.results);
   }
 
@@ -51,8 +51,8 @@ export default function deliveryPage() {
 
   async function handleSetDefault(id: Number) {
     const res = await useHttp().patch(
-      "users/user_addresses/" + id + "/",
-      { is_default: true },
+      "users/user_addresses/change_to_default/",
+      { is_default: true, id: id },
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("access_token"),

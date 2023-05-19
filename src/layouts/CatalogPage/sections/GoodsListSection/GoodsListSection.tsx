@@ -1,9 +1,16 @@
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListSection.module.scss";
-import { ProductCardItem, ThemeProductCard } from "@/components/ProductCardItem/ProductCardItem";
+import {
+  ProductCardItem,
+  ThemeProductCard,
+} from "@/components/ProductCardItem/ProductCardItem";
+import ReactPaginate from "react-paginate";
 
-import { useAppSelector } from "@/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { ProductService } from "@/services/Product.servise";
+import { setProducts } from "@/store/slices/ProductSlice";
+
 const cn = classNames.bind(cls);
 
 interface GoodsListSectionProps {
@@ -14,7 +21,32 @@ interface GoodsListSectionProps {
 
 export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
   const { className, openFilters, isOpened } = props;
+  const [pagesCount, setPagesCount] = useState<Number>(25);
+  const dispatch = useAppDispatch();
+  const [productsState, setProductState] = useState<any>();
   const { products } = useAppSelector((state) => state.ProductSlice);
+
+  useEffect(() => {
+    setProductState(products);
+    console.log("====================================");
+    console.log(products);
+    console.log("====================================");
+  }, [products]);
+
+  const [onLoad, setOnLoad] = useState<boolean>(false);
+
+  async function handleChangePage(e: any) {
+    setOnLoad(true);
+    document.querySelector("#items")?.scrollIntoView({ behavior: "smooth" });
+    try {
+      const res = await ProductService().getProducts(
+        `?page=${JSON.stringify(e.selected + 1)}`
+      );
+      setPagesCount(res.count_pages);
+      dispatch(setProducts(res));
+      setOnLoad(false);
+    } catch (err) {}
+  }
 
   return (
     <div className={cn(cls.GoodsListSection)}>
@@ -66,12 +98,41 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
         )}
       </button>
 
-      {products?.results.length ? (
-        <ul className={cls.goodsList}>
-          {products?.results.map((el) => (
-            <ProductCardItem theme={ThemeProductCard.CATALOG} {...el} key={el.code} />
-          ))}
-        </ul>
+      {productsState?.results.length ? (
+        <div>
+          <div>
+            <div
+              className={
+                onLoad ? "loading mx-auto w-fit block my-40" : "hidden"
+              }
+            >
+              <div className="loading__inner"></div>
+            </div>
+            <ul id="items" className={!onLoad ? cls.goodsList : "hidden"}>
+              {productsState?.results.map((el: any) => (
+                <ProductCardItem
+                  theme={ThemeProductCard.CATALOG}
+                  {...el}
+                  key={el.code}
+                />
+              ))}
+            </ul>
+            <div className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}>
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={handleChangePage}
+                pageRangeDisplayed={2}
+                pageCount={pagesCount as number}
+                className="flex items-center pagination"
+                previousLabel="<"
+                renderOnZeroPageCount={null}
+                activeClassName="pagination__active"
+                pageClassName="cursor-pointer hover:text-[#00abc2] transition-all duration-300"
+              />
+            </div>
+          </div>
+        </div>
       ) : (
         <p className={cls.goodsList_notFound}>Товары не найдены</p>
       )}

@@ -36,6 +36,7 @@ export interface productAnswI {
   count: number;
   next: string | null;
   previous: string | null;
+  count_pages: number | 0;
   results: productI[];
 }
 

@@ -11,6 +11,7 @@ i18n
     resources: {
       kz: {
         translation: {
+          lang: "KZ",
           header: {
             account: "Жеке кабинет",
             free: "РК бойынша тегін",
@@ -177,6 +178,7 @@ i18n
       },
       ru: {
         translation: {
+          lang: "RU",
           header: {
             account: "Личный кабинет",
             free: "Бесплатно по РК",

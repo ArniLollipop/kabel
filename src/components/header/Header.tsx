@@ -18,6 +18,7 @@ import { useHttp } from "@/hooks/useHttp";
 import { CartService } from "@/services/Cart.service";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 import KZ from "@/assets/images/kz.png";
+import RU from "@/assets/images/Russia.webp";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
@@ -189,7 +190,7 @@ export const Header: FC<HeaderProps> = (props) => {
           <li className={cls.language_block}>
             <button onClick={() => setOpen(!open)} className={cls.language_btn}>
               <Image
-                src={KZ}
+                src={t("lang") === "RU" ? RU : KZ}
                 width={64}
                 height={64}
                 className={cls.language}

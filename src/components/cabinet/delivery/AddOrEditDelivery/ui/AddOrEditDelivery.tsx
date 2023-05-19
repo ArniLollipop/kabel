@@ -1,5 +1,5 @@
 // packages
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames";
 import { Form, Formik } from "formik";
 
@@ -20,13 +20,14 @@ import { deliveryAddressSchema } from "@/helpers/validation";
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector } from "@/hooks/store";
 import { useTranslation } from "next-i18next";
+import Script from "next/script";
 
 let cn = classNames.bind(cls);
 
 interface AddOrEditDeliveryProps {
   className: string;
   setIsOpen: any;
-  address: String;
+  address: string;
   apartment: Number;
   floor: Number;
   house: Number;
@@ -36,6 +37,7 @@ interface AddOrEditDeliveryProps {
 
 export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
   const { t } = useTranslation();
+
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const {
     className,
@@ -57,6 +59,12 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
     }
   }, []);
 
+  const [addressInput, setAddress] = useState<String>(address || "");
+  const [lonInput, setLon] = useState<String>("");
+  const [latInput, setLat] = useState<String>("");
+
+  console.log(addressInput, "asdasdasd");
+
   return (
     <div id="setAddress" className={cn(cls.AddOrEditDelivery, className)}>
       <Formik
@@ -66,6 +74,8 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
           floor: floor ? floor : 0,
           house: house ? house : 0,
           phone_number: phone_number ? phone_number : "",
+          lat: "",
+          lon: "",
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -74,62 +84,120 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
       >
         {({ values, touched, errors, handleChange, handleBlur }) => {
           const handleSaveAddOrDelivery = async () => {
-            const { address, apartment, floor, house, phone_number } = touched;
-            if (address && !errors?.address) {
-              if (address && authUser?.id) {
-                await useHttp()
-                  .put("users/user_addresses/" + id + "/", {
-                    ...values,
+            if (address) {
+              await useHttp()
+                .put("users/user_addresses/" + id + "/", {
+                  address: document.getElementById("address")
+                    ? (document.getElementById("address") as HTMLInputElement)
+                        .value
+                    : "",
+                  longitude: document.getElementById("lontitude")
+                    ? (document.getElementById("lontitude") as HTMLInputElement)
+                        .value
+                    : "",
+                  latitude: document.getElementById("latitude")
+                    ? (document.getElementById("latitude") as HTMLInputElement)
+                        .value
+                    : "",
+                  phone_number: values.phone_number,
+                  user: authUser?.id,
+                })
+                .then(() => {
+                  setIsOpen(false);
+                });
+            } else {
+              await useHttp()
+                .post(
+                  "users/user_addresses/",
+                  {
+                    address: document.getElementById("address")
+                      ? (document.getElementById("address") as HTMLInputElement)
+                          .value
+                      : "",
+                    longitude: document.getElementById("lontitude")
+                      ? (
+                          document.getElementById(
+                            "lontitude"
+                          ) as HTMLInputElement
+                        ).value
+                      : "",
+                    latitude: document.getElementById("latitude")
+                      ? (
+                          document.getElementById(
+                            "latitude"
+                          ) as HTMLInputElement
+                        ).value
+                      : "",
+                    phone_number: values.phone_number,
                     user: authUser?.id,
-                  })
-                  .then(() => {
-                    setIsOpen(false);
-                  });
-              } else if (authUser?.id) {
-                await useHttp()
-                  .post(
-                    "users/user_addresses/",
-                    {
-                      ...values,
-                      user: authUser?.id,
+                  },
+                  {
+                    headers: {
+                      Authorization:
+                        "Bearer " + localStorage.getItem("access_token"),
                     },
-                    {
-                      headers: {
-                        Authorization:
-                          "Bearer " + localStorage.getItem("access_token"),
-                      },
-                    }
-                  )
-                  .then(() => {
-                    setIsOpen(false);
-                  });
-              }
+                  }
+                )
+                .then(() => {
+                  setIsOpen(false);
+                });
             }
           };
 
           return (
             <div className={cls.container}>
               <p>{address ? t("changeAddress") : t("newAddress")}</p>
+
               <Form>
-                <InputInstance
-                  theme={EInputInstanceTheme.PROFILE}
+                <input
+                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                    values.address === e.target.value;
+                    console.log("address");
+                  }}
+                  readOnly
+                  value={addressInput as string}
                   type="text"
                   id="address"
-                  name="address"
-                  placeholder="Адрес"
+                />
+                <InputInstance
+                  mask={maskForPhone}
+                  theme={EInputInstanceTheme.PROFILE}
+                  type="text"
+                  id="phone_number"
+                  name="phone_number"
+                  placeholder="+7 (___) ___ __ __"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.address as string}
-                  errors={errors.address}
-                  touched={touched.address}
-                  className={cls.addressInput}
+                  value={values.phone_number as number}
+                  errors={errors.phone_number}
+                  touched={touched.phone_number}
+                  className={cls.phoneNumberInput}
                 />
-                <p className={cls.warning}>
-                  Пример: Алматы, проспект Аль-Фараби, 21/1
-                  <br />
-                  Можете посмотреть в картах 2гис
-                </p>
 
+                <input
+                  className="hidden"
+                  value={latInput as string}
+                  type="text"
+                  id="latitude"
+                />
+                <input
+                  className="hidden"
+                  value={lonInput as string}
+                  type="text"
+                  id="lontitude"
+                />
+                <p className={cls.warning}>Найдите через поиск ваш адрес</p>
+
+                <div id="map1" className="h-[300px] w-full mt-6"></div>
+                <Script
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                    getMap2(43.2446, 76.9114);
+              `,
+                  }}
+                ></Script>
                 <div className={cls.container_BtnContainer}>
                   <Button
                     theme={ThemeButton.CANCEL}
