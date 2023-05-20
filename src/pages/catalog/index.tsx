@@ -5,8 +5,13 @@ import { MainLayout } from "@/layouts/MainLayout";
 import { ProductService } from "@/services/Product.servise";
 import { categoriesAnswI, coresI, productAnswI } from "@/types/ProductTypes";
 import { useAppDispatch } from "@/hooks/store";
-import { setProducts, setCategories, setCores } from "@/store/slices/ProductSlice";
+import {
+  setProducts,
+  setCategories,
+  setCores,
+} from "@/store/slices/ProductSlice";
 import { NextPageContext } from "next/types";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 interface CardProps {
   products: productAnswI;
@@ -33,7 +38,7 @@ export default function Card(props: CardProps) {
 }
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  const products = await ProductService().getProducts();
+  const products = await ProductService().getProducts(parseCookies().queries);
   const categories = await ProductService().getCategories();
   const cores = await ProductService().getCores();
 

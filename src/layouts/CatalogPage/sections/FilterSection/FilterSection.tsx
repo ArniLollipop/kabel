@@ -17,6 +17,7 @@ import { setProducts } from "@/store/slices/ProductSlice";
 import { queriesGenerator } from "@/helpers/queriesGenerator";
 import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
 import { useTranslation } from "next-i18next";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 const cn = classNames.bind(cls);
 
@@ -41,10 +42,6 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     sortWidget: "-cost" | "cost";
   }
 
-  console.log("====================================");
-  console.log(categories?.results, "asdasdasd");
-  console.log("====================================");
-
   const submitHandler = async (value: sortI) => {
     const { availability, categories, checkedCors, sortWidget } = value;
 
@@ -65,9 +62,13 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     const sortQuery = `&ordering=${sortWidget}`;
 
     const queries = `?${coresQuery}${sectionsQuery}${categoriesQuery}${availabilityQuery}${sortQuery}`;
-    console.log("result", queries);
+    setCookie(null, "queries", JSON.stringify(queries), {
+      maxAge: 30 * 24 * 60 * 60,
+    });
+
     const res = await ProductService().getProducts(queries);
     dispatch(setProducts(res));
+    document.querySelector("#items")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

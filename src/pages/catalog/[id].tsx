@@ -33,7 +33,6 @@ export async function getServerSideProps(ctx: NextPageContext) {
   const { id } = ctx.query;
   const prodId = typeof id === "string" ? id : Array.isArray(id) ? id[0] : "";
   const product = await ProductService().getProductById(prodId);
-  console.log(product);
 
   return {
     props: product,
