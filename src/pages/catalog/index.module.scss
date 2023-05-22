@@ -5,7 +5,6 @@
 
   &_wrapper {
     @include adaptive-size(100, 30, padding-top);
-    @include adaptive-size(75, 40, padding-bottom);
 
     max-width: 1700px;
     margin: 0 auto;

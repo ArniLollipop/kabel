@@ -15,10 +15,14 @@ export default function Document() {
           rel="stylesheet"
         />
         <script src="https://api-maps.yandex.ru/2.1/?apikey=18378de5-507b-4d2a-a7c7-ca2fb2be7f0b&lang=ru_RU" />
+        {/* сам в ахуе что написал это */}
+
+        {/* сорри я не хотел меня заставили писать это говно, если будет вопрос
+        пиши на телегу @ArniL, но оно работает */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-             
+              // это функция для получения карты в контактах
               function getMap(lat, lon){
                 ymaps.ready(init);
                 function init() {
@@ -28,6 +32,7 @@ export default function Document() {
                   });
                 }
               }
+              // это для добавления/удаления адреса
               let lon2, lat2;
               function getMap2(lat, lon) {
                 
@@ -38,7 +43,7 @@ export default function Document() {
         }, {
             searchControlProvider: 'yandex#search'
         });
-
+                // метод взят из доки яндекс мапы, это для того чтобы получать адрес после поиска
                 var searchControl = new ymaps.control.SearchControl({
                   options: {
                     provider: 'yandex#search'
@@ -51,12 +56,13 @@ export default function Document() {
                   var index = e.get('index');
                   searchControl.getResult(index).then(function(res) {
                     //
-                    //сорри я не хотел меня заставили писать это говно, если будет вопрос пиши на телегу @ArniL, но оно работает
                     console.log(res.geometry.getCoordinates(), res.properties._data.address); // получаем адрес найденной точки
-                    
-                    document.getElementById("address").value = res.properties._data.address;
-                    document.getElementById("latitude").value = res.geometry.getCoordinates()[0];
-                    document.getElementById("lontitude").value = res.geometry.getCoordinates()[1];
+
+                    // тут крч через обычный жс помещал значение в инпуты, которые скрыты, сделано для того чтобы получать данные
+                    // плюс еще useState не работало с нативным жс хотя я там помещал onChange, но это не работало. Поэтому пришлось так
+                    document.getElementById("address").value = res.properties._data.address; //
+                    document.getElementById("latitude").value = res.geometry.getCoordinates()[0]; //
+                    document.getElementById("lontitude").value = res.geometry.getCoordinates()[1]; //
 
                     ymaps.geolocation.get({
                           provider: 'yandex',

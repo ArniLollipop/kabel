@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./FilterSection.module.scss";
 import { Button, ThemeButton } from "@/UI/Button/ui/Button";
@@ -13,11 +13,12 @@ import { Field, Form, Formik } from "formik";
 import { CheckBoxInstance } from "@/shared/formElements/checkboxInstance/CheckBoxInstance";
 import { RadioInstance } from "@/shared/formElements/radioInstance/RadioInstance";
 import { ProductService } from "@/services/Product.servise";
-import { setProducts } from "@/store/slices/ProductSlice";
+import { setPage, setProducts } from "@/store/slices/ProductSlice";
 import { queriesGenerator } from "@/helpers/queriesGenerator";
 import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
 import { useTranslation } from "next-i18next";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
+import nookies from "nookies";
 
 const cn = classNames.bind(cls);
 
@@ -33,10 +34,25 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
   const { categories, cores, products } = useAppSelector(
     (state) => state.ProductSlice
   );
+
+  const [checkedFilters, setCheckedFilters] = useState<any>({
+    subcategory: [],
+    section: [],
+    core_number: [],
+    availability: "Все",
+    ordering: "cost",
+  });
+
+  async function handleGetFilters() {
+    if (parseCookies().queries) {
+      setCheckedFilters(await JSON.parse(parseCookies().queries));
+    }
+  }
+
   const dispatch = useAppDispatch();
 
   interface sortI {
-    availability: "Все" | "в наличии" | "под заказ";
+    availability: "Все" | "в наличии" | "под заказ" | "";
     checkedCors: string[];
     categories: string[];
     sortWidget: "-cost" | "cost";
@@ -62,24 +78,48 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     const sortQuery = `&ordering=${sortWidget}`;
 
     const queries = `?${coresQuery}${sectionsQuery}${categoriesQuery}${availabilityQuery}${sortQuery}`;
-    setCookie(null, "queries", JSON.stringify(queries), {
+
+    const cookieQuery = {
+      subcategory: categories,
+      section: section,
+      core_number: core_number,
+      availability: availability === "Все" ? "" : availability,
+      ordering: sortWidget,
+    };
+
+    setCookie(null, "queries", JSON.stringify(cookieQuery), {
       maxAge: 30 * 24 * 60 * 60,
     });
-
-    const res = await ProductService().getProducts(queries);
+    const res = await ProductService().getProducts();
+    dispatch(setPage(res.count_pages));
     dispatch(setProducts(res));
     document.querySelector("#items")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    handleGetFilters();
+  }, []);
+
   return (
     <div className={cn(cls.FilterSection, { visible: isOpened })}>
       <Formik
-        initialValues={{
-          availability: "Все",
-          checkedCors: [],
-          categories: [],
-          sortWidget: "cost",
-        }}
+        initialValues={
+          checkedFilters
+            ? {
+                availability: checkedFilters
+                  ? checkedFilters.availability
+                  : "Все",
+                checkedCors: checkedFilters ? checkedFilters.core_number : [],
+                categories: checkedFilters ? checkedFilters.subcategory : [],
+                sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
+              }
+            : {
+                availability: "Все",
+                checkedCors: [],
+                categories: [],
+                sortWidget: "cost",
+              }
+        }
         onSubmit={(values: sortI) => submitHandler(values)}
       >
         {({ isSubmitting, values }) => (
@@ -98,7 +138,9 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                     values.categories = [];
                     values.checkedCors = [];
                     values.sortWidget = "cost";
+                    destroyCookie(null, "queries");
                     const res = await ProductService().getProducts();
+                    dispatch(setPage(res.count_pages));
                     dispatch(setProducts(res));
                   }}
                 >
@@ -118,10 +160,14 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
 
               <RadioInstance
                 name="availability"
-                value="Все"
+                value=""
                 id="all"
                 text="Все"
                 className={cls.FilterSection_radio}
+                checked={
+                  checkedFilters.availability === "" ||
+                  values.availability === ""
+                }
               />
               <RadioInstance
                 name="availability"
@@ -129,6 +175,10 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 id="inStock"
                 text="В наличии"
                 className={cls.FilterSection_radio}
+                checked={
+                  checkedFilters.availability === "в наличии" ||
+                  values.availability === "в наличии"
+                }
               />
               <RadioInstance
                 name="availability"
@@ -136,6 +186,10 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 id="underOrder"
                 text="Под заказ"
                 className={cls.FilterSection_radio}
+                checked={
+                  checkedFilters.availability === "под заказ" ||
+                  values.availability === "под заказ"
+                }
               />
             </div>
 
@@ -199,6 +253,12 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                                     id={subcat.name}
                                     text={subcat.name}
                                     className={cls.filtersAcc_itemInput}
+                                    checked={
+                                      checkedFilters.subcategory.includes(
+                                        subcat.name
+                                      ) ||
+                                      values.categories.includes(subcat.name)
+                                    }
                                   />
                                 </li>
                               ))}
@@ -261,6 +321,17 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                                       name="checkedCors"
                                       value={`${core}x${coreSect}`}
                                       id="coreItem"
+                                      checked={
+                                        (checkedFilters.core_number.includes(
+                                          core
+                                        ) &&
+                                          checkedFilters.section.includes(
+                                            coreSect
+                                          )) ||
+                                        values.checkedCors.includes(
+                                          `${core}x${coreSect}`
+                                        )
+                                      }
                                     />
                                   </li>
                                 ))}

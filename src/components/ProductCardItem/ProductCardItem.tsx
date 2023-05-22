@@ -228,13 +228,16 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
             <div className="flex items-center">
               <input
                 className={
-                  cls.cartCounter + " w-[20px] outline-none border-none"
+                  cls.cartCounter + " w-[50px] outline-none border-none"
                 }
                 min={1}
-                max={50}
+                max={1000}
                 type="number"
                 value={cartChange}
-                onChange={(e: any) => handleChangeCount(e.target.value)}
+                onChange={(e: any) => {
+                  if (e.target.value <= 1000 && e.target.value >= 1)
+                    handleChangeCount(e.target.value);
+                }}
               />
               <p className={cls.cartCounter}> м</p>
             </div>

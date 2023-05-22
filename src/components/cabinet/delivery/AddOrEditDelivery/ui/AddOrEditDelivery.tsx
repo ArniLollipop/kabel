@@ -191,6 +191,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                 <p className={cls.warning}>Найдите через поиск ваш адрес</p>
 
                 <div id="map1" className="h-[300px] w-full mt-6"></div>
+                {/* написано на нативном жс так как, некст не поддерживал яндекс мапы. Нативка написана в _document.tsx */}
                 <Script
                   dangerouslySetInnerHTML={{
                     __html: `

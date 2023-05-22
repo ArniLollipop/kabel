@@ -151,7 +151,11 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             min={1}
             max={50}
             value={cartChange}
-            onChange={(e) => handleChangeCount(e.target.value)}
+            className="w-[50px]"
+            onChange={(e: any) => {
+              if (e.target.value <= 1000 && e.target.value >= 1)
+                handleChangeCount(e.target.value);
+            }}
           />
           М
           <Button onClick={handlePlus} theme={ThemeButton.CLEAR}>

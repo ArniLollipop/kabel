@@ -28,9 +28,6 @@ const cartSlice = createSlice({
 
     setAmount: (state, action: PayloadAction<number>) => {
       state.total_amount = action.payload;
-      console.log("====================================");
-      console.log(state.total_amount);
-      console.log("====================================");
     },
   },
 });

@@ -13,10 +13,13 @@ import {
 } from "react-headless-accordion";
 import { productI } from "@/types/ProductTypes";
 import nullImg from "@/assets/images/nullImg.webp";
-import { useAppSelector } from "@/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 // import { Router } from "next/router";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { setAmount, setItems } from "@/store/slices/CartSlice";
+import { useHttp } from "@/hooks/useHttp";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -31,6 +34,119 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   const [count, setCount] = useState<number>(0);
 
   const { push } = useRouter();
+
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const [cart, setCart] = useState<number>(0);
+  const [cartChange, setCartChange] = useState<number>(0);
+  const router = useRouter();
+
+  const plus = () => setCart((prev) => prev + 1);
+  const minus = () => cart > 1 && setCart((prev) => prev - 1);
+
+  async function handleAddCart(e: any) {
+    e.stopPropagation();
+    try {
+      const res = await useHttp().post(
+        "orders/carts/add_to_cart/",
+        {
+          product: props.code,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      );
+      dispatch(setAmount(res.data.result.total_amount));
+      dispatch(setItems(res.data.result.items));
+    } catch (err) {
+      window.location.replace("/auth");
+    }
+  }
+
+  async function handleMinus(e: any) {
+    e.stopPropagation();
+    try {
+      const res = await useHttp().post(
+        "orders/carts/reduce_from_cart/",
+        {
+          product: props.code,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      );
+      dispatch(setAmount(res.data.result.total_amount));
+      minus();
+    } catch (err) {}
+  }
+
+  async function handleChangeCount(count: any) {
+    try {
+      if (parseInt(count) > 0) {
+        const res = await useHttp().post(
+          "orders/carts/add_to_cart/",
+          {
+            product: props.code,
+            length: count,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        );
+        setCart(parseInt(count));
+        dispatch(setAmount(res.data.result.total_amount));
+      }
+      setCartChange(parseInt(count));
+    } catch {}
+  }
+
+  async function handlePlus(e: any) {
+    e.stopPropagation();
+    try {
+      const res = await useHttp().post(
+        "orders/carts/add_to_cart/",
+        {
+          product: props.code,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        }
+      );
+      dispatch(setAmount(res.data.result.total_amount));
+      plus();
+    } catch (err) {}
+  }
+
+  function handleStop(e: any) {
+    e.stopPropagation();
+  }
+
+  useEffect(() => {
+    setCart(0);
+    if (items) {
+      items.map((el: any) => {
+        if (el.product_info.code === props.code) {
+          setCart(el.length);
+        }
+      });
+    }
+  }, [items]);
+
+  useEffect(() => {
+    setCartChange(cart);
+  }, [cart]);
+
+  function handleClick() {
+    router.push("/catalog/" + props.code);
+  }
 
   useEffect(() => {
     setCount(0);
@@ -215,59 +331,120 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
               </p>
 
               <span className={cls.buyActions_price}>{props.cost} ₸</span>
-
-              <Button
-                onClick={() => push("/card")}
-                className={cls.buyActions_btn}
-                theme={ThemeButton.CARD}
-              >
-                {count > 0 && (
-                  <p className={cls.buyActions_btn__count}>{count}</p>
-                )}
-                В корзину
-                <svg
-                  width="20"
-                  height="22"
-                  viewBox="0 0 20 22"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              {cartChange ? (
+                <div onClick={handleStop} className={cls.cartBtn}>
+                  <button onClick={handleMinus} className={cls.cartMinus}>
+                    <svg
+                      width="20"
+                      height="2"
+                      viewBox="0 0 20 2"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1 1H19"
+                        stroke="#00ABC2"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </button>
+                  <div className="flex items-center">
+                    <input
+                      className={
+                        cls.cartCounter +
+                        " w-[50px] outline-none border-none font-bold bg-transparent"
+                      }
+                      min={1}
+                      max={1000}
+                      type="number"
+                      value={cartChange}
+                      onChange={(e: any) => {
+                        if (e.target.value <= 1000 && e.target.value >= 1)
+                          handleChangeCount(e.target.value);
+                      }}
+                    />
+                    <p className={cls.cartCounter}> м</p>
+                  </div>
+                  <button onClick={handlePlus} className={cls.cartPlus}>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 5V19"
+                        stroke="#00ABC2"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M5 12H19"
+                        stroke="#00ABC2"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <Button
+                  onClick={() => push("/card")}
+                  className={cls.buyActions_btn}
+                  theme={ThemeButton.CARD}
                 >
-                  <ellipse
-                    cx="3.25"
-                    cy="18.692"
-                    rx="2.25"
-                    ry="2.21156"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <ellipse
-                    cx="15.625"
-                    cy="18.692"
-                    rx="2.25"
-                    ry="2.21156"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M15.625 16.4809H3.25V1H1"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M3.25 3.21094L19 4.31672L17.875 12.0572H3.25"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Button>
+                  {count > 0 && (
+                    <p className={cls.buyActions_btn__count}>{count}</p>
+                  )}
+                  В корзину
+                  <svg
+                    width="20"
+                    height="22"
+                    viewBox="0 0 20 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <ellipse
+                      cx="3.25"
+                      cy="18.692"
+                      rx="2.25"
+                      ry="2.21156"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <ellipse
+                      cx="15.625"
+                      cy="18.692"
+                      rx="2.25"
+                      ry="2.21156"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M15.625 16.4809H3.25V1H1"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M3.25 3.21094L19 4.31672L17.875 12.0572H3.25"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Button>
+              )}
 
               <div className={cls.buyActions_secondaruBtns}>
                 <Button className={cls.secondaryBtn} theme={ThemeButton.CLEAR}>

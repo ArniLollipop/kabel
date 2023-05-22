@@ -9,7 +9,7 @@ import ReactPaginate from "react-paginate";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { ProductService } from "@/services/Product.servise";
-import { setProducts } from "@/store/slices/ProductSlice";
+import { setPage, setProducts } from "@/store/slices/ProductSlice";
 
 const cn = classNames.bind(cls);
 
@@ -24,7 +24,7 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
   const [pagesCount, setPagesCount] = useState<Number>(25);
   const dispatch = useAppDispatch();
   const [productsState, setProductState] = useState<any>();
-  const { products } = useAppSelector((state) => state.ProductSlice);
+  const { products, pages } = useAppSelector((state) => state.ProductSlice);
 
   useEffect(() => {
     setProductState(products);
@@ -37,9 +37,10 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
     document.querySelector("#items")?.scrollIntoView({ behavior: "smooth" });
     try {
       const res = await ProductService().getProducts(
-        `?page=${JSON.stringify(e.selected + 1)}`
+        `?page=${JSON.stringify(e.selected)}`
       );
       setPagesCount(res.count_pages);
+      dispatch(setPage(res.count_pages));
       dispatch(setProducts(res));
       setOnLoad(false);
     } catch (err) {}
@@ -114,20 +115,24 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
                 />
               ))}
             </ul>
-            <div className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}>
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel=">"
-                onPageChange={handleChangePage}
-                pageRangeDisplayed={2}
-                pageCount={pagesCount as number}
-                className="flex items-center pagination"
-                previousLabel="<"
-                renderOnZeroPageCount={null}
-                activeClassName="pagination__active"
-                pageClassName="cursor-pointer hover:text-[#00abc2] transition-all duration-300"
-              />
-            </div>
+            {pages > 1 && (
+              <div
+                className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}
+              >
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel=">"
+                  onPageChange={handleChangePage}
+                  pageRangeDisplayed={2}
+                  pageCount={pages as number}
+                  className="flex items-center pagination"
+                  previousLabel="<"
+                  renderOnZeroPageCount={null}
+                  activeClassName="pagination__active"
+                  pageClassName="cursor-pointer hover:text-[#00abc2] transition-all duration-300"
+                />
+              </div>
+            )}
           </div>
         </div>
       ) : (

@@ -14,9 +14,11 @@ interface CheckBoxInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const CheckBoxInstance: FC<CheckBoxInstanceProps> = (props) => {
   const { id, name, text, className, value } = props;
+
   return (
     <label className={cn(cls.control, cls.control_checkbox, className)}>
       {text}
+
       <Field type="checkbox" {...props} />
       <div className={cls.control_indicator}></div>
     </label>

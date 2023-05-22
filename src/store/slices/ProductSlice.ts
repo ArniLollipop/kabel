@@ -6,6 +6,7 @@ interface productState {
   categories: categoriesAnswI | null;
   cores: coresI | null;
   servicesWeight: null;
+  pages: number;
 }
 
 // Init
@@ -15,6 +16,7 @@ const initialState: productState = {
   categories: null,
   cores: null,
   servicesWeight: null,
+  pages: 0,
 };
 
 // Slice
@@ -37,9 +39,17 @@ const productSlice = createSlice({
     setServicesWeight: (state, action: PayloadAction<any>) => {
       state.servicesWeight = action.payload;
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.pages = action.payload;
+    },
   },
 });
 
-export const { setProducts, setCategories, setCores, setServicesWeight } =
-  productSlice.actions;
+export const {
+  setProducts,
+  setCategories,
+  setCores,
+  setServicesWeight,
+  setPage,
+} = productSlice.actions;
 export default productSlice.reducer;
