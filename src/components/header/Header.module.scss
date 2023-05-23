@@ -222,7 +222,7 @@ $margins_mob: 5;
   transform: translateY(-100%);
 
   z-index: 10;
-  left: calc((100vw - 100%) / 2 * -1);
+  left: 0;
 
   background-color: var(--color-bg-white);
 
@@ -243,7 +243,7 @@ $margins_mob: 5;
     padding: 40px 0;
     height: fit-content;
 
-    max-width: 27vw;
+    max-width: 350px;
     position: relative;
   }
 
@@ -296,7 +296,6 @@ $margins_mob: 5;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
 
-    padding-top: 50px;
     width: 54vw;
     display: none;
 

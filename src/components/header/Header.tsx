@@ -117,291 +117,303 @@ export const Header: FC<HeaderProps> = (props) => {
 
   return (
     <div className={cls.Header} onClick={() => setResultOpen(false)}>
-      <div className={cls.Header_wrapper}>
-        <ul className={cls.contacts_list}>
-          <li className={cls.contacts_list_mobileLogo}>
-            <Link href="/">
-              <IconLogo width="126" height="47" />
-            </Link>
-          </li>
+      <div className="w-full bg-white">
+        <div className={cls.Header_wrapper}>
+          <ul className={cls.contacts_list}>
+            <li className={cls.contacts_list_mobileLogo}>
+              <Link href="/">
+                <IconLogo width="126" height="47" />
+              </Link>
+            </li>
 
-          <li className={cls.contacts_list_geoTag}>
-            <a href="" className={cls["link"]}>
-              <IconGeoTag className={cls["icon"]} />
-              <span className={cls["city"]}>Алматы</span>
-            </a>
-          </li>
+            <li className={cls.contacts_list_geoTag}>
+              <a href="" className={cls["link"]}>
+                <IconGeoTag className={cls["icon"]} />
+                <span className={cls["city"]}>Алматы</span>
+              </a>
+            </li>
 
-          <li className={cls.contacts_list_contacts}>
-            <a href="tel:+78000704798" className={cls["main-phone"]}>
-              <IconPhone className={cls["icon"]} />
-              <span className={cls["phone"]}>8 800 070 47 98</span>
-            </a>
-            <span className={cls["phone-descr"]}>
-              {t("header.free") ? t("header.free") : ""}
+            <li className={cls.contacts_list_contacts}>
+              <a href="tel:+78000704798" className={cls["main-phone"]}>
+                <IconPhone className={cls["icon"]} />
+                <span className={cls["phone"]}>8 800 070 47 98</span>
+              </a>
+              <span className={cls["phone-descr"]}>
+                {t("header.free") ? t("header.free") : ""}
 
-              {}
-            </span>
-
-            <a
-              href="tel:+77273014798"
-              className={(cls["phone"], cls["phone-secondary"])}
-            >
-              +7 727 301 47 98
-            </a>
-
-            <a
-              href="tel:+77273554798"
-              className={(cls["phone"], cls["phone-secondary"])}
-            >
-              +7 727 355 47 98
-            </a>
-
-            <a
-              href="https://wa.me/77003014798"
-              target="_blank"
-              className={(cls["phone"], cls["phone-secondary"])}
-            >
-              +7 700 301 47 98
-              <IconWhatsApp />
-            </a>
-          </li>
-          <li className={cls.contacts_list_card}>
-            <Link href="/card" className={cls["card-link"]}>
-              <IconCard className={cls["icon"]} />
-              <span>{total_amount} ₸</span>
-            </Link>
-          </li>
-
-          <li className={cls.contacts_list_user}>
-            <Link
-              href={isLoggedIn ? "/cabinet/profile" : "/auth"}
-              className={cls["user-link"]}
-            >
-              <IconUserCabinet className={cls["icon"]} />
-              {/* @ts-ignore */}
-              <span>
                 {}
-
-                {first_name || authUser?.first_name || t("header.free")}
               </span>
-            </Link>
-          </li>
-          <li className={cls.language_block}>
-            <button onClick={() => setOpen(!open)} className={cls.language_btn}>
-              <Image
-                src={t("lang") === "RU" ? RU : KZ}
-                width={64}
-                height={64}
-                className={cls.language}
-                alt="asdassd"
-              />
-            </button>
-            {open && (
-              <div className={cls.language_choices}>
-                <button
-                  onClick={() => {
-                    changeLanguage("kz");
-                    location.reload();
-                  }}
-                  className={cls.language_choice}
-                >
-                  KZ
-                </button>
-                <button
-                  onClick={() => {
-                    changeLanguage("ru");
-                    location.reload();
-                  }}
-                  className={cls.language_choice}
-                >
-                  RU
-                </button>
-              </div>
-            )}
-          </li>
-        </ul>
 
-        <nav className={cls.nav}>
-          <Link href="/" className={cls.nav_linkLogo}>
-            <IconLogo className={cls.nav_logo} />
-          </Link>
+              <a
+                href="tel:+77273014798"
+                className={(cls["phone"], cls["phone-secondary"])}
+              >
+                +7 727 301 47 98
+              </a>
 
-          <ul className={cls.nav_list}>
-            <li
-              className={cn(cls.nav_list_item, {
-                active: activePage === ActiveHeaderPage.ABOUT,
-              })}
-            >
-              <Link href="/about">
-                {t("list.company") ? t("list.company") : ""}
-                {}
+              <a
+                href="tel:+77273554798"
+                className={(cls["phone"], cls["phone-secondary"])}
+              >
+                +7 727 355 47 98
+              </a>
+
+              <a
+                href="https://wa.me/77003014798"
+                target="_blank"
+                className={(cls["phone"], cls["phone-secondary"])}
+              >
+                +7 700 301 47 98
+                <IconWhatsApp />
+              </a>
+            </li>
+            <li className={cls.contacts_list_card}>
+              <Link href="/card" className={cls["card-link"]}>
+                <IconCard className={cls["icon"]} />
+                <span>{total_amount} ₸</span>
               </Link>
             </li>
-            <li className={cn(cls.nav_list_item, cls.catalogLink)}>
+
+            <li className={cls.contacts_list_user}>
               <Link
-                onMouseEnter={() => setActiveCat(categories[0].name || "")}
-                href="/catalog"
-                className="peer"
+                href={isLoggedIn ? "/cabinet/profile" : "/auth"}
+                className={cls["user-link"]}
               >
-                {t("list.product") ? t("list.product") : ""}
+                <IconUserCabinet className={cls["icon"]} />
+                {/* @ts-ignore */}
+                <span>
+                  {}
 
-                {}
+                  {first_name || authUser?.first_name || t("header.free")}
+                </span>
               </Link>
-              <div
-                className={
-                  activeCat === ""
-                    ? cn(cls.hovered) + " !-translate-y-[100%]"
-                    : cn(cls.hovered) + " "
-                }
+            </li>
+            <li className={cls.language_block}>
+              <button
+                onClick={() => setOpen(!open)}
+                className={cls.language_btn}
               >
-                <nav className={cls.hovered_nav}>
-                  {categories?.map((cat: any) => (
-                    <Link
-                      onClick={() => {
-                        localStorage.setItem(
-                          "cat",
-                          JSON.stringify({
-                            cat: cat.name,
-                            subcat: "",
-                          })
-                        );
-                        setActiveCat("");
-                      }}
-                      className={
-                        activeCat === cat.name
-                          ? cls.hovered_navLink + " bg-[#f6bf0c]"
-                          : cls.hovered_navLink
-                      }
-                      href={"/catalog"}
-                      onMouseEnter={() => setActiveCat(cat.name)}
-                      key={cat.name}
-                    >
-                      <Image src={cat.icon} alt="icon" width={10} height={15} />
-                      <p className={cls.text}> {cat.name} </p>
-                      <IconCabinetArrow
-                        className={
-                          activeCat === cat.name
-                            ? cls.hovered_arrowIcon + " !stroke-[#fff]"
-                            : cls.hovered_arrowIcon
-                        }
-                      />
-
-                      <div
-                        className={cn(cls.hovered_content, {
-                          visible: activeCat === cat.name,
-                        })}
-                      >
-                        {cat.subcategory_set.map((subcat: any) => (
-                          <Link
-                            onClick={() => {
-                              localStorage.setItem(
-                                "cat",
-                                JSON.stringify({
-                                  cat: cat.name,
-                                  subcat: subcat.name,
-                                })
-                              );
-                              setActiveCat("");
-                            }}
-                            className={cls.hovered_contentLink}
-                            href={`/catalog`}
-                            key={subcat.name}
-                          >
-                            {subcat.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </Link>
-                  ))}
-                </nav>
-              </div>
-            </li>
-
-            <li
-              className={cn(cls.nav_list_item, {
-                active: activePage === ActiveHeaderPage.SERVICES,
-              })}
-            >
-              <Link href="/services">
-                {t("list.services") ? t("list.services") : ""}
-
-                {}
-              </Link>
-            </li>
-
-            <li
-              className={cn(cls.nav_list_item, {
-                active: activePage === ActiveHeaderPage.NEWS,
-              })}
-            >
-              <Link href="/news">
-                {t("list.news") ? t("list.news") : ""}
-
-                {}
-              </Link>
-            </li>
-
-            <li
-              className={cn(cls.nav_list_item, {
-                active: activePage === ActiveHeaderPage.PAY_DEL,
-              })}
-            >
-              <Link href="/pay-del/payment">
-                {t("list.payment") ? t("list.payment") : ""}
-
-                {}
-              </Link>
-            </li>
-
-            <li
-              className={cn(cls.nav_list_item, {
-                active: activePage === ActiveHeaderPage.CONTACTS,
-              })}
-            >
-              <Link href="/contacts">
-                {t("list.contacts") ? t("list.contacts") : ""}
-
-                {}
-              </Link>
+                <Image
+                  src={t("lang") === "RU" ? RU : KZ}
+                  width={64}
+                  height={64}
+                  className={cls.language}
+                  alt="asdassd"
+                />
+              </button>
+              {open && (
+                <div className={cls.language_choices}>
+                  <button
+                    onClick={() => {
+                      changeLanguage("kz");
+                      location.reload();
+                    }}
+                    className={cls.language_choice}
+                  >
+                    KZ
+                  </button>
+                  <button
+                    onClick={() => {
+                      changeLanguage("ru");
+                      location.reload();
+                    }}
+                    className={cls.language_choice}
+                  >
+                    RU
+                  </button>
+                </div>
+              )}
             </li>
           </ul>
-          <div className={cls.search}>
-            <input
-              type="text"
-              placeholder="Поиск по имени товара"
-              className={cls.nav_search}
-              onChange={(e: any) => inputCheck(e)}
-            />
-            {isResultOpen && (
-              <div className={cls.search__results}>
-                {searchRes &&
-                  searchRes?.map((el: any) => {
-                    return (
-                      <Link
-                        href={"/catalog/" + el.code}
-                        className={cls.search__result}
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
+
+          <nav className={cls.nav}>
+            <Link href="/" className={cls.nav_linkLogo}>
+              <IconLogo className={cls.nav_logo} />
+            </Link>
+
+            <ul className={cls.nav_list}>
+              <li
+                className={cn(cls.nav_list_item, {
+                  active: activePage === ActiveHeaderPage.ABOUT,
+                })}
+              >
+                <Link href="/about">
+                  {t("list.company") ? t("list.company") : ""}
+                  {}
+                </Link>
+              </li>
+              <li className={cn(cls.nav_list_item, cls.catalogLink)}>
+                <Link
+                  onMouseEnter={() => setActiveCat(categories[0].name || "")}
+                  href="/catalog"
+                  className="peer"
+                >
+                  {t("list.product") ? t("list.product") : ""}
+
+                  {}
+                </Link>
+                <div
+                  className={
+                    activeCat === ""
+                      ? cn(cls.hovered) + " !-translate-y-[100%]"
+                      : cn(cls.hovered) + " "
+                  }
+                >
+                  <div className="absolute left-1/2 !-translate-x-1/2 max-w-[1400px] w-full">
+                    <nav className={cls.hovered_nav}>
+                      {categories?.map((cat: any) => (
+                        <Link
+                          onClick={() => {
+                            localStorage.setItem(
+                              "cat",
+                              JSON.stringify({
+                                cat: cat.name,
+                                subcat: "",
+                              })
+                            );
+                            setActiveCat("");
+                          }}
+                          className={
+                            activeCat === cat.name
+                              ? cls.hovered_navLink + " bg-[#f6bf0c]"
+                              : cls.hovered_navLink
+                          }
+                          href={"/catalog"}
+                          onMouseEnter={() => setActiveCat(cat.name)}
+                          key={cat.name}
                         >
-                          <path
-                            d="M15.5 14.9258L11.5 10.9258M7.5 12.9258C4.18629 12.9258 1.5 10.2395 1.5 6.92578C1.5 3.61207 4.18629 0.925781 7.5 0.925781C10.8137 0.925781 13.5 3.61207 13.5 6.92578C13.5 10.2395 10.8137 12.9258 7.5 12.9258Z"
-                            stroke="#00ABC2"
+                          <Image
+                            src={cat.icon}
+                            alt="icon"
+                            width={10}
+                            height={15}
                           />
-                        </svg>
-                        {el.name}
-                      </Link>
-                    );
-                  })}
-              </div>
-            )}
-          </div>
-        </nav>
+                          <p className={cls.text}> {cat.name} </p>
+                          <IconCabinetArrow
+                            className={
+                              activeCat === cat.name
+                                ? cls.hovered_arrowIcon + " !stroke-[#fff]"
+                                : cls.hovered_arrowIcon
+                            }
+                          />
+
+                          <div
+                            className={cn(cls.hovered_content, {
+                              visible: activeCat === cat.name,
+                            })}
+                          >
+                            {cat.subcategory_set.map((subcat: any) => (
+                              <Link
+                                onClick={() => {
+                                  localStorage.setItem(
+                                    "cat",
+                                    JSON.stringify({
+                                      cat: cat.name,
+                                      subcat: subcat.name,
+                                    })
+                                  );
+                                  setActiveCat("");
+                                }}
+                                className={cls.hovered_contentLink}
+                                href={`/catalog`}
+                                key={subcat.name}
+                              >
+                                {subcat.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+              </li>
+
+              <li
+                className={cn(cls.nav_list_item, {
+                  active: activePage === ActiveHeaderPage.SERVICES,
+                })}
+              >
+                <Link href="/services">
+                  {t("list.services") ? t("list.services") : ""}
+
+                  {}
+                </Link>
+              </li>
+
+              <li
+                className={cn(cls.nav_list_item, {
+                  active: activePage === ActiveHeaderPage.NEWS,
+                })}
+              >
+                <Link href="/news">
+                  {t("list.news") ? t("list.news") : ""}
+
+                  {}
+                </Link>
+              </li>
+
+              <li
+                className={cn(cls.nav_list_item, {
+                  active: activePage === ActiveHeaderPage.PAY_DEL,
+                })}
+              >
+                <Link href="/pay-del/payment">
+                  {t("list.payment") ? t("list.payment") : ""}
+
+                  {}
+                </Link>
+              </li>
+
+              <li
+                className={cn(cls.nav_list_item, {
+                  active: activePage === ActiveHeaderPage.CONTACTS,
+                })}
+              >
+                <Link href="/contacts">
+                  {t("list.contacts") ? t("list.contacts") : ""}
+
+                  {}
+                </Link>
+              </li>
+            </ul>
+            <div className={cls.search}>
+              <input
+                type="text"
+                placeholder="Поиск по имени товара"
+                className={cls.nav_search}
+                onChange={(e: any) => inputCheck(e)}
+              />
+              {isResultOpen && (
+                <div className={cls.search__results}>
+                  {searchRes &&
+                    searchRes?.map((el: any) => {
+                      return (
+                        <Link
+                          href={"/catalog/" + el.code}
+                          className={cls.search__result}
+                        >
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15.5 14.9258L11.5 10.9258M7.5 12.9258C4.18629 12.9258 1.5 10.2395 1.5 6.92578C1.5 3.61207 4.18629 0.925781 7.5 0.925781C10.8137 0.925781 13.5 3.61207 13.5 6.92578C13.5 10.2395 10.8137 12.9258 7.5 12.9258Z"
+                              stroke="#00ABC2"
+                            />
+                          </svg>
+                          {el.name}
+                        </Link>
+                      );
+                    })}
+                </div>
+              )}
+            </div>
+          </nav>
+        </div>
       </div>
     </div>
   );
