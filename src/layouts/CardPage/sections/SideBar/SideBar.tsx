@@ -36,6 +36,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const { total_amount, items } = useAppSelector((state) => state.CartSlice);
 
   const [length, setLength] = useState<number>(0);
+  const [bonusBalance, setBonusBalance] = useState<number>(0);
 
   const [addresses, setAddresses] = useState<any>();
   const [times, setTimes] = useState<any>();
@@ -43,6 +44,8 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const [date, setDate] = useState<any>();
   const [time, setTime] = useState<any>({ time_from: "", time_to: "" });
   const [salePoints, setSalePoints] = useState<any>([]);
+  const [bonus, setBonus] = useState<boolean>(false);
+  const [deliveryCost, setDeliveryCost] = useState<any>();
 
   async function getTime() {
     try {
@@ -68,6 +71,20 @@ export const SideBar: FC<SideBarProps> = (props) => {
     } catch {}
   }
 
+  async function getBonuses() {
+    try {
+      const res = await useHttp().get("users/users/my_bonus_card/");
+      setBonusBalance(res.data.balance);
+    } catch {}
+  }
+
+  async function getDelivery() {
+    try {
+      const res = await useHttp().get("orders/delivery_cost/1/");
+      setDeliveryCost(res.data);
+    } catch {}
+  }
+
   useEffect(() => {
     setLength(0);
     if (items) {
@@ -81,6 +98,8 @@ export const SideBar: FC<SideBarProps> = (props) => {
     getTime();
     getAddresses();
     getSalePoints();
+    getBonuses();
+    getDelivery();
   }, []);
 
   async function handleOrder(values: any) {
@@ -102,6 +121,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
             values.selectedDeliveryOption === "Доставка"
               ? ""
               : values.selectedAddress,
+          is_bonus_used: bonus,
         };
         const res = await useHttp().post("orders/orders/create_order/", data, {
           headers: {
@@ -120,12 +140,43 @@ export const SideBar: FC<SideBarProps> = (props) => {
     } catch (error) {}
   }
 
+  function handleGetTotal(option: string) {
+    if (option === "Доставка") {
+      if (deliveryCost && deliveryCost.order_cost > total_amount) {
+        if (bonus) {
+          if (total_amount - bonusBalance >= 1000 && total_amount >= 1000) {
+            return total_amount - bonusBalance;
+          } else if (total_amount < 1000) {
+            return total_amount;
+          } else {
+            return 1000;
+          }
+        } else {
+          return total_amount;
+        }
+      } else if (deliveryCost) {
+        return total_amount + deliveryCost.delivery_cost;
+      }
+    } else if (bonus) {
+      if (total_amount - bonusBalance >= 1000 && total_amount >= 1000) {
+        return total_amount - bonusBalance;
+      } else if (total_amount < 1000) {
+        return total_amount;
+      } else {
+        return 1000;
+      }
+    } else {
+      return total_amount;
+    }
+  }
+
   return (
     <Formik
       initialValues={{
         selectedDeliveryOption: "",
         selectedPayOption: "",
         selectedAddress: "",
+        is_bonus_used: false,
         // address: "",
         // apartment: 0,
         // floor: 0,
@@ -276,13 +327,13 @@ export const SideBar: FC<SideBarProps> = (props) => {
               >
                 <label className={cls.SideBar_paymentMethods_label + " !mb-0"}>
                   <Field
-                    type="radio"
-                    name="selectedPayOption"
+                    type="checkbox"
+                    name="isBonus"
                     value={"Накоплено: 1000б"}
-                    checked={values.selectedPayOption === "Наличными"}
-                    onChange={handleChange}
+                    checked={bonus}
+                    onChange={() => setBonus(!bonus)}
                   />
-                  <p className="mt-[6px]">Накоплено: 1000б</p>
+                  <p className="mt-[6px]">Накоплено: {bonusBalance} b</p>
                 </label>
               </span>
             </div>
@@ -308,14 +359,16 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 <div className="flex">
                   <span>Сумма к оплате</span>
                   <span className={cls.SideBar_payment_sum}>
-                    {total_amount} ₸
+                    {handleGetTotal(values.selectedDeliveryOption)} ₸
                   </span>
                 </div>
                 <div className="flex">
                   <span>Стоимость доставки</span>
                   <span className={cls.SideBar_payment_sum}>
                     {values.selectedDeliveryOption.includes("Доставка")
-                      ? "500"
+                      ? deliveryCost.order_cost < total_amount
+                        ? 0
+                        : deliveryCost.delivery_cost
                       : 0}{" "}
                     ₸
                   </span>
@@ -444,7 +497,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
               )} */}
 
               <Button
-                disabled={total_amount === 0}
+                disabled={handleGetTotal(values.selectedDeliveryOption) < 1000}
                 type="submit"
                 theme={ThemeButton.YELLOW}
                 className={cls.btn}
@@ -454,6 +507,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
               >
                 Оформить заказ
               </Button>
+              {handleGetTotal(values.selectedDeliveryOption) < 1000 && (
+                <p className="mt-4 font-medium text-base text-center">
+                  Вы не можете заказать на сумму меньше 1000 тг, без учета
+                  доставки
+                </p>
+              )}
             </div>
           </div>
         </Form>

@@ -157,7 +157,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
       </div>
 
       <Button
-        className={cn(cls.nav_deleteAccountBtn)}
+        className={cn(cls.nav_deleteAccountBtn) + " hidden"}
         theme={ThemeButton.CLEAR}
       >
         {t("deleteAccount")}
