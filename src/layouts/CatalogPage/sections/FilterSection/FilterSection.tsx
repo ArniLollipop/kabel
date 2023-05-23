@@ -103,22 +103,14 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
   return (
     <div className={cn(cls.FilterSection, { visible: isOpened })}>
       <Formik
+        enableReinitialize={true}
         initialValues={
-          checkedFilters
-            ? {
-                availability: checkedFilters
-                  ? checkedFilters.availability
-                  : "Все",
-                checkedCors: checkedFilters ? checkedFilters.core_number : [],
-                categories: checkedFilters ? checkedFilters.subcategory : [],
-                sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
-              }
-            : {
-                availability: "Все",
-                checkedCors: [],
-                categories: [],
-                sortWidget: "cost",
-              }
+          checkedFilters && {
+            availability: checkedFilters ? checkedFilters.availability : "",
+            checkedCors: checkedFilters ? checkedFilters.core_number : [],
+            categories: checkedFilters ? checkedFilters.subcategory : [],
+            sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
+          }
         }
         onSubmit={(values: sortI) => submitHandler(values)}
       >
@@ -140,6 +132,13 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                     values.sortWidget = "cost";
                     destroyCookie(null, "queries");
                     const res = await ProductService().getProducts();
+                    setCheckedFilters({
+                      subcategory: [],
+                      section: [],
+                      core_number: [],
+                      availability: "",
+                      ordering: "cost",
+                    });
                     dispatch(setPage(res.count_pages));
                     dispatch(setProducts(res));
                   }}
@@ -165,7 +164,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 text="Все"
                 className={cls.FilterSection_radio}
                 checked={
-                  checkedFilters.availability === "" ||
+                  // checkedFilters.availability === "" ||
                   values.availability === ""
                 }
               />
@@ -176,7 +175,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 text="В наличии"
                 className={cls.FilterSection_radio}
                 checked={
-                  checkedFilters.availability === "в наличии" ||
+                  // checkedFilters.availability === "в наличии" ||
                   values.availability === "в наличии"
                 }
               />
@@ -187,7 +186,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 text="Под заказ"
                 className={cls.FilterSection_radio}
                 checked={
-                  checkedFilters.availability === "под заказ" ||
+                  // checkedFilters.availability === "под заказ" ||
                   values.availability === "под заказ"
                 }
               />
@@ -254,9 +253,9 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                                     text={subcat.name}
                                     className={cls.filtersAcc_itemInput}
                                     checked={
-                                      checkedFilters.subcategory.includes(
-                                        subcat.name
-                                      ) ||
+                                      // checkedFilters.subcategory.includes(
+                                      //   subcat.name
+                                      // ) ||
                                       values.categories.includes(subcat.name)
                                     }
                                   />
@@ -322,12 +321,12 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                                       value={`${core}x${coreSect}`}
                                       id="coreItem"
                                       checked={
-                                        (checkedFilters.core_number.includes(
-                                          core
-                                        ) &&
-                                          checkedFilters.section.includes(
-                                            coreSect
-                                          )) ||
+                                        // (checkedFilters.core_number.includes(
+                                        //   core
+                                        // ) &&
+                                        //   checkedFilters.section.includes(
+                                        //     coreSect
+                                        //   )) ||
                                         values.checkedCors.includes(
                                           `${core}x${coreSect}`
                                         )
