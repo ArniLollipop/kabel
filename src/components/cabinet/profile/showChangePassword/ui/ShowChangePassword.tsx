@@ -14,6 +14,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 import { changePasswordsSchema } from "@/helpers/validation";
 import { ProfileService } from "@/services/Profile.service";
 import { useTranslation } from "next-i18next";
+import { useHttp } from "@/hooks/useHttp";
 
 let cn = classNames.bind(cls);
 
@@ -68,7 +69,58 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
               if (res.result) {
                 setShowSentTo("phone");
               }
-              location.reload();
+            } catch (e: any) {
+              setErrorMessage(e);
+            }
+          };
+
+          const compareEmailCodeFunc = async (value: string) => {
+            try {
+              const res = await useHttp().post(
+                "users/users/email_verification/",
+                {
+                  code: value,
+                }
+              );
+              console.log("res inside compareSmsCodeFunc is: ", res);
+
+              // @ts-ignore
+              if (res.data.result) {
+                setShowSentTo("");
+                setShowChangePasswords(true);
+              }
+            } catch (error) {
+              console.log("error inside compareSmsCodeFunc is: ", error);
+            }
+          };
+
+          const compareSmsCodeFunc = async (value: string) => {
+            // send sms code to the backend IF success show passwords
+            try {
+              const res = await ProfileService().compareSmsCodes(value, "asd");
+              console.log("res inside compareSmsCodeFunc is: ", res);
+
+              // @ts-ignore
+              if (res.result) {
+                setShowSentTo("");
+                setShowChangePasswords(true);
+              }
+            } catch (error) {
+              console.log("error inside compareSmsCodeFunc is: ", error);
+            }
+          };
+
+          const sendSmsCodeToMail = async () => {
+            try {
+              const res = await useHttp().post("users/users/email_send_code/", {
+                email: values.email,
+              });
+              console.log(res);
+
+              // @ts-ignore
+              if (res.data.result) {
+                setShowSentTo("email");
+              }
             } catch (e: any) {
               setErrorMessage(e);
             }
@@ -111,6 +163,8 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                     phone_number={values.phone_number}
                     setShowChangePasswords={setShowChangePasswords}
                     setShowSentTo={setShowSentTo}
+                    sendSmsCodeToPhone={sendSmsCodeToMail}
+                    compareCodeFunc={compareEmailCodeFunc}
                   />
                 ) : (
                   <SentToEmailOrPhoneNumber
@@ -122,6 +176,8 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                     phone_number={values.phone_number}
                     setShowChangePasswords={setShowChangePasswords}
                     setShowSentTo={setShowSentTo}
+                    sendSmsCodeToPhone={sendSmsCodeToPhone}
+                    compareCodeFunc={compareSmsCodeFunc}
                   />
                 )
               ) : showChangePasswords ? (
@@ -196,10 +252,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                   <small className={cn(cls.info)}>{t("forChange")}</small>
 
                   <div className={cn(cls.btnContainer)}>
-                    <div
-                      onClick={() => setShowSentTo("email")}
-                      className={cn(cls.btn)}
-                    >
+                    <div onClick={sendSmsCodeToMail} className={cn(cls.btn)}>
                       <p>{t("bymail")}</p>
                       <IconCabinetArrow />
                     </div>

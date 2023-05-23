@@ -250,6 +250,43 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 );
               })}
             </div>
+
+            <div className={cls.SideBar_paymentMethods + " pb-5"}>
+              <span className={cls.SideBar_paymentMethods_title}>
+                <svg
+                  className={cls.SideBar_paymentMethods_icon}
+                  width="29"
+                  height="28"
+                  viewBox="0 0 29 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.4626 27.0428C22.4629 27.7548 16.0488 23.2413 14.8203 23.2314C13.5918 23.2215 7.10545 27.6312 6.11746 26.9032C5.12948 26.1752 7.45218 18.6975 7.08203 17.5295C6.71188 16.3615 0.50156 11.5727 0.890578 10.4108C1.27968 9.24882 9.12936 9.14089 10.129 8.42886C11.1287 7.71692 13.7769 0.347597 15.0055 0.357432C16.2338 0.367352 18.7625 7.77832 19.7504 8.50634C20.7384 9.23428 28.5854 9.4686 28.9557 10.6366C29.3258 11.8046 23.0389 16.4929 22.6498 17.6548C22.2608 18.8167 24.4622 26.3308 23.4626 27.0428Z"
+                    fill="#F6BF0C"
+                  />
+                </svg>
+                Потратить бонусы
+              </span>
+              <span
+                className={
+                  (cls.SideBar_paymentMethods_cards, cls.radioBtn) +
+                  " items-center mb-5"
+                }
+              >
+                <label className={cls.SideBar_paymentMethods_label + " !mb-0"}>
+                  <Field
+                    type="radio"
+                    name="selectedPayOption"
+                    value={"Накоплено: 1000б"}
+                    checked={values.selectedPayOption === "Наличными"}
+                    onChange={handleChange}
+                  />
+                  <p className="mt-[6px]">Накоплено: 1000б</p>
+                </label>
+              </span>
+            </div>
+
             <div className={cls.SideBar_payment}>
               <span className={cls.SideBar_payment_title}>Оплата</span>
 

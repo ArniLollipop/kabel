@@ -17,10 +17,13 @@ interface SentToEmailProps {
   setShowChangePasswords: (value: boolean) => void;
   setShowSentTo: (value: string) => void;
   phone_number: string;
+  sendSmsCodeToPhone: any;
+  compareCodeFunc: any;
 }
 
 export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
   const { t } = useTranslation();
+  const { compareCodeFunc } = props;
   const [smsCode, setSmsCode] = useState("");
   const [token, setToken] = useState("");
   const [countdown, setCountdown] = useState(60);
@@ -35,22 +38,6 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
         return 0;
       });
     }, 1000);
-  };
-
-  const compareSmsCodeFunc = async (value: string) => {
-    // send sms code to the backend IF success show passwords
-    try {
-      const res = await ProfileService().compareSmsCodes(value, token);
-      console.log("res inside compareSmsCodeFunc is: ", res);
-
-      // @ts-ignore
-      if (res.result) {
-        setShowSentTo("");
-        setShowChangePasswords(true);
-      }
-    } catch (error) {
-      console.log("error inside compareSmsCodeFunc is: ", error);
-    }
   };
 
   useEffect(() => {
@@ -68,7 +55,7 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
       <small className={cn(cls.info)}>{info}</small>
 
       <ReactPinInput
-        length={4}
+        length={props.type === "phone" ? 4 : 6}
         initialValue=""
         type="numeric"
         style={{ margin: "35px 0" }}
@@ -79,7 +66,7 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
         }}
         inputFocusStyle={{ borderColor: "black" }}
         onComplete={(value: string, index: number) => {
-          compareSmsCodeFunc(value);
+          compareCodeFunc(value);
         }}
       />
 
@@ -89,7 +76,7 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
             theme={ThemeButton.CLEAR}
             className={cn(cls.sendAgainContainer_sendAgain)}
             type="button"
-            onClick={() => setCountdown(60)}
+            onClick={props.sendSmsCodeToPhone}
           >
             {t("getSmsAgain")}
           </Button>
