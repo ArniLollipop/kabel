@@ -59,10 +59,13 @@ export const ProfileService = (
           },
         }
       );
+      location.reload();
     } else {
       res = await useHttp().patch(`${endpoints.editProfile}${userId}/`, values);
+      location.reload();
     }
-    return res.data;
+
+    return res;
   };
 
   const changePassByPhone = async (

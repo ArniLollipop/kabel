@@ -68,11 +68,10 @@ export const EditProfile = createAsyncThunk(
   ) => {
     try {
       const data = await ProfileService().editProfile(userId, values, avatar);
-      console.log("data inside edit profile slice is: ", data);
-      dispatch(setUser(data));
-      localStorage.setItem("user", JSON.stringify(data));
-
-      return data;
+      console.log("data inside edit profile slice is: ", data.data);
+      dispatch(setUser(data.data));
+      localStorage.setItem("user", JSON.stringify(data.data));
+      return data.data;
     } catch (error: any) {
       console.error("error inside AuthSlice:1 ", error);
       return rejectWithValue(Object.values(error.response.data)[0]);

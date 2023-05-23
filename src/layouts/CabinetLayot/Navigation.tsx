@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./CabinetLayout.module.scss";
 import Link from "next/link";
@@ -39,6 +39,7 @@ export const enum ThemeNavigation {
 export const Navigation: FC<NavigationProps> = (props) => {
   const { className, activePage, theme } = props;
   const { t } = useTranslation();
+  const [modal, setModal] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -57,6 +58,31 @@ export const Navigation: FC<NavigationProps> = (props) => {
         mobile: theme === ThemeNavigation.MOBILE,
       })}
     >
+      <div
+        onClick={() => setModal(false)}
+        className={
+          modal
+            ? "fixed top-0 left-0 bg-black bg-opacity-40 w-full h-[100vh] z-[1000] transition-all duration-300"
+            : "fixed top-0 left-0 bg-transparent bg-opacity-40 w-0 h-[100vh] z-[1000] transition-all duration-300"
+        }
+      ></div>
+      <div
+        className={
+          modal
+            ? cls.modal_inner
+            : "fixed top-0 -translate-y-1/2 w-0 -left-[50%] transition-all duration-300"
+        }
+      >
+        <p className="text-center font-semibold text-xl">
+          Вы уверены что хотите выйти?
+        </p>
+        <button
+          onClick={logoutHandler}
+          className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mx-auto mt-4 block font-semibold text-lg cursor-pointer"
+        >
+          Да
+        </button>
+      </div>
       <Link
         href="/cabinet/profile"
         className={cn(cls.nav_link, {
@@ -125,7 +151,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
 
       <div className={cn(cls.nav_logoutBtnContainer)}>
         <IconCabinetLogout fillColor="#F6BF0C" />
-        <Button theme={ThemeButton.CLEAR} onClick={logoutHandler}>
+        <Button theme={ThemeButton.CLEAR} onClick={() => setModal(true)}>
           {t("leave")}
         </Button>
       </div>

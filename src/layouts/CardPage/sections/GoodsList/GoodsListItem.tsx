@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useTransition } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListItem.module.scss";
 import Image, { StaticImageData } from "next/image";
@@ -14,6 +14,9 @@ import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 import NullImg from "@/assets/images/nullImg.webp";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
 
@@ -25,6 +28,10 @@ interface GoodsListItemProps {
 export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
   const { element, getCart } = props;
   const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
+  const { t } = useTranslation();
 
   const [amount, setCount] = useState<number>(element.length);
   const [cartChange, setCartChange] = useState<number>();
@@ -48,6 +55,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       );
       dispatch(setAmount(res.data.result.total_amount));
       minus();
+      getCart();
     } catch (err) {}
   }
 
@@ -90,6 +98,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       );
       dispatch(setAmount(res.data.result.total_amount));
       plus();
+      getCart();
     } catch (err) {}
   }
   useEffect(() => {
@@ -118,9 +127,20 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
     }
   }
 
-  console.log("====================================");
-  console.log();
-  console.log("====================================");
+  function handleCopyToClipboard() {
+    navigator.clipboard
+      .writeText(`https://cable.kz/catalog/${element.product_info.code}`)
+      .then(() => {
+        toast("Ссылка скопирована в буфер обмена", {
+          hideProgressBar: true,
+          autoClose: 2000,
+          type: "success",
+        });
+      })
+      .catch((err) => {
+        console.log("Something went wrong", err);
+      });
+  }
 
   return (
     <li className={cn(cls.GoodsListItem)}>
@@ -184,9 +204,13 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       <span className={cls.GoodsPrice}>{element.amount} ₸</span>
 
       <div className={cls.GoodsBtns}>
-        <Button theme={ThemeButton.CLEAR} className={cls.GoodsBtns_shareBtn}>
+        <Button
+          onClick={handleCopyToClipboard}
+          theme={ThemeButton.CLEAR}
+          className={cls.GoodsBtns_shareBtn}
+        >
           <IconShare className={cls.GoodsBtns_shareIcon} />
-          <span>поделиться</span>
+          <span> {t("share")}</span>
         </Button>
         <Button onClick={handleDelete} theme={ThemeButton.CLEAR}>
           <IconTrash />

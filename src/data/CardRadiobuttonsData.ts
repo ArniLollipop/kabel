@@ -7,6 +7,7 @@ import {
 } from "@/assets/icons/cardIcons";
 import { useHttp } from "@/hooks/useHttp";
 import Cash from "@/assets/icons/Cash.svg";
+import IconPaymentKaspi from "@/assets/icons/IconPaymentKaspi.svg";
 
 export const CardDeliveryData = [
   {

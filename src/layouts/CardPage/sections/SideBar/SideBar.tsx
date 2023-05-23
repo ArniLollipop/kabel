@@ -53,7 +53,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
 
   async function getAddresses() {
     try {
-      const res = await useHttp().get("users/user_addresses/");
+      const res = await useHttp().get("users/user_addresses/my_addresses/");
       setAddresses(res.data.results);
     } catch (error) {}
   }

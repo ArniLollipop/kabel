@@ -20,6 +20,7 @@ import Link from "next/link";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 import { useHttp } from "@/hooks/useHttp";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const cn = classNames.bind(cls);
 
@@ -43,6 +44,8 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
   const plus = () => setCart((prev) => prev + 1);
   const minus = () => cart > 1 && setCart((prev) => prev - 1);
+
+  const [sum, setSum] = useState<number>(props.cost * cart);
 
   async function handleAddCart(e: any) {
     e.stopPropagation();
@@ -142,6 +145,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
   useEffect(() => {
     setCartChange(cart);
+    setSum(cart * props.cost);
   }, [cart]);
 
   function handleClick() {
@@ -176,6 +180,21 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
       </ul>
     );
   };
+
+  function handleCopyToClipboard() {
+    navigator.clipboard
+      .writeText(`https://cable.kz/catalog/${props.code}`)
+      .then(() => {
+        toast("Ссылка скопирована в буфер обмена", {
+          hideProgressBar: true,
+          autoClose: 2000,
+          type: "success",
+        });
+      })
+      .catch((err) => {
+        console.log("Something went wrong", err);
+      });
+  }
 
   return (
     <div className={cn(cls.CatalogItemPage)}>
@@ -326,8 +345,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
           <div className={cls.info}>
             <div className={cls.buyActions}>
               <p className={cls.buyActions_discont}>
-                <span>%</span>
-                <span>Скидки при заказе от 10000 тг.</span>
+                <span className="!text-base">{t("saleFromAll")}</span>
               </p>
 
               <span className={cls.buyActions_price}>{props.cost} ₸</span>
@@ -447,9 +465,13 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
               )}
 
               <div className={cls.buyActions_secondaruBtns}>
-                <Button className={cls.secondaryBtn} theme={ThemeButton.CLEAR}>
+                <Button
+                  onClick={handleCopyToClipboard}
+                  className={cls.secondaryBtn}
+                  theme={ThemeButton.CLEAR}
+                >
                   <IconShare />
-                  Поделиться
+                  {t("share")}
                 </Button>
               </div>
             </div>
@@ -457,7 +479,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
             <div className={cls.delivery}>
               <span>Данные о доставке:</span>
               <span>Самовывоз</span>
-              <span>Курьером от 500 тг.</span>
+              <span>Курьером от 2000 тг.</span>
             </div>
           </div>
         </div>

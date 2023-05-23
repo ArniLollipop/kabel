@@ -1,19 +1,19 @@
-import { FC, ReactNode } from 'react';
-import classNames from 'classnames/bind';
-import cls from './CabinetLayout.module.scss';
-import { MainLayout } from '@/layouts/MainLayout';
-import { Navigation } from '@/layouts/CabinetLayot/Navigation';
+import { FC, ReactNode } from "react";
+import classNames from "classnames/bind";
+import cls from "./CabinetLayout.module.scss";
+import { MainLayout } from "@/layouts/MainLayout";
+import { Navigation } from "@/layouts/CabinetLayot/Navigation";
 
 const cn = classNames.bind(cls);
 
 export const enum ActiveCabinetPageEnum {
-  PROFILE = 'profile',
-  ORDERS = 'orders',
-  DELIVERY = 'delivery',
-  CARDS = 'cards',
-  BONUSES = 'bonuses',
-  SUPPORT = 'support',
-  CURRENCY = 'currency',
+  PROFILE = "profile",
+  ORDERS = "orders",
+  DELIVERY = "delivery",
+  CARDS = "cards",
+  BONUSES = "bonuses",
+  SUPPORT = "support",
+  CURRENCY = "currency",
 }
 
 interface CabinetLayoutProps {

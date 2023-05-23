@@ -19,6 +19,7 @@ export const EditProfilePhoto = ({
 }: any) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined);
+  const [Temp, setTemp] = useState<any>(true);
 
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
@@ -56,39 +57,47 @@ export const EditProfilePhoto = ({
   }, [avatar]);
 
   return (
-    <div className={cls.editProfile}>
-      {/* @ts-ignore */}
-      {previewUrl || profileUser?.avatar || authUser?.avatar ? (
-        <Image
-          width={167}
-          height={167}
-          className={cls.editProfile_avatar}
-          // @ts-ignore
-          src={previewUrl || profileUser?.avatar || authUser?.avatar}
-          alt="User avatar"
-        />
-      ) : (
-        <Image
-          width={167}
-          height={167}
-          className={cls.editProfile_avatar}
-          src={ImageDefaultAvatar}
-          alt="Default user avatar"
-        />
+    <div>
+      {Temp && (
+        <div className={cls.editProfile}>
+          {/* @ts-ignore */}
+          {previewUrl || profileUser?.avatar || authUser?.avatar ? (
+            <Image
+              width={167}
+              height={167}
+              className={cls.editProfile_avatar}
+              // @ts-ignore
+              src={previewUrl || profileUser?.avatar || authUser?.avatar}
+              alt="User avatar"
+            />
+          ) : (
+            <Image
+              width={167}
+              height={167}
+              className={cls.editProfile_avatar}
+              src={ImageDefaultAvatar}
+              alt="Default user avatar"
+            />
+          )}
+          <div className={cls.editProfile_btn}>
+            <Button
+              type="button"
+              theme={ThemeButton.CLEAR}
+              onClick={handleClick}
+            >
+              <IconCabinetEditPhoto />
+            </Button>
+            <input
+              type="file"
+              accept="image/*"
+              ref={hiddenFileInput}
+              onChange={handleFileSelect}
+              style={{ display: "none" }}
+              name="img"
+            />
+          </div>
+        </div>
       )}
-      <div className={cls.editProfile_btn}>
-        <Button type="button" theme={ThemeButton.CLEAR} onClick={handleClick}>
-          <IconCabinetEditPhoto />
-        </Button>
-        <input
-          type="file"
-          accept="image/*"
-          ref={hiddenFileInput}
-          onChange={handleFileSelect}
-          style={{ display: "none" }}
-          name="img"
-        />
-      </div>
     </div>
   );
 };

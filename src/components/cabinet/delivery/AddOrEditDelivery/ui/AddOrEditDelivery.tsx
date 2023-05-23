@@ -108,7 +108,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
             } else {
               await useHttp()
                 .post(
-                  "users/user_addresses/",
+                  "users/user_addresses/my_addresses/",
                   {
                     address: document.getElementById("address")
                       ? (document.getElementById("address") as HTMLInputElement)

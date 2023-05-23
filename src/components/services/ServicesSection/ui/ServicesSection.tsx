@@ -69,10 +69,12 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
     if (metal && voltage && location) {
       getPower();
     }
+  }, [metal, voltage, location]);
+  useEffect(() => {
     if (metal && voltage && location && power) {
       getCalc();
     }
-  }, [metal, voltage, location, power]);
+  }, [power]);
 
   return (
     <div className={cn(cls.ServicesSection)}>

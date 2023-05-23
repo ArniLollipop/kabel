@@ -32,13 +32,13 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
   const { t } = useTranslation();
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
-  const [disabledBtn] = useState(!!authUser?.phone_number);
   const dispatch = useAppDispatch();
   const { className, setShowEditProfile } = props;
 
   return (
     <div className={cn(cls.ShowEditProfile)}>
       <Formik
+        enableReinitialize={true}
         initialValues={{
           // @ts-ignore
           phone_number: profileUser?.phone_number || authUser?.phone_number,
@@ -71,7 +71,6 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
             EditProfile({ userId: authUser?.id, values: modifiedValues })
           );
           setShowEditProfile(false);
-          location.reload();
         }}
       >
         {({
@@ -156,12 +155,7 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
                   </div>
 
                   <Button
-                    className={
-                      disabledBtn && !dirty
-                        ? cls.userCard_disabledBtn
-                        : cls.userCard_saveBtn
-                    }
-                    disabled={disabledBtn && !dirty}
+                    className={cls.userCard_saveBtn}
                     type="submit"
                     theme={ThemeButton.YELLOW}
                   >
