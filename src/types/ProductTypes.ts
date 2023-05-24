@@ -21,6 +21,7 @@ export interface productI {
   characteristics_info: characteristicsI[];
   name: string;
   cost: number;
+  remains: number;
   image: string;
   availability: "в наличии" | "под заказ";
   description: string | null;

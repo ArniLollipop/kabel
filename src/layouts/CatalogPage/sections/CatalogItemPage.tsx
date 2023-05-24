@@ -26,7 +26,6 @@ const cn = classNames.bind(cls);
 
 interface CatalogItemPageProps extends productI {
   className?: string;
-  remains: number;
 }
 
 export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
@@ -471,7 +470,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                   </svg>
                 </Button>
               )}
-              <p className=" text-sm font-medium mt-2 sm:text-base text-center">
+              <p className=" text-sm font-medium mt-1 sm:text-base text-center">
                 {t("canBuy")} {props.remains} м
               </p>
 

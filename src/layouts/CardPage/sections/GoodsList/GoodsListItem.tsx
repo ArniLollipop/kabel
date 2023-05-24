@@ -23,7 +23,6 @@ const cn = classNames.bind(cls);
 interface GoodsListItemProps {
   element?: any;
   getCart: () => void;
-  remain: number;
 }
 
 export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
