@@ -7,6 +7,7 @@ interface productState {
   cores: coresI | null;
   servicesWeight: null;
   pages: number;
+  stateForQueris: string | null;
 }
 
 // Init
@@ -17,6 +18,7 @@ const initialState: productState = {
   cores: null,
   servicesWeight: null,
   pages: 0,
+  stateForQueris: "a",
 };
 
 // Slice
@@ -42,6 +44,9 @@ const productSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.pages = action.payload;
     },
+    setQuery: (state, action: PayloadAction<string>) => {
+      state.stateForQueris = action.payload;
+    },
   },
 });
 
@@ -51,5 +56,6 @@ export const {
   setCores,
   setServicesWeight,
   setPage,
+  setQuery,
 } = productSlice.actions;
 export default productSlice.reducer;

@@ -31,7 +31,7 @@ interface FilterSectionProps {
 export const FilterSection: FC<FilterSectionProps> = (props) => {
   const { t } = useTranslation();
   const { isOpened, closeFilters } = props;
-  const { categories, cores, products } = useAppSelector(
+  const { categories, cores, products, stateForQueris } = useAppSelector(
     (state) => state.ProductSlice
   );
 
@@ -56,6 +56,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     checkedCors: string[];
     categories: string[];
     sortWidget: "-cost" | "cost";
+    sectionCors: string[];
   }
 
   const submitHandler = async (value: sortI) => {
@@ -98,7 +99,16 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
 
   useEffect(() => {
     handleGetFilters();
-  }, []);
+    console.log("Зашел");
+  }, [stateForQueris]);
+
+  function getCors() {
+    let temp = [""];
+    checkedFilters.core_number.map((el: string, index: number) => {
+      temp.push(`${el}x${checkedFilters.section[index]}`);
+    });
+    return temp;
+  }
 
   return (
     <div className={cn(cls.FilterSection, { visible: isOpened })}>
@@ -107,7 +117,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
         initialValues={
           checkedFilters && {
             availability: checkedFilters ? checkedFilters.availability : "",
-            checkedCors: checkedFilters ? checkedFilters.core_number : [],
+            checkedCors: checkedFilters ? getCors() : [],
             categories: checkedFilters ? checkedFilters.subcategory : [],
             sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
           }
@@ -132,7 +142,20 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                     values.categories = [];
                     values.checkedCors = [];
                     values.sortWidget = "cost";
-                    destroyCookie(null, "queries");
+                    setCookie(
+                      null,
+                      "queries",
+                      JSON.stringify({
+                        subcategory: [],
+                        section: [],
+                        core_number: [],
+                        availability: "",
+                        ordering: "cost",
+                      }),
+                      {
+                        maxAge: 30 * 24 * 60 * 60,
+                      }
+                    );
                     const res = await ProductService().getProducts();
                     setCheckedFilters({
                       subcategory: [],

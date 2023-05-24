@@ -83,9 +83,13 @@ export const ProductService = (
           orderingQuery +
           availabilityQuery
       );
+      console.log("первый");
+
       return res.data;
     } else {
       const res = await useHttp(ctx).get<productAnswI>(endpoints.getProducts);
+      console.log("второй", nookies.get(ctx));
+
       return res.data;
     }
   };

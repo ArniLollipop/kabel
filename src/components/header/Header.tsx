@@ -22,6 +22,8 @@ import RU from "@/assets/images/Russia.webp";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { setQuery } from "@/store/slices/ProductSlice";
 
 const cn = classNames.bind(cls);
 
@@ -305,11 +307,16 @@ export const Header: FC<HeaderProps> = (props) => {
                             {cat.subcategory_set.map((subcat: any) => (
                               <Link
                                 onClick={() => {
-                                  localStorage.setItem(
-                                    "cat",
+                                  dispatch(setQuery(subcat.name));
+                                  setCookie(
+                                    null,
+                                    "queries",
                                     JSON.stringify({
-                                      cat: cat.name,
-                                      subcat: subcat.name,
+                                      subcategory: [subcat.name],
+                                      section: [],
+                                      core_number: [],
+                                      availability: "",
+                                      ordering: "cost",
                                     })
                                   );
                                   setActiveCat("");

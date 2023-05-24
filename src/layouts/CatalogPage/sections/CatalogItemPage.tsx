@@ -26,6 +26,7 @@ const cn = classNames.bind(cls);
 
 interface CatalogItemPageProps extends productI {
   className?: string;
+  remains: number;
 }
 
 export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
@@ -381,7 +382,11 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                       type="number"
                       value={cartChange}
                       onChange={(e: any) => {
-                        if (e.target.value <= 1000 && e.target.value >= 1)
+                        if (
+                          e.target.value <= props.remains &&
+                          e.target.value >= 1 &&
+                          e.target.value <= 1000
+                        )
                           handleChangeCount(e.target.value);
                       }}
                     />
@@ -414,14 +419,14 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 </div>
               ) : (
                 <Button
-                  onClick={() => push("/card")}
+                  onClick={handleAddCart}
                   className={cls.buyActions_btn}
                   theme={ThemeButton.CARD}
                 >
                   {count > 0 && (
                     <p className={cls.buyActions_btn__count}>{count}</p>
                   )}
-                  В корзину
+                  {t("toCart")}
                   <svg
                     width="20"
                     height="22"
@@ -466,6 +471,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                   </svg>
                 </Button>
               )}
+              <p className=" text-sm font-medium mt-2 sm:text-base text-center">
+                {t("canBuy")} {props.remains} м
+              </p>
 
               <div className={cls.buyActions_secondaruBtns}>
                 <Button

@@ -23,6 +23,7 @@ const cn = classNames.bind(cls);
 interface GoodsListItemProps {
   element?: any;
   getCart: () => void;
+  remain: number;
 }
 
 export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
@@ -173,7 +174,11 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             value={cartChange}
             className="w-[50px]"
             onChange={(e: any) => {
-              if (e.target.value <= 1000 && e.target.value >= 1)
+              if (
+                e.target.value <= element.remains &&
+                e.target.value >= 1 &&
+                e.target.value <= 1000
+              )
                 handleChangeCount(e.target.value);
             }}
           />

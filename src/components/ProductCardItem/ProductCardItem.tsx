@@ -30,6 +30,7 @@ interface ProductCardItemProps extends productI {
   className?: string;
   theme?: ThemeProductCard;
   promo_cost?: number;
+  remains: number;
 }
 
 export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
@@ -197,7 +198,6 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         )}
         {/* <span className={cls.newPrice}>{props.promo_cost} ₸</span> */}
       </div>
-
       <div className={cls.cardBtns}>
         {cart === 0 ? (
           <Button
@@ -235,7 +235,11 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
                 type="number"
                 value={cartChange}
                 onChange={(e: any) => {
-                  if (e.target.value <= 1000 && e.target.value >= 1)
+                  if (
+                    e.target.value <= props.remains &&
+                    e.target.value >= 1 &&
+                    e.target.value <= 1000
+                  )
                     handleChangeCount(e.target.value);
                 }}
               />
