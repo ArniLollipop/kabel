@@ -199,7 +199,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                       type={changePassNew ? "text" : "password"}
                       id="changePassNew"
                       name="changePassNew"
-                      placeholder="Новый пароль"
+                      placeholder={t("newPass") || "Новый пароль"}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.changePassNew}
@@ -226,7 +226,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                       type={changePassConfirm ? "text" : "password"}
                       id="changePassConfirm"
                       name="changePassConfirm"
-                      placeholder="Повторить пароль"
+                      placeholder={t("repeatPass") || "Повторить пароль"}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.changePassConfirm}

@@ -132,7 +132,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                   type="text"
                   id="confirmSmsCode"
                   name="confirmSmsCode"
-                  placeholder="Код SMS"
+                  placeholder={t("placeholderCode") || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.confirmSmsCode}
@@ -177,7 +177,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
-                    placeholder="Новый пароль"
+                    placeholder={t("newPass") || ""}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
@@ -203,7 +203,7 @@ export const GetSmsCode: FC<GetSmsCodeProps> = (props) => {
                     type={showConfirmPassword ? "text" : "password"}
                     id="confirmPassword"
                     name="confirmPassword"
-                    placeholder="Повторить пароль"
+                    placeholder={t("repeatPass") || "Повторить пароль"}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.confirmPassword}

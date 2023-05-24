@@ -108,7 +108,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
             } else {
               await useHttp()
                 .post(
-                  "users/user_addresses/my_addresses/",
+                  "users/user_addresses/",
                   {
                     address: document.getElementById("address")
                       ? (document.getElementById("address") as HTMLInputElement)
@@ -150,7 +150,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
 
               <Form>
                 <input
-                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
+                  className="w-full hidden border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
                   onChange={(e) => {
                     setAddress(e.target.value);
                     values.address === e.target.value;
@@ -188,7 +188,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   type="text"
                   id="lontitude"
                 />
-                <p className={cls.warning}>Найдите через поиск ваш адрес</p>
+                <p className={cls.warning}>{t("findAddress")}</p>
 
                 <div id="map1" className="h-[300px] w-full mt-6"></div>
                 {/* написано на нативном жс так как, некст не поддерживал яндекс мапы. Нативка написана в _document.tsx */}

@@ -133,13 +133,13 @@ export const Footer: FC<FooterProps> = (props) => {
                 склад: ул. Бирлик 9
               </span>
               <a
-                href="mailto: almaty-kazkabel@mail.ru"
+                href="mailto: info@cable.kz"
                 className={cn(
                   cls.footerInfo_tableColRow,
                   cls.footerInfo_withEmailIcon
                 )}
               >
-                almaty-kazkabel@mail.ru
+                info@cable.kz
               </a>
             </li>
 

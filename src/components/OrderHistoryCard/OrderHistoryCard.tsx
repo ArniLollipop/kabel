@@ -43,9 +43,11 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
       href={`/cabinet/orders/${id}`}
       className={cn(cls.orderHistoryCard, className)}
     >
-      <p className={cls.number}>Номер заказа: №{id}</p>
+      <p className={cls.number}>
+        {t("nomerZakaza")}: №{id}
+      </p>
       {order_date ? order_date : "asdasd"}
-      <p className={cls.weight__text}>Способ оплаты и доставки</p>
+      <p className={cls.weight__text}>{t("sposobOplata")}</p>
       <p className={cls.text}>
         Оплата: {pay_type === "card" ? "Картой (онлайн)" : "Наличными"}{" "}
       </p>

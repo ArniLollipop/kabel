@@ -16,6 +16,7 @@ import {
   IconMetalUp,
 } from "@/assets/icons";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -29,6 +30,8 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
   const { className, currency, metalRes } = props;
   const currencyItems = [];
   const formattedDate = dateConverter(currency?.date);
+
+  const { t } = useTranslation();
 
   let formattedMetalDate;
   // @ts-ignore
@@ -86,7 +89,8 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
       <div className={cn(cls.GetCurrency_currencyContainer, className)}>
         <div className={cn(cls.dateContainer)}>
           <p>
-            Курсы валют <span>НБ РК</span>
+            {t("exchangeRates")}
+            <span>НБ РК</span>
           </p>
           <p>{formattedDate}</p>
         </div>
@@ -98,7 +102,7 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
 
       <div className={cn(cls.GetCurrency_currencyContainer, className)}>
         <p>
-          Курс продаж цветных металлов по данным{" "}
+          {t("exchangeRatesText")}{" "}
           <Link
             target={"_blank"}
             className={cn(cls.metalLink)}

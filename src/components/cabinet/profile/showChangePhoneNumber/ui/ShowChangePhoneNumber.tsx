@@ -187,7 +187,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                 type="text"
                 id="confirmSmsCode"
                 name="confirmSmsCode"
-                placeholder="Код SMS"
+                placeholder={t("placeholderCode") || "Код SMS"}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.confirmSmsCode}

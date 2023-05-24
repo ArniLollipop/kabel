@@ -380,7 +380,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <div className={cls.search}>
               <input
                 type="text"
-                placeholder="Поиск по имени товара"
+                placeholder={t("findTovar") || "Поиск по имени товара"}
                 className={cls.nav_search}
                 onChange={(e: any) => inputCheck(e)}
               />

@@ -72,7 +72,7 @@ export const AddCard: FC<AddCardProps> = (props) => {
                   type="text"
                   id="numberOfCard"
                   name="numberOfCard"
-                  placeholder="Номер карты"
+                  placeholder={t("cardNumber") || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.numberOfCard}
@@ -118,7 +118,7 @@ export const AddCard: FC<AddCardProps> = (props) => {
                   type="text"
                   id="nameOfCardOwner"
                   name="nameOfCardOwner"
-                  placeholder="Имя владельца карты"
+                  placeholder={t("maintainerCard") || "Имя владельца карты"}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.nameOfCardOwner}

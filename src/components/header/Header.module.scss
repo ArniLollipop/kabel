@@ -344,9 +344,6 @@ $margins_mob: 5;
 .language_block {
   position: relative;
   margin-top: 2px;
-  @media (max-width: 640px) {
-    display: none;
-  }
 }
 
 .language_choices {
