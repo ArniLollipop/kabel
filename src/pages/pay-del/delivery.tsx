@@ -68,7 +68,7 @@ export default function delivery() {
         <DeliveryLayout
           className={cn(cls.wrapper, cls.wrapper_del)}
           activePage={ActivePayDelPageEnum.DELIVERY}
-          title="Доставка"
+          title={t("delivery")}
         >
           <div
             className={cls.descrText}

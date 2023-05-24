@@ -16,6 +16,7 @@ import { ServiceService } from "@/services/Service.service";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { setServicesWeight } from "@/store/slices/ProductSlice";
 import { useHttp } from "@/hooks/useHttp";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -53,6 +54,8 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
       setRes("");
     }
   }
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     getWeight();
@@ -111,7 +114,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                   type="text"
                   id="cable_type"
                   name="cable_type"
-                  placeholder="Поиск"
+                  placeholder={t("labelFind") || "Поиск"}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.cable_type}
@@ -128,7 +131,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                 </Button>
               </Form>
               <div className={cls.info}>
-                <p>Наименование</p>
+                <p>{t("naming")}</p>
                 <p className={cls.center}>Вес 1 км кабеля, 660 В</p>
                 <p className={cls.center}>Вес 1 км кабеля, 1000 В</p>
               </div>

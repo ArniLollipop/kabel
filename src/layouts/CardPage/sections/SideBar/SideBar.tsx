@@ -21,6 +21,7 @@ import {
   IconCardTenge,
   IconCash,
 } from "@/assets/icons/cardIcons";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -31,6 +32,8 @@ interface SideBarProps {
 
 export const SideBar: FC<SideBarProps> = (props) => {
   const { className, setIsOpen } = props;
+
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
   const { total_amount, items } = useAppSelector((state) => state.CartSlice);
@@ -66,7 +69,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
       const res = await useHttp().get("products/sale_points/");
 
       let temp = res.data;
-      temp.push({ id: 667, name: "Доставка" });
+      temp.push({ id: 667, name: t("delivery") });
       setSalePoints(temp);
     } catch {}
   }
@@ -111,14 +114,14 @@ export const SideBar: FC<SideBarProps> = (props) => {
           items: items,
           total_amount: total_amount,
           delivery_type:
-            values.selectedDeliveryOption === "Доставка"
+            values.selectedDeliveryOption === t("delivery")
               ? "delivery"
               : "pickup",
           pay_type:
             values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
           user: userId.id,
           user_addresses:
-            values.selectedDeliveryOption === "Доставка"
+            values.selectedDeliveryOption === t("delivery")
               ? ""
               : values.selectedAddress,
           is_bonus_used: bonus,
@@ -141,7 +144,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
   }
 
   function handleGetTotal(option: string) {
-    if (option === "Доставка") {
+    if (option === t("delivery")) {
       if (deliveryCost && deliveryCost.order_cost > total_amount) {
         if (bonus) {
           if (total_amount - bonusBalance >= 1000 && total_amount >= 1000) {
@@ -198,17 +201,17 @@ export const SideBar: FC<SideBarProps> = (props) => {
             <div className={cls.SideBar_adventages + " " + cls.mb}>
               <span className={cls.SideBar_adventages_icon}>
                 <IconCardGarant />
-                Гарантия качества
+                {t("garantia")}
               </span>
 
               <span className={cls.SideBar_adventages_icon}>
                 <IconCardReturn />
-                Условия возврата
+                {t("usloviaVozvrata")}
               </span>
 
               <span className={cls.SideBar_adventages_icon}>
                 <IconCardInsurance />
-                Страхование
+                {t("straxovanie")}
               </span>
 
               <hr />
@@ -232,12 +235,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     <label
                       className={
                         (cls.SideBar_adventages,
-                        name.includes("Доставка")
+                        name.includes(t("delivery"))
                           ? cls.SideBar_adventages_link
                           : "")
                       }
                     >
-                      {name === "Доставка" ? <IconCardDelivery /> : ""}
+                      {name === t("delivery") ? <IconCardDelivery /> : ""}
                       <Field
                         type="radio"
                         name="selectedDeliveryOption"
@@ -257,9 +260,9 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 <IconSidebarPaymentMethods
                   className={cls.SideBar_paymentMethods_icon}
                 />
-                Способы оплаты
+                {t("footer.pay")}
               </span>
-              {!(values.selectedDeliveryOption === "Доставка") && (
+              {!(values.selectedDeliveryOption === t("delivery")) && (
                 <span
                   className={(cls.SideBar_paymentMethods_cards, cls.radioBtn)}
                 >
@@ -268,11 +271,11 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     <Field
                       type="radio"
                       name="selectedPayOption"
-                      value={"Наличными"}
-                      checked={values.selectedPayOption === "Наличными"}
+                      value={t("nalichnimi")}
+                      checked={values.selectedPayOption === t("nalichnimi")}
                       onChange={handleChange}
                     />
-                    Наличными
+                    {t("nalichnimi")}
                   </label>
                 </span>
               )}
@@ -317,7 +320,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     fill="#F6BF0C"
                   />
                 </svg>
-                Потратить бонусы
+                {t("spendBonus")}
               </span>
               <span
                 className={
@@ -333,13 +336,15 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     checked={bonus}
                     onChange={() => setBonus(!bonus)}
                   />
-                  <p className="mt-[6px]">Накоплено: {bonusBalance} b</p>
+                  <p className="mt-[6px]">
+                    {t("bonuses")}: {bonusBalance} b
+                  </p>
                 </label>
               </span>
             </div>
 
             <div className={cls.SideBar_payment}>
-              <span className={cls.SideBar_payment_title}>Оплата</span>
+              <span className={cls.SideBar_payment_title}>{t("pay")}</span>
 
               <hr />
 
@@ -347,25 +352,25 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 {/* <span>Название</span>
                 <span className={cls.SideBar_payment_sum}>Провод ПуГВнг (А)- LS</span> */}
                 <div className="flex">
-                  <span>Количество</span>
+                  <span>{t("countCart")}</span>
                   <span className={cls.SideBar_payment_sum}>
                     {items ? items.length : 0}
                   </span>
                 </div>
                 <div className="flex">
-                  <span>Общая Длина</span>
+                  <span>{t("allLength")}</span>
                   <span className={cls.SideBar_payment_sum}>{length}</span>
                 </div>
                 <div className="flex">
-                  <span>Сумма к оплате</span>
+                  <span>{t("sumForPay")}</span>
                   <span className={cls.SideBar_payment_sum}>
                     {handleGetTotal(values.selectedDeliveryOption)} ₸
                   </span>
                 </div>
                 <div className="flex">
-                  <span>Стоимость доставки</span>
+                  <span>{t("payDostavka")}</span>
                   <span className={cls.SideBar_payment_sum}>
-                    {values.selectedDeliveryOption.includes("Доставка")
+                    {values.selectedDeliveryOption.includes(t("delivery"))
                       ? deliveryCost.order_cost < total_amount
                         ? 0
                         : deliveryCost.delivery_cost
@@ -375,13 +380,13 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 </div>
               </div>
 
-              {values.selectedDeliveryOption.includes("Доставка") && (
+              {values.selectedDeliveryOption.includes(t("delivery")) && (
                 <div>
                   <div className={cls.SideBar_payment_address}>
                     <IconCardGeoTag textColor="#39424B" />
 
                     <div>
-                      <p>Адрес доставки</p>
+                      <p>{t("dostavka")}</p>
                     </div>
                   </div>
                   <div className={cls.SideBar_adventages + " " + cls.address}>
@@ -505,12 +510,11 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   handleOrder(values);
                 }}
               >
-                Оформить заказ
+                {t("makeZakaz")}
               </Button>
               {handleGetTotal(values.selectedDeliveryOption) < 1000 && (
                 <p className="mt-4 font-medium text-base text-center">
-                  Вы не можете заказать на сумму меньше 1000 тг, без учета
-                  доставки
+                  {t("nelzya1000")}
                 </p>
               )}
             </div>

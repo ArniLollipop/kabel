@@ -40,7 +40,7 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
                 active: activePage === ActivePayDelPageEnum.PAYMENT,
               })}
             >
-              <span>Оплата</span>
+              <span>{t("pay")}</span>
               <IconCabinetArrow />
             </Link>
 
@@ -50,7 +50,7 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
                 active: activePage === ActivePayDelPageEnum.DELIVERY,
               })}
             >
-              <span>Доставка</span>
+              <span>{t("delivery")}</span>
               <IconCabinetArrow />
             </Link>
           </div>

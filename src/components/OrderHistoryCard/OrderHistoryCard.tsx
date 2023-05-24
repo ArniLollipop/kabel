@@ -49,20 +49,22 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
       {order_date ? order_date : "asdasd"}
       <p className={cls.weight__text}>{t("sposobOplata")}</p>
       <p className={cls.text}>
-        Оплата: {pay_type === "card" ? "Картой (онлайн)" : "Наличными"}{" "}
+        Оплата: {pay_type === "card" ? "Картой (онлайн)" : t("nalichnimi")}{" "}
       </p>
       <p className={cls.text}>
-        {delivery_type === "pickup" ? "Самовывоз" : "Доставка: Курьер"}
+        {delivery_type === "pickup" ? "Самовывоз" : t("dostavkaCura")}
       </p>
-      <p className={cls.weight__text}>Адрес доставки</p>
-      <p className={cls.text}>Доставка: Курьер</p>
+      <p className={cls.weight__text}>{t("dostavka")}</p>
+      <p className={cls.text}>{t("dostavkaCura")}</p>
       <p className={cls.weight__text}>Товары</p>
       <p className={cls.text}>{items.length} шт.</p>
       <div className={cls.order_info}>
         <p className={cls.text}>
-          Статус: {is_delivered ? "Выполнен" : "Не Выполнен"}{" "}
+          Статус: {is_delivered ? t("dead") : t("noDead")}{" "}
         </p>
-        <p className={cls.text}>Время: {order_time_from}</p>
+        <p className={cls.text}>
+          {t("time")}: {order_time_from}
+        </p>
         <p className={cls.text}>Дата: {order_date} </p>
       </div>
     </Link>

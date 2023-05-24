@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import cls from "./SortByWidget.module.scss";
 import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { Field } from "formik";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -13,9 +14,11 @@ interface SortByWidgetProps {
 export const SortByWidget: FC<SortByWidgetProps> = (props) => {
   const { className } = props;
 
+  const { t } = useTranslation();
+
   return (
     <div className={cn(cls.SortByWidget)}>
-      <label htmlFor="sortWidget">Сортировать по:</label>
+      <label htmlFor="sortWidget">{t("sortirovkaPo")}:</label>
 
       <Field
         component="select"
@@ -25,10 +28,10 @@ export const SortByWidget: FC<SortByWidgetProps> = (props) => {
         className={cls.SortByWidget_selector}
       >
         <option value="cost" className={cls.SortByWidget_option}>
-          Возрастанию цены
+          {t("vozrastaniPay")}
         </option>
         <option value="-cost" className={cls.SortByWidget_option}>
-          Убыванию цены
+          {t("spuskPay")}
         </option>
       </Field>
     </div>

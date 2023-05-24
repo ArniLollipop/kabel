@@ -10,6 +10,7 @@ import ReactPaginate from "react-paginate";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { ProductService } from "@/services/Product.servise";
 import { setPage, setProducts } from "@/store/slices/ProductSlice";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -25,6 +26,8 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
   const dispatch = useAppDispatch();
   const [productsState, setProductState] = useState<any>();
   const { products, pages } = useAppSelector((state) => state.ProductSlice);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setProductState(products);
@@ -136,7 +139,7 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
           </div>
         </div>
       ) : (
-        <p className={cls.goodsList_notFound}>Товары не найдены</p>
+        <p className={cls.goodsList_notFound}>{t("noTovars")}</p>
       )}
     </div>
   );

@@ -56,7 +56,7 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
                 type="text"
                 id="decoding"
                 name="decoding"
-                placeholder="Введите марку кабеля"
+                placeholder={t("writeCabel") || "Введите марку кабеля"}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.decoding}

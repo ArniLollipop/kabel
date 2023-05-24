@@ -76,7 +76,7 @@ export default function OrderCard(props: OrderCardProps) {
                       />
                       <p className={cls.weight__text}>{el.product_info.name}</p>
                       <p className={cls.text}>
-                        Выполнен <br />
+                        {t("dead")} <br />
                         Дата: 03.02.23
                       </p>
                     </div>

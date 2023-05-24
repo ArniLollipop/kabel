@@ -185,7 +185,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
     navigator.clipboard
       .writeText(`https://cable.kz/catalog/${props.code}`)
       .then(() => {
-        toast("Ссылка скопирована в буфер обмена", {
+        toast(t("copyOk"), {
           hideProgressBar: true,
           autoClose: 2000,
           type: "success",
@@ -203,7 +203,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
           <div className={cls.card}>
             <h1 className={cls.card_title}>{props.name}</h1>
 
-            <span className={cls.card_code}>Код товара: {props.code}</span>
+            <span className={cls.card_code}>
+              {t("tovarCode")}: {props.code}
+            </span>
 
             <div className={cls.card_content}>
               {/* Картинка товара */}
@@ -225,12 +227,13 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 >
                   {props.availability === "в наличии" ? (
                     <>
-                      <IconCardItemInStock />В наличии
+                      <IconCardItemInStock />
+                      {t("estUNas")}
                     </>
                   ) : (
                     <>
                       <IconCardItemOutOfStock />
-                      Под заказ
+                      {t("podZakaz")}
                     </>
                   )}
                 </div>
@@ -253,7 +256,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
                 {/* Описание / Характеристики */}
                 <div className={cls.pcDescr}>
-                  <h3 className={cls.card_subTitle}>Описание</h3>
+                  <h3 className={cls.card_subTitle}>{t("description")}</h3>
                   {/* Описание */}
                   <p className={cls.card_descr}>{props.description}</p>
 
@@ -267,7 +270,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                           {({ open }: { open: boolean }) => (
                             <>
                               <AccordionHeader className={cls.char_accTitle}>
-                                <span>Все характеристики</span>
+                                <span>{t("allCharackteristik")}</span>
                                 <svg
                                   width="9"
                                   height="15"
@@ -308,7 +311,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                     {({ open }: { open: boolean }) => (
                       <>
                         <AccordionHeader className={cls.char_accTitle}>
-                          <span>Развернуть описание</span>
+                          <span>{t("razvernutOpisanie")}</span>
                           <svg
                             width="9"
                             height="15"
@@ -477,9 +480,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
             </div>
 
             <div className={cls.delivery}>
-              <span>Данные о доставке:</span>
+              <span>{t("dannieZakaza")}:</span>
               <span>Самовывоз</span>
-              <span>Курьером от 2000 тг.</span>
+              <span>{t("cura2000")}.</span>
             </div>
           </div>
         </div>

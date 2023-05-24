@@ -118,7 +118,9 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
           <Form>
             {/* Header of Filters */}
             <div className={cls.header} id="top">
-              <span>{products?.count || "Нет"} товаров</span>
+              <span>
+                {products?.count || "Нет"} {t("tovars")}
+              </span>
 
               <div className={cls.mainBtns}>
                 <Button

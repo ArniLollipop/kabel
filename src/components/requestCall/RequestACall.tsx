@@ -38,7 +38,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
               phone_number: values.requestACallPhoneNumber,
               message: values.requestACallTextarea,
             });
-            toast("Заказ на звонок получен!", {
+            toast(t("getPhone"), {
               hideProgressBar: true,
               autoClose: 2000,
               type: "success",
@@ -47,7 +47,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
             values.requestACallPhoneNumber = "";
             values.requestACallTextarea = "";
           } catch {
-            toast("Ошибка!", {
+            toast(t("error") + "!", {
               hideProgressBar: true,
               autoClose: 2000,
               type: "error",
@@ -79,7 +79,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
                   type="text"
                   id="requestACallName"
                   name="requestACallName"
-                  placeholder="Имя"
+                  placeholder={t("name") || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   // use actual value instead this ↓

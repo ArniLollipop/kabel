@@ -131,7 +131,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
     navigator.clipboard
       .writeText(`https://cable.kz/catalog/${element.product_info.code}`)
       .then(() => {
-        toast("Ссылка скопирована в буфер обмена", {
+        toast(t("copyOk"), {
           hideProgressBar: true,
           autoClose: 2000,
           type: "success",
@@ -195,7 +195,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             </p>
           )}
           <p className={cls.GoodsDescr_props_weight}>
-            <span>Вес, кг:</span>0.10
+            <span>{t("weight")}:</span>0.10
           </p>
           <span className={cls.GoodsPrice_mobile}>{element.amount}</span>
         </div>

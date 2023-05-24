@@ -118,7 +118,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 
                 <div className={cn(cls.chooseTypeContainer)}>
                   <div className={cn(cls.chooseBtn)}>
-                    <label>Выберите тип электросети</label>
+                    <label>{t("pickTypeElectro")}</label>
                     <ServicesToggleButtons
                       setData={setVoltage}
                       data={[
@@ -144,7 +144,9 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       value={location}
                       errors={errors.location}
                       touched={touched.location}
-                      labeltext={"Выберите  способ прокладки"}
+                      labeltext={
+                        t("prokladkaType") || "Выберите  способ прокладки"
+                      }
                       className={cls.weightInput}
                     >
                       {select1.map(({ title }) => (
@@ -170,7 +172,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       value={power}
                       errors={errors.power}
                       touched={touched.power}
-                      labeltext={"Введите мощность (кВт)"}
+                      labeltext={t("getPower") || "Введите мощность (кВт)"}
                       className={cls.weightInput}
                     >
                       {powers?.map((el: number) => {
@@ -188,7 +190,9 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       theme={EInputInstanceTheme.SERVICES}
                       id="selectOfUsing"
                       name="selectOfUsing"
-                      labeltext={"Расчет сечения кабеля:"}
+                      labeltext={
+                        t("raschetSechenia") || "Расчет сечения кабеля:"
+                      }
                       onChange={(e) => setRes(parseFloat(e.target.value))}
                       value={res}
                       disabled

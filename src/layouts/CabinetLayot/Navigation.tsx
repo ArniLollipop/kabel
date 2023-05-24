@@ -73,14 +73,12 @@ export const Navigation: FC<NavigationProps> = (props) => {
             : "fixed top-0 -translate-y-1/2 w-0 -left-[50%] transition-all duration-300"
         }
       >
-        <p className="text-center font-semibold text-xl">
-          Вы уверены что хотите выйти?
-        </p>
+        <p className="text-center font-semibold text-xl">{t("areYouDown")}</p>
         <button
           onClick={logoutHandler}
           className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mx-auto mt-4 block font-semibold text-lg cursor-pointer"
         >
-          Да
+          {t("da")}
         </button>
       </div>
       <Link

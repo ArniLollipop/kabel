@@ -15,6 +15,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { offerI } from "@/types/OfferTypes";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -26,6 +27,8 @@ interface OfferSectionProps {
 
 export const OfferSection: FC<OfferSectionProps> = (props) => {
   const { className, offers } = props;
+
+  const { t } = useTranslation();
 
   const [myswiper, setSwiper] = useState<any>({});
 
@@ -72,11 +75,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
                   <Link href={`${button_url}`} className={cls.offerBtn}>
                     {button_text}
                   </Link>
-                  <p className={cls.offerLabel}>
-                    Используя высокие технологии и современное оборудование, мы
-                    представляем кабельную продукцию отвечающую всем
-                    международным стандартам и нормам
-                  </p>
+                  <p className={cls.offerLabel}>{t("offerText")}</p>
                 </div>
 
                 <Image

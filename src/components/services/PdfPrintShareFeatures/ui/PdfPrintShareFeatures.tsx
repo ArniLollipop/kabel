@@ -40,9 +40,7 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (
     doc.setFont("helvetica", "", "normal");
 
     // replace with real data
-    const tableHead = [
-      ["Марка кабеля с сечением", "Количество метров", "Вес, кг"],
-    ];
+    const tableHead = [[t("markCabel"), t("lengthCabel"), t("weight")]];
     const tableBody = [
       ["Кабель АБВГ", "100", "10"],
       ["Кабель ГВП", "50", "5"],
@@ -82,14 +80,14 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (
     const currentUrl = window.location.href;
     navigator.clipboard.writeText(currentUrl).then(
       () => {
-        toast("Ссылка скопирована в буфер обмена!", {
+        toast(t("copyOk"), {
           hideProgressBar: true,
           autoClose: 2000,
           type: "success",
         });
       },
       () => {
-        toast("Ошибка при копирований!", {
+        toast(t("copyError"), {
           hideProgressBar: true,
           autoClose: 2000,
           type: "error",
