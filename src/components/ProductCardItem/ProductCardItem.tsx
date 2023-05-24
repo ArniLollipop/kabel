@@ -209,7 +209,12 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
           </Button>
         ) : (
           <div onClick={handleStop} className={cls.cartBtn}>
-            <button onClick={handleMinus} className={cls.cartMinus}>
+            <button
+              onClick={(e: any) => {
+                cart > 1 && handleMinus(e);
+              }}
+              className={cls.cartMinus}
+            >
               <svg
                 width="20"
                 height="2"
@@ -245,7 +250,12 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
               />
               <p className={cls.cartCounter}> м</p>
             </div>
-            <button onClick={handlePlus} className={cls.cartPlus}>
+            <button
+              onClick={() => {
+                cart < 1000 && handlePlus;
+              }}
+              className={cls.cartPlus}
+            >
               <svg
                 width="24"
                 height="24"

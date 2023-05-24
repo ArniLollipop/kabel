@@ -354,7 +354,12 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
               <span className={cls.buyActions_price}>{props.cost} ₸</span>
               {cartChange ? (
                 <div onClick={handleStop} className={cls.cartBtn}>
-                  <button onClick={handleMinus} className={cls.cartMinus}>
+                  <button
+                    onClick={(e: any) => {
+                      cart > 1 && handleMinus(e);
+                    }}
+                    className={cls.cartMinus}
+                  >
                     <svg
                       width="20"
                       height="2"
@@ -391,7 +396,12 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                     />
                     <p className={cls.cartCounter}> м</p>
                   </div>
-                  <button onClick={handlePlus} className={cls.cartPlus}>
+                  <button
+                    onClick={(e: any) => {
+                      cart < 1000 && handlePlus(e);
+                    }}
+                    className={cls.cartPlus}
+                  >
                     <svg
                       width="24"
                       height="24"

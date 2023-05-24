@@ -161,7 +161,9 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         <div className={cls.GoodsDescr_counter}>
           <Button
             theme={ThemeButton.CLEAR}
-            onClick={handleMinus}
+            onClick={(e: any) => {
+              amount > 1 && handleMinus(e);
+            }}
             disabled={amount == 0}
           >
             <IconCardCounterMinus className={cls.GoodsDescr_counterBtn} />
@@ -182,7 +184,12 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             }}
           />
           М
-          <Button onClick={handlePlus} theme={ThemeButton.CLEAR}>
+          <Button
+            onClick={(e: any) => {
+              amount < 1000 && handlePlus(e);
+            }}
+            theme={ThemeButton.CLEAR}
+          >
             <IconCardCounterPlus className={cls.GoodsDescr_counterBtn} />
           </Button>
         </div>
