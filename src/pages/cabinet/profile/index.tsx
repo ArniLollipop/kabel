@@ -111,7 +111,8 @@ export default function profilePage() {
                     <div className={cls.userCard_datas}>
                       <p>
                         <span>{t("name")}: </span>
-                        {user && user?.first_name + " " + user?.last_name}
+                        {(user && user?.first_name) || ""}{" "}
+                        {(user && user?.last_name) || ""}
                         {!user && t("yourName")}
                       </p>
                       <p>

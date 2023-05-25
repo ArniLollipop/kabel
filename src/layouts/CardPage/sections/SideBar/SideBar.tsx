@@ -36,7 +36,9 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
-  const { total_amount, items } = useAppSelector((state) => state.CartSlice);
+  const { total_amount, items, delivery_price } = useAppSelector(
+    (state) => state.CartSlice
+  );
 
   const [length, setLength] = useState<number>(0);
   const [bonusBalance, setBonusBalance] = useState<number>(0);
@@ -330,7 +332,9 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 </div>
                 <div className="flex">
                   <span>{t("payDostavka")}</span>
-                  <span className={cls.SideBar_payment_sum}>0 ₸</span>
+                  <span className={cls.SideBar_payment_sum}>
+                    {delivery_price === 0 ? t("free") : delivery_price + "₸"}
+                  </span>
                 </div>
               </div>
 

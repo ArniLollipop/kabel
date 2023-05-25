@@ -11,6 +11,7 @@ export interface CartI {
   total_amount: number;
   user: number;
   items: any;
+  delivery_price: number;
 }
 
 export interface cartAnswI {

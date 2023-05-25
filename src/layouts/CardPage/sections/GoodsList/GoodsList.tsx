@@ -5,7 +5,8 @@ import { GoodsListItem } from "@/layouts/CardPage/sections/GoodsList/GoodsListIt
 import MockImage from "@/assets/images/ImageMockProduct.png";
 import MockImageMini from "@/assets/images/ImageMockProductMini3.png";
 import { useHttp } from "@/hooks/useHttp";
-import { useAppSelector } from "@/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { setDelivery } from "@/store/slices/CartSlice";
 
 const cn = classNames.bind(cls);
 
@@ -16,6 +17,7 @@ interface GoodsListProps {
 export const GoodsList: FC<GoodsListProps> = (props) => {
   const { className } = props;
   const [cart, setCart] = useState<any>();
+  const dispatch = useAppDispatch();
 
   const { total_amount, items } = useAppSelector((state) => state.CartSlice);
 
@@ -24,6 +26,7 @@ export const GoodsList: FC<GoodsListProps> = (props) => {
       const temp: any = JSON.parse(localStorage.getItem("user") || "") || null;
       const res = await useHttp().get("orders/carts/" + temp.id);
       setCart(res.data.items);
+      dispatch(setDelivery(res.data.delivery_price));
     } catch (err) {
       console.log("====================================");
       console.log(err);
