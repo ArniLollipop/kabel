@@ -11,17 +11,20 @@ const nextConfig = {
   webpack(config) {
     config.module.rules.push({
       test: /\.js$/,
-      use: [
-        {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              ["next/babel", { "preset-env": { modules: "commonjs" } }],
-            ],
-            plugins: ["babel-plugin-module-resolver"],
+      use: {
+        loader: "@swc/loader",
+        options: {
+          jsc: {
+            parser: {
+              syntax: "ecmascript",
+              jsx: true,
+            },
+            transform: {
+              react: true,
+            },
           },
         },
-      ],
+      },
     });
     return config;
   },
