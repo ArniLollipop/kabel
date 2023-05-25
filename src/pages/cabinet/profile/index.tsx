@@ -120,7 +120,7 @@ export default function profilePage() {
                         {user && user?.email} {!user && t("yourMail")}
                       </p>
                       <p>
-                        <span>Номер телефона: </span>
+                        <span>{t("nomerTelephona")}: </span>
                         {user && user?.phone_number} {!user && t("yourPhone")}
                       </p>
                     </div>

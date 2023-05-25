@@ -13,12 +13,17 @@ import { Field, Form, Formik } from "formik";
 import { CheckBoxInstance } from "@/shared/formElements/checkboxInstance/CheckBoxInstance";
 import { RadioInstance } from "@/shared/formElements/radioInstance/RadioInstance";
 import { ProductService } from "@/services/Product.servise";
-import { setPage, setProducts } from "@/store/slices/ProductSlice";
+import {
+  setCategories,
+  setPage,
+  setProducts,
+} from "@/store/slices/ProductSlice";
 import { queriesGenerator } from "@/helpers/queriesGenerator";
 import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
 import { useTranslation } from "next-i18next";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import nookies from "nookies";
+import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
@@ -109,6 +114,21 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     });
     return temp;
   }
+
+  async function getCategories() {
+    try {
+      let res = await useHttp().get("products/categories/");
+      setCategories(res.data.results);
+    } catch (err) {
+      console.log("====================================");
+      console.log(err);
+      console.log("====================================");
+    }
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <div className={cn(cls.FilterSection, { visible: isOpened })}>
@@ -306,7 +326,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                           )}
                           as="div"
                         >
-                          <h3 className={cls.accTitle}>Сечение </h3>
+                          <h3 className={cls.accTitle}>{t("sechenie")} </h3>
                           <svg
                             className={cn(cls.filtersAcc_arrow, {
                               filtersAcc_arrowActive: open,
@@ -384,7 +404,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 {t("aprove2")}
               </Button>
               <a href="#top" className={cls.anchorUp}>
-                {t("Наверх")}
+                {t("toUp")}
               </a>
             </div>
           </Form>

@@ -85,7 +85,7 @@ export default function supportPage() {
         <div className={cls.support_content}>
           <div className={cls.support_problems}>
             <div className={cls.support_accordion}>
-              <h3>Проблема</h3>
+              <h3>{t("problema")}</h3>
               <Accordion alwaysOpen={true}>
                 {question &&
                   question?.map((el: any) => {

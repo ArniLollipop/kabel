@@ -29,9 +29,27 @@ export default function Document() {
                 function init() {
                   var myMap = new ymaps.Map("map", {
                     center: [lat, lon],
-                    zoom: 7,
+                    zoom: 16,
                   });
+                  var squareLayout = ymaps.templateLayoutFactory.createClass('<div class="placemark_layout_container"><div class="square_layout"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M25.5916 45.8403C28.3277 43.584 39.5807 33.6518 39.5807 22.9167C39.5807 14.8626 33.0515 8.33337 24.9974 8.33337C16.9432 8.33337 10.4141 14.8626 10.4141 22.9167C10.4141 33.6518 21.667 43.584 24.4032 45.8403C24.7521 46.1281 25.2427 46.1281 25.5916 45.8403ZM24.9978 27.3256C27.2454 27.3256 29.0675 25.3734 29.0675 22.9651C29.0675 20.5569 27.2454 18.6047 24.9978 18.6047C22.7501 18.6047 20.928 20.5569 20.928 22.9651C20.928 25.3734 22.7501 27.3256 24.9978 27.3256Z" fill="#F9AB50"/></svg></div></div>');
+                  var squarePlacemark = new ymaps.Placemark(
+                      [lat, lon], {
+                          hintContent: 'Метка с прямоугольным HTML макетом'
+                      }, {
+                          iconLayout: squareLayout,
+                          // Описываем фигуру активной области "Прямоугольник".
+                          iconShape: {
+                              type: 'Rectangle',
+                              // Прямоугольник описывается в виде двух точек - верхней левой и нижней правой.
+                              coordinates: [
+                                  [lat, lon], [lat, lon]
+                              ]
+                          }
+                      }
+                  );
+                  myMap.geoObjects.add(squarePlacemark);
                 }
+                
               }
               // это для добавления/удаления адреса
               let lon2, lat2;

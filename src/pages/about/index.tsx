@@ -9,11 +9,14 @@ import { AboutService } from "@/services/About.service";
 import { AboutI } from "@/types/AboutTypes";
 import { useEffect } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
 export default function aboutPage(props: AboutI) {
   const { image, text, title, our_goal } = props;
+
+  const { t } = useTranslation();
 
   function clearHtmlTags(htmlString: string) {
     const regex = /(<([^>]+)>)/gi;
@@ -33,7 +36,7 @@ export default function aboutPage(props: AboutI) {
   return (
     <MainLayout activePage={ActiveHeaderPage.ABOUT}>
       <div className={cn(cls.about)}>
-        <Title className={cls.about_title}>{title}</Title>
+        <Title className={cls.about_title}>{t("aboutCompany")}</Title>
         <div className={cls.about_wrapper}>
           <Image
             className={cls.about_img}

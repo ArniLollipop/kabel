@@ -27,7 +27,7 @@ export const Homepage: FC<HomeProps> = (props) => {
     adventages,
     news,
     offers,
-    currencyRes,
+    // currencyRes,
   } = props;
 
   return (
@@ -40,7 +40,7 @@ export const Homepage: FC<HomeProps> = (props) => {
       <ServicesSection />
       <SertificatesSection sertificates={sertificates} />
       <NewsSection news={news} />
-      <GetCurrency currency={currencyRes} metalRes={metalRes} />
+      {/* <GetCurrency currency={currencyRes} metalRes={metalRes} /> */}
       <Link href="/about" className="navBtn__main">
         {t("list.company")}
       </Link>
