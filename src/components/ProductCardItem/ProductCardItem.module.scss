@@ -98,6 +98,7 @@
     @include adaptive-size(137, 90, height);
     object-fit: contain;
     margin-right: 10px;
+    border-radius: 10px;
   }
 
   .cardInfo {

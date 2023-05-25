@@ -4,6 +4,7 @@
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
+    appDir: true,
     modern: true,
     modularize: true,
     css: true,

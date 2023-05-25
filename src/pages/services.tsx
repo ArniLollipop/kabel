@@ -28,8 +28,20 @@ export default function Home() {
     return (
       <article key={articleId} className={cn(cls.ServicesArticleMainPage)}>
         <ArticleIcon className={cn(cls.articleIcon)} textColor={"#00ABC2"} />
-        <h2>{title}</h2>
-        <p>{desc}</p>
+        <h2>
+          {title === "Таблица Веса кабеля"
+            ? t("tableWeight")
+            : title === "Расчет сечения кабеля"
+            ? t("raschetSechenia")
+            : t("rashifrovka")}
+        </h2>
+        <p>
+          {title === "Таблица Веса кабеля"
+            ? t("firstService")
+            : title === "Расчет сечения кабеля"
+            ? t("secondService")
+            : t("thirdService")}
+        </p>
         <div className={cn(cls.detailsIconContainer)}>
           <Link href={`/services/${link}`}>
             {t("another")} <ServicesDetailsIcon textColor={"#00ABC2"} />

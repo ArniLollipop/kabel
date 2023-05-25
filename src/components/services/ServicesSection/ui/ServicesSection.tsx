@@ -151,7 +151,9 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                     >
                       {select1.map(({ title }) => (
                         <option key={title} value={title}>
-                          {title}
+                          {title === "В воздухе"
+                            ? t("inVozduh")
+                            : t("inZemlia")}
                         </option>
                       ))}
                     </InputInstance>

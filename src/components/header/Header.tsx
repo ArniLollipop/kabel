@@ -337,7 +337,7 @@ export const Header: FC<HeaderProps> = (props) => {
                                       section: [],
                                       core_number: [],
                                       availability: "",
-                                      ordering: "cost",
+                                      ordering: "",
                                     })
                                   );
                                   setActiveCat("");

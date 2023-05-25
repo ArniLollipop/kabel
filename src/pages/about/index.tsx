@@ -7,7 +7,7 @@ import Image from "next/image";
 import ImageHomepageAboutBig from "@/assets/images/ImageHomepageAboutBig.png";
 import { AboutService } from "@/services/About.service";
 import { AboutI } from "@/types/AboutTypes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
@@ -16,17 +16,13 @@ const cn = classNames.bind(cls);
 export default function aboutPage(props: AboutI) {
   const { image, text, title, our_goal } = props;
 
-  const { t } = useTranslation();
+  const [about, setAbout] = useState<any>();
 
-  function clearHtmlTags(htmlString: string) {
-    const regex = /(<([^>]+)>)/gi;
-    return htmlString.replace(regex, "");
-  }
-  const clearedText = clearHtmlTags(our_goal);
+  const { t } = useTranslation();
 
   const getInfo = async () => {
     const res = await AboutService().getAboutInfo();
-    console.log("res is: ", res);
+    setAbout(res);
   };
 
   useEffect(() => {
@@ -36,11 +32,11 @@ export default function aboutPage(props: AboutI) {
   return (
     <MainLayout activePage={ActiveHeaderPage.ABOUT}>
       <div className={cn(cls.about)}>
-        <Title className={cls.about_title}>{t("aboutCompany")}</Title>
+        <Title className={cls.about_title}>{about && about.title}</Title>
         <div className={cls.about_wrapper}>
           <Image
             className={cls.about_img}
-            src={image}
+            src={about && about.image}
             alt="about image"
             width={1150}
             height={460}
@@ -48,19 +44,22 @@ export default function aboutPage(props: AboutI) {
 
           <div
             className={cls.about_text}
-            dangerouslySetInnerHTML={{ __html: text }}
+            dangerouslySetInnerHTML={{ __html: about && about.text }}
           />
-          <p className={cls.about_accent}>{clearedText.split("&")[0]}</p>
+          <p
+            className={cls.about_accent}
+            dangerouslySetInnerHTML={{ __html: about && about.our_goal }}
+          ></p>
         </div>
       </div>
     </MainLayout>
   );
 }
 
-export async function getServerSideProps() {
-  const res = await AboutService().getAboutInfo();
+// export async function getServerSideProps() {
+//   const res = await AboutService().getAboutInfo();
 
-  return {
-    props: res,
-  };
-}
+//   return {
+//     props: res,
+//   };
+// }

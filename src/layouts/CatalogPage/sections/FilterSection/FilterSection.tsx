@@ -13,11 +13,7 @@ import { Field, Form, Formik } from "formik";
 import { CheckBoxInstance } from "@/shared/formElements/checkboxInstance/CheckBoxInstance";
 import { RadioInstance } from "@/shared/formElements/radioInstance/RadioInstance";
 import { ProductService } from "@/services/Product.servise";
-import {
-  setCategories,
-  setPage,
-  setProducts,
-} from "@/store/slices/ProductSlice";
+import { setPage, setProducts } from "@/store/slices/ProductSlice";
 import { queriesGenerator } from "@/helpers/queriesGenerator";
 import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
 import { useTranslation } from "next-i18next";
@@ -36,7 +32,8 @@ interface FilterSectionProps {
 export const FilterSection: FC<FilterSectionProps> = (props) => {
   const { t } = useTranslation();
   const { isOpened, closeFilters } = props;
-  const { categories, cores, products, stateForQueris } = useAppSelector(
+  const [categories, setCategories] = useState<any>([]);
+  const { cores, products, stateForQueris } = useAppSelector(
     (state) => state.ProductSlice
   );
 
@@ -44,8 +41,8 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     subcategory: [],
     section: [],
     core_number: [],
-    availability: "Все",
-    ordering: "cost",
+    availability: "",
+    ordering: "",
   });
 
   async function handleGetFilters() {
@@ -119,11 +116,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
     try {
       let res = await useHttp().get("products/categories/");
       setCategories(res.data.results);
-    } catch (err) {
-      console.log("====================================");
-      console.log(err);
-      console.log("====================================");
-    }
+    } catch (err) {}
   }
 
   useEffect(() => {
@@ -162,6 +155,14 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                     values.categories = [];
                     values.checkedCors = [];
                     values.sortWidget = "cost";
+                    const res = await useHttp().get("products/products/");
+                    setCheckedFilters({
+                      subcategory: [],
+                      section: [],
+                      core_number: [],
+                      availability: "",
+                      ordering: "",
+                    });
                     setCookie(
                       null,
                       "queries",
@@ -176,16 +177,8 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                         maxAge: 30 * 24 * 60 * 60,
                       }
                     );
-                    const res = await ProductService().getProducts();
-                    setCheckedFilters({
-                      subcategory: [],
-                      section: [],
-                      core_number: [],
-                      availability: "",
-                      ordering: "",
-                    });
-                    dispatch(setPage(res.count_pages));
-                    dispatch(setProducts(res));
+                    dispatch(setPage(res.data.count_pages));
+                    dispatch(setProducts(res.data));
                   }}
                 >
                   {t("clear")}
@@ -246,8 +239,8 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
               <Accordion className={cls.filtersAcc} alwaysOpen={true}>
                 {/* Categories */}
                 <>
-                  {categories ? (
-                    categories.results?.map((cat: any, i: number) => (
+                  {categories &&
+                    categories?.map((cat: any, i: number) => (
                       <AccordionItem
                         isActive={i === 0 ? true : false}
                         key={cat.name}
@@ -310,10 +303,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                           </>
                         )}
                       </AccordionItem>
-                    ))
-                  ) : (
-                    <></>
-                  )}
+                    ))}
 
                   {/* Сечение */}
                   <AccordionItem isActive={true}>
