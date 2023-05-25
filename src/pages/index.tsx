@@ -43,7 +43,7 @@ export default function Home() {
     const sertificates = await SertificateService().getSertificate();
     const adventages = await AdventagesService().getAdventages();
     const news = await NewsService().getNews();
-    // const currencyRes = await GetCurrencyService().getCurrency();
+    const currencyRes = await GetCurrencyService().getCurrency();
     const metalRes = await GetCurrencyService().getMetal();
 
     setItems({
@@ -53,7 +53,7 @@ export default function Home() {
       adventages,
       news,
       offers,
-      // currencyRes,
+      currencyRes,
       metalRes,
     });
   }

@@ -8,26 +8,6 @@ const nextConfig = {
     modularize: true,
     css: true,
   },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.js$/,
-      use: {
-        loader: "@swc/loader",
-        options: {
-          jsc: {
-            parser: {
-              syntax: "ecmascript",
-              jsx: true,
-            },
-            transform: {
-              react: true,
-            },
-          },
-        },
-      },
-    });
-    return config;
-  },
   i18n: {
     locales: ["ru", "kz"],
     defaultLocale: "ru",
