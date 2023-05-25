@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
-import NullImg from "@/assets/images/nullImg.webp";
+import NullImg from "@/assets/images/nullImg.png";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
@@ -61,12 +61,16 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
   async function handleChangeCount(count: any) {
     try {
-      if (parseInt(count) > 0) {
+      if (
+        parseInt(count) > 1 &&
+        parseInt(count) <= element.remains &&
+        parseInt(count) <= 1000
+      ) {
         const res = await useHttp().post(
           "orders/carts/add_to_cart/",
           {
             product: element.product_info.code,
-            length: count,
+            length: parseInt(count),
           },
           {
             headers: {
@@ -147,6 +151,8 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       <Image
         src={element.product_info.image || NullImg}
         alt="Product image"
+        width={300}
+        height={300}
         className={cls.img}
       />
 
@@ -202,6 +208,8 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
                 src={element.product_info ? element.product_info.image : ""}
                 alt="Product image miniature"
                 className={cls.GoodsDescr_props_colorImg}
+                width={300}
+                height={300}
               />
             </p>
           )}

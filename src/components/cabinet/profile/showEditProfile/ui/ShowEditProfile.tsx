@@ -99,7 +99,7 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
                         type="text"
                         id="first_name"
                         name="first_name"
-                        placeholder="Имя"
+                        placeholder={t("name") || "Имя"}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.first_name}

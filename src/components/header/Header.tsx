@@ -124,7 +124,11 @@ export const Header: FC<HeaderProps> = (props) => {
           <ul className={cls.contacts_list}>
             <li className={cls.contacts_list_mobileLogo}>
               <Link href="/">
-                <IconLogo width="126" height="47" />
+                <IconLogo
+                  width="150"
+                  height="100"
+                  className="h-[50px] overflow-hidden"
+                />
               </Link>
             </li>
 

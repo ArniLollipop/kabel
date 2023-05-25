@@ -90,7 +90,7 @@ export const Register: FC<RegisterProps> = (props) => {
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Имя"
+                  placeholder={t("name") || "Имя"}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.name}

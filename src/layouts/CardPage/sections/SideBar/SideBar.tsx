@@ -48,7 +48,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const [time, setTime] = useState<any>({ time_from: "", time_to: "" });
   const [salePoints, setSalePoints] = useState<any>([]);
   const [bonus, setBonus] = useState<boolean>(false);
-  const [deliveryCost, setDeliveryCost] = useState<any>();
 
   async function getTime() {
     try {
@@ -81,13 +80,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
     } catch {}
   }
 
-  async function getDelivery() {
-    try {
-      const res = await useHttp().get("orders/delivery_cost/1/");
-      setDeliveryCost(res.data);
-    } catch {}
-  }
-
   useEffect(() => {
     setLength(0);
     if (items) {
@@ -102,7 +94,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
     getAddresses();
     getSalePoints();
     getBonuses();
-    getDelivery();
   }, []);
 
   async function handleOrder(values: any) {
@@ -141,36 +132,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
         }
       }
     } catch (error) {}
-  }
-
-  function handleGetTotal(option: string) {
-    if (option === t("delivery")) {
-      if (deliveryCost && deliveryCost.order_cost > total_amount) {
-        if (bonus) {
-          if (total_amount - bonusBalance >= 1000 && total_amount >= 1000) {
-            return total_amount - bonusBalance;
-          } else if (total_amount < 1000) {
-            return total_amount;
-          } else {
-            return 1000;
-          }
-        } else {
-          return total_amount;
-        }
-      } else if (deliveryCost) {
-        return total_amount + deliveryCost.delivery_cost;
-      }
-    } else if (bonus) {
-      if (total_amount - bonusBalance >= 1000 && total_amount >= 1000) {
-        return total_amount - bonusBalance;
-      } else if (total_amount < 1000) {
-        return total_amount;
-      } else {
-        return 1000;
-      }
-    } else {
-      return total_amount;
-    }
   }
 
   return (
@@ -364,19 +325,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 <div className="flex">
                   <span>{t("sumForPay")}</span>
                   <span className={cls.SideBar_payment_sum}>
-                    {handleGetTotal(values.selectedDeliveryOption)} ₸
+                    {total_amount} ₸
                   </span>
                 </div>
                 <div className="flex">
                   <span>{t("payDostavka")}</span>
-                  <span className={cls.SideBar_payment_sum}>
-                    {values.selectedDeliveryOption.includes(t("delivery"))
-                      ? deliveryCost.order_cost < total_amount
-                        ? 0
-                        : deliveryCost.delivery_cost
-                      : 0}{" "}
-                    ₸
-                  </span>
+                  <span className={cls.SideBar_payment_sum}>0 ₸</span>
                 </div>
               </div>
 
@@ -502,7 +456,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
               )} */}
 
               <Button
-                disabled={handleGetTotal(values.selectedDeliveryOption) < 1000}
+                disabled={total_amount < 1000}
                 type="submit"
                 theme={ThemeButton.YELLOW}
                 className={cls.btn}
@@ -512,7 +466,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
               >
                 {t("makeZakaz")}
               </Button>
-              {handleGetTotal(values.selectedDeliveryOption) < 1000 && (
+              {total_amount < 1000 && (
                 <p className="mt-4 font-medium text-base text-center">
                   {t("nelzya1000")}
                 </p>

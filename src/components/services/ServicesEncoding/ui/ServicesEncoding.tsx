@@ -8,6 +8,7 @@ import { useTranslation } from "next-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import Image from "next/image";
 import ImageMockProduct from "@/assets/images/ImageMockProduct.png";
+import nullImg from "@/assets/images/nullImg.png";
 
 let cn = classNames.bind(cls);
 
@@ -68,7 +69,7 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
                 return (
                   <div className={cls.encoding}>
                     <Image
-                      src={ImageMockProduct}
+                      src={res?.image || nullImg}
                       alt="asd"
                       className={cls.encodingImage}
                     />

@@ -5,7 +5,7 @@ import { seeMoreCardI } from "@/data/SeeMoreCardData";
 import Link from "next/link";
 import Image from "next/image";
 import { productI } from "@/types/ProductTypes";
-import nullImg from "@/assets/images/nullImg.webp";
+import nullImg from "@/assets/images/nullImg.png";
 import { useTranslation } from "next-i18next";
 
 const cn = classNames.bind(cls);

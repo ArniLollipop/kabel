@@ -114,6 +114,9 @@
 
 .encodingImage {
   grid-column: span 1 / span 1;
+  max-width: 200px;
+  height: fit-content;
+  border-radius: 10px;
 }
 
 .description_text {

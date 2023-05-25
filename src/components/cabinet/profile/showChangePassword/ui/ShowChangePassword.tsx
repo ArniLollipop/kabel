@@ -15,6 +15,7 @@ import { changePasswordsSchema } from "@/helpers/validation";
 import { ProfileService } from "@/services/Profile.service";
 import { useTranslation } from "next-i18next";
 import { useHttp } from "@/hooks/useHttp";
+import { toast } from "react-toastify";
 
 let cn = classNames.bind(cls);
 
@@ -122,6 +123,11 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                 setShowSentTo("email");
               }
             } catch (e: any) {
+              toast(t("mailError") + "!", {
+                hideProgressBar: true,
+                autoClose: 2000,
+                type: "error",
+              });
               setErrorMessage(e);
             }
           };

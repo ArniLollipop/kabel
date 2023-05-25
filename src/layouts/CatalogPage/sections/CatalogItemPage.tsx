@@ -12,7 +12,7 @@ import {
   AccordionItem,
 } from "react-headless-accordion";
 import { productI } from "@/types/ProductTypes";
-import nullImg from "@/assets/images/nullImg.webp";
+import nullImg from "@/assets/images/nullImg.png";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 // import { Router } from "next/router";
 import { useRouter } from "next/router";
@@ -48,23 +48,25 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   const [sum, setSum] = useState<number>(props.cost * cart);
 
   async function handleAddCart(e: any) {
-    e.stopPropagation();
-    try {
-      const res = await useHttp().post(
-        "orders/carts/add_to_cart/",
-        {
-          product: props.code,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
+    if (props.availability === "в наличии") {
+      e.stopPropagation();
+      try {
+        const res = await useHttp().post(
+          "orders/carts/add_to_cart/",
+          {
+            product: props.code,
           },
-        }
-      );
-      dispatch(setAmount(res.data.result.total_amount));
-      dispatch(setItems(res.data.result.items));
-    } catch (err) {
-      window.location.replace("/auth");
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        );
+        dispatch(setAmount(res.data.result.total_amount));
+        dispatch(setItems(res.data.result.items));
+      } catch (err) {
+        window.location.replace("/auth");
+      }
     }
   }
 
@@ -89,12 +91,16 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
   async function handleChangeCount(count: any) {
     try {
-      if (parseInt(count) > 0) {
+      if (
+        parseInt(count) > 1 &&
+        parseInt(count) <= props.remains &&
+        parseInt(count) <= 1000
+      ) {
         const res = await useHttp().post(
           "orders/carts/add_to_cart/",
           {
             product: props.code,
-            length: count,
+            length: parseInt(count),
           },
           {
             headers: {
@@ -386,12 +392,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                       type="number"
                       value={cartChange}
                       onChange={(e: any) => {
-                        if (
-                          e.target.value <= props.remains &&
-                          e.target.value >= 1 &&
-                          e.target.value <= 1000
-                        )
-                          handleChangeCount(e.target.value);
+                        handleChangeCount(e.target.value);
                       }}
                     />
                     <p className={cls.cartCounter}> м</p>
