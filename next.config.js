@@ -3,6 +3,28 @@
  */
 const nextConfig = {
   reactStrictMode: false,
+  experimental: {
+    modern: true,
+    modularize: true,
+    css: true,
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.js$/,
+      use: [
+        {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              ["next/babel", { "preset-env": { modules: "commonjs" } }],
+            ],
+            plugins: ["babel-plugin-module-resolver"],
+          },
+        },
+      ],
+    });
+    return config;
+  },
   i18n: {
     locales: ["ru", "kz"],
     defaultLocale: "ru",
