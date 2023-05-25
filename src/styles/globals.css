@@ -67,6 +67,10 @@ body {
   overflow-x: hidden;
 }
 
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
 body {
   color: rgb(var(--color-font-descr));
   background: var(--color-bg-white);

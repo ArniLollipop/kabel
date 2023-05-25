@@ -14,7 +14,7 @@ i18n
           lang: "KZ",
           header: {
             account: "Жеке кабинет",
-            free: "РК бойынша тегін",
+            free: "Жеке кабинет",
           },
           list: {
             company: "Компания",
@@ -204,6 +204,7 @@ i18n
           naming: "Аты",
           areYouDown: "Шығыңыз келетініне сенімдісіз бе?",
           da: "Ия",
+          net: "Жоқ",
           garantia: "Сапа кепілдігі",
           usloviaVozvrata: "Қайтару шарттары",
           straxovanie: "Сақтандыру",
@@ -234,12 +235,21 @@ i18n
           canBuy: "Тапсырыс беруге болады:",
           mailError: "Сізде тіркелген пошта жоқ",
           free: "Төлемсіз",
+          samovivoz: "Ала кету",
+          iz: "",
+          punkti: "нүктеден",
+          cardPayOnline: "Картамен онлайн",
         },
       },
       ru: {
         translation: {
           lang: "RU",
           da: "Да",
+          cardPayOnline: "Картой онлайн",
+          punkti: "пунктов",
+          iz: "из",
+          samovivoz: "Самовывоз",
+          net: "Нет",
           free: "Бесплатно",
           mailError: "У вас не зарегестрирована почта",
           canBuy: "Доступно к заказу:",
@@ -293,7 +303,7 @@ i18n
           findTovar: "Поиск по имени товара",
           header: {
             account: "Личный кабинет",
-            free: "Бесплатно по РК",
+            free: "Личный кабинет",
           },
           list: {
             company: "О компании",

@@ -197,15 +197,32 @@ export const Header: FC<HeaderProps> = (props) => {
             <li className={cls.language_block}>
               <button
                 onClick={() => setOpen(!open)}
-                className={cls.language_btn}
+                className={
+                  cls.language_btn +
+                  " flex items-center text-[#39424B] font-medium"
+                }
               >
-                <Image
-                  src={t("lang") === "RU" ? RU : KZ}
-                  width={64}
-                  height={64}
-                  className={cls.language}
-                  alt="asdassd"
-                />
+                {t("lang")}
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={
+                    open
+                      ? "rotate-180 transition-all duration-300"
+                      : "transition-all duration-300"
+                  }
+                >
+                  <path
+                    d="M6 9L12 15L18 9"
+                    stroke="#39424B"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
               </button>
               {open && (
                 <div className={cls.language_choices}>

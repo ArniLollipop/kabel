@@ -74,12 +74,20 @@ export const Navigation: FC<NavigationProps> = (props) => {
         }
       >
         <p className="text-center font-semibold text-xl">{t("areYouDown")}</p>
-        <button
-          onClick={logoutHandler}
-          className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mx-auto mt-4 block font-semibold text-lg cursor-pointer"
-        >
-          {t("da")}
-        </button>
+        <div className="flex items-center gap-[10px] !justify-center">
+          <button
+            onClick={logoutHandler}
+            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
+          >
+            {t("da")}
+          </button>
+          <button
+            onClick={() => setModal(false)}
+            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
+          >
+            {t("net")}
+          </button>
+        </div>
       </div>
       <Link
         href="/cabinet/profile"

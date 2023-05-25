@@ -182,9 +182,9 @@ export const SideBar: FC<SideBarProps> = (props) => {
               <span className={cls.SideBar_adventages_item}>
                 <a href="" className={cls.SideBar_adventages_link}>
                   <IconCardGeoTag />
-                  Самовывоз&nbsp;
+                  {t("Ала кету")}&nbsp;
                 </a>
-                из {salePoints && salePoints.length - 1} пунктов
+                {t("iz")} {salePoints && salePoints.length - 1} {t("punkti")}
               </span>
 
               {salePoints?.map((option: any) => {
@@ -261,7 +261,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                         checked={values.selectedPayOption === text}
                         onChange={handleChange}
                       />
-                      {text}
+                      {text === "Картой онлайн" ? t("cardPayOnline") : text}
                     </label>
                   </span>
                 );
@@ -327,7 +327,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
                 <div className="flex">
                   <span>{t("sumForPay")}</span>
                   <span className={cls.SideBar_payment_sum}>
-                    {total_amount} ₸
+                    {bonus
+                      ? total_amount - bonusBalance
+                        ? total_amount - bonusBalance
+                        : 1000
+                      : total_amount}{" "}
+                    ₸
                   </span>
                 </div>
                 <div className="flex">

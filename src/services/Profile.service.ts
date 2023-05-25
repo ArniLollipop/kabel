@@ -124,7 +124,7 @@ export const ProfileService = (
     phone_number: string,
     password: string
   ): Promise<AxiosResponse<any>> => {
-    const res = await useHttp().post(endpoints.changePassFinal, {
+    const res = await useHttp().patch(endpoints.changePassFinal, {
       phone_number,
       password,
     });

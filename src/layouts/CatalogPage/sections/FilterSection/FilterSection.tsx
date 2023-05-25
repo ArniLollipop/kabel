@@ -150,7 +150,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                         section: [],
                         core_number: [],
                         availability: "",
-                        ordering: "cost",
+                        ordering: "",
                       }),
                       {
                         maxAge: 30 * 24 * 60 * 60,
@@ -162,7 +162,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                       section: [],
                       core_number: [],
                       availability: "",
-                      ordering: "cost",
+                      ordering: "",
                     });
                     dispatch(setPage(res.count_pages));
                     dispatch(setProducts(res));

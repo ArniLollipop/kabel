@@ -2,7 +2,6 @@
 
 .AdvantagesSection {
   @include adaptive-size(100, 20, padding-top);
-  @include adaptive-size(100, 20, padding-bottom);
   padding-left: 15px;
   padding-right: 15px;
 
