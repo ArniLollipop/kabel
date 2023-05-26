@@ -96,7 +96,7 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
             core_numberQuery +
             orderingQuery +
             availabilityQuery +
-            `?page=${JSON.stringify(e.selected + 1)}`
+            `&page=${JSON.stringify(e.selected + 1)}`
         );
         products = res.data;
       } else {
