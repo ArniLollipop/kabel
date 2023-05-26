@@ -36,7 +36,7 @@ export const HistoryOfWatching: FC<HistoryOfWatchingProps> = (props) => {
   }, []);
 
   return (
-    <div className={recom.length > 0 ? cls.HistoryOfWatching + " " : "hidden"}>
+    <div className={recom ? cls.HistoryOfWatching + " " : "hidden"}>
       <h2 className={cls.HistoryOfWatching_title}>Вы недавно смотрели</h2>
       <ul className={cls.HistoryOfWatching_wrapper}>
         {recom?.map((el: any) => {
