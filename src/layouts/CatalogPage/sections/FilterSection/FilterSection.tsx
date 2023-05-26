@@ -241,10 +241,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 <>
                   {categories &&
                     categories?.map((cat: any, i: number) => (
-                      <AccordionItem
-                        isActive={i === 0 ? true : false}
-                        key={cat.name}
-                      >
+                      <AccordionItem isActive={true} key={cat.name}>
                         {({ open }: { open: boolean }) => (
                           <>
                             <AccordionHeader
