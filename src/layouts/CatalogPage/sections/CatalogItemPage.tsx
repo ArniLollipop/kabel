@@ -118,21 +118,23 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
   async function handlePlus(e: any) {
     e.stopPropagation();
-    try {
-      const res = await useHttp().post(
-        "orders/carts/add_to_cart/",
-        {
-          product: props.code,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
+    if (cartChange < props.remains) {
+      try {
+        const res = await useHttp().post(
+          "orders/carts/add_to_cart/",
+          {
+            product: props.code,
           },
-        }
-      );
-      dispatch(setAmount(res.data.result.total_amount));
-      plus();
-    } catch (err) {}
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        );
+        dispatch(setAmount(res.data.result.total_amount));
+        plus();
+      } catch (err) {}
+    }
   }
 
   function handleStop(e: any) {

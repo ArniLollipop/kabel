@@ -335,7 +335,13 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     ₸
                   </span>
                 </div>
-                <div className="flex">
+                <div
+                  className={
+                    values.selectedDeliveryOption === t("delivery")
+                      ? " flex"
+                      : "hidden"
+                  }
+                >
                   <span>{t("payDostavka")}</span>
                   <span className={cls.SideBar_payment_sum}>
                     {delivery_price === 0 ? t("free") : delivery_price + "₸"}

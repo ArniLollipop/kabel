@@ -94,6 +94,7 @@ export const Login: FC<LoginProps> = (props) => {
         phone_number: phone,
         password: password,
       });
+      setTab(1);
     } catch {}
   }
 

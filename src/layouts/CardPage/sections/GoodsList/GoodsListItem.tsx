@@ -88,22 +88,24 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
   async function handlePlus(e: any) {
     e.stopPropagation();
-    try {
-      const res = await useHttp().post(
-        "orders/carts/add_to_cart/",
-        {
-          product: element.product_info.code,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
+    if (cartChange < element.remains) {
+      try {
+        const res = await useHttp().post(
+          "orders/carts/add_to_cart/",
+          {
+            product: element.product_info.code,
           },
-        }
-      );
-      dispatch(setAmount(res.data.result.total_amount));
-      plus();
-      getCart();
-    } catch (err) {}
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        );
+        dispatch(setAmount(res.data.result.total_amount));
+        plus();
+        getCart();
+      } catch (err) {}
+    }
   }
   useEffect(() => {
     setCartChange(amount);
