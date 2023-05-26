@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useHttp } from "@/hooks/useHttp";
-import ImageMockProduct2 from "../../../../public/ImageMockProduct2.png";
+import NullImg from "@/assets/images/nullImg.png";
 
 const cn = classNames.bind(cls);
 
@@ -70,14 +70,16 @@ export default function OrderCard(props: OrderCardProps) {
                   <div className={cls.item__grid}>
                     <div className={cls.item_box}>
                       <Image
-                        src={el.product_info.image || ImageMockProduct2}
+                        src={el.product_info.image || NullImg}
                         alt="asdasd"
                         className={cls.image}
+                        width={100}
+                        height={100}
                       />
                       <p className={cls.weight__text}>{el.product_info.name}</p>
                       <p className={cls.text}>
-                        {t("dead")} <br />
-                        Дата: 03.02.23
+                        {product?.is_paid ? t("dead") : t("noDead")} <br />
+                        Дата: {product?.updated_at.split("T")[0]}
                       </p>
                     </div>
                   </div>

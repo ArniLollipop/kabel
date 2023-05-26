@@ -249,12 +249,14 @@ i18n
           inVozduh: "Ауада",
           inZemlia: "Жерде",
           areYouUdalit: "Есептік жазбаңызды шынымен жойғыңыз келе ме?",
+          youRecentlyWatch: "Сіз жақында қарадыңыз",
         },
       },
       ru: {
         translation: {
           lang: "RU",
           da: "Да",
+          youRecentlyWatch: "Вы недавно смотрели",
           areYouUdalit: "Вы уверены что хотите удалить аккаунт?",
           inZemlia: "В земле",
           inVozduh: "В воздухе",

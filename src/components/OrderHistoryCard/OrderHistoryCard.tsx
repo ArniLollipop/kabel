@@ -17,6 +17,7 @@ interface orderHistoryCardProps extends ordersDataI {
   order_date?: any;
   order_time_from?: string;
   is_delivered?: boolean;
+  updated_at?: string;
 }
 
 export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
@@ -36,6 +37,7 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
     order_date,
     order_time_from,
     is_delivered,
+    updated_at,
   } = props;
 
   return (
@@ -63,9 +65,10 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
           Статус: {is_delivered ? t("dead") : t("noDead")}{" "}
         </p>
         <p className={cls.text}>
-          {t("time")}: {order_time_from}
+          {t("time")}: {updated_at?.split("T")[1].split(":")[0]} :{" "}
+          {updated_at?.split("T")[1].split(":")[1]}
         </p>
-        <p className={cls.text}>Дата: {order_date} </p>
+        <p className={cls.text}>Дата: {updated_at?.split("T")[0]} </p>
       </div>
     </Link>
   );

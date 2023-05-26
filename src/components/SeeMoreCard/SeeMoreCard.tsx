@@ -32,8 +32,8 @@ export const SeeMoreCard: FC<SeeMoreCardProps> = (props) => {
         <h4 className={cls.SeeMoreCard_title}>{name}</h4>
         <p className={cls.SeeMoreCard_descr}>
           {description
-            ? description.length > 150
-              ? `${description.slice(0, 150)}...`
+            ? description.length > 50
+              ? `${description.slice(0, 50)}...`
               : description
             : ""}
         </p>

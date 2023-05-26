@@ -10,6 +10,7 @@ import {
   ThemeProductCard,
 } from "@/components/ProductCardItem/ProductCardItem";
 import { useHttp } from "@/hooks/useHttp";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -21,6 +22,8 @@ export const HistoryOfWatching: FC<HistoryOfWatchingProps> = (props) => {
   const { className } = props;
 
   const [recom, setRecom] = useState<any>();
+
+  const { t } = useTranslation();
 
   async function getRecomendations() {
     try {
@@ -37,7 +40,7 @@ export const HistoryOfWatching: FC<HistoryOfWatchingProps> = (props) => {
 
   return (
     <div className={recom ? cls.HistoryOfWatching + " " : "hidden"}>
-      <h2 className={cls.HistoryOfWatching_title}>Вы недавно смотрели</h2>
+      <h2 className={cls.HistoryOfWatching_title}>{t("youRecentlyWatch")}</h2>
       <ul className={cls.HistoryOfWatching_wrapper}>
         {recom?.map((el: any) => {
           return <ProductCardItem theme={ThemeProductCard.MINI} {...el} />;

@@ -62,6 +62,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
   const [addressInput, setAddress] = useState<String>(address || "");
   const [lonInput, setLon] = useState<String>("");
   const [latInput, setLat] = useState<String>("");
+  const [phone, setPhone] = useState<String>("");
 
   console.log(addressInput, "asdasdasd");
 
@@ -99,7 +100,13 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                     ? (document.getElementById("latitude") as HTMLInputElement)
                         .value
                     : "",
-                  phone_number: values.phone_number,
+                  phone_number: document.getElementById("phone_number")
+                    ? (
+                        document.getElementById(
+                          "phone_number"
+                        ) as HTMLInputElement
+                      ).value
+                    : "",
                   user: authUser?.id,
                 })
                 .then(() => {
@@ -128,7 +135,13 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                           ) as HTMLInputElement
                         ).value
                       : "",
-                    phone_number: values.phone_number,
+                    phone_number: document.getElementById("phone_number")
+                      ? (
+                          document.getElementById(
+                            "phone_number"
+                          ) as HTMLInputElement
+                        ).value
+                      : "",
                     user: authUser?.id,
                   },
                   {
@@ -161,6 +174,15 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   type="text"
                   id="address"
                 />
+
+                <input
+                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
+                  id="phone_number"
+                  name="phone_number"
+                  type="text"
+                  placeholder="+7 (___) ___ __ __"
+                />
+
                 <InputInstance
                   mask={maskForPhone}
                   theme={EInputInstanceTheme.PROFILE}
@@ -168,12 +190,10 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   id="phone_number"
                   name="phone_number"
                   placeholder="+7 (___) ___ __ __"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
                   value={values.phone_number as number}
                   errors={errors.phone_number}
                   touched={touched.phone_number}
-                  className={cls.phoneNumberInput}
+                  className={cls.phoneNumberInput + " hidden"}
                 />
 
                 <input
