@@ -64,7 +64,13 @@ export default function Home() {
 
   return (
     <MainLayout activePage={ActiveHeaderPage.MAIN}>
-      <Homepage {...items} />
+      {items ? (
+        <Homepage {...items} />
+      ) : (
+        <div className="flex items-center !justify-center w-full h-[100vh]">
+          <div className="loading"></div>
+        </div>
+      )}
     </MainLayout>
   );
 }
