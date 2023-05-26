@@ -227,7 +227,9 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         </div>
       </div>
 
-      <span className={cls.GoodsPrice}>{element.amount} ₸</span>
+      <span className={cls.GoodsPrice}>
+        {element.amount.toLocaleString("ru-RU")} ₸
+      </span>
 
       <div className={cls.GoodsBtns}>
         <Button

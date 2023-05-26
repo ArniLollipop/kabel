@@ -177,7 +177,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <li className={cls.contacts_list_card}>
               <Link href="/card" className={cls["card-link"]}>
                 <IconCard className={cls["icon"]} />
-                <span>{total_amount} ₸</span>
+                <span>{total_amount.toLocaleString("ru-RU")} ₸</span>
               </Link>
             </li>
 
