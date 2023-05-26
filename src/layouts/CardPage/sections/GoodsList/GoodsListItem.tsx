@@ -34,7 +34,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
   const { t } = useTranslation();
 
   const [amount, setCount] = useState<number>(element.length);
-  const [cartChange, setCartChange] = useState<number>();
+  const [cartChange, setCartChange] = useState<number>(0);
 
   const plus = () => setCount((prev) => prev + 1);
   const minus = () => amount > 1 && setCount((prev) => prev - 1);
@@ -64,7 +64,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       if (
         parseInt(count) > 1 &&
         parseInt(count) <= element.remains &&
-        parseInt(count) <= 1000
+        parseInt(count) <= 99999
       ) {
         const res = await useHttp().post(
           "orders/carts/add_to_cart/",
@@ -179,12 +179,11 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             min={1}
             max={50}
             value={cartChange}
-            className="w-[50px]"
             onChange={(e: any) => {
               if (
                 e.target.value <= element.remains &&
                 e.target.value >= 1 &&
-                e.target.value <= 1000
+                e.target.value <= 99999
               )
                 handleChangeCount(e.target.value);
             }}
@@ -201,6 +200,12 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         </div>
 
         <div className={cls.GoodsDescr_props}>
+          <p className=" text-sm font-medium mt-1 sm:text-base text-center">
+            {t("canBuy")}{" "}
+            <span className="text-red-500">
+              {element.remains - cartChange} м
+            </span>
+          </p>
           {element.color && (
             <p className={cls.GoodsDescr_props_color}>
               <span>Цвет:</span>Красный

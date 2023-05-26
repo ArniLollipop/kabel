@@ -55,6 +55,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
           "orders/carts/add_to_cart/",
           {
             product: props.code,
+            color: imageName,
           },
           {
             headers: {
@@ -94,7 +95,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
       if (
         parseInt(count) > 1 &&
         parseInt(count) <= props.remains &&
-        parseInt(count) <= 1000
+        parseInt(count) <= 99999
       ) {
         const res = await useHttp().post(
           "orders/carts/add_to_cart/",
@@ -168,6 +169,10 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
       });
     }
   }, []);
+
+  const [imageName, setImageName] = useState<string>(
+    props.colors_info[0]?.color_name || ""
+  );
 
   const renderCharList = (start?: number, end?: number) => {
     const startPoint = start ? start : 0;
@@ -247,15 +252,25 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 {/* Выбор цветов */}
                 <div className={cls.card_colors}>
                   <h3 className={cls.card_subTitle}>Цвет</h3>
-                  <div className="">
-                    {props.colors_info.map(({ image: src }, i) => (
-                      <Image
-                        src={src}
-                        alt="image mini"
-                        width={35}
-                        height={35}
-                        key={i}
-                      />
+                  <div className=" flex items-center !justify-normal gap-2 flex-wrap">
+                    {props.colors_info.map((el: any) => (
+                      <button
+                        onClick={() => setImageName(el.color_name)}
+                        className={
+                          imageName === el.color_name
+                            ? "p-1 bg-transparent border border-solid border-black rounded-full overflow-hidden flex items-center !justify-center transition-all duration-300"
+                            : "p-1 bg-transparent border border-solid border-[#E1E1E1] rounded-full overflow-hidden flex items-center !justify-center transition-all duration-300"
+                        }
+                      >
+                        <Image
+                          src={el.image}
+                          alt="image mini"
+                          width={35}
+                          height={35}
+                          key={el.color_name}
+                          className=" rounded-full !h-[35px] !w-[35px] overflow-hidden"
+                        />
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -385,7 +400,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                     <input
                       className={
                         cls.cartCounter +
-                        " w-[50px] outline-none border-none font-bold bg-transparent"
+                        " w-[60px] outline-none border-none font-bold bg-transparent"
                       }
                       min={1}
                       max={1000}
@@ -482,7 +497,10 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 </Button>
               )}
               <p className=" text-sm font-medium mt-1 sm:text-base text-center">
-                {t("canBuy")} {props.remains} м
+                {t("canBuy")}{" "}
+                <span className="text-red-500">
+                  {props.remains - cartChange} м
+                </span>
               </p>
 
               <div className={cls.buyActions_secondaruBtns}>

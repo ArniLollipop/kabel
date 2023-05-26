@@ -37,6 +37,7 @@ export const enum ActiveHeaderPage {
   MAIN = "main",
   CARD = "card",
   CABINET = "more",
+  POLITICS = "politics",
 }
 
 interface CategoriesDataI {

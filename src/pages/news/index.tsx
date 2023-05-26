@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { Title } from "@/UI/Title/Title";
@@ -53,9 +53,21 @@ interface newsPageI {
   news: newsI[];
 }
 
-export default function newsPage(props: newsPageI) {
-  const { news } = props;
+export default function newsPage() {
+  const [news, setNews] = useState<any>();
   const { t } = useTranslation();
+
+  async function getNews() {
+    try {
+      const news = await NewsService().getNews();
+      setNews(news);
+    } catch (err) {}
+  }
+
+  useEffect(() => {
+    getNews();
+  }, []);
+
   console.log("news is: ", news);
 
   const [myswiper, setSwiper] = useState<any>();
@@ -108,7 +120,7 @@ export default function newsPage(props: newsPageI) {
                   },
                 }}
               >
-                {news.map((news) => (
+                {news?.map((news: any) => (
                   <SwiperSlide className={cls.news_sliderSlide} key={news.id}>
                     <NewsCard
                       className={cls.news_newsCard}
@@ -125,7 +137,7 @@ export default function newsPage(props: newsPageI) {
 
       {/* MobImplementation */}
       <div className={cls.newsMobile}>
-        {news.map((news) => (
+        {news?.map((news: any) => (
           <div key={news.id}>
             <NewsCard
               className={cls.news_newsCardMobile}
@@ -139,10 +151,10 @@ export default function newsPage(props: newsPageI) {
   );
 }
 
-export async function getServerSideProps() {
-  const news = await NewsService().getNews();
+// export async function getServerSideProps() {
+//   const news = await NewsService().getNews();
 
-  return {
-    props: { news },
-  };
-}
+//   return {
+//     props: { news },
+//   };
+// }

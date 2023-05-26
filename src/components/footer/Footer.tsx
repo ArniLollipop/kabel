@@ -20,6 +20,7 @@ import Link from "next/link";
 import { ActiveHeaderPage } from "@/components/header/Header";
 
 import { useAppSelector } from "@/hooks/store";
+import { useRouter } from "next/router";
 
 let cn = classNames.bind(cls);
 
@@ -30,6 +31,8 @@ interface FooterProps {
 
 export const Footer: FC<FooterProps> = (props) => {
   const { className, activePage } = props;
+
+  const router = useRouter();
 
   const { t } = useTranslation();
 
@@ -107,7 +110,7 @@ export const Footer: FC<FooterProps> = (props) => {
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
-                active: activePage === ActiveHeaderPage.CONTACTS,
+                active: router.pathname === "/politics",
               })}
             >
               <Link href="/politics">

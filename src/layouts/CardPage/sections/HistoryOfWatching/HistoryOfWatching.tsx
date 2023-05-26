@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./HistoryOfWatching.module.scss";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import {
   ProductCardItem,
   ThemeProductCard,
 } from "@/components/ProductCardItem/ProductCardItem";
+import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
@@ -19,11 +20,28 @@ interface HistoryOfWatchingProps {
 export const HistoryOfWatching: FC<HistoryOfWatchingProps> = (props) => {
   const { className } = props;
 
+  const [recom, setRecom] = useState<any>();
+
+  async function getRecomendations() {
+    try {
+      const res = await useHttp().get(
+        "products/products/recent_watched_products/"
+      );
+      setRecom(res.data.results);
+    } catch {}
+  }
+
+  useEffect(() => {
+    getRecomendations();
+  }, []);
+
   return (
-    <div className={cls.HistoryOfWatching + " hidden"}>
+    <div className={recom.length > 0 ? cls.HistoryOfWatching + " " : "hidden"}>
       <h2 className={cls.HistoryOfWatching_title}>Вы недавно смотрели</h2>
       <ul className={cls.HistoryOfWatching_wrapper}>
-        {/* <ProductCardItem theme={ThemeProductCard.MINI} /> */}
+        {recom?.map((el: any) => {
+          return <ProductCardItem theme={ThemeProductCard.MINI} {...el} />;
+        })}
       </ul>
     </div>
   );

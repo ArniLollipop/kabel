@@ -9,12 +9,69 @@ import { ProductService } from "@/services/Product.servise";
 import { productI } from "@/types/ProductTypes";
 
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Iphone from "@/assets/Iphone.png";
+import Android from "@/assets/Android.png";
 
 export default function item(props: productI) {
   const { t } = useTranslation();
 
+  const router = useRouter();
+
+  const [modal, setModal] = useState<boolean>(
+    router.query.modal ? true : false
+  );
+
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
+      <div
+        onClick={() => setModal(false)}
+        className={
+          modal
+            ? "fixed top-0 left-0 bg-black bg-opacity-40 w-full h-[100vh] z-[1000] transition-all duration-300"
+            : "fixed top-0 left-0 bg-transparent bg-opacity-40 w-0 opacity-0 h-[100vh] z-[1000] transition-all duration-300"
+        }
+      ></div>
+      <div className={modal ? cls.modal_inner : "hidden"}>
+        <div className="flex items-center gap-[10px] !justify-center flex-col relative">
+          <button
+            onClick={() => setModal(false)}
+            className="p-0 bg-transparent border-none absolute top-0 right-0 cursor-pointer"
+          >
+            <svg
+              width="35"
+              height="35"
+              viewBox="0 0 35 35"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M26.25 8.75L8.75 26.25"
+                stroke="#2F3138"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8.75 8.75L26.25 26.25"
+                stroke="#2F3138"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <a href="">
+            <Image src={Iphone} alt="iphone" className="max-w-[200px] h-auto" />
+          </a>
+          <a href="">
+            <Image
+              src={Android}
+              alt="android"
+              className="max-w-[200px] h-auto"
+            />
+          </a>
+        </div>
+      </div>
       <div className={cls.cardItem}>
         <div className={cls.cardItem_wrapper}>
           <CatalogItemPage {...props} />

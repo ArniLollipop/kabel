@@ -38,7 +38,6 @@
   &_counter {
     display: flex;
     align-items: center;
-    width: 140px;
     height: 35px;
 
     input {
@@ -174,4 +173,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.card_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

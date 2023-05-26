@@ -9,10 +9,13 @@ import { NewsService } from "@/services/News.service";
 import { newsI } from "@/types/NewsTypes";
 
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
 export default function articlePage(props: newsI) {
+  const router = useRouter();
   const { t } = useTranslation();
 
   const { newssection_set: sections, title, description, thumbnail } = props;
@@ -48,6 +51,8 @@ export default function articlePage(props: newsI) {
                       className={cls.articlePage_img}
                       src={image}
                       alt="image"
+                      width={1146}
+                      height={460}
                     />
                   )}
                   <p className={cls.articlePage_img__text}>{image_text}</p>
@@ -68,8 +73,8 @@ export default function articlePage(props: newsI) {
 export async function getServerSideProps(ctx: NextPageContext) {
   const { id } = ctx.query;
   const newsId = typeof id === "string" ? id : Array.isArray(id) ? id[0] : "";
-  const res = await NewsService().getNewsById(newsId);
+  const res = await useHttp().get(`news/news/${id}/`);
   return {
-    props: res,
+    props: res.data,
   };
 }

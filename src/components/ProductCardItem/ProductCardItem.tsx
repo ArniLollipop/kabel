@@ -92,7 +92,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
       if (
         parseInt(count) > 1 &&
         parseInt(count) <= props.remains &&
-        parseInt(count) <= 1000
+        parseInt(count) <= 99999
       ) {
         const res = await useHttp().post(
           "orders/carts/add_to_cart/",
@@ -108,8 +108,8 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         );
         setCart(parseInt(count));
         dispatch(setAmount(res.data.result.total_amount));
+        setCartChange(parseInt(count));
       }
-      setCartChange(parseInt(count));
     } catch {}
   }
 
@@ -187,12 +187,12 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
           </h3>
         </Link>
         <p className={cls.cardDescr}>
-          {/* {props.description
-            ? props.description.length < 77
+          {props.description
+            ? props.description.length < 20
               ? props.description
-              : `${props.description?.slice(0, 77)}...`
-            : ""} */}
-          {props.description}
+              : `${props.description?.slice(0, 20)}...`
+            : ""}
+          {/* {props.description} */}
         </p>
         {props.promo_cost ? (
           <div>
@@ -236,7 +236,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
                 />
               </svg>
             </button>
-            <div className="flex items-center">
+            <div className="flex items-center justify-between">
               <input
                 className={
                   cls.cartCounter + " w-[50px] outline-none border-none"
@@ -249,7 +249,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
                   handleChangeCount(e.target.value);
                 }}
               />
-              <p className={cls.cartCounter}> м</p>
+              <p className={cls.cartCounter}>м</p>
             </div>
             <button
               onClick={(e: any) => {
