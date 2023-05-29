@@ -130,7 +130,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
           window.location.href = res.data.equiring_page_url;
         }
         if (values.selectedPayOption === "Kaspi Pay") {
-          window.location.href = "https://pay.kaspi.kz/pay/vgfoeb1c";
+          window.open("https://pay.kaspi.kz/pay/vgfoeb1c");
         }
       }
     } catch (error) {}
