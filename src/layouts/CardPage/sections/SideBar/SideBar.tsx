@@ -127,7 +127,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
         dispatch(setAmount(0));
         dispatch(setItems(null));
         if (res.data.equiring_page_url) {
-          window.location.href = res.data.equiring_page_url;
+          window.open(res.data.equiring_page_url);
         }
         if (values.selectedPayOption === "Kaspi Pay") {
           window.open("https://pay.kaspi.kz/pay/vgfoeb1c");
