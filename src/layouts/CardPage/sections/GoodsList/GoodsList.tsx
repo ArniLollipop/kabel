@@ -6,7 +6,7 @@ import MockImage from "@/assets/images/ImageMockProduct.png";
 import MockImageMini from "@/assets/images/ImageMockProductMini3.png";
 import { useHttp } from "@/hooks/useHttp";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { setDelivery } from "@/store/slices/CartSlice";
+import { setDelivery, setEntity } from "@/store/slices/CartSlice";
 
 const cn = classNames.bind(cls);
 
@@ -27,6 +27,14 @@ export const GoodsList: FC<GoodsListProps> = (props) => {
       const res = await useHttp().get("orders/carts/" + temp.id);
       setCart(res.data.items);
       dispatch(setDelivery(res.data.delivery_price));
+      dispatch(
+        setEntity({
+          bin: res.data.bin,
+          current_account: res.data.current_account,
+          entity_address: res.data.entity_address,
+          name_company: res.data.name_company,
+        })
+      );
     } catch (err) {
       console.log("====================================");
       console.log(err);

@@ -36,7 +36,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
-  const { total_amount, items, delivery_price } = useAppSelector(
+  const { total_amount, items, delivery_price, entity } = useAppSelector(
     (state) => state.CartSlice
   );
 
@@ -50,6 +50,15 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const [time, setTime] = useState<any>({ time_from: "", time_to: "" });
   const [salePoints, setSalePoints] = useState<any>([]);
   const [bonus, setBonus] = useState<boolean>(false);
+  const [isEntity, setEntity] = useState<boolean>(false);
+  const [bin, setBin] = useState<string>(entity.bin);
+  const [current_account, setCurrent_account] = useState<string>(
+    entity.current_account
+  );
+  const [entity_address, setEntity_address] = useState<string>(
+    entity.entity_address
+  );
+  const [name_company, setName_company] = useState<string>(entity.name_company);
 
   async function getTime() {
     try {
@@ -98,27 +107,58 @@ export const SideBar: FC<SideBarProps> = (props) => {
     getBonuses();
   }, []);
 
+  useEffect(() => {
+    setBin(entity.bin);
+    setCurrent_account(entity.current_account);
+    setEntity_address(entity.entity_address);
+    setName_company(entity.name_company);
+  }, [entity]);
+
   async function handleOrder(values: any) {
     try {
       if (localStorage.getItem("user")) {
         const userId = JSON.parse(localStorage.getItem("user") || "");
+        let data;
+        if (isEntity) {
+          data = {
+            items: items,
+            total_amount: total_amount,
+            delivery_type:
+              values.selectedDeliveryOption === t("delivery")
+                ? "delivery"
+                : "pickup",
+            pay_type:
+              values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
+            user: userId.id,
+            user_addresses:
+              values.selectedDeliveryOption === t("delivery")
+                ? ""
+                : values.selectedAddress,
+            is_bonus_used: bonus,
+            bin: bin,
+            current_account: current_account,
+            entity_address: entity_address,
+            name_company: name_company,
+          };
+        } else {
+          data = {
+            items: items,
+            total_amount: total_amount,
+            delivery_type:
+              values.selectedDeliveryOption === t("delivery")
+                ? "delivery"
+                : "pickup",
+            pay_type:
+              values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
+            user: userId.id,
+            user_addresses:
+              values.selectedDeliveryOption === t("delivery")
+                ? ""
+                : values.selectedAddress,
+            is_bonus_used: bonus,
+          };
+        }
 
-        const data = {
-          items: items,
-          total_amount: total_amount,
-          delivery_type:
-            values.selectedDeliveryOption === t("delivery")
-              ? "delivery"
-              : "pickup",
-          pay_type:
-            values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
-          user: userId.id,
-          user_addresses:
-            values.selectedDeliveryOption === t("delivery")
-              ? ""
-              : values.selectedAddress,
-          is_bonus_used: bonus,
-        };
         const res = await useHttp().post("orders/orders/create_order/", data, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
@@ -306,7 +346,61 @@ export const SideBar: FC<SideBarProps> = (props) => {
               </span>
             </div>
 
-            <div className={cls.SideBar_payment}>
+            <div
+              className={
+                (cls.SideBar_payment, cls.SideBar_paymentMethods + " pb-5")
+              }
+            >
+              <span
+                className={
+                  (cls.SideBar_paymentMethods_cards, cls.radioBtn) +
+                  " items-center mb-5"
+                }
+              >
+                <label className={cls.SideBar_paymentMethods_label + " !mb-0"}>
+                  <Field
+                    type="checkbox"
+                    name="isBonus"
+                    value={"entity"}
+                    checked={isEntity}
+                    onChange={() => setEntity(!isEntity)}
+                  />
+                  <p className="mt-[6px]">{t("entity")}</p>
+                </label>
+              </span>
+              {isEntity && (
+                <div className="flex items-center flex-col gap-[10px] mb-[15px] mt-[5px]">
+                  <input
+                    type="text"
+                    placeholder="БИН"
+                    value={bin}
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    onChange={(e: any) => setBin(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="РАСЧЕТНЫЙ СЧЕТ"
+                    value={current_account}
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    onChange={(e: any) => setCurrent_account(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="АДРЕС ЮР ЛИЦА"
+                    value={entity_address}
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    onChange={(e: any) => setEntity_address(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder={t("name_company") || "НАЗВАНИЕ КОМПАНИИ"}
+                    value={name_company}
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    onChange={(e: any) => setName_company(e.target.value)}
+                  />
+                </div>
+              )}
+
               <span className={cls.SideBar_payment_title}>{t("pay")}</span>
 
               <hr />
@@ -328,7 +422,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   <span>{t("sumForPay")}</span>
                   <span className={cls.SideBar_payment_sum}>
                     {bonus
-                      ? total_amount - bonusBalance
+                      ? total_amount - bonusBalance >= 1000
                         ? total_amount - bonusBalance
                         : 1000
                       : total_amount}{" "}

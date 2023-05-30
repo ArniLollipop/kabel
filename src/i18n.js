@@ -250,12 +250,16 @@ i18n
           inZemlia: "Жерде",
           areYouUdalit: "Есептік жазбаңызды шынымен жойғыңыз келе ме?",
           youRecentlyWatch: "Сіз жақында қарадыңыз",
+          name_company: "КОМПАНИЯ АТЫ",
+          entity: "Заңды тұлға",
         },
       },
       ru: {
         translation: {
           lang: "RU",
           da: "Да",
+          name_company: "НАЗВАНИЕ КОМПАНИИ",
+          entity: "ЮР лицо",
           youRecentlyWatch: "Вы недавно смотрели",
           areYouUdalit: "Вы уверены что хотите удалить аккаунт?",
           inZemlia: "В земле",

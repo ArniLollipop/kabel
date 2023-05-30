@@ -6,6 +6,7 @@ export interface CartI {
   user: number;
   items: any;
   delivery_price: number;
+  entity: any;
 }
 
 // Init
@@ -16,6 +17,12 @@ const initialState: CartI = {
   user: 0,
   items: null,
   delivery_price: 0,
+  entity: {
+    bin: "",
+    current_account: "",
+    entity_address: "",
+    name_company: "",
+  },
 };
 
 // Slice
@@ -35,8 +42,12 @@ const cartSlice = createSlice({
     setDelivery: (state, action: PayloadAction<number>) => {
       state.delivery_price = action.payload;
     },
+    setEntity: (state, action: PayloadAction<any>) => {
+      state.entity = action.payload;
+    },
   },
 });
 
-export const { setAmount, setItems, setDelivery } = cartSlice.actions;
+export const { setAmount, setItems, setDelivery, setEntity } =
+  cartSlice.actions;
 export default cartSlice.reducer;
