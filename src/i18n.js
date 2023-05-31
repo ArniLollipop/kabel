@@ -252,12 +252,14 @@ i18n
           youRecentlyWatch: "Сіз жақында қарадыңыз",
           name_company: "КОМПАНИЯ АТЫ",
           entity: "Заңды тұлға",
+          lengthId: "Ұзындығы:",
         },
       },
       ru: {
         translation: {
           lang: "RU",
           da: "Да",
+          lengthId: "Длина:",
           name_company: "НАЗВАНИЕ КОМПАНИИ",
           entity: "Юридическое лицо",
           youRecentlyWatch: "Вы недавно смотрели",

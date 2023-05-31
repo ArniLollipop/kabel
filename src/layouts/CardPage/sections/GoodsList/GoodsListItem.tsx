@@ -202,12 +202,6 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         </div>
 
         <div className={cls.GoodsDescr_props}>
-          <p className=" text-sm font-medium mt-1 sm:text-base text-center">
-            {t("canBuy")}{" "}
-            <span className="text-red-500">
-              {element.remains - cartChange} м
-            </span>
-          </p>
           {element.color && (
             <p className={cls.GoodsDescr_props_color}>
               <span>Цвет:</span>Красный
@@ -221,7 +215,10 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             </p>
           )}
           <p className={cls.GoodsDescr_props_weight}>
-            <span>{t("weight")}:</span>0.10
+            {t("canBuy")}{" "}
+            <span className="text-red-500">
+              {element.remains - cartChange} м
+            </span>
           </p>
           <span className={cls.GoodsPrice_mobile}>{element.amount}</span>
         </div>

@@ -78,6 +78,8 @@ export default function OrderCard(props: OrderCardProps) {
                       />
                       <p className={cls.weight__text}>{el.product_info.name}</p>
                       <p className={cls.text}>
+                        {t("lengthId")} {el.length} м
+                        <br />
                         {product?.is_paid ? t("dead") : t("noDead")} <br />
                         Дата: {product?.updated_at.split("T")[0]}
                       </p>

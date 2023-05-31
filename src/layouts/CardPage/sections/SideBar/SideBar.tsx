@@ -22,6 +22,7 @@ import {
   IconCash,
 } from "@/assets/icons/cardIcons";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const cn = classNames.bind(cls);
 
@@ -473,6 +474,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
 
                     <div>
                       <p>{t("dostavka")}</p>
+                      <Link
+                        href="http://localhost:3000/cabinet/delivery"
+                        className="text-[#00ABC2] text-sm font-medium p-0 bg-transparent border-none cursor-pointer"
+                      >
+                        Добавить адрес
+                      </Link>
                     </div>
                   </div>
                   <div className={cls.SideBar_adventages + " " + cls.address}>

@@ -53,11 +53,17 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
       <p className={cls.text}>
         Оплата: {pay_type === "card" ? "Картой (онлайн)" : t("nalichnimi")}{" "}
       </p>
-      <p className={cls.text}>
-        {delivery_type === "pickup" ? "Самовывоз" : t("dostavkaCura")}
-      </p>
-      <p className={cls.weight__text}>{t("dostavka")}</p>
-      <p className={cls.text}>{t("dostavkaCura")}</p>
+      {delivery_type === "pickup" && (
+        <p className={cls.text}>
+          {delivery_type === "pickup" ? t("samovivoz") : t("dostavkaCura")}
+        </p>
+      )}
+      {delivery_type !== "pickup" && (
+        <div>
+          <p className={cls.weight__text}>{t("dostavka")}</p>
+          <p className={cls.text}>{t("dostavkaCura")}</p>
+        </div>
+      )}
       <p className={cls.weight__text}>Товары</p>
       <p className={cls.text}>{items.length} шт.</p>
       <div className={cls.order_info}>
