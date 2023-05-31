@@ -259,7 +259,7 @@ i18n
           lang: "RU",
           da: "Да",
           name_company: "НАЗВАНИЕ КОМПАНИИ",
-          entity: "ЮР лицо",
+          entity: "Юридическое лицо",
           youRecentlyWatch: "Вы недавно смотрели",
           areYouUdalit: "Вы уверены что хотите удалить аккаунт?",
           inZemlia: "В земле",

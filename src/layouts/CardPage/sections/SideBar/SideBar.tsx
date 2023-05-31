@@ -222,7 +222,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
               <span className={cls.SideBar_adventages_item}>
                 <a href="" className={cls.SideBar_adventages_link}>
                   <IconCardGeoTag />
-                  {t("Ала кету")}&nbsp;
+                  {t("samovivoz")}&nbsp;
                 </a>
                 {t("iz")} {salePoints && salePoints.length - 1} {t("punkti")}
               </span>
@@ -308,43 +308,47 @@ export const SideBar: FC<SideBarProps> = (props) => {
               })}
             </div>
 
-            <div className={cls.SideBar_paymentMethods + " pb-5"}>
-              <span className={cls.SideBar_paymentMethods_title}>
-                <svg
-                  className={cls.SideBar_paymentMethods_icon}
-                  width="29"
-                  height="28"
-                  viewBox="0 0 29 28"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            {bonusBalance > 0 && (
+              <div className={cls.SideBar_paymentMethods + " pb-5"}>
+                <span className={cls.SideBar_paymentMethods_title}>
+                  <svg
+                    className={cls.SideBar_paymentMethods_icon}
+                    width="29"
+                    height="28"
+                    viewBox="0 0 29 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M23.4626 27.0428C22.4629 27.7548 16.0488 23.2413 14.8203 23.2314C13.5918 23.2215 7.10545 27.6312 6.11746 26.9032C5.12948 26.1752 7.45218 18.6975 7.08203 17.5295C6.71188 16.3615 0.50156 11.5727 0.890578 10.4108C1.27968 9.24882 9.12936 9.14089 10.129 8.42886C11.1287 7.71692 13.7769 0.347597 15.0055 0.357432C16.2338 0.367352 18.7625 7.77832 19.7504 8.50634C20.7384 9.23428 28.5854 9.4686 28.9557 10.6366C29.3258 11.8046 23.0389 16.4929 22.6498 17.6548C22.2608 18.8167 24.4622 26.3308 23.4626 27.0428Z"
+                      fill="#F6BF0C"
+                    />
+                  </svg>
+                  {t("spendBonus")}
+                </span>
+                <span
+                  className={
+                    (cls.SideBar_paymentMethods_cards, cls.radioBtn) +
+                    " items-center mb-5"
+                  }
                 >
-                  <path
-                    d="M23.4626 27.0428C22.4629 27.7548 16.0488 23.2413 14.8203 23.2314C13.5918 23.2215 7.10545 27.6312 6.11746 26.9032C5.12948 26.1752 7.45218 18.6975 7.08203 17.5295C6.71188 16.3615 0.50156 11.5727 0.890578 10.4108C1.27968 9.24882 9.12936 9.14089 10.129 8.42886C11.1287 7.71692 13.7769 0.347597 15.0055 0.357432C16.2338 0.367352 18.7625 7.77832 19.7504 8.50634C20.7384 9.23428 28.5854 9.4686 28.9557 10.6366C29.3258 11.8046 23.0389 16.4929 22.6498 17.6548C22.2608 18.8167 24.4622 26.3308 23.4626 27.0428Z"
-                    fill="#F6BF0C"
-                  />
-                </svg>
-                {t("spendBonus")}
-              </span>
-              <span
-                className={
-                  (cls.SideBar_paymentMethods_cards, cls.radioBtn) +
-                  " items-center mb-5"
-                }
-              >
-                <label className={cls.SideBar_paymentMethods_label + " !mb-0"}>
-                  <Field
-                    type="checkbox"
-                    name="isBonus"
-                    value={"Накоплено: 1000б"}
-                    checked={bonus}
-                    onChange={() => setBonus(!bonus)}
-                  />
-                  <p className="mt-[6px]">
-                    {t("bonuses")}: {bonusBalance} b
-                  </p>
-                </label>
-              </span>
-            </div>
+                  <label
+                    className={cls.SideBar_paymentMethods_label + " !mb-0"}
+                  >
+                    <Field
+                      type="checkbox"
+                      name="isBonus"
+                      value={"Накоплено: 1000б"}
+                      checked={bonus}
+                      onChange={() => setBonus(!bonus)}
+                    />
+                    <p className="mt-[6px]">
+                      {t("bonuses")}: {bonusBalance} b
+                    </p>
+                  </label>
+                </span>
+              </div>
+            )}
 
             <div
               className={
@@ -357,7 +361,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   " items-center mb-5"
                 }
               >
-                <label className={cls.SideBar_paymentMethods_label + " !mb-0"}>
+                <label
+                  className={
+                    cls.SideBar_paymentMethods_label +
+                    " !mb-0 flex items-center gap-3"
+                  }
+                >
                   <Field
                     type="checkbox"
                     name="isBonus"
@@ -365,6 +374,20 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     checked={isEntity}
                     onChange={() => setEntity(!isEntity)}
                   />
+                  <svg
+                    width="24"
+                    height="18"
+                    viewBox="0 0 24 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mt-1"
+                  >
+                    <path
+                      d="M23.25 3H16.0226C15.774 1.90575 14.9216 0 12 0C9.07838 0 8.226 1.90575 7.97738 3H0.75C0.551088 3 0.360322 3.07902 0.21967 3.21967C0.0790176 3.36032 0 3.55109 0 3.75L0 17.25C0 17.4489 0.0790176 17.6397 0.21967 17.7803C0.360322 17.921 0.551088 18 0.75 18H23.25C23.4489 18 23.6397 17.921 23.7803 17.7803C23.921 17.6397 24 17.4489 24 17.25V3.75C24 3.55109 23.921 3.36032 23.7803 3.21967C23.6397 3.07902 23.4489 3 23.25 3ZM12 1.5C13.6256 1.5 14.2425 2.3415 14.478 3H9.5205C9.75675 2.34488 10.3759 1.5 12 1.5ZM22.5 4.5V7.5H1.5V4.5H22.5ZM10.875 9H13.125V9.75H10.875V9ZM1.5 16.5V9H9.375V10.5C9.375 10.6989 9.45402 10.8897 9.59467 11.0303C9.73532 11.171 9.92609 11.25 10.125 11.25H13.875C14.0739 11.25 14.2647 11.171 14.4053 11.0303C14.546 10.8897 14.625 10.6989 14.625 10.5V9H22.5V16.5H1.5Z"
+                      fill="#00ABC1"
+                    />
+                  </svg>
+
                   <p className="mt-[6px]">{t("entity")}</p>
                 </label>
               </span>
@@ -374,28 +397,28 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     type="text"
                     placeholder="БИН"
                     value={bin}
-                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base placeholder:text-[#C0C0C0]"
                     onChange={(e: any) => setBin(e.target.value)}
                   />
                   <input
                     type="text"
-                    placeholder="РАСЧЕТНЫЙ СЧЕТ"
+                    placeholder="РАСЧЕТНЫЙ СЧЕТ (ИИК)"
                     value={current_account}
-                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base placeholder:text-[#C0C0C0]"
                     onChange={(e: any) => setCurrent_account(e.target.value)}
                   />
                   <input
                     type="text"
                     placeholder="АДРЕС ЮР ЛИЦА"
                     value={entity_address}
-                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base placeholder:text-[#C0C0C0]"
                     onChange={(e: any) => setEntity_address(e.target.value)}
                   />
                   <input
                     type="text"
                     placeholder={t("name_company") || "НАЗВАНИЕ КОМПАНИИ"}
                     value={name_company}
-                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base"
+                    className="border-none outline-none p-3 rounded-[10px] bg-[#F8F8F9] w-full font-medium text-base placeholder:text-[#C0C0C0]"
                     onChange={(e: any) => setName_company(e.target.value)}
                   />
                 </div>
