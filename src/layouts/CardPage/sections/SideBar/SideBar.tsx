@@ -341,13 +341,28 @@ export const SideBar: FC<SideBarProps> = (props) => {
                       name="isBonus"
                       value={"Накоплено: 1000б"}
                       checked={bonus}
-                      onChange={() => setBonus(!bonus)}
+                      onChange={() => {
+                        total_amount > 1000 && setBonus(!bonus);
+                      }}
                     />
                     <p className="mt-[6px]">
-                      {t("bonuses")}: {bonusBalance} b
+                      {t("bonuses")}:{" "}
+                      {bonus
+                        ? total_amount - 1000 >= bonusBalance
+                          ? 0
+                          : total_amount - 1000 < bonusBalance
+                          ? bonusBalance - (total_amount - 1000)
+                          : bonusBalance
+                        : bonusBalance}{" "}
+                      b
                     </p>
                   </label>
                 </span>
+                {total_amount < 1000 && (
+                  <p className=" font-medium text-base text-center">
+                    {t("nelzya1000Bonus")}
+                  </p>
+                )}
               </div>
             )}
 
@@ -475,7 +490,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
                     <div>
                       <p>{t("dostavka")}</p>
                       <Link
-                        href="http://localhost:3000/cabinet/delivery"
+                        href="/cabinet/delivery"
                         className="text-[#00ABC2] text-sm font-medium p-0 bg-transparent border-none cursor-pointer"
                       >
                         Добавить адрес

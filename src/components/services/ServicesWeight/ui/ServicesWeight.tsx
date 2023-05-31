@@ -76,6 +76,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
               />
               <label
                 htmlFor={el.name}
+                className="sm:text-[20px] text-sm"
                 onClick={() => {
                   setTable(el);
                   setInd(index);

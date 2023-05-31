@@ -85,7 +85,7 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
 
       <div
         className={cn(cls.SpeciallySection_newsList, {
-          hidden: activeSection == 0,
+          hidden: activeSection === 0,
         })}
       >
         {news?.map((news) => (

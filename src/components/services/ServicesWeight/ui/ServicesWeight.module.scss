@@ -99,6 +99,9 @@
 
 .tablesScroll input[type="radio"]:checked + label::after {
   background: #00abc2;
+  @media (max-width: 640px) {
+    background: transparent;
+  }
 }
 
 .hidden {
