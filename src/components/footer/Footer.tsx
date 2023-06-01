@@ -221,10 +221,14 @@ export const Footer: FC<FooterProps> = (props) => {
             © 2023 {t("footer.private") ? t("footer.private") : ""}
             {}
           </span>
-          <span className={cls.footerInfo_protected + " mt-2"}>
+          <Link
+            href="https://a-lux.kz/"
+            target="_blank"
+            className={cls.footerInfo_protected + " mt-2"}
+          >
             {t("footer.alux") ? t("footer.alux") : ""}
             {}
-          </span>
+          </Link>
         </div>
       </div>
 

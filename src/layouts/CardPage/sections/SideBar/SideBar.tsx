@@ -118,6 +118,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
   async function handleOrder(values: any) {
     try {
       if (localStorage.getItem("user")) {
+        let sale_point;
+        salePoints.forEach((el: any) => {
+          if (values.selectedDeliveryOption === el.name) {
+            sale_point = el.id;
+          }
+        });
         const userId = JSON.parse(localStorage.getItem("user") || "");
         let data;
         if (isEntity) {
@@ -135,6 +141,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
               values.selectedDeliveryOption === t("delivery")
                 ? ""
                 : values.selectedAddress,
+            sale_point: sale_point ? sale_point : "",
             is_bonus_used: bonus,
             bin: bin,
             current_account: current_account,
@@ -152,6 +159,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
             pay_type:
               values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
             user: userId.id,
+            sale_point: sale_point ? sale_point : "",
             user_addresses:
               values.selectedDeliveryOption === t("delivery")
                 ? ""
@@ -230,7 +238,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
 
               {salePoints?.map((option: any) => {
                 const { id, name } = option;
-
                 return (
                   <span
                     key={id}
