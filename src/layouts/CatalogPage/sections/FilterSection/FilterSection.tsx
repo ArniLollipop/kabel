@@ -199,7 +199,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 name="availability"
                 value=""
                 id="all"
-                text="Все"
+                text={t("all") || "Все"}
                 className={cls.FilterSection_radio}
                 checked={
                   // checkedFilters.availability === "" ||
@@ -210,7 +210,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 name="availability"
                 value="в наличии"
                 id="inStock"
-                text="В наличии"
+                text={t("estUNas") || "В наличии"}
                 className={cls.FilterSection_radio}
                 checked={
                   // checkedFilters.availability === "в наличии" ||
@@ -221,7 +221,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 name="availability"
                 value="под заказ"
                 id="underOrder"
-                text="Под заказ"
+                text={t("podZakaz") || "Под заказ"}
                 className={cls.FilterSection_radio}
                 checked={
                   // checkedFilters.availability === "под заказ" ||

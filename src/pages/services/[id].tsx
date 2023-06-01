@@ -47,7 +47,13 @@ export default function Home() {
             className={cls.articleIconWidthNHeight}
             textColor={isActive ? "#fff" : "#00ABC2"}
           />
-          <h2>{title}</h2>
+          <h2>
+            {title === "Таблица Веса кабеля"
+              ? t("tableWeight")
+              : title === "Расчет сечения кабеля"
+              ? t("raschetSechenia")
+              : t("rashifrovka")}
+          </h2>
           <ServicesDetailsIcon textColor={isActive ? "#fff" : "#00ABC2"} />
         </Link>
       </article>
