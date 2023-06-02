@@ -41,6 +41,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
   const [cartChange, setCartChange] = useState<number>(0);
   const { items } = useAppSelector((state) => state.CartSlice);
   const router = useRouter();
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const plus = () => setCart((prev) => prev + 1);
   const minus = () => cart > 1 && setCart((prev) => prev - 1);
@@ -70,6 +71,8 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
 
   async function handleMinus(e: any) {
     e.stopPropagation();
+    setDisabled(true);
+
     try {
       const res = await useHttp().post(
         "orders/carts/reduce_from_cart/",
@@ -84,10 +87,14 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
       );
       dispatch(setAmount(res.data.result.total_amount));
       minus();
-    } catch (err) {}
+      setDisabled(false);
+    } catch (err) {
+      setDisabled(false);
+    }
   }
 
   async function handleChangeCount(count: any) {
+    setDisabled(true);
     try {
       if (
         parseInt(count) > 1 &&
@@ -109,12 +116,16 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         setCart(parseInt(count));
         dispatch(setAmount(res.data.result.total_amount));
         setCartChange(parseInt(count));
+        setDisabled(false);
       }
-    } catch {}
+    } catch {
+      setDisabled(false);
+    }
   }
 
   async function handlePlus(e: any) {
     e.stopPropagation();
+    setDisabled(true);
     if (cartChange < props.remains) {
       try {
         const res = await useHttp().post(
@@ -130,7 +141,10 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         );
         dispatch(setAmount(res.data.result.total_amount));
         if (cartChange <= props.remains) plus();
-      } catch (err) {}
+        setDisabled(false);
+      } catch (err) {
+        setDisabled(false);
+      }
     }
   }
 
@@ -218,6 +232,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         ) : (
           <div onClick={handleStop} className={cls.cartBtn}>
             <button
+              disabled={disabled}
               onClick={(e: any) => {
                 cart > 1 && handleMinus(e);
               }}
@@ -254,6 +269,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
               <p className={cls.cartCounter}>м</p>
             </div>
             <button
+              disabled={disabled}
               onClick={(e: any) => {
                 cart < 1000 && handlePlus(e);
               }}

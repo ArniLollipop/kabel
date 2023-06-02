@@ -41,6 +41,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   const [cart, setCart] = useState<number>(0);
   const [cartChange, setCartChange] = useState<number>(0);
   const router = useRouter();
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const plus = () => setCart((prev) => prev + 1);
   const minus = () => cart > 1 && setCart((prev) => prev - 1);
@@ -72,6 +73,8 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   }
 
   async function handleMinus(e: any) {
+    setDisabled(true);
+
     e.stopPropagation();
     try {
       const res = await useHttp().post(
@@ -87,10 +90,14 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
       );
       dispatch(setAmount(res.data.result.total_amount));
       minus();
-    } catch (err) {}
+      setDisabled(false);
+    } catch (err) {
+      setDisabled(false);
+    }
   }
 
   async function handleChangeCount(count: any) {
+    setDisabled(true);
     try {
       if (
         parseInt(count) > 1 &&
@@ -113,11 +120,16 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
         dispatch(setAmount(res.data.result.total_amount));
       }
       setCartChange(parseInt(count));
-    } catch {}
+      setDisabled(false);
+    } catch {
+      setDisabled(false);
+    }
   }
 
   async function handlePlus(e: any) {
     e.stopPropagation();
+    setDisabled(true);
+
     if (cartChange < props.remains) {
       try {
         const res = await useHttp().post(
@@ -133,7 +145,10 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
         );
         dispatch(setAmount(res.data.result.total_amount));
         plus();
-      } catch (err) {}
+        setDisabled(false);
+      } catch (err) {
+        setDisabled(false);
+      }
     }
   }
 
@@ -381,6 +396,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                     onClick={(e: any) => {
                       cart > 1 && handleMinus(e);
                     }}
+                    disabled={disabled}
                     className={cls.cartMinus}
                   >
                     <svg
@@ -415,6 +431,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                     <p className={cls.cartCounter}> м</p>
                   </div>
                   <button
+                    disabled={disabled}
                     onClick={(e: any) => {
                       cart < 1000 && handlePlus(e);
                     }}

@@ -35,12 +35,15 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
   const [amount, setCount] = useState<number>(element.length);
   const [cartChange, setCartChange] = useState<number>(0);
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const plus = () => setCount((prev) => prev + 1);
   const minus = () => amount > 1 && setCount((prev) => prev - 1);
 
   async function handleMinus(e: any) {
     e.stopPropagation();
+    setDisabled(true);
+
     try {
       const res = await useHttp().post(
         "orders/carts/reduce_from_cart/",
@@ -56,10 +59,15 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
       dispatch(setAmount(res.data.result.total_amount));
       minus();
       getCart();
-    } catch (err) {}
+      setDisabled(false);
+    } catch (err) {
+      setDisabled(false);
+    }
   }
 
   async function handleChangeCount(count: any) {
+    setDisabled(true);
+
     try {
       if (
         parseInt(count) > 1 &&
@@ -83,11 +91,16 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         getCart();
       }
       setCartChange(parseInt(count));
-    } catch {}
+      setDisabled(false);
+    } catch {
+      setDisabled(false);
+    }
   }
 
   async function handlePlus(e: any) {
     e.stopPropagation();
+    setDisabled(true);
+
     if (cartChange < element.remains) {
       try {
         const res = await useHttp().post(
@@ -104,9 +117,13 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         dispatch(setAmount(res.data.result.total_amount));
         plus();
         getCart();
-      } catch (err) {}
+        setDisabled(false);
+      } catch (err) {
+        setDisabled(false);
+      }
     }
   }
+
   useEffect(() => {
     setCartChange(amount);
   }, [amount]);
@@ -172,7 +189,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             onClick={(e: any) => {
               amount > 1 && handleMinus(e);
             }}
-            disabled={amount == 0}
+            disabled={amount == 0 || disabled}
           >
             <IconCardCounterMinus className={cls.GoodsDescr_counterBtn} />
           </Button>
@@ -195,6 +212,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             onClick={(e: any) => {
               amount < 1000 && handlePlus(e);
             }}
+            disabled={disabled}
             theme={ThemeButton.CLEAR}
           >
             <IconCardCounterPlus className={cls.GoodsDescr_counterBtn} />

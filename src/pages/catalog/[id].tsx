@@ -75,11 +75,12 @@ export default function item(props: productI) {
       <div className={cls.cardItem}>
         <div className={cls.cardItem_wrapper}>
           <CatalogItemPage {...props} />
-
-          <div className={cls.slider}>
-            <h3 className={cls.slider_title}>{t("watch")}</h3>
-            <SeeMoreSlider slides={props.recommended_products} />
-          </div>
+          {props.recommended_products.length > 0 && (
+            <div className={cls.slider}>
+              <h3 className={cls.slider_title}>{t("watch")}</h3>
+              <SeeMoreSlider slides={props.recommended_products} />
+            </div>
+          )}
         </div>
       </div>
     </MainLayout>
