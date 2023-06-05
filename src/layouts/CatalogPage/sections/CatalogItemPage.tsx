@@ -118,8 +118,8 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
         );
         setCart(parseInt(count));
         dispatch(setAmount(res.data.result.total_amount));
+        setCartChange(parseInt(count));
       }
-      setCartChange(parseInt(count));
       setDisabled(false);
     } catch {
       setDisabled(false);

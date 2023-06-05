@@ -89,8 +89,8 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         setCount(parseInt(count));
         dispatch(setAmount(res.data.result.total_amount));
         getCart();
+        setCartChange(parseInt(count));
       }
-      setCartChange(parseInt(count));
       setDisabled(false);
     } catch {
       setDisabled(false);

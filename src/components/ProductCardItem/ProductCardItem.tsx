@@ -116,8 +116,8 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
         setCart(parseInt(count));
         dispatch(setAmount(res.data.result.total_amount));
         setCartChange(parseInt(count));
-        setDisabled(false);
       }
+      setDisabled(false);
     } catch {
       setDisabled(false);
     }
