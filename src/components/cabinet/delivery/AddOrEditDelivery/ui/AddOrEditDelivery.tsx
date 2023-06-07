@@ -29,10 +29,9 @@ interface AddOrEditDeliveryProps {
   className: string;
   setIsOpen: any;
   address: string;
-  apartment: Number;
   floor: Number;
-  house: Number;
-  phone_number: Number;
+  apart_ment: Number;
+  home_phone: Number;
   id: Number;
 }
 
@@ -40,22 +39,35 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
   const { t } = useTranslation();
 
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
-  const {
-    className,
-    setIsOpen,
-    address,
-    apartment,
-    floor,
-    house,
-    phone_number,
-    id,
-  } = props;
+  const { className, setIsOpen, address, apart_ment, id, floor, home_phone } =
+    props;
 
-  const searchRef = useRef(null);
+  const searchRef = useRef<any>();
+
+  const [searchState, setSearchState] = useState<any>(address);
 
   useEffect(() => {
-    console.log(searchRef.current);
-  }, [searchRef]);
+    if (searchState) {
+      if (searchRef.current) {
+        searchRef.current?.search(searchState).then((result: any) => {
+          const resultsArray = result.geoObjects.toArray();
+
+          let temp: any = [];
+
+          resultsArray.map((geoObject: any) => {
+            const name = geoObject.properties.get("text");
+            const coordinates = geoObject.geometry.getCoordinates();
+
+            temp.push({ name: name, coordinates: coordinates });
+          });
+
+          setAddresses(temp);
+        });
+      }
+    } else {
+      setAddresses([]);
+    }
+  }, [searchState]);
 
   useEffect(() => {
     const temp = document.querySelector(
@@ -66,22 +78,20 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
     }
   }, []);
 
-  const [addressInput, setAddress] = useState<String>(address || "");
-  const [lonInput, setLon] = useState<String>("");
-  const [latInput, setLat] = useState<String>("");
-  const [phone, setPhone] = useState<String>("");
-
-  console.log(addressInput, "asdasdasd");
+  const [addresses, setAddresses] = useState<any>();
+  const [choiceAddress, setChoiceAddress] = useState<any>();
+  const [floorState, setFloor] = useState<any>(floor);
+  const [apart_mentState, setApart_ment] = useState<any>(apart_ment);
+  const [home_phoneState, setHome_phone] = useState<any>(home_phone);
 
   return (
     <div id="setAddress" className={cn(cls.AddOrEditDelivery, className)}>
       <Formik
         initialValues={{
           address: address ? address : "",
-          apartment: apartment ? apartment : 0,
-          floor: floor ? floor : 0,
-          house: house ? house : 0,
-          phone_number: phone_number ? phone_number : "",
+          floor: floor ? floor : "",
+          apart_ment: apart_ment ? apart_ment : "",
+          home_phone: home_phone ? home_phone : "",
           lat: "",
           lon: "",
         }}
@@ -95,25 +105,13 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
             if (address) {
               await useHttp()
                 .put("users/user_addresses/" + id + "/", {
-                  address: document.getElementById("address")
-                    ? (document.getElementById("address") as HTMLInputElement)
-                        .value
-                    : "",
-                  longitude: document.getElementById("lontitude")
-                    ? (document.getElementById("lontitude") as HTMLInputElement)
-                        .value
-                    : "",
-                  latitude: document.getElementById("latitude")
-                    ? (document.getElementById("latitude") as HTMLInputElement)
-                        .value
-                    : "",
-                  phone_number: document.getElementById("phone_number")
-                    ? (
-                        document.getElementById(
-                          "phone_number"
-                        ) as HTMLInputElement
-                      ).value
-                    : "",
+                  address: choiceAddress ? choiceAddress.name : "",
+                  longitude: choiceAddress ? choiceAddress.coordinates[0] : "",
+                  latitude: choiceAddress ? choiceAddress.coordinates[1] : "",
+                  floor: floorState,
+                  apart_ment: apart_mentState,
+                  home_phone: home_phoneState,
+                  phone_number: "",
                   user: authUser?.id,
                 })
                 .then(() => {
@@ -124,31 +122,15 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                 .post(
                   "users/user_addresses/",
                   {
-                    address: document.getElementById("address")
-                      ? (document.getElementById("address") as HTMLInputElement)
-                          .value
+                    address: choiceAddress ? choiceAddress.name : "",
+                    longitude: choiceAddress
+                      ? choiceAddress.coordinates[0]
                       : "",
-                    longitude: document.getElementById("lontitude")
-                      ? (
-                          document.getElementById(
-                            "lontitude"
-                          ) as HTMLInputElement
-                        ).value
-                      : "",
-                    latitude: document.getElementById("latitude")
-                      ? (
-                          document.getElementById(
-                            "latitude"
-                          ) as HTMLInputElement
-                        ).value
-                      : "",
-                    phone_number: document.getElementById("phone_number")
-                      ? (
-                          document.getElementById(
-                            "phone_number"
-                          ) as HTMLInputElement
-                        ).value
-                      : "",
+                    latitude: choiceAddress ? choiceAddress.coordinates[1] : "",
+                    floor: floorState,
+                    apart_ment: apart_mentState,
+                    home_phone: home_phoneState,
+                    phone_number: "",
                     user: authUser?.id,
                   },
                   {
@@ -169,52 +151,63 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               <p>{address ? t("changeAddress") : t("newAddress")}</p>
 
               <Form>
-                <input
-                  className="w-full hidden border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
-                  onChange={(e) => {
-                    setAddress(e.target.value);
-                    values.address === e.target.value;
-                    console.log("address");
-                  }}
-                  readOnly
-                  value={addressInput as string}
-                  type="text"
-                  id="address"
-                />
-
+                <div className="relative">
+                  <input
+                    className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
+                    id="search"
+                    name="search"
+                    type="text"
+                    placeholder="Поиск"
+                    value={searchState}
+                    onChange={(e: any) => setSearchState(e.target.value)}
+                  />
+                  {addresses && (
+                    <div className="absolute top-full left-0 w-full z-[5] max-h-64 overflow-y-scroll select">
+                      {addresses?.map((el: any) => {
+                        return (
+                          <button
+                            onClick={() => {
+                              setChoiceAddress(el);
+                              setAddresses([]);
+                              setSearchState(el.name);
+                            }}
+                            className="w-full hover:bg-[#f3f3f3] bg-transparent border border-solid bg-white border-[#D2D8DE] p-4 text-start rounded-[30px] cursor-pointer font-medium text-base"
+                          >
+                            {el.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
                 <input
                   className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
-                  id="phone_number"
-                  name="phone_number"
+                  id="floor"
+                  name="floor"
                   type="text"
-                  placeholder="+7 (___) ___ __ __"
-                />
-
-                <InputInstance
-                  mask={maskForPhone}
-                  theme={EInputInstanceTheme.PROFILE}
-                  type="text"
-                  id="phone_number"
-                  name="phone_number"
-                  placeholder="+7 (___) ___ __ __"
-                  value={values.phone_number as number}
-                  errors={errors.phone_number}
-                  touched={touched.phone_number}
-                  className={cls.phoneNumberInput + " hidden"}
-                />
-
-                <input
-                  className="hidden"
-                  value={latInput as string}
-                  type="text"
-                  id="latitude"
+                  placeholder="Этаж"
+                  value={floorState}
+                  onChange={(e: any) => setFloor(e.target.value)}
                 />
                 <input
-                  className="hidden"
-                  value={lonInput as string}
+                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
+                  id="apart_ment"
+                  name="apart_ment"
                   type="text"
-                  id="lontitude"
+                  placeholder="Номер квартиры/офис"
+                  value={apart_mentState}
+                  onChange={(e: any) => setApart_ment(e.target.value)}
                 />
+                <input
+                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
+                  id="home_phone"
+                  name="home_phone"
+                  type="text"
+                  placeholder="Домофон"
+                  value={home_phoneState}
+                  onChange={(e: any) => setHome_phone(e.target.value)}
+                />
+
                 <p className={cls.warning}>{t("findAddress")}</p>
 
                 {/* <div id="map1" className="h-[300px] w-full mt-6"></div> */}
@@ -226,27 +219,28 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               `,
                   }}
                 ></Script> */}
-                <div></div>
-                <YMaps
-                  query={{ apikey: "18378de5-507b-4d2a-a7c7-ca2fb2be7f0b" }}
-                >
-                  <Map
-                    className="map-small"
-                    defaultState={{
-                      center: [43.2446, 76.9114],
-                      zoom: 13,
-                      controls: [],
-                    }}
+                <div className="hidden">
+                  <YMaps
+                    enterprise
+                    query={{ apikey: "18378de5-507b-4d2a-a7c7-ca2fb2be7f0b" }}
                   >
-                    <SearchControl
-                      options={{ float: "left" }}
-                      instanceRef={(ref: any) => {
-                        if (ref) searchRef.current = ref;
+                    <Map
+                      className="map-small"
+                      defaultState={{
+                        center: [43.2446, 76.9114],
+                        zoom: 13,
+                        controls: [],
                       }}
-                    />
-                  </Map>
-                </YMaps>
-
+                    >
+                      <SearchControl
+                        options={{ float: "left" }}
+                        instanceRef={(ref: any) => {
+                          searchRef.current = ref;
+                        }}
+                      />
+                    </Map>
+                  </YMaps>
+                </div>
                 <div className={cls.container_BtnContainer}>
                   <Button
                     theme={ThemeButton.CANCEL}

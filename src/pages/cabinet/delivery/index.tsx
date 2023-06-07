@@ -79,12 +79,7 @@ export default function deliveryPage() {
         <AddOrEditDelivery
           className={cls.delivery_form}
           setIsOpen={setIsOpen}
-          address={address.address}
-          apartment={address.apartment}
-          floor={address.floor}
-          house={address.house}
-          phone_number={address.phone_number}
-          id={address.id}
+          {...address}
         />
       ) : (
         <>
