@@ -1,5 +1,5 @@
 // packages
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { Form, Formik } from "formik";
 
@@ -21,6 +21,7 @@ import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector } from "@/hooks/store";
 import { useTranslation } from "next-i18next";
 import Script from "next/script";
+import { YMaps, Map, SearchControl } from "@pbe/react-yandex-maps";
 
 let cn = classNames.bind(cls);
 
@@ -50,6 +51,12 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
     id,
   } = props;
 
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    console.log(searchRef.current);
+  }, [searchRef]);
+
   useEffect(() => {
     const temp = document.querySelector(
       "#setAddress"
@@ -78,12 +85,12 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
           lat: "",
           lon: "",
         }}
-        onSubmit={(values) => {
+        onSubmit={(values: any) => {
           console.log(values);
         }}
         validationSchema={deliveryAddressSchema}
       >
-        {({ values, touched, errors, handleChange, handleBlur }) => {
+        {({ values, touched, errors, handleChange, handleBlur }: any) => {
           const handleSaveAddOrDelivery = async () => {
             if (address) {
               await useHttp()
@@ -210,15 +217,36 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                 />
                 <p className={cls.warning}>{t("findAddress")}</p>
 
-                <div id="map1" className="h-[300px] w-full mt-6"></div>
+                {/* <div id="map1" className="h-[300px] w-full mt-6"></div> */}
                 {/* написано на нативном жс так как, некст не поддерживал яндекс мапы. Нативка написана в _document.tsx */}
-                <Script
+                {/* <Script
                   dangerouslySetInnerHTML={{
                     __html: `
                     getMap2(43.2446, 76.9114);
               `,
                   }}
-                ></Script>
+                ></Script> */}
+                <div></div>
+                <YMaps
+                  query={{ apikey: "18378de5-507b-4d2a-a7c7-ca2fb2be7f0b" }}
+                >
+                  <Map
+                    className="map-small"
+                    defaultState={{
+                      center: [43.2446, 76.9114],
+                      zoom: 13,
+                      controls: [],
+                    }}
+                  >
+                    <SearchControl
+                      options={{ float: "left" }}
+                      instanceRef={(ref: any) => {
+                        if (ref) searchRef.current = ref;
+                      }}
+                    />
+                  </Map>
+                </YMaps>
+
                 <div className={cls.container_BtnContainer}>
                   <Button
                     theme={ThemeButton.CANCEL}

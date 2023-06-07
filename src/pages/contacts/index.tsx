@@ -18,6 +18,8 @@ const enum endpoints {
   getContacts = "/main/contacts/",
 }
 
+import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
+
 const cn = classNames.bind(cls);
 
 export interface Coords {
@@ -58,9 +60,22 @@ function contactsPage() {
                 {/* Map implementation */}
                 <div className={cls.contactsPage_imageWrapper}>
                   {contacts && (
-                    <MapComponent
-                      coords={{ lat: el.x_coordinate, lon: el.y_coordinate }}
-                    />
+                    // <MapComponent
+                    //   coords={{ lat: el.x_coordinate, lon: el.y_coordinate }}
+                    // />
+                    <YMaps>
+                      <Map
+                        className={cn(cls.MapComponent_map) + " relative"}
+                        state={{
+                          center: [el.x_coordinate, el.y_coordinate],
+                          zoom: 13,
+                        }}
+                      >
+                        <Placemark
+                          geometry={[el.x_coordinate, el.y_coordinate]}
+                        />
+                      </Map>
+                    </YMaps>
                   )}
                 </div>
                 {/* Text datas */}

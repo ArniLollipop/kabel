@@ -300,9 +300,11 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
             </button>
           </div>
         )}
-        <Link href={`/catalog/${props.code}`} className={cls.cardMoreBtn}>
-          {t("another")}
-        </Link>
+        {cart > 0 && (
+          <Link href={`/card`} className={cls.cardMoreBtn}>
+            {t("toCart")}
+          </Link>
+        )}
       </div>
     </li>
   );

@@ -58,6 +58,8 @@
   outline: transparent;
   padding: 0;
   margin: 0;
+  transition: all;
+  transition-duration: 300ms;
 }
 
 html,
@@ -193,9 +195,11 @@ input::-webkit-inner-spin-button {
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-.ymaps-2-1-79-controls__control_toolbar:first-child,
-.ymaps-2-1-79-controls__control_toolbar:last-child {
-  display: none;
+.map-small {
+  margin-top: 20px;
+  width: 100% !important;
+  height: 250px !important;
+  position: relative;
 }
 
 .swiper-button-next {

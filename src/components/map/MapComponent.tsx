@@ -56,8 +56,8 @@ export const MapComponent = (props: MapComponentProps) => {
 
   return (
     <div className={cn(cls.MapComponent)}>
-      <div className={cn(cls.MapComponent_map)}>
-        <div id="map" className="w-full h-full"></div>
+      <div className={cn(cls.MapComponent_map) + " relative"}>
+        <div id="map" className="w-full h-full top-0 absolute"></div>
         <Script
           dangerouslySetInnerHTML={{
             __html: `
