@@ -125,7 +125,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
             pay_type:
               values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
             user: userId.id,
-            user_addresses:
+            user_address:
               values.selectedDeliveryOption === t("delivery")
                 ? values.selectedAddress
                 : "",
@@ -150,7 +150,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
             user: userId.id,
             sale_point:
               values.selectedDeliveryOption === t("delivery") ? "" : sale_point,
-            user_addresses:
+            user_address:
               values.selectedDeliveryOption === t("delivery")
                 ? values.selectedAddress
                 : "",
