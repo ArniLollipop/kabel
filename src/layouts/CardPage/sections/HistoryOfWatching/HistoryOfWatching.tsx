@@ -42,8 +42,10 @@ export const HistoryOfWatching: FC<HistoryOfWatchingProps> = (props) => {
     <div className={recom ? cls.HistoryOfWatching + " " : "hidden"}>
       <h2 className={cls.HistoryOfWatching_title}>{t("youRecentlyWatch")}</h2>
       <ul className={cls.HistoryOfWatching_wrapper}>
-        {recom?.map((el: any) => {
-          return <ProductCardItem theme={ThemeProductCard.MINI} {...el} />;
+        {recom?.map((el: any, index: number) => {
+          if (index <= 4) {
+            return <ProductCardItem theme={ThemeProductCard.MINI} {...el} />;
+          }
         })}
       </ul>
     </div>

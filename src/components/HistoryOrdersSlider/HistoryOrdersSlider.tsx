@@ -45,13 +45,17 @@ export const HistoryOrdersSlider: FC<HistoryOrdersSliderProps> = (props) => {
 
   return (
     <div className={cn(cls.slider, className)}>
-      {false ? (
+      {!orders ? (
         <p className=" text-lg font-medium text-center my-20">
           {t("emptyOrder")}
         </p>
       ) : (
         <div className="my-10">
-          <Swiper {...params} onSwiper={(swiper) => setSwiper(swiper)}>
+          <Swiper
+            {...params}
+            onSwiper={(swiper) => setSwiper(swiper)}
+            onChange={(swiper) => setSwiper(swiper)}
+          >
             {orders?.map((order: any) => {
               return (
                 <SwiperSlide key={order.id}>

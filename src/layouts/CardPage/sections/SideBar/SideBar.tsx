@@ -28,7 +28,7 @@ const cn = classNames.bind(cls);
 
 interface SideBarProps {
   className?: string;
-  setIsOpen?: (value: boolean) => void;
+  setIsOpen?: any;
 }
 
 export const SideBar: FC<SideBarProps> = (props) => {
@@ -45,10 +45,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
   const [bonusBalance, setBonusBalance] = useState<number>(0);
 
   const [addresses, setAddresses] = useState<any>();
-  const [times, setTimes] = useState<any>();
-  const [open, setOpen] = useState<boolean>(false);
-  const [date, setDate] = useState<any>();
-  const [time, setTime] = useState<any>({ time_from: "", time_to: "" });
   const [salePoints, setSalePoints] = useState<any>([]);
   const [bonus, setBonus] = useState<boolean>(false);
   const [isEntity, setEntity] = useState<boolean>(false);
@@ -60,13 +56,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
     entity.entity_address
   );
   const [name_company, setName_company] = useState<string>(entity.name_company);
-
-  async function getTime() {
-    try {
-      const res = await useHttp().get("/orders/orders/get_order_times/");
-      setTimes(res.data.results);
-    } catch (error) {}
-  }
 
   async function getAddresses() {
     try {
@@ -102,7 +91,6 @@ export const SideBar: FC<SideBarProps> = (props) => {
   }, [items, total_amount]);
 
   useEffect(() => {
-    getTime();
     getAddresses();
     getSalePoints();
     getBonuses();
@@ -139,9 +127,10 @@ export const SideBar: FC<SideBarProps> = (props) => {
             user: userId.id,
             user_addresses:
               values.selectedDeliveryOption === t("delivery")
-                ? ""
-                : values.selectedAddress,
-            sale_point: sale_point ? sale_point : "",
+                ? values.selectedAddress
+                : "",
+            sale_point:
+              values.selectedDeliveryOption === t("delivery") ? "" : sale_point,
             is_bonus_used: bonus,
             bin: bin,
             current_account: current_account,
@@ -159,11 +148,12 @@ export const SideBar: FC<SideBarProps> = (props) => {
             pay_type:
               values.selectedPayOption === "Kaspi Pay" ? "kaspi_pay" : "card",
             user: userId.id,
-            sale_point: sale_point ? sale_point : "",
+            sale_point:
+              values.selectedDeliveryOption === t("delivery") ? "" : sale_point,
             user_addresses:
               values.selectedDeliveryOption === t("delivery")
-                ? ""
-                : values.selectedAddress,
+                ? values.selectedAddress
+                : "",
             is_bonus_used: bonus,
           };
         }
@@ -173,8 +163,7 @@ export const SideBar: FC<SideBarProps> = (props) => {
             Authorization: "Bearer " + localStorage.getItem("access_token"),
           },
         });
-        dispatch(setAmount(0));
-        dispatch(setItems(null));
+        setIsOpen(true);
         if (res.data.equiring_page_url) {
           window.open(res.data.equiring_page_url);
         }
@@ -264,6 +253,11 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   </span>
                 );
               })}
+              {!values.selectedDeliveryOption && (
+                <p className=" font-medium text-base text-center text-red-500">
+                  {t("errorVariantSalePoint")}
+                </p>
+              )}
             </div>
 
             <div className={cls.SideBar_paymentMethods}>
@@ -314,6 +308,11 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   </span>
                 );
               })}
+              {!values.selectedPayOption && (
+                <p className=" font-medium text-base text-center text-red-500">
+                  {t("errorVariantPay")}
+                </p>
+              )}
             </div>
 
             {bonusBalance > 0 && (
@@ -446,7 +445,13 @@ export const SideBar: FC<SideBarProps> = (props) => {
                   />
                 </div>
               )}
+            </div>
 
+            <div
+              className={
+                (cls.SideBar_payment, cls.SideBar_paymentMethods + " pb-5")
+              }
+            >
               <span className={cls.SideBar_payment_title}>{t("pay")}</span>
 
               <hr />
@@ -534,6 +539,11 @@ export const SideBar: FC<SideBarProps> = (props) => {
                           </span>
                         );
                       })}
+                    {!values.selectedAddress && (
+                      <p className=" font-medium text-base text-center text-red-500">
+                        {t("errorVatiantAddress")}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
