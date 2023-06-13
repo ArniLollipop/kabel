@@ -522,13 +522,17 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 </span>
               </p>
 
-              <Button
-                className={cls.buyActions_btn + " mt-3"}
-                theme={ThemeButton.CARD}
-                onClick={() => router.push("/card")}
-              >
-                {t("toCart")}
-              </Button>
+              {cartChange ? (
+                <Button
+                  className={cls.buyActions_btn + " mt-3"}
+                  theme={ThemeButton.CARD}
+                  onClick={() => router.push("/card")}
+                >
+                  {t("toCart")}
+                </Button>
+              ) : (
+                ""
+              )}
 
               <div className={cls.buyActions_secondaruBtns}>
                 <Button
