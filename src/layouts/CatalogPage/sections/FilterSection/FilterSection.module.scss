@@ -1,4 +1,4 @@
-@import '/src//styles/globalMixins.scss';
+@import "/src//styles/globalMixins.scss";
 
 .FilterSection {
   background-color: var(--color-bg-white);
@@ -107,7 +107,7 @@
 
   &_bodyActive {
     overflow-y: auto !important;
-    max-height: 160px !important;
+    max-height: 145px !important;
     // margin-bottom: 25px;
   }
 

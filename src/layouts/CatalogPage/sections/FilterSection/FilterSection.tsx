@@ -334,7 +334,12 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                           </svg>
                         </AccordionHeader>
 
-                        <AccordionBody className={cls.filtersAcc_body} as="ul">
+                        <AccordionBody
+                          className={cn(cls.filtersAcc_body, {
+                            filtersAcc_bodyActive: open,
+                          })}
+                          as="ul"
+                        >
                           {cores ? (
                             Object.keys(cores).map((core) => (
                               <ul
