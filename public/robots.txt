@@ -4,4 +4,3 @@ Disallow: /admin
 
 Host: https://cable.kz/
 Sitemap: https://cable.kz/sitemap.xml
-Sitemap: https://cable.kz/sitemap.html
