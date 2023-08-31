@@ -1,3 +1,5 @@
+/** @format */
+
 import classNames from "classnames";
 import { memo, useEffect, useState } from "react";
 import cls from "./ShowChangePassword.module.scss";
@@ -5,7 +7,7 @@ import ReactPinInput from "react-pin-input";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ProfileService } from "@/services/Profile.service";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -56,8 +58,8 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
 
       <ReactPinInput
         length={props.type === "phone" ? 4 : 6}
-        initialValue=""
-        type="numeric"
+        initialValue=''
+        type='numeric'
         style={{ margin: "35px 0" }}
         inputStyle={{
           borderColor: "#39424B",
@@ -75,9 +77,8 @@ export const SentToEmailOrPhoneNumber = (props: SentToEmailProps) => {
           <Button
             theme={ThemeButton.CLEAR}
             className={cn(cls.sendAgainContainer_sendAgain)}
-            type="button"
-            onClick={props.sendSmsCodeToPhone}
-          >
+            type='button'
+            onClick={props.sendSmsCodeToPhone}>
             {t("getSmsAgain")}
           </Button>
         ) : (

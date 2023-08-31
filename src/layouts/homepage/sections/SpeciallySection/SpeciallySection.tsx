@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./SpeciallySection.module.scss";
@@ -10,7 +12,7 @@ import {
   ThemeProductCard,
 } from "@/components/ProductCardItem/ProductCardItem";
 import { newsI } from "@/types/NewsTypes";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
@@ -49,8 +51,7 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
             active: activeSection == 0,
           })}
           theme={ThemeButton.CLEAR}
-          onClick={() => setAvtiveSection(0)}
-        >
+          onClick={() => setAvtiveSection(0)}>
           Акции
         </Button>
         <Button
@@ -58,8 +59,7 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
             active: activeSection == 1,
           })}
           theme={ThemeButton.CLEAR}
-          onClick={() => setAvtiveSection(1)}
-        >
+          onClick={() => setAvtiveSection(1)}>
           {t("list.news")}
         </Button>
       </div>
@@ -67,8 +67,7 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
       <div
         className={cn(cls.SpeciallySection_cardList, {
           hidden: activeSection == 1,
-        })}
-      >
+        })}>
         {/* @ts-ignore */}
         {mockAct &&
           mockAct?.map((el: any) => {
@@ -86,8 +85,7 @@ export const SpeciallySection: FC<SpeciallySectionProps> = (props) => {
       <div
         className={cn(cls.SpeciallySection_newsList, {
           hidden: activeSection === 0,
-        })}
-      >
+        })}>
         {news?.map((news) => (
           <NewsCard
             className={cls.SpeciallySection_newsCard}

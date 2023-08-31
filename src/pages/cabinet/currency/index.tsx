@@ -1,3 +1,5 @@
+/** @format */
+
 import classNames from "classnames";
 import cls from "./index.module.scss";
 import {
@@ -12,7 +14,8 @@ import {
 import { GetCurrencyService } from "@/services/GetCurrency";
 import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
 let cn = classNames.bind(cls);
 
@@ -29,8 +32,14 @@ export default function index(props: ICurrencyNMetalResponse) {
   return (
     <CabinetLayout
       className={cn(cls.currency)}
-      activePage={ActiveCabinetPageEnum.CURRENCY}
-    >
+      activePage={ActiveCabinetPageEnum.CURRENCY}>
+      <Head>
+        <title>{t("title_currency")}</title>
+        <meta
+          name='description'
+          content={t("description_currency") as string}
+        />
+      </Head>
       <p>{t("london")}</p>
       <div className={cn(cls.currency_header)}>
         <span>{t("valuta")}</span>

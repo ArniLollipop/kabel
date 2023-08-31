@@ -1,3 +1,5 @@
+/** @format */
+
 // hooks
 import { FC, useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
@@ -9,7 +11,7 @@ import classNames from "classnames";
 // assets
 import cls from "./Login.module.scss";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 // helpers
 import { maskForPhone } from "@/helpers/masks";
@@ -119,8 +121,7 @@ export const Login: FC<LoginProps> = (props) => {
                 phone: values.phoneNumberLogin,
               })
             );
-          }}
-        >
+          }}>
           {({
             values,
             touched,
@@ -136,10 +137,10 @@ export const Login: FC<LoginProps> = (props) => {
                   <InputInstance
                     theme={EInputInstanceTheme.AUTH}
                     mask={maskForPhone}
-                    type="text"
-                    id="phoneNumberLogin"
-                    name="phoneNumberLogin"
-                    placeholder="+7 (___) ___-__-__"
+                    type='text'
+                    id='phoneNumberLogin'
+                    name='phoneNumberLogin'
+                    placeholder='+7 (___) ___-__-__'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.phoneNumberLogin}
@@ -150,22 +151,20 @@ export const Login: FC<LoginProps> = (props) => {
 
                   <ErrorBorder
                     touchedValue={touched.passwordLogin}
-                    errorsValue={errors.passwordLogin}
-                  >
+                    errorsValue={errors.passwordLogin}>
                     <Button
                       theme={ThemeButton.CLEAR}
-                      type="button"
-                      onClick={() => setShowPasswordLogin(!showPasswordLogin)}
-                    >
+                      type='button'
+                      onClick={() => setShowPasswordLogin(!showPasswordLogin)}>
                       {showPasswordLogin ? <ShowPassword /> : <HidePassword />}
                     </Button>
                     <InputInstance
                       password={"password"}
                       theme={EInputInstanceTheme.AUTH}
                       type={showPasswordLogin ? "text" : "password"}
-                      id="passwordLogin"
-                      name="passwordLogin"
-                      placeholder="Пароль"
+                      id='passwordLogin'
+                      name='passwordLogin'
+                      placeholder='Пароль'
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.passwordLogin}
@@ -175,7 +174,7 @@ export const Login: FC<LoginProps> = (props) => {
                     />
                   </ErrorBorder>
 
-                  <Button theme={ThemeButton.YELLOW} type="submit">
+                  <Button theme={ThemeButton.YELLOW} type='submit'>
                     {t("go")}
                   </Button>
 
@@ -184,8 +183,7 @@ export const Login: FC<LoginProps> = (props) => {
                       setTab(2);
                       setCountdown(60);
                     }}
-                    className={cls.forget}
-                  >
+                    className={cls.forget}>
                     {t("forgot")}
                   </div>
 
@@ -204,8 +202,7 @@ export const Login: FC<LoginProps> = (props) => {
             }}
             onSubmit={(values) => {
               SendSms(values.phone_number);
-            }}
-          >
+            }}>
             {({
               values,
               touched,
@@ -221,10 +218,10 @@ export const Login: FC<LoginProps> = (props) => {
                     <InputInstance
                       theme={EInputInstanceTheme.AUTH}
                       mask={maskForPhone}
-                      type="text"
-                      id="phone_number"
-                      name="phone_number"
-                      placeholder="+7 (___) ___-__-__"
+                      type='text'
+                      id='phone_number'
+                      name='phone_number'
+                      placeholder='+7 (___) ___-__-__'
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.phone_number}
@@ -233,7 +230,7 @@ export const Login: FC<LoginProps> = (props) => {
                       className={cls.phoneNumberLogin}
                     />
 
-                    <Button theme={ThemeButton.YELLOW} type="submit">
+                    <Button theme={ThemeButton.YELLOW} type='submit'>
                       {t("code")}
                     </Button>
 
@@ -254,9 +251,8 @@ export const Login: FC<LoginProps> = (props) => {
                 <Button
                   theme={ThemeButton.CLEAR}
                   className={cn(cls.sendAgainContainer_sendAgain)}
-                  type="button"
-                  onClick={() => {}}
-                >
+                  type='button'
+                  onClick={() => {}}>
                   {t("again")}
                 </Button>
               ) : (
@@ -275,8 +271,7 @@ export const Login: FC<LoginProps> = (props) => {
             onSubmit={(values) => {
               verifySMS(values.smsInput);
             }}
-            validationSchema={loginSchema}
-          >
+            validationSchema={loginSchema}>
             {({
               values,
               touched,
@@ -291,15 +286,14 @@ export const Login: FC<LoginProps> = (props) => {
                   <div className={cn(cls.Login)}>
                     <ErrorBorder
                       touchedValue={touched.smsInput}
-                      errorsValue={errors.smsInput}
-                    >
+                      errorsValue={errors.smsInput}>
                       <InputInstance
                         password={"password"}
                         theme={EInputInstanceTheme.AUTH}
-                        type="number"
-                        id="smsInput"
-                        name="smsInput"
-                        placeholder="Number"
+                        type='number'
+                        id='smsInput'
+                        name='smsInput'
+                        placeholder='Number'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.smsInput}
@@ -314,8 +308,7 @@ export const Login: FC<LoginProps> = (props) => {
                         verifySMS(values.smsInput);
                       }}
                       theme={ThemeButton.YELLOW}
-                      type="submit"
-                    >
+                      type='submit'>
                       {t("verify")}
                     </Button>
 
@@ -339,8 +332,7 @@ export const Login: FC<LoginProps> = (props) => {
                 handleSavePass(values.passwordReset);
               }
             }}
-            validationSchema={loginSchema}
-          >
+            validationSchema={loginSchema}>
             {({
               values,
               touched,
@@ -355,13 +347,13 @@ export const Login: FC<LoginProps> = (props) => {
                   <div className={cn(cls.Login)}>
                     <ErrorBorder
                       touchedValue={touched.passwordReset}
-                      errorsValue={errors.passwordReset}
-                    >
+                      errorsValue={errors.passwordReset}>
                       <Button
                         theme={ThemeButton.CLEAR}
-                        type="button"
-                        onClick={() => setShowPasswordLogin(!showPasswordLogin)}
-                      >
+                        type='button'
+                        onClick={() =>
+                          setShowPasswordLogin(!showPasswordLogin)
+                        }>
                         {showPasswordLogin ? (
                           <ShowPassword />
                         ) : (
@@ -372,9 +364,9 @@ export const Login: FC<LoginProps> = (props) => {
                         password={"password"}
                         theme={EInputInstanceTheme.AUTH}
                         type={showPasswordLogin ? "text" : "password"}
-                        id="passwordReset"
-                        name="passwordReset"
-                        placeholder="Пароль"
+                        id='passwordReset'
+                        name='passwordReset'
+                        placeholder='Пароль'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.passwordReset}
@@ -386,22 +378,20 @@ export const Login: FC<LoginProps> = (props) => {
 
                     <ErrorBorder
                       touchedValue={touched.passwordRepeat}
-                      errorsValue={errors.passwordRepeat}
-                    >
+                      errorsValue={errors.passwordRepeat}>
                       <Button
                         theme={ThemeButton.CLEAR}
-                        type="button"
-                        onClick={() => setShowRepeatPass(!showRepeatPass)}
-                      >
+                        type='button'
+                        onClick={() => setShowRepeatPass(!showRepeatPass)}>
                         {showRepeatPass ? <ShowPassword /> : <HidePassword />}
                       </Button>
                       <InputInstance
                         password={"password"}
                         theme={EInputInstanceTheme.AUTH}
                         type={showRepeatPass ? "text" : "password"}
-                        id="passwordRepeat"
-                        name="passwordRepeat"
-                        placeholder="Пароль"
+                        id='passwordRepeat'
+                        name='passwordRepeat'
+                        placeholder='Пароль'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.passwordRepeat}
@@ -418,8 +408,7 @@ export const Login: FC<LoginProps> = (props) => {
                         }
                       }}
                       theme={ThemeButton.YELLOW}
-                      type="submit"
-                    >
+                      type='submit'>
                       {t("save")}
                     </Button>
 

@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./SortByWidget.module.scss";
@@ -18,19 +20,18 @@ export const SortByWidget: FC<SortByWidgetProps> = (props) => {
 
   return (
     <div className={cn(cls.SortByWidget)}>
-      <label htmlFor="sortWidget">{t("sortirovkaPo")}:</label>
+      <label htmlFor='sortWidget'>{t("sortirovkaPo")}:</label>
 
       <Field
-        component="select"
-        id="sortWidget"
-        name="sortWidget"
+        component='select'
+        id='sortWidget'
+        name='sortWidget'
         multiple={false}
-        className={cls.SortByWidget_selector}
-      >
-        <option value="cost" className={cls.SortByWidget_option}>
+        className={cls.SortByWidget_selector}>
+        <option value='cost' className={cls.SortByWidget_option}>
           {t("vozrastaniPay")}
         </option>
-        <option value="-cost" className={cls.SortByWidget_option}>
+        <option value='-cost' className={cls.SortByWidget_option}>
           {t("spuskPay")}
         </option>
       </Field>

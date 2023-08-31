@@ -1,3 +1,5 @@
+/** @format */
+
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListSection.module.scss";
@@ -116,48 +118,45 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
     <div className={cn(cls.GoodsListSection)}>
       <button
         className={cls.mockBtn}
-        onClick={() => (isOpened ? openFilters(false) : openFilters(true))}
-      >
+        onClick={() => (isOpened ? openFilters(false) : openFilters(true))}>
         {isOpened ? (
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
-              d="M18 6L6 18"
-              stroke="#00ABC2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              d='M18 6L6 18'
+              stroke='#00ABC2'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
             <path
-              d="M6 6L18 18"
-              stroke="#00ABC2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              d='M6 6L18 18'
+              stroke='#00ABC2'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </svg>
         ) : (
           <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect y="2" width="18" height="2" rx="1" fill="#00ABC2" />
-            <rect y="8" width="18" height="2" rx="1" fill="#00ABC2" />
-            <rect y="14" width="18" height="2" rx="1" fill="#00ABC2" />
-            <rect x="12" y="2" width="2" height="2" fill="white" />
-            <circle cx="13" cy="3" r="2" stroke="#00ABC2" strokeWidth="2" />
-            <rect x="4" y="8" width="2" height="2" fill="white" />
-            <circle cx="5" cy="9" r="2" stroke="#00ABC2" strokeWidth="2" />
-            <rect x="12" y="14" width="2" height="2" fill="white" />
-            <circle cx="13" cy="15" r="2" stroke="#00ABC2" strokeWidth="2" />
+            width='18'
+            height='18'
+            viewBox='0 0 18 18'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
+            <rect y='2' width='18' height='2' rx='1' fill='#00ABC2' />
+            <rect y='8' width='18' height='2' rx='1' fill='#00ABC2' />
+            <rect y='14' width='18' height='2' rx='1' fill='#00ABC2' />
+            <rect x='12' y='2' width='2' height='2' fill='white' />
+            <circle cx='13' cy='3' r='2' stroke='#00ABC2' strokeWidth='2' />
+            <rect x='4' y='8' width='2' height='2' fill='white' />
+            <circle cx='5' cy='9' r='2' stroke='#00ABC2' strokeWidth='2' />
+            <rect x='12' y='14' width='2' height='2' fill='white' />
+            <circle cx='13' cy='15' r='2' stroke='#00ABC2' strokeWidth='2' />
           </svg>
         )}
       </button>
@@ -168,11 +167,10 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
             <div
               className={
                 onLoad ? "loading mx-auto w-fit block my-40" : "hidden"
-              }
-            >
-              <div className="loading__inner"></div>
+              }>
+              <div className='loading__inner'></div>
             </div>
-            <ul id="items" className={!onLoad ? cls.goodsList : "hidden"}>
+            <ul id='items' className={!onLoad ? cls.goodsList : "hidden"}>
               {productsState?.results.map((el: any) => (
                 <ProductCardItem
                   theme={ThemeProductCard.CATALOG}
@@ -183,19 +181,18 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
             </ul>
             {pages > 1 && (
               <div
-                className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}
-              >
+                className={!onLoad ? "max-w-[300px] mx-auto mt-10" : "hidden"}>
                 <ReactPaginate
-                  breakLabel="..."
-                  nextLabel=">"
+                  breakLabel='...'
+                  nextLabel='>'
                   onPageChange={handleChangePage}
                   pageRangeDisplayed={2}
                   pageCount={pages as number}
-                  className="flex items-center pagination"
-                  previousLabel="<"
+                  className='flex items-center pagination'
+                  previousLabel='<'
                   renderOnZeroPageCount={null}
-                  activeClassName="pagination__active"
-                  pageClassName="cursor-pointer hover:text-[#00abc2] transition-all duration-300"
+                  activeClassName='pagination__active'
+                  pageClassName='cursor-pointer hover:text-[#00abc2] transition-all duration-300'
                 />
               </div>
             )}

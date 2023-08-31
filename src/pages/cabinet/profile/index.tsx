@@ -1,3 +1,5 @@
+/** @format */
+
 // @ts-nocheck
 
 // packages
@@ -32,7 +34,8 @@ import { OkModal } from "@/components/cabinet/profile/okModal";
 import { ShowChangePassword } from "@/components/cabinet/profile/showChangePassword";
 import { ProfileService } from "@/services/Profile.service";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
 export default function profilePage() {
   const [showEditProfile, setShowEditProfile] = useState<boolean>(false);
@@ -51,9 +54,6 @@ export default function profilePage() {
     let temp = JSON.parse(localStorage.getItem("user"));
     if (temp) {
       const res = await ProfileService().getExactUser(temp.id);
-      console.log("====================================");
-      console.log(res);
-      console.log("====================================");
       setUser(res);
     }
   };
@@ -65,8 +65,12 @@ export default function profilePage() {
   return (
     <CabinetLayout
       className={cls.content}
-      activePage={ActiveCabinetPageEnum.PROFILE}
-    >
+      activePage={ActiveCabinetPageEnum.PROFILE}>
+      <Head>
+        <title>{t("title_profile")}</title>
+        <meta name='description' content={t("description_profile") as string} />
+      </Head>
+
       {showModal && (
         <Modal isOpen={showModal}>
           <OkModal numberOrEmail={numberOrEmail} setShowModal={setShowModal} />
@@ -96,8 +100,7 @@ export default function profilePage() {
             console.log("values is: ", {
               ...values,
             });
-          }}
-        >
+          }}>
           {({ values, setFieldValue }) => {
             return (
               <Form>
@@ -129,23 +132,20 @@ export default function profilePage() {
                     <Button
                       onClick={() => setShowChangePassword(true)}
                       className={cls.userCard_btn}
-                      theme={ThemeButton.CLEAR}
-                    >
+                      theme={ThemeButton.CLEAR}>
                       <IconCabinetPassword />
                       {t("changePass")}
                     </Button>
                     <Button
                       onClick={() => setShowEditProfile(true)}
                       className={cls.userCard_btn}
-                      theme={ThemeButton.CLEAR}
-                    >
+                      theme={ThemeButton.CLEAR}>
                       <IconCabinetEdit /> {t("changeProfile")}
                     </Button>
                     <Button
                       onClick={() => setShowChangePhoneNumber(true)}
                       className={cls.userCard_btn}
-                      theme={ThemeButton.CLEAR}
-                    >
+                      theme={ThemeButton.CLEAR}>
                       <IconCabinetChangePhoneNumber /> {t("changePhone")}
                     </Button>
                   </div>

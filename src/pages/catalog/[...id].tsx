@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useState } from "react";
 import { CatalogItemPage } from "@/layouts/CatalogPage/sections/CatalogItemPage";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -8,11 +10,12 @@ import { NextPageContext } from "next";
 import { ProductService } from "@/services/Product.servise";
 import { productI } from "@/types/ProductTypes";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Iphone from "@/assets/Iphone.png";
 import Android from "@/assets/Android.png";
+import Head from "next/head";
 
 export default function item(props: productI) {
   const { t } = useTranslation();
@@ -23,51 +26,64 @@ export default function item(props: productI) {
     router.query.modal ? true : false
   );
 
+  console.log(router.asPath);
+
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
+      <Head>
+        <title>{t("title_catalog")}</title>
+        <meta name='description' content={t("description_catalog") as string} />
+        <meta property='og:title' content={props.name} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        <meta property='og:image' content={props.image} />
+      </Head>
       <div
         onClick={() => setModal(false)}
         className={
           modal
             ? "fixed top-0 left-0 bg-black bg-opacity-40 w-full h-[100vh] z-[1000] transition-all duration-300"
             : "fixed top-0 left-0 bg-transparent bg-opacity-40 w-0 opacity-0 h-[100vh] z-[1000] transition-all duration-300"
-        }
-      ></div>
+        }></div>
       <div className={modal ? cls.modal_inner : "hidden"}>
-        <div className="flex items-center gap-[10px] !justify-center flex-col relative">
+        <div className='flex items-center gap-[10px] !justify-center flex-col relative'>
           <button
             onClick={() => setModal(false)}
-            className="p-0 bg-transparent border-none absolute top-0 right-0 cursor-pointer"
-          >
+            className='p-0 bg-transparent border-none absolute top-0 right-0 cursor-pointer'>
             <svg
-              width="35"
-              height="35"
-              viewBox="0 0 35 35"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              width='35'
+              height='35'
+              viewBox='0 0 35 35'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
               <path
-                d="M26.25 8.75L8.75 26.25"
-                stroke="#2F3138"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                d='M26.25 8.75L8.75 26.25'
+                stroke='#2F3138'
+                stroke-linecap='round'
+                stroke-linejoin='round'
               />
               <path
-                d="M8.75 8.75L26.25 26.25"
-                stroke="#2F3138"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                d='M8.75 8.75L26.25 26.25'
+                stroke='#2F3138'
+                stroke-linecap='round'
+                stroke-linejoin='round'
               />
             </svg>
           </button>
-          <a href="">
-            <Image src={Iphone} alt="iphone" className="max-w-[200px] h-auto" />
+          <a href=''>
+            <Image
+              src={Iphone}
+              alt={"iphone" + "| Almaty Kazkabel"}
+              className='max-w-[200px] h-auto'
+            />
           </a>
-          <a href="">
+          <a href=''>
             <Image
               src={Android}
-              alt="android"
-              className="max-w-[200px] h-auto"
+              alt={"android" + "| Almaty Kazkabel"}
+              className='max-w-[200px] h-auto'
             />
           </a>
         </div>
@@ -89,10 +105,19 @@ export default function item(props: productI) {
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const { id } = ctx.query;
-  const prodId = typeof id === "string" ? id : Array.isArray(id) ? id[0] : "";
-  const product = await ProductService().getProductById(prodId);
+  if (id?.length === 1) {
+    return {
+      redirect: {
+        destination: "/catalog",
+        permanent: false,
+      },
+    };
+  } else {
+    const prodId = typeof id === "string" ? id : Array.isArray(id) ? id[1] : "";
+    const product = await ProductService().getProductById(prodId);
 
-  return {
-    props: product,
-  };
+    return {
+      props: product,
+    };
+  }
 }

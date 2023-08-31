@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames";
@@ -68,20 +70,19 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
           return (
             <>
               <input
-                type="radio"
-                name="table"
+                type='radio'
+                name='table'
                 id={el.name}
                 className={cls.hidden}
                 checked={index === ind}
               />
               <label
                 htmlFor={el.name}
-                className="sm:text-[20px] text-sm"
+                className='sm:text-[20px] text-sm'
                 onClick={() => {
                   setTable(el);
                   setInd(index);
-                }}
-              >
+                }}>
                 {el.name}
               </label>
             </>
@@ -94,8 +95,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
         }}
         onSubmit={(values) => {
           searchWeight(values.cable_type);
-        }}
-      >
+        }}>
         {({ values, touched, errors, handleChange, handleBlur }) => {
           const getCables = async () => {
             const { cable_type } = values;
@@ -112,9 +112,9 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
               <Form>
                 <InputInstance
                   theme={EInputInstanceTheme.SERVICES}
-                  type="text"
-                  id="cable_type"
-                  name="cable_type"
+                  type='text'
+                  id='cable_type'
+                  name='cable_type'
                   placeholder={t("labelFind") || "Поиск"}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -126,8 +126,7 @@ export const ServicesWeight: FC<ServicesWeightProps> = (props) => {
                 <Button
                   onClick={getCables}
                   className={cls.searchBtn}
-                  theme={ThemeButton.CLEAR}
-                >
+                  theme={ThemeButton.CLEAR}>
                   <IconSearch />
                 </Button>
               </Form>

@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import {
   OfferSection,
@@ -41,13 +43,13 @@ export const Homepage: FC<HomeProps> = (props) => {
       <SertificatesSection sertificates={sertificates} />
       <NewsSection news={news} />
       <GetCurrency currency={currencyRes} metalRes={metalRes} />
-      <Link href="/about" className="navBtn__main">
+      <Link href='/about' className='navBtn__main'>
         {t("list.company")}
       </Link>
-      <Link href="/pay-del/payment" className="navBtn__main">
+      <Link href='/pay-del/payment' className='navBtn__main'>
         {t("list.payment")}
       </Link>
-      <Link href="/contacts" className="navBtn__main">
+      <Link href='/contacts' className='navBtn__main'>
         {t("list.contacts")}
       </Link>
     </>

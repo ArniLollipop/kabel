@@ -1,3 +1,5 @@
+/** @format */
+
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { Homepage } from "@/layouts/homepage/Homepage";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -20,6 +22,8 @@ import { SertificateService } from "@/services/Sertificate.service";
 import { AboutService } from "@/services/About.service";
 import { ProductService } from "@/services/Product.servise";
 import { useEffect, useState } from "react";
+import Head from "next/head";
+import { useTranslation } from "react-i18next";
 
 export interface HomeProps {
   offers: offerI[];
@@ -33,44 +37,45 @@ export interface HomeProps {
   metalRes: IMetalResponse;
 }
 
-export default function Home() {
-  const [items, setItems] = useState<any>();
-
-  async function getters() {
-    const offers = await OfferService().getOffers();
-    const aboutInfo = await AboutService().getAboutInfo();
-    const categories = await ProductService().getCategories();
-    const sertificates = await SertificateService().getSertificate();
-    const adventages = await AdventagesService().getAdventages();
-    const news = await NewsService().getNews();
-    const currencyRes = await GetCurrencyService().getCurrency();
-    const metalRes = await GetCurrencyService().getMetal();
-
-    setItems({
-      categories: categories,
-      aboutInfo,
-      sertificates,
-      adventages,
-      news,
-      offers,
-      currencyRes,
-      metalRes,
-    });
-  }
-
-  useEffect(() => {
-    getters();
-  }, []);
+export default function Home(props: HomeProps) {
+  const { t } = useTranslation();
 
   return (
     <MainLayout activePage={ActiveHeaderPage.MAIN}>
-      {items ? (
-        <Homepage {...items} />
+      <Head>
+        <title>{t("title_index")}</title>
+        <meta name='description' content={t("description_index") as string} />
+      </Head>
+      {props ? (
+        <Homepage {...props} />
       ) : (
-        <div className="flex items-center !justify-center w-full h-[100vh]">
-          <div className="loading"></div>
+        <div className='flex items-center !justify-center w-full h-[100vh]'>
+          <div className='loading'></div>
         </div>
       )}
     </MainLayout>
   );
+}
+
+export async function getServerSideProps() {
+  const offers = await OfferService().getOffers();
+  const aboutInfo = await AboutService().getAboutInfo();
+  const categories = await ProductService().getCategories();
+  const sertificates = await SertificateService().getSertificate();
+  const adventages = await AdventagesService().getAdventages();
+  const news = await NewsService().getNews();
+  const currencyRes = await GetCurrencyService().getCurrency();
+  const metalRes = await GetCurrencyService().getMetal();
+  return {
+    props: {
+      offers,
+      aboutInfo,
+      categories,
+      sertificates,
+      adventages,
+      news,
+      currencyRes,
+      metalRes,
+    },
+  };
 }

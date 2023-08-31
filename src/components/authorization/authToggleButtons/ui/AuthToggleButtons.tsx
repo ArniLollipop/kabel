@@ -1,3 +1,5 @@
+/** @format */
+
 // hooks
 import { FC } from "react";
 import { useState } from "react";
@@ -46,10 +48,9 @@ export const AuthToggleButtons: FC<AuthToggleButtonsProps> = (props) => {
   const Buttons = ({ id, children, isActive, onClick }: ButtonsProps) => {
     return (
       <a
-        href="#nolink"
+        href='#nolink'
         onClick={() => navigate(id)}
-        className={isActive ? cls.active : ""}
-      >
+        className={isActive ? cls.active : ""}>
         {children}
       </a>
     );

@@ -1,3 +1,5 @@
+/** @format */
+
 import cls from "./index.module.scss";
 
 import {
@@ -9,7 +11,8 @@ import ImageCabinetBonus from "@/assets/images/ImageCabinetBonus.png";
 import { useHttp } from "@/hooks/useHttp";
 import { useEffect, useState } from "react";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
 export default function bonusesPage() {
   const { t } = useTranslation();
@@ -37,8 +40,11 @@ export default function bonusesPage() {
   return (
     <CabinetLayout
       activePage={ActiveCabinetPageEnum.BONUSES}
-      className={cls.bonuses}
-    >
+      className={cls.bonuses}>
+      <Head>
+        <title>{t("title_bonus")}</title>
+        <meta name='description' content={t("description_bonus") as string} />
+      </Head>
       <h3>{t("bonuses")}</h3>
 
       <div className={cls.bonuses_info}>
@@ -62,7 +68,7 @@ export default function bonusesPage() {
       <Image
         className={cls.bonuses_img}
         src={ImageCabinetBonus}
-        alt="bonus image"
+        alt={t("alt_bonus_image") + "| Almaty Kazkabel"}
       />
     </CabinetLayout>
   );

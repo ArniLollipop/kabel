@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./CardPage.module.scss";
@@ -6,7 +8,7 @@ import { Modal } from "@/shared/modal/Modal";
 import { AddOrEditDelivery } from "../../components/cabinet/delivery/AddOrEditDelivery";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/hooks/store";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import Link from "next/link";
 
@@ -40,15 +42,13 @@ export const CardPage: FC<CardPageProps> = (props) => {
           modal
             ? "fixed top-0 left-0 bg-black bg-opacity-40 w-full h-[100vh] z-[1000] transition-all duration-300"
             : "fixed top-0 left-0 bg-transparent bg-opacity-40 opacity-0 h-[100vh] z-[1000] transition-all duration-300"
-        }
-      ></div>
+        }></div>
       <div className={modal ? cls.modal_inner : "hidden"}>
-        <p className="text-center font-semibold text-xl"> {t("korzinaText")}</p>
-        <div className="flex items-center gap-[10px] !justify-center">
+        <p className='text-center font-semibold text-xl'> {t("korzinaText")}</p>
+        <div className='flex items-center gap-[10px] !justify-center'>
           <Link
-            href="/cabinet/orders"
-            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
-          >
+            href='/cabinet/orders'
+            className='bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer'>
             {t("pereitiButton")}
           </Link>
         </div>

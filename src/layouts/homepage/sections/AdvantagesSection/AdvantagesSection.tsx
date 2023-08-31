@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./AdvantagesSection.module.scss";
@@ -10,7 +12,7 @@ import IconAdvantagesDelivery from "@/assets/icons/IconAdvantagesDelivery.svg";
 import IconAdvantagesHands from "@/assets/icons/IconAdvantagesHands.svg";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import { adventagesI } from "@/types/AdventagesTypes";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -57,7 +59,12 @@ export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
               <span className={cls.AdvantagesSection_itemStep}>
                 {i + 1 > 9 ? i + 1 : `0${i + 1}`}
               </span>
-              <Image src={icon} alt="advantages icon" width={45} height={45} />
+              <Image
+                src={icon}
+                alt={advantage + "| Almaty Kazkabel"}
+                width={45}
+                height={45}
+              />
               <p className={cls.AdvantagesSection_itemDescr}>{advantage}</p>
             </li>
           </SwiperSlide>

@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState, useTransition } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListItem.module.scss";
@@ -152,7 +154,9 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
   function handleCopyToClipboard() {
     navigator.clipboard
-      .writeText(`https://cable.kz/catalog/${element.product_info.code}`)
+      .writeText(
+        `https://cable.kz/catalog/${element.product_info.subcategory_slug}/${element.product_info.code}`
+      )
       .then(() => {
         toast(t("copyOk"), {
           hideProgressBar: true,
@@ -169,7 +173,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
     <li className={cn(cls.GoodsListItem)}>
       <Image
         src={element.product_info.image || NullImg}
-        alt="Product image"
+        alt={element.product_info.name + "| Almaty Kazkabel"}
         width={300}
         height={300}
         className={cls.img}
@@ -177,9 +181,13 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
 
       <div className={cls.GoodsDescr}>
         <Link
-          href={"/catalog/" + element.product_info.code}
-          className={cls.GoodsDescr_title}
-        >
+          href={
+            "/catalog/" +
+            element.product_info.subcategory_slug +
+            "/" +
+            element.product_info.code
+          }
+          className={cls.GoodsDescr_title}>
           {element.product_info.name}
         </Link>
 
@@ -189,12 +197,11 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
             onClick={(e: any) => {
               amount > 1 && handleMinus(e);
             }}
-            disabled={amount == 0 || disabled}
-          >
+            disabled={amount == 0 || disabled}>
             <IconCardCounterMinus className={cls.GoodsDescr_counterBtn} />
           </Button>
           <input
-            type="number"
+            type='number'
             min={1}
             max={50}
             value={cartChange}
@@ -213,8 +220,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
               amount < 1000 && handlePlus(e);
             }}
             disabled={disabled}
-            theme={ThemeButton.CLEAR}
-          >
+            theme={ThemeButton.CLEAR}>
             <IconCardCounterPlus className={cls.GoodsDescr_counterBtn} />
           </Button>
         </div>
@@ -225,7 +231,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
               <span>Цвет:</span>Красный
               <Image
                 src={element.product_info ? element.product_info.image : ""}
-                alt="Product image miniature"
+                alt={element.product_info.name + "| Almaty Kazkabel"}
                 className={cls.GoodsDescr_props_colorImg}
                 width={300}
                 height={300}
@@ -234,7 +240,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
           )}
           <p className={cls.GoodsDescr_props_weight}>
             {t("canBuy")}{" "}
-            <span className="text-red-500">
+            <span className='text-red-500'>
               {element.remains - cartChange} м
             </span>
           </p>
@@ -250,8 +256,7 @@ export const GoodsListItem: FC<GoodsListItemProps> = (props) => {
         <Button
           onClick={handleCopyToClipboard}
           theme={ThemeButton.CLEAR}
-          className={cls.GoodsBtns_shareBtn}
-        >
+          className={cls.GoodsBtns_shareBtn}>
           <IconShare className={cls.GoodsBtns_shareIcon} />
           <span> {t("share")}</span>
         </Button>

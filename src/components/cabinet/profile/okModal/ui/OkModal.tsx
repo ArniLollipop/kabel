@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames";
 import cls from "./OkModal.module.scss";
@@ -6,7 +8,7 @@ import { ThemeButton } from "@/UI/Button/ui/Button";
 
 let cn = classNames.bind(cls);
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 interface OkModalProps {
   className?: string;
@@ -27,8 +29,7 @@ export const OkModal: FC<OkModalProps> = (props) => {
         theme={ThemeButton.YELLOW}
         onClick={() => {
           setShowModal(false);
-        }}
-      >
+        }}>
         ОК
       </Button>
     </div>

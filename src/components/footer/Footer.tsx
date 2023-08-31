@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./Footer.module.scss";
@@ -42,24 +44,22 @@ export const Footer: FC<FooterProps> = (props) => {
     <>
       <div className={cls.Footer}>
         <nav className={cls.footerNav}>
-          <IconLogo className={cls.footerNav_logo} textColor="#fff" />
+          <IconLogo className={cls.footerNav_logo} textColor='#fff' />
 
           <ul className={cls.footerNav_list}>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.ABOUT,
-              })}
-            >
-              <Link href="/about">
+              })}>
+              <Link href='/about'>
                 {t("list.company") ? t("list.company") : ""}
               </Link>
             </li>
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CATALOG,
-              })}
-            >
-              <Link href="/catalog">
+              })}>
+              <Link href='/catalog'>
                 {t("list.product") ? t("list.product") : ""}
                 {}
               </Link>
@@ -67,9 +67,8 @@ export const Footer: FC<FooterProps> = (props) => {
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.SERVICES,
-              })}
-            >
-              <Link href="/services">
+              })}>
+              <Link href='/services'>
                 {t("list.services") ? t("list.services") : ""}
 
                 {}
@@ -78,9 +77,8 @@ export const Footer: FC<FooterProps> = (props) => {
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.NEWS,
-              })}
-            >
-              <Link href="/news">
+              })}>
+              <Link href='/news'>
                 {t("list.news") ? t("list.news") : ""}
 
                 {}
@@ -89,9 +87,8 @@ export const Footer: FC<FooterProps> = (props) => {
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.PAY_DEL,
-              })}
-            >
-              <Link href="/pay-del/payment">
+              })}>
+              <Link href='/pay-del/payment'>
                 {t("list.payment") ? t("list.payment") : ""}
 
                 {}
@@ -100,9 +97,8 @@ export const Footer: FC<FooterProps> = (props) => {
             <li
               className={cn(cls.footerNav_listItem, {
                 active: activePage === ActiveHeaderPage.CONTACTS,
-              })}
-            >
-              <Link href="/contacts">
+              })}>
+              <Link href='/contacts'>
                 {t("list.contacts") ? t("list.contacts") : ""}
 
                 {}
@@ -111,9 +107,8 @@ export const Footer: FC<FooterProps> = (props) => {
             <li
               className={cn(cls.footerNav_listItem, {
                 active: router.pathname === "/politics",
-              })}
-            >
-              <Link href="/politics">
+              })}>
+              <Link href='/politics'>
                 {t("footer.politics") ? t("footer.politics") : ""}
 
                 {}
@@ -130,18 +125,16 @@ export const Footer: FC<FooterProps> = (props) => {
                 className={cn(
                   cls.footerInfo_tableColRow,
                   cls.footerInfo_withAdressIcon
-                )}
-              >
+                )}>
                 Алматы ул. Тлендиева 94/94А <br />
                 склад: ул. Бирлик 9
               </span>
               <a
-                href="mailto: info@cable.kz"
+                href='mailto: info@cable.kz'
                 className={cn(
                   cls.footerInfo_tableColRow,
                   cls.footerInfo_withEmailIcon
-                )}
-              >
+                )}>
                 info@cable.kz
               </a>
             </li>
@@ -171,28 +164,24 @@ export const Footer: FC<FooterProps> = (props) => {
               </h4>
               <div className={cls.footerInfo_tableColPhones}>
                 <a
-                  href="tel:+77273014798"
-                  className={cls.footerInfo_tableColRow}
-                >
+                  href='tel:+77273014798'
+                  className={cls.footerInfo_tableColRow}>
                   +7 727 301 47 98
                 </a>
                 <a
-                  href="tel:88000704798"
-                  className={cls.footerInfo_tableColRow}
-                >
+                  href='tel:88000704798'
+                  className={cls.footerInfo_tableColRow}>
                   8 800 070 47 98
                 </a>
                 <a
-                  href="tel:+77273554798"
-                  className={cls.footerInfo_tableColRow}
-                >
+                  href='tel:+77273554798'
+                  className={cls.footerInfo_tableColRow}>
                   +7 727 355 47 98
                 </a>
                 <a
-                  href="https://wa.me/77003014798"
-                  target="_blank"
-                  className={cls.footerInfo_tableColRow}
-                >
+                  href='https://wa.me/77003014798'
+                  target='_blank'
+                  className={cls.footerInfo_tableColRow}>
                   +7 700 301 47 98
                 </a>
               </div>
@@ -211,9 +200,15 @@ export const Footer: FC<FooterProps> = (props) => {
               </h4>
 
               <div className={cls.footerInfo_payments}>
-                <Image src={IconPaymentVisa} alt="img" />
-                <Image src={IconPaymentMC} alt="img" />
-                <Image src={IconPaymentKaspi} alt="img" />
+                <Image
+                  src={IconPaymentVisa}
+                  alt={"VISA" + "| Almaty Kazkabel"}
+                />
+                <Image src={IconPaymentMC} alt={"MC" + "| Almaty Kazkabel"} />
+                <Image
+                  src={IconPaymentKaspi}
+                  alt={"KASPI" + "| Almaty Kazkabel"}
+                />
               </div>
             </li>
           </ul>
@@ -222,10 +217,9 @@ export const Footer: FC<FooterProps> = (props) => {
             {}
           </span>
           <Link
-            href="https://a-lux.kz/"
-            target="_blank"
-            className={cls.footerInfo_protected + " mt-2"}
-          >
+            href='https://a-lux.kz/'
+            target='_blank'
+            className={cls.footerInfo_protected + " mt-2"}>
             {t("footer.alux") ? t("footer.alux") : ""}
             {}
           </Link>
@@ -235,11 +229,10 @@ export const Footer: FC<FooterProps> = (props) => {
       {/* Mobile implementation */}
       <div className={cls.FooterMobile}>
         <Link
-          href="/"
+          href='/'
           className={cn(cls.FooterMobile_navMenuItem, {
             active: activePage === ActiveHeaderPage.MAIN,
-          })}
-        >
+          })}>
           <IconMobileMenuHome
             textColor={
               activePage === ActiveHeaderPage.MAIN ? "#00abc2" : "#4F4F4F"
@@ -253,11 +246,10 @@ export const Footer: FC<FooterProps> = (props) => {
         </Link>
 
         <Link
-          href="/catalog"
+          href='/catalog'
           className={cn(cls.FooterMobile_navMenuItem, {
             active: activePage === ActiveHeaderPage.CATALOG,
-          })}
-        >
+          })}>
           <IconMobileMenuProduct
             textColor={
               activePage === ActiveHeaderPage.CATALOG ? "#00abc2" : "#4F4F4F"
@@ -271,11 +263,10 @@ export const Footer: FC<FooterProps> = (props) => {
         </Link>
 
         <Link
-          href="/services"
+          href='/services'
           className={cn(cls.FooterMobile_navMenuItem, {
             active: activePage === ActiveHeaderPage.SERVICES,
-          })}
-        >
+          })}>
           <IconMobileMenuServices
             textColor={
               activePage === ActiveHeaderPage.SERVICES ? "#00abc2" : "#4F4F4F"
@@ -289,11 +280,10 @@ export const Footer: FC<FooterProps> = (props) => {
         </Link>
 
         <Link
-          href="/card"
+          href='/card'
           className={cn(cls.FooterMobile_navMenuItem, {
             active: activePage === ActiveHeaderPage.CARD,
-          })}
-        >
+          })}>
           <IconMobileMenuCard
             textColor={
               activePage === ActiveHeaderPage.CARD ? "#00abc2" : "#4F4F4F"
@@ -310,8 +300,7 @@ export const Footer: FC<FooterProps> = (props) => {
           href={isLoggedIn ? "/cabinet" : "/auth"}
           className={cn(cls.FooterMobile_navMenuItem, {
             active: activePage === ActiveHeaderPage.CABINET,
-          })}
-        >
+          })}>
           <IconMobileMenuMore
             textColor={
               activePage === ActiveHeaderPage.CABINET ? "#00abc2" : "#4F4F4F"

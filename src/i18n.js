@@ -1,3 +1,5 @@
+/** @format */
+
 import i18n from "i18next";
 import I18NextHttpBackend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -261,10 +263,178 @@ i18n
           errorVariantSalePoint: "Алу нүктесін немесе жеткізуді таңдаңыз",
           errorVariantPay: "Төлем әдісін таңдаңыз",
           errorVatiantAddress: "Жеткізу нүктесін таңдаңыз",
+          product_image1:
+            "Өнімдер Алматы Казкабель - әртүрлі форматтағы алюминий кабельдері",
+          product_image2:
+            "Өнімдер Алматы Казкабель - әртүрлі форматтағы мыс кабельдер",
+          product_image3: "Өнімдер Алматы Казкабель - басқа компоненттер",
+          sertificate_alt1: "Біздің сәйкестік сертификатымыз - сурет 1",
+          sertificate_alt2: "Біздің сәйкестік сертификатымыз - 2-сурет",
+          sertificate_alt3: "Біздің сәйкестік сертификатымыз - сурет 3",
+          sertificate_alt4: "Біздің сәйкестік сертификатымыз - сурет 4",
+          sertificate_alt5: "Біздің сәйкестік сертификатымыз – 5-сурет",
+          sertificate_alt6: "Біздің сәйкестік сертификатымыз - сурет 6",
+
+          title_index:
+            "Кабель және сым өнімдерінің жетекші жеткізушісі | Almaty Kazkabel",
+          title_politics:
+            "Алматы Казкабель веб-сайтының Құпиялық саясаты және пайдалану шарттары",
+          title_card: "Сауда себеті | Almaty Kazkabel",
+          title_catalog: "Өнім каталогы | Almaty Kazkabel",
+          title_news: "Компания жаңалықтары | Almaty Kazkabel",
+          title_about: "Компания туралы | Almaty Kazkabel",
+          title_services: "Қызметтер | Almaty Kazkabel",
+          title_contacts: "Компания байланыстары | Almaty Kazkabel",
+          title_auth: "Авторизация | Almaty Kazkabel",
+          title_payment: "Төлем әдістері | Almaty Kazkabel",
+          title_section:
+            "Кабель қимасының онлайн калькуляторы | Almaty Kazkabel",
+          title_delivery: "Жеткізу әдістері | Almaty Kazkabel",
+          title_orders: "Менің тапсырыстарым | Almaty Kazkabel",
+          title_weight: "Кабель салмағының кестесі | Almaty Kazkabel",
+          title_encoding: "Кабель атауын онлайн декодтау | Almaty Kazkabel",
+          title_currency:
+            "Валюта бағамы және Лондон металл тақтасы | Almaty Kazkabel",
+          title_support: "Жиі қойылатын сұрақтар және қолдау | Almaty Kazkabel",
+          title_cabinet_delivery: "Жеткізу мекенжайлары | Almaty Kazkabel",
+          title_profile: "Менің профилім | Almaty Kazkabel",
+          title_bonus: "Менің бонустарым | Almaty Kazkabel",
+
+          description_index:
+            "Қазақстан Республикасында кабель және сым өнімдерін жоғары сапалы көтерме жеткізу. Кең ассортимент және қолжетімді баға – Almaty Kazkabel..",
+          description_politics:
+            "Сіздің құпиялылығыңыз біз үшін ең маңызды. Құпиялық саясатымызды оқып шығыңыз және «Almaty Kazkabel.» ЖШС веб-сайтында деректеріңіздің қауіпсіздігін қалай қамтамасыз ететінімізді біліңіз",
+          description_card:
+            "Себетке қосқан заттарды тексеріп, төлеуге дайын болыңыз. Almaty Kazkabel.",
+          description_catalog:
+            "Әртүрлі форматтағы өнеркәсіптік қажеттіліктерге арналған кабельдер каталогын, сондай-ақ Almaty Kazkabel ресми сайтында аксессуарлардың кең таңдауымен танысыңыз.",
+          description_news:
+            "Жаңалықтар мен пайдалы мақалаларды «Almaty Kazkabel.» ЖШС ресми сайтынан оқыңыз.",
+          description_about:
+            "Қазақстан Республикасындағы кабель және сым өнімдерін жеткізетін жетекші компаниялардың бірі «Almaty Kazkabel.» туралы білуіңіз керек нәрсенің бәрі.",
+          description_services:
+            "Сым мен кабельді таңдауға арналған ыңғайлы онлайн құралдарын зерттеңіз | Almaty Kazkabel",
+          description_contacts:
+            "Байланыс ақпараты және «Almaty Kazkabel.» ЖШС байланысы Телефон нөмірлері, поштасы, мекенжайы, жұмыс кестесі және байланыс үшін әлеуметтік желілерге сілтемелер.",
+          description_auth: "Тіркелу және жеке кабинетке кіру.",
+          description_payment:
+            "Ыңғайлы және қолжетімді төлем әдістерін тексеріңіз | Almaty Kazkabel.",
+          description_section:
+            "Кабельдің көлденең қимасын жылдам және дәл есептеу үшін біздің онлайн калькуляторды пайдаланыңыз. «Almaty Kazkabel» компаниясы – сіздің сенімді серіктесіңіз.",
+          description_delivery:
+            "Тапсырысты жылдам және ыңғайлы жеткізу мүмкіндігін пайдаланыңыз | Almaty Kazkabel.",
+          description_orders: "Тапсырыс тарихы | Almaty Kazkabel.",
+          description_weight:
+            "Тегін онлайн кабель салмағын есептеу кестесін пайдаланыңыз | Almaty Kazkabel.",
+          description_encoding:
+            "Кабель атауларын шешу ешқашан оңай болған емес! Әрбір кабель | туралы толық ақпаратты жылдам қол жеткізу үшін біздің қызметімізді пайдаланыңыз Almaty Kazkabel.",
+          description_currency:
+            "Ағымдағы айырбас бағамы мен Лондон металл биржасы туралы ақпаратты Алматы Kazkabel парақшасынан біліңіз. Қаржылық өзгерістерден хабардар болыңыз.",
+          description_support:
+            "Сұрақтарыңызға жауап іздеп жүрсіз бе? Almaty Kazkabel жиі қойылатын сұрақтар және қолдау бетіне кіріп, кәсіби көмек алыңыз.",
+          description_cabinet_delivery:
+            "Біздің жеткізу мекенжайларымызды тексеріңіз және тапсырысыңызды алу үшін ыңғайлы орынды таңдаңыз. Жылдам және сенімді жеткізу сіздің қолыңызда | Almaty Kazkabel.",
+          description_profile:
+            "Беттегі профильді және жеке параметрлерді басқарыңыз. Almaty Kazkabel компаниясымен жеке тәжірибе алыңыз.",
+          description_bonus:
+            "Біздің бонустық бағдарламаларымыз және бонустарды жинақтау мүмкіндігі туралы біліңіз. Almaty Kazkabel артықшылықтарыңызды кеңейтіп, артықшылықтарға ие болыңыз.",
+          alt_avatar: "Фото пользователя",
+
+          alt_default_user_avatar: "Әдепкі пайдаланушы аватары",
+          alt_cat_icon: "Санат белгішесі",
+          alt_decoding: "декодтау",
+          alt_services_icon: "Қызметтер белгішелері",
+          alt_bonus_image: "Бонустардың суреті",
+          alt_payment_image: "төлем суреті",
         },
       },
       ru: {
         translation: {
+          alt_payment_image: "изображение платежа",
+          alt_bonus_image: "Картинка бонусов",
+          alt_services_icon: "Иконки служб",
+          alt_decoding: "декодирование",
+          alt_cat_icon: "Иконка категории",
+          alt_default_user_avatar: "Аватар пользователя по умолчанию",
+          alt_avatar: "Фото пользователя",
+          title_index:
+            "Ведущий поставщик кабельно-проводниковой продукции | Almaty Kazkabel",
+          title_politics:
+            "Политика конфиденциальности и Условия использования сайта Almaty Kazkabel",
+          title_card: "Корзина покупок | Almaty Kazkabel",
+          title_catalog: "Каталог товаров | Almaty Kazkabel",
+          title_news: "Новости компании | Almaty Kazkabel",
+          title_about: "О компании | Almaty Kazkabel",
+          title_services: "Сервисы | Almaty Kazkabel",
+          title_contacts: "Контакты компании | Almaty Kazkabel",
+          title_auth: "Авторизация | Almaty Kazkabel",
+          title_payment: "Способы оплаты | Almaty Kazkabel",
+          title_section:
+            "Онлайн калькулятор расчета сечения кабеля | Almaty Kazkabel",
+          title_delivery: "Способы доставки | Almaty Kazkabel",
+          title_orders: "Мои заказы | Almaty Kazkabel",
+          title_weight: "Таблица веса кабеля | Almaty Kazkabel",
+          title_encoding:
+            "Онлайн расшифровка названия кабеля | Almaty Kazkabel",
+          title_currency:
+            "Курс валюты и Лондонская бирда металлов | Almaty Kazkabel",
+          title_support: "Частые вопросы и поддержка | Almaty Kazkabel",
+          title_cabinet_delivery: "Адреса достаки | Almaty Kazkabel",
+          title_profile: "Мой профиль | Almaty Kazkabel",
+          title_bonus: "Мои бонусы | Almaty Kazkabel",
+
+          description_index:
+            "Качественные оптовые поставки кабельно-проводниковой продукции по Республике Казахстан. Широкий ассортимент и доступные цены - Almaty Kazkabel.",
+          description_politics:
+            "Ваша конфиденциальность имеет для нас высшее значение. Ознакомьтесь с нашей политикой конфиденциальности и узнайте, как мы обеспечиваем безопасность ваших данных на сайте ТОО «Almaty Kazkabel»",
+          description_card:
+            "Ознакомьтесь с товарами, которые вы добавили в корзину, и готовьтесь к оформлению своего заказа. Almaty Kazkabel.",
+          description_catalog:
+            "Изучите наш каталог кабелей под промышленные нужды разных форматов, а также широкий выбор комплектующих товаров на официальнома сайте компании Almaty Kazkabel.",
+          description_news:
+            "Читайте новости и полезные статьи на официальном сайте ТОО «Almaty Kazkabel».",
+          description_about:
+            "Всё что нужно знать о компании «Almaty Kazkabel» - одной из ведущих компаний, которая занимается поставками кабельно-проводниковой продукции в Республике Казахстан.",
+          description_services:
+            "Ознакомьтесь с удобными онлайн-инструментами для выбора проводниковой и кабельной продукции | Almaty Kazkabel",
+          description_contacts:
+            "Контактная информация и связь с ТОО «Almaty Kazkabel» Номера телефонов, почта, адрес, график работы и ссылки на социальные сети для связи.",
+          description_auth: "Регистраци и вход в личный кабинет.",
+          description_payment:
+            "Ознакомьтесь с удобными и достумными способами оплаты | Almaty Kazkabel.",
+          description_section:
+            "Используйте наш онлайн-калькулятор для быстрого и точного расчета сечения кабеля. Almaty Kazkabel - ваш надежный партнер.",
+          description_delivery:
+            "Воспользуйтесь быстрой и удобной доставкой заказа | Almaty Kazkabel.",
+          description_orders: "История заказов | Almaty Kazkabel.",
+          description_weight:
+            "Воспользуйтесь бесплатной онлайн таблицей для расчёта веса кабеля | Almaty Kazkabel.",
+          description_encoding:
+            "Расшифровка названий кабелей никогда не была такой простой! Используйте наш сервис для быстрого доступа к полной информации о каждом кабеле | Almaty Kazkabel.",
+          description_currency:
+            "Узнайте актуальный курс валюты и информацию о Лондонской бирже металлов на странице Almaty Kazkabel. Будьте в курсе финансовых изменений.",
+          description_support:
+            "Ищете ответы на свои вопросы? Посетите страницу Частые вопросы и поддержка на Almaty Kazkabel и получите профессиональную помощь.",
+          description_cabinet_delivery:
+            "Ознакомьтесь с нашими адресами доставки и выберите удобное местоположение для получения заказа. Быстрая и надежная доставка в вашем распоряжении | Almaty Kazkabel.",
+          description_profile:
+            "Управляйте своим профилем и персональными настройками на странице. Получайте персонализированный опыт с Almaty Kazkabel.",
+          description_bonus:
+            "Узнайте о наших бонусных программах и возможности накопления бонусов. Расширьте свои выгоды и получайте привилегии с Almaty Kazkabel.",
+
+          sertificate_alt1: "Наш сертификат Соответствия - изображение 1",
+          sertificate_alt2: "Наш сертификат Соответствия - изображение 2",
+          sertificate_alt3: "Наш сертификат Соответствия - изображение 3",
+          sertificate_alt4: "Наш сертификат Соответствия - изображение 4",
+          sertificate_alt5: "Наш сертификат Соответствия - изображение 5",
+          sertificate_alt6: "Наш сертификат Соответствия - изображение 6",
+
+          product_image1:
+            "Продукция Almaty Kazkabel - алюминиевые кабеля разных форматов",
+          product_image2:
+            "Продукция Almaty Kazkabel - медные кабеля разных форматов",
+          product_image3:
+            "Продукция Almaty Kazkabel - другие комплектующие товары",
           lang: "RU",
           da: "Да",
           all: "Все",
@@ -368,7 +538,7 @@ i18n
             main: "Главная",
             cart: "Корзина",
             profile: "Профиль",
-            alux: "Сайт разработан в компании «A-LUX",
+            alux: "Сайт разработан в компании «A-LUX»",
           },
           auth: "Авторизация",
           code: "Получить код",

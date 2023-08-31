@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import cls from "./Header.module.scss";
 import {
@@ -120,62 +122,54 @@ export const Header: FC<HeaderProps> = (props) => {
 
   return (
     <div className={cls.Header} onClick={() => setResultOpen(false)}>
-      <div className="w-full bg-white">
+      <div className='w-full bg-white'>
         <div className={cls.Header_wrapper}>
           <ul className={cls.contacts_list}>
             <li className={cls.contacts_list_mobileLogo}>
-              <Link href="/">
+              <Link href='/'>
                 <IconLogo
-                  width="150"
-                  height="100"
-                  className="h-[50px] overflow-hidden"
+                  width='150'
+                  height='100'
+                  className='h-[50px] overflow-hidden'
                 />
               </Link>
             </li>
 
             <li className={cls.contacts_list_geoTag}>
-              <a href="" className={cls["link"]}>
+              <a href='' className={cls["link"]}>
                 <IconGeoTag className={cls["icon"]} />
                 <span className={cls["city"]}>Алматы</span>
               </a>
             </li>
 
             <li className={cls.contacts_list_contacts}>
-              <a href="tel:+78000704798" className={cls["main-phone"]}>
+              <a href='tel:+78000704798' className={cls["main-phone"]}>
                 <IconPhone className={cls["icon"]} />
                 <span className={cls["phone"]}>8 800 070 47 98</span>
               </a>
-              <span className={cls["phone-descr"]}>
-                {t("header.free") ? t("header.free") : ""}
-
-                {}
-              </span>
 
               <a
-                href="tel:+77273014798"
-                className={(cls["phone"], cls["phone-secondary"])}
-              >
+                href='tel:+77273014798'
+                className={(cls["phone"], cls["phone-secondary"])}>
                 +7 727 301 47 98
               </a>
 
               <a
-                href="tel:+77273554798"
-                className={(cls["phone"], cls["phone-secondary"])}
-              >
+                href='tel:+77273554798'
+                className={(cls["phone"], cls["phone-secondary"])}>
                 +7 727 355 47 98
               </a>
 
               <a
-                href="https://wa.me/77003014798"
-                target="_blank"
-                className={(cls["phone"], cls["phone-secondary"])}
-              >
+                href='https://wa.me/77003014798'
+                target='_blank'
+                className={(cls["phone"], cls["phone-secondary"])}>
                 +7 700 301 47 98
                 <IconWhatsApp />
               </a>
             </li>
             <li className={cls.contacts_list_card}>
-              <Link href="/card" className={cls["card-link"]}>
+              <Link href='/card' className={cls["card-link"]}>
                 <IconCard className={cls["icon"]} />
                 <span>{total_amount.toLocaleString("ru-RU")} ₸</span>
               </Link>
@@ -184,8 +178,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <li className={cls.contacts_list_user}>
               <Link
                 href={isLoggedIn ? "/cabinet/profile" : "/auth"}
-                className={cls["user-link"]}
-              >
+                className={cls["user-link"]}>
                 <IconUserCabinet className={cls["icon"]} />
                 {/* @ts-ignore */}
                 <span>
@@ -201,27 +194,25 @@ export const Header: FC<HeaderProps> = (props) => {
                 className={
                   cls.language_btn +
                   " flex items-center text-[#39424B] font-medium"
-                }
-              >
+                }>
                 {t("lang")}
                 <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
                   className={
                     open
                       ? "rotate-180 transition-all duration-300"
                       : "transition-all duration-300"
-                  }
-                >
+                  }>
                   <path
-                    d="M6 9L12 15L18 9"
-                    stroke="#39424B"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    d='M6 9L12 15L18 9'
+                    stroke='#39424B'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    strokeLinejoin='round'
                   />
                 </svg>
               </button>
@@ -232,8 +223,7 @@ export const Header: FC<HeaderProps> = (props) => {
                       changeLanguage("kz");
                       location.reload();
                     }}
-                    className={cls.language_choice}
-                  >
+                    className={cls.language_choice}>
                     KZ
                   </button>
                   <button
@@ -241,8 +231,7 @@ export const Header: FC<HeaderProps> = (props) => {
                       changeLanguage("ru");
                       location.reload();
                     }}
-                    className={cls.language_choice}
-                  >
+                    className={cls.language_choice}>
                     RU
                   </button>
                 </div>
@@ -251,7 +240,7 @@ export const Header: FC<HeaderProps> = (props) => {
           </ul>
 
           <nav className={cls.nav}>
-            <Link href="/" className={cls.nav_linkLogo}>
+            <Link href='/' className={cls.nav_linkLogo}>
               <IconLogo className={cls.nav_logo} />
             </Link>
 
@@ -259,9 +248,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <li
                 className={cn(cls.nav_list_item, {
                   active: activePage === ActiveHeaderPage.ABOUT,
-                })}
-              >
-                <Link href="/about">
+                })}>
+                <Link href='/about'>
                   {t("list.company") ? t("list.company") : ""}
                   {}
                 </Link>
@@ -269,9 +257,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <li className={cn(cls.nav_list_item, cls.catalogLink)}>
                 <Link
                   onMouseEnter={() => setActiveCat(categories[0].name || "")}
-                  href="/catalog"
-                  className="peer"
-                >
+                  href='/catalog'
+                  className='peer'>
                   {t("list.product") ? t("list.product") : ""}
 
                   {}
@@ -281,9 +268,8 @@ export const Header: FC<HeaderProps> = (props) => {
                     activeCat === ""
                       ? cn(cls.hovered) + " !-translate-y-[100%]"
                       : cn(cls.hovered) + " "
-                  }
-                >
-                  <div className="absolute left-1/2 !-translate-x-1/2 max-w-[1400px] w-full">
+                  }>
+                  <div className='absolute left-1/2 !-translate-x-1/2 max-w-[1400px] w-full'>
                     <nav className={cls.hovered_nav}>
                       {categories?.map((cat: any) => (
                         <Link
@@ -304,11 +290,10 @@ export const Header: FC<HeaderProps> = (props) => {
                           }
                           href={"/catalog"}
                           onMouseEnter={() => setActiveCat(cat.name)}
-                          key={cat.name}
-                        >
+                          key={cat.name}>
                           <Image
                             src={cat.icon}
-                            alt="icon"
+                            alt={t("alt_cat_icon") + "| Almaty Kazkabel"}
                             width={10}
                             height={15}
                           />
@@ -324,8 +309,7 @@ export const Header: FC<HeaderProps> = (props) => {
                           <div
                             className={cn(cls.hovered_content, {
                               visible: activeCat === cat.name,
-                            })}
-                          >
+                            })}>
                             {cat.subcategory_set.map((subcat: any) => (
                               <Link
                                 onClick={() => {
@@ -345,8 +329,7 @@ export const Header: FC<HeaderProps> = (props) => {
                                 }}
                                 className={cls.hovered_contentLink}
                                 href={`/catalog`}
-                                key={subcat.name}
-                              >
+                                key={subcat.name}>
                                 {subcat.name}
                               </Link>
                             ))}
@@ -361,9 +344,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <li
                 className={cn(cls.nav_list_item, {
                   active: activePage === ActiveHeaderPage.SERVICES,
-                })}
-              >
-                <Link href="/services">
+                })}>
+                <Link href='/services'>
                   {t("list.services") ? t("list.services") : ""}
 
                   {}
@@ -373,9 +355,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <li
                 className={cn(cls.nav_list_item, {
                   active: activePage === ActiveHeaderPage.NEWS,
-                })}
-              >
-                <Link href="/news">
+                })}>
+                <Link href='/news'>
                   {t("list.news") ? t("list.news") : ""}
 
                   {}
@@ -385,9 +366,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <li
                 className={cn(cls.nav_list_item, {
                   active: activePage === ActiveHeaderPage.PAY_DEL,
-                })}
-              >
-                <Link href="/pay-del/payment">
+                })}>
+                <Link href='/pay-del/payment'>
                   {t("list.payment") ? t("list.payment") : ""}
 
                   {}
@@ -397,9 +377,8 @@ export const Header: FC<HeaderProps> = (props) => {
               <li
                 className={cn(cls.nav_list_item, {
                   active: activePage === ActiveHeaderPage.CONTACTS,
-                })}
-              >
-                <Link href="/contacts">
+                })}>
+                <Link href='/contacts'>
                   {t("list.contacts") ? t("list.contacts") : ""}
 
                   {}
@@ -408,7 +387,7 @@ export const Header: FC<HeaderProps> = (props) => {
             </ul>
             <div className={cls.search}>
               <input
-                type="text"
+                type='text'
                 placeholder={t("findTovar") || "Поиск по имени товара"}
                 className={cls.nav_search}
                 onChange={(e: any) => inputCheck(e)}
@@ -419,19 +398,19 @@ export const Header: FC<HeaderProps> = (props) => {
                     searchRes?.map((el: any) => {
                       return (
                         <Link
-                          href={"/catalog/" + el.code}
-                          className={cls.search__result}
-                        >
+                          href={
+                            "/catalog/" + el.subcategory_slug + "/" + el.code
+                          }
+                          className={cls.search__result}>
                           <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                            width='16'
+                            height='16'
+                            viewBox='0 0 16 16'
+                            fill='none'
+                            xmlns='http://www.w3.org/2000/svg'>
                             <path
-                              d="M15.5 14.9258L11.5 10.9258M7.5 12.9258C4.18629 12.9258 1.5 10.2395 1.5 6.92578C1.5 3.61207 4.18629 0.925781 7.5 0.925781C10.8137 0.925781 13.5 3.61207 13.5 6.92578C13.5 10.2395 10.8137 12.9258 7.5 12.9258Z"
-                              stroke="#00ABC2"
+                              d='M15.5 14.9258L11.5 10.9258M7.5 12.9258C4.18629 12.9258 1.5 10.2395 1.5 6.92578C1.5 3.61207 4.18629 0.925781 7.5 0.925781C10.8137 0.925781 13.5 3.61207 13.5 6.92578C13.5 10.2395 10.8137 12.9258 7.5 12.9258Z'
+                              stroke='#00ABC2'
                             />
                           </svg>
                           {el.name}

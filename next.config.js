@@ -1,7 +1,10 @@
 /**
+ * @format
  * @type {import('next').NextConfig}
  */
+
 const nextConfig = {
+  fallback: true,
   reactStrictMode: false,
   experimental: {
     appDir: true,

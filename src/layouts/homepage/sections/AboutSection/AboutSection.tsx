@@ -1,10 +1,12 @@
-import { FC } from 'react';
-import classNames from 'classnames/bind';
-import cls from './AboutSection.module.scss';
-import { Title } from '@/UI/Title/Title';
-import ImageHomepageAbout from '@/assets/images/ImageHomepageAbout.png';
-import Image from 'next/image';
-import { AboutI } from '@/types/AboutTypes';
+/** @format */
+
+import { FC } from "react";
+import classNames from "classnames/bind";
+import cls from "./AboutSection.module.scss";
+import { Title } from "@/UI/Title/Title";
+import ImageHomepageAbout from "@/assets/images/ImageHomepageAbout.png";
+import Image from "next/image";
+import { AboutI } from "@/types/AboutTypes";
 
 const cn = classNames.bind(cls);
 
@@ -23,7 +25,7 @@ export const AboutSection: FC<AboutSectionProps> = (props) => {
         <Image
           src={aboutInfo?.image}
           className={cls.AboutSection_descrImage}
-          alt="About image"
+          alt={aboutInfo?.title + "| Almaty Kazkabel"}
           width={470}
           height={450}
         />

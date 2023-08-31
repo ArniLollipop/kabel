@@ -1,3 +1,5 @@
+/** @format */
+
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./FilterSection.module.scss";
@@ -16,7 +18,7 @@ import { ProductService } from "@/services/Product.servise";
 import { setPage, setProducts } from "@/store/slices/ProductSlice";
 import { queriesGenerator } from "@/helpers/queriesGenerator";
 import { SortByWidget } from "@/layouts/CatalogPage/widgets/SortByWidget/SortByWidget";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import nookies from "nookies";
 import { useHttp } from "@/hooks/useHttp";
@@ -135,12 +137,11 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
             sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
           }
         }
-        onSubmit={(values: sortI) => submitHandler(values)}
-      >
+        onSubmit={(values: sortI) => submitHandler(values)}>
         {({ isSubmitting, values }) => (
           <Form>
             {/* Header of Filters */}
-            <div className={cls.header} id="top">
+            <div className={cls.header} id='top'>
               <span>
                 {products?.count || "Нет"} {t("tovars")}
               </span>
@@ -149,7 +150,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 <Button
                   theme={ThemeButton.YELLOW}
                   className={cls.resetBtn}
-                  type="button"
+                  type='button'
                   onClick={async () => {
                     values.availability = "Все";
                     values.categories = [];
@@ -179,8 +180,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                     );
                     dispatch(setPage(res.data.count_pages));
                     dispatch(setProducts(res.data));
-                  }}
-                >
+                  }}>
                   {t("clear")}
                 </Button>
               </div>
@@ -196,9 +196,9 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
               </h3>
 
               <RadioInstance
-                name="availability"
-                value=""
-                id="all"
+                name='availability'
+                value=''
+                id='all'
                 text={t("all") || "Все"}
                 className={cls.FilterSection_radio}
                 checked={
@@ -207,9 +207,9 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 }
               />
               <RadioInstance
-                name="availability"
-                value="в наличии"
-                id="inStock"
+                name='availability'
+                value='в наличии'
+                id='inStock'
                 text={t("estUNas") || "В наличии"}
                 className={cls.FilterSection_radio}
                 checked={
@@ -218,9 +218,9 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                 }
               />
               <RadioInstance
-                name="availability"
-                value="под заказ"
-                id="underOrder"
+                name='availability'
+                value='под заказ'
+                id='underOrder'
                 text={t("podZakaz") || "Под заказ"}
                 className={cls.FilterSection_radio}
                 checked={
@@ -245,27 +245,25 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                         {({ open }: { open: boolean }) => (
                           <>
                             <AccordionHeader
-                              as="div"
+                              as='div'
                               className={cn(cls.filtersAcc_title, {
                                 filtersAcc_titleActive: open,
-                              })}
-                            >
+                              })}>
                               <h3 className={cls.accTitle}>{cat.name}</h3>
                               <svg
                                 className={cn(cls.filtersAcc_arrow, {
                                   filtersAcc_arrowActive: open,
                                 })}
-                                width="15"
-                                height="9"
-                                viewBox="0 0 15 9"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
+                                width='15'
+                                height='9'
+                                viewBox='0 0 15 9'
+                                fill='none'
+                                xmlns='http://www.w3.org/2000/svg'>
                                 <path
-                                  d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
+                                  d='M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562'
+                                  strokeWidth='2'
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
                                 />
                               </svg>
                             </AccordionHeader>
@@ -274,16 +272,14 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                               className={cn(cls.filtersAcc_body, {
                                 filtersAcc_bodyActive: open,
                               })}
-                              as="ul"
-                            >
+                              as='ul'>
                               {cat.subcategory_set.map((subcat: any) => (
                                 <li
                                   className={cls.filtersAcc_item}
-                                  key={subcat.name}
-                                >
+                                  key={subcat.name}>
                                   <CheckBoxInstance
                                     value={subcat.name}
-                                    name="categories"
+                                    name='categories'
                                     id={subcat.name}
                                     text={subcat.name}
                                     className={cls.filtersAcc_itemInput}
@@ -311,25 +307,23 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                             cls.filtersAcc_title,
                             cls.filtersAcc_titleCross
                           )}
-                          as="div"
-                        >
+                          as='div'>
                           <h3 className={cls.accTitle}>{t("sechenie")} </h3>
                           <svg
                             className={cn(cls.filtersAcc_arrow, {
                               filtersAcc_arrowActive: open,
                             })}
-                            width="15"
-                            height="9"
-                            viewBox="0 0 15 9"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                            width='15'
+                            height='9'
+                            viewBox='0 0 15 9'
+                            fill='none'
+                            xmlns='http://www.w3.org/2000/svg'>
                             <path
-                              d="M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562"
-                              stroke="#39424b"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+                              d='M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562'
+                              stroke='#39424b'
+                              strokeWidth='2'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             />
                           </svg>
                         </AccordionHeader>
@@ -338,25 +332,22 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
                           className={cn(cls.filtersAcc_body, {
                             filtersAcc_bodyActive: open,
                           })}
-                          as="ul"
-                        >
+                          as='ul'>
                           {cores ? (
                             Object.keys(cores).map((core) => (
                               <ul
                                 className={cls.filtersAcc_coreSect}
-                                key={core}
-                              >
+                                key={core}>
                                 {cores[core].map((coreSect) => (
                                   <li
                                     className={cls.filtersAcc_coreSectItem}
                                     key={`${core}x${coreSect}`}
-                                    data-sub={`${core}x${coreSect}`}
-                                  >
+                                    data-sub={`${core}x${coreSect}`}>
                                     <CheckBoxInstance
                                       text={`${core}x${coreSect}`}
-                                      name="checkedCors"
+                                      name='checkedCors'
                                       value={`${core}x${coreSect}`}
-                                      id="coreItem"
+                                      id='coreItem'
                                       checked={
                                         // (checkedFilters.core_number.includes(
                                         //   core
@@ -389,13 +380,12 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
               <Button
                 className={cls.submitBtn}
                 theme={ThemeButton.BLUE}
-                type="submit"
+                type='submit'
                 disabled={isSubmitting}
-                onClick={() => closeFilters && closeFilters(false)}
-              >
+                onClick={() => closeFilters && closeFilters(false)}>
                 {t("aprove2")}
               </Button>
-              <a href="#top" className={cls.anchorUp}>
+              <a href='#top' className={cls.anchorUp}>
                 {t("toUp")}
               </a>
             </div>

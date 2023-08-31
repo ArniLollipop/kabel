@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./HistoryOrdersSlider.module.scss";
@@ -46,16 +48,15 @@ export const HistoryOrdersSlider: FC<HistoryOrdersSliderProps> = (props) => {
   return (
     <div className={cn(cls.slider, className)}>
       {!orders ? (
-        <p className=" text-lg font-medium text-center my-20">
+        <p className=' text-lg font-medium text-center my-20'>
           {t("emptyOrder")}
         </p>
       ) : (
-        <div className="my-10">
+        <div className='my-10'>
           <Swiper
             {...params}
             onSwiper={(swiper) => setSwiper(swiper)}
-            onChange={(swiper) => setSwiper(swiper)}
-          >
+            onChange={(swiper) => setSwiper(swiper)}>
             {orders?.map((order: any) => {
               return (
                 <SwiperSlide key={order.id}>
@@ -68,42 +69,38 @@ export const HistoryOrdersSlider: FC<HistoryOrdersSliderProps> = (props) => {
           <Button
             className={cls.slider_next}
             theme={ThemeButton.CLEAR}
-            onClick={() => myswiper.slideNext()}
-          >
+            onClick={() => myswiper.slideNext()}>
             <svg
-              width="11"
-              height="21"
-              viewBox="0 0 11 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              width='11'
+              height='21'
+              viewBox='0 0 11 21'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
               <path
-                d="M1.125 19.25L9.875 10.5L1.125 1.75"
-                stroke="#39424B"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d='M1.125 19.25L9.875 10.5L1.125 1.75'
+                stroke='#39424B'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               />
             </svg>
           </Button>
           <Button
             className={cls.slider_prev}
             theme={ThemeButton.CLEAR}
-            onClick={() => myswiper.slidePrev()}
-          >
+            onClick={() => myswiper.slidePrev()}>
             <svg
-              width="11"
-              height="21"
-              viewBox="0 0 11 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              width='11'
+              height='21'
+              viewBox='0 0 11 21'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
               <path
-                d="M1.125 19.25L9.875 10.5L1.125 1.75"
-                stroke="#39424B"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d='M1.125 19.25L9.875 10.5L1.125 1.75'
+                stroke='#39424B'
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
               />
             </svg>
           </Button>

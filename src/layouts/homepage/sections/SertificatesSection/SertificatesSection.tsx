@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./SertificatesSection.module.scss";
@@ -6,7 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ImageMockSertificate from "@/assets/images/ImageMockSertificate.png";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 
@@ -75,8 +77,8 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
             </button>
             <Image
               className={cls.slider__img}
-              src={sertificates[0]?.image}
-              alt="Sertificate"
+              src={choice}
+              alt={t("sertificate_alt1") + "| Almaty Kazkabel"}
               width={500}
               height={700}
             />
@@ -92,15 +94,14 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
         <Swiper
           {...params}
           className={cls.slider}
-          onSwiper={(swiper) => setSwiper(swiper)}
-        >
-          {sertificates?.map((sert) => (
+          onSwiper={(swiper) => setSwiper(swiper)}>
+          {sertificates?.map((sert, index: number) => (
             <SwiperSlide key={sert.id}>
               <Image
                 onClick={() => setChoice(sert.image)}
                 className={cls.slider__img + " scale"}
                 src={sert.image}
-                alt="Sertificate"
+                alt={t("sertificate_alt" + (index + 1)) + "| Almaty Kazkabel"}
                 width={234}
                 height={351}
               />
@@ -111,38 +112,34 @@ export const SertificatesSection: FC<ServicesSectionProps> = (props) => {
         <Button
           className={cls.slider_next}
           theme={ThemeButton.CLEAR}
-          onClick={() => myswiper.slideNext()}
-        >
+          onClick={() => myswiper.slideNext()}>
           <svg
-            width="7"
-            height="11"
-            viewBox="0 0 7 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            width='7'
+            height='11'
+            viewBox='0 0 7 11'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
-              d="M0.966797 10.1004L5.5668 5.50039L0.966797 0.900391"
-              stroke="#F6BF0C"
-              strokeLinecap="square"
+              d='M0.966797 10.1004L5.5668 5.50039L0.966797 0.900391'
+              stroke='#F6BF0C'
+              strokeLinecap='square'
             />
           </svg>
         </Button>
         <Button
           className={cls.slider_prev}
           theme={ThemeButton.CLEAR}
-          onClick={() => myswiper.slidePrev()}
-        >
+          onClick={() => myswiper.slidePrev()}>
           <svg
-            width="7"
-            height="11"
-            viewBox="0 0 7 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            width='7'
+            height='11'
+            viewBox='0 0 7 11'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
-              d="M6.0332 10.1004L1.4332 5.50039L6.0332 0.900391"
-              stroke="#F6BF0C"
-              strokeLinecap="square"
+              d='M6.0332 10.1004L1.4332 5.50039L6.0332 0.900391'
+              stroke='#F6BF0C'
+              strokeLinecap='square'
             />
           </svg>
         </Button>

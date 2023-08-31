@@ -1,3 +1,5 @@
+/** @format */
+
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import cls from "./ShowChangePhoneNumber.module.scss";
@@ -10,7 +12,7 @@ import { maskForPhone } from "@/helpers/masks";
 import { changePhoneNumberSchema } from "@/helpers/validation";
 import { AuthService } from "@/services/Auth.service";
 import { Register } from "@/store/slices/AuthSlice";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -72,8 +74,7 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
           setShowChangePhoneNumber(false);
           setShowModal(true);
         }
-      }}
-    >
+      }}>
       {({
         values,
         touched,
@@ -151,9 +152,8 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
                   <Button
                     theme={ThemeButton.CLEAR}
                     className={cn(cls.sendAgainContainer_sendAgain)}
-                    type="button"
-                    onClick={() => setCountdown(60)}
-                  >
+                    type='button'
+                    onClick={() => setCountdown(60)}>
                     {t("again")}
                   </Button>
                 ) : (
@@ -165,9 +165,9 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
               <InputInstance
                 theme={EInputInstanceTheme.AUTH}
                 mask={maskForPhone}
-                type="text"
-                id="phone_number"
-                name="phone_number"
+                type='text'
+                id='phone_number'
+                name='phone_number'
                 placeholder={t("newPhone") || ""}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -184,9 +184,9 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
 
               <InputInstance
                 theme={EInputInstanceTheme.AUTH}
-                type="text"
-                id="confirmSmsCode"
-                name="confirmSmsCode"
+                type='text'
+                id='confirmSmsCode'
+                name='confirmSmsCode'
                 placeholder={t("placeholderCode") || "Код SMS"}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -210,19 +210,17 @@ export const ShowChangePhoneNumber = (props: ShowChangePhoneNumberProps) => {
               {isSmsCodeSend ? (
                 <Button
                   onClick={sendSmsCode}
-                  type="submit"
+                  type='submit'
                   className={cn(cls.changePhoneNBtn)}
-                  theme={ThemeButton.YELLOW}
-                >
+                  theme={ThemeButton.YELLOW}>
                   {t("aprove")}
                 </Button>
               ) : (
                 <Button
                   onClick={sendNewPhoneNumber}
-                  type="submit"
+                  type='submit'
                   className={cn(cls.changePhoneNBtn)}
-                  theme={ThemeButton.YELLOW}
-                >
+                  theme={ThemeButton.YELLOW}>
                   {t("code")}
                 </Button>
               )}

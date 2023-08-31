@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, ReactNode } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
@@ -6,7 +8,7 @@ import Link from "next/link";
 import { IconCabinetArrow } from "@/assets/icons";
 import { Title } from "@/UI/Title/Title";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -38,8 +40,7 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
               href={`/pay-del/${ActivePayDelPageEnum.PAYMENT}`}
               className={cn(cls.deliveryLayout_link, {
                 active: activePage === ActivePayDelPageEnum.PAYMENT,
-              })}
-            >
+              })}>
               <span>{t("pay")}</span>
               <IconCabinetArrow />
             </Link>
@@ -48,8 +49,7 @@ export const DeliveryLayout: FC<DeliveryLayoutProps> = (props) => {
               href={`/pay-del/${ActivePayDelPageEnum.DELIVERY}`}
               className={cn(cls.deliveryLayout_link, {
                 active: activePage === ActivePayDelPageEnum.DELIVERY,
-              })}
-            >
+              })}>
               <span>{t("delivery")}</span>
               <IconCabinetArrow />
             </Link>

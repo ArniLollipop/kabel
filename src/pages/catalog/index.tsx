@@ -1,3 +1,5 @@
+/** @format */
+
 import { useEffect, useState } from "react";
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { CatalogPage } from "@/layouts/CatalogPage/CatalogPage";
@@ -15,6 +17,8 @@ import { NextPageContext } from "next/types";
 import nookies from "nookies";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { useHttp } from "@/hooks/useHttp";
+import Head from "next/head";
+import { useTranslation } from "react-i18next";
 
 interface CardProps {
   products: productAnswI;
@@ -27,6 +31,8 @@ export default function Card(props: CardProps) {
 
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     dispatch(setProducts(products));
     dispatch(setPage(products.count_pages));
@@ -34,8 +40,14 @@ export default function Card(props: CardProps) {
     dispatch(setCores(cores));
   }, [products, categories, cores]);
 
+  console.log(props);
+
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
+      <Head>
+        <title>{t("title_catalog")}</title>
+        <meta name='description' content={t("description_catalog") as string} />
+      </Head>
       <CatalogPage />
     </MainLayout>
   );

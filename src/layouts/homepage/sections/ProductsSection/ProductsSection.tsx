@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./ProductsSection.module.scss";
@@ -9,7 +11,7 @@ import ImageMockCard3 from "@/assets/images/ImageMockCard3.png";
 import Link from "next/link";
 import { categoryI } from "@/types/ProductTypes";
 import { useHttp } from "@/hooks/useHttp";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 interface ProductsSectionProps {
@@ -36,12 +38,12 @@ export const ProductsSection: FC<ProductsSectionProps> = (props) => {
       <Title className={cls.ProductsSection_title}>{t("list.product")}</Title>
 
       <ul className={cls.ProductsSection_list}>
-        {categories?.map((cat: any) => (
+        {categories?.map((cat: any, index: number) => (
           <li className={cls.ProductsSection_item + " scale"} key={cat.name}>
-            <Link href="/catalog" className={cls.ProductsSection_link}>
+            <Link href='/catalog' className={cls.ProductsSection_link}>
               <Image
                 src={cat.image}
-                alt="Product image"
+                alt={t("product_image" + (index + 1)) + "| Almaty Kazkabel"}
                 className={cls.ProductsSection_img}
                 width={390}
                 height={290}

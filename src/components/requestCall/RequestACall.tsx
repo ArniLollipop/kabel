@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import cls from "./RequestACall.module.scss";
 import { Form, Formik } from "formik";
@@ -8,7 +10,7 @@ import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { requestACallSchema } from "@/helpers/validation";
 import { toast } from "react-toastify";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 
 interface RequestACallProps {
@@ -56,8 +58,7 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
           // if it is success
 
           // if it is error
-        }}
-      >
+        }}>
         {({ values, touched, errors, handleChange, handleBlur }) => {
           const handleSaveAddOrDelivery = () => {
             const { requestACallName, requestACallPhoneNumber } = touched;
@@ -76,9 +77,9 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
               <Form>
                 <InputInstance
                   theme={EInputInstanceTheme.PROFILE}
-                  type="text"
-                  id="requestACallName"
-                  name="requestACallName"
+                  type='text'
+                  id='requestACallName'
+                  name='requestACallName'
                   placeholder={t("name") || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -92,10 +93,10 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
                 <InputInstance
                   mask={maskForPhone}
                   theme={EInputInstanceTheme.PROFILE}
-                  type="text"
-                  id="requestACallPhoneNumber"
-                  name="requestACallPhoneNumber"
-                  placeholder="+7 (___) ___-__-__"
+                  type='text'
+                  id='requestACallPhoneNumber'
+                  name='requestACallPhoneNumber'
+                  placeholder='+7 (___) ___-__-__'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   // use actual value instead this ↓
@@ -108,10 +109,10 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
 
                 <InputInstance
                   theme={EInputInstanceTheme.PROFILE}
-                  as="textarea"
-                  id="requestACallTextarea"
-                  name="requestACallTextarea"
-                  placeholder="Написать..."
+                  as='textarea'
+                  id='requestACallTextarea'
+                  name='requestACallTextarea'
+                  placeholder='Написать...'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.requestACallTextarea}
@@ -123,10 +124,9 @@ export const RequestACall: FC<RequestACallProps> = (props) => {
 
                 <Button
                   onClick={handleSaveAddOrDelivery}
-                  type="submit"
+                  type='submit'
                   className={cls.requestACallBtn}
-                  theme={ThemeButton.CLEAR}
-                >
+                  theme={ThemeButton.CLEAR}>
                   {t("Отправить")}
                 </Button>
               </Form>

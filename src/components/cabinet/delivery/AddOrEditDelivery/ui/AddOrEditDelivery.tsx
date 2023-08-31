@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
@@ -19,7 +21,7 @@ import { deliveryAddressSchema } from "@/helpers/validation";
 
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector } from "@/hooks/store";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import Script from "next/script";
 import { YMaps, Map, SearchControl } from "@pbe/react-yandex-maps";
 
@@ -85,7 +87,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
   const [home_phoneState, setHome_phone] = useState<any>(home_phone);
 
   return (
-    <div id="setAddress" className={cn(cls.AddOrEditDelivery, className)}>
+    <div id='setAddress' className={cn(cls.AddOrEditDelivery, className)}>
       <Formik
         initialValues={{
           address: address ? address : "",
@@ -98,8 +100,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
         onSubmit={(values: any) => {
           console.log(values);
         }}
-        validationSchema={deliveryAddressSchema}
-      >
+        validationSchema={deliveryAddressSchema}>
         {({ values, touched, errors, handleChange, handleBlur }: any) => {
           const handleSaveAddOrDelivery = async () => {
             if (address) {
@@ -151,18 +152,18 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               <p>{address ? t("changeAddress") : t("newAddress")}</p>
 
               <Form>
-                <div className="relative">
+                <div className='relative'>
                   <input
-                    className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
-                    id="search"
-                    name="search"
-                    type="text"
-                    placeholder="Поиск"
+                    className='w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium'
+                    id='search'
+                    name='search'
+                    type='text'
+                    placeholder='Поиск'
                     value={searchState}
                     onChange={(e: any) => setSearchState(e.target.value)}
                   />
                   {addresses && (
-                    <div className="absolute top-full left-0 w-full z-[5] max-h-64 overflow-y-scroll select">
+                    <div className='absolute top-full left-0 w-full z-[5] max-h-64 overflow-y-scroll select'>
                       {addresses?.map((el: any) => {
                         return (
                           <button
@@ -171,8 +172,7 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                               setAddresses([]);
                               setSearchState(el.name);
                             }}
-                            className="w-full hover:bg-[#f3f3f3] bg-transparent border border-solid bg-white border-[#D2D8DE] p-4 text-start rounded-[30px] cursor-pointer font-medium text-base"
-                          >
+                            className='w-full hover:bg-[#f3f3f3] bg-transparent border border-solid bg-white border-[#D2D8DE] p-4 text-start rounded-[30px] cursor-pointer font-medium text-base'>
                             {el.name}
                           </button>
                         );
@@ -181,29 +181,29 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   )}
                 </div>
                 <input
-                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
-                  id="floor"
-                  name="floor"
-                  type="text"
-                  placeholder="Этаж"
+                  className='w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium'
+                  id='floor'
+                  name='floor'
+                  type='text'
+                  placeholder='Этаж'
                   value={floorState}
                   onChange={(e: any) => setFloor(e.target.value)}
                 />
                 <input
-                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
-                  id="apart_ment"
-                  name="apart_ment"
-                  type="text"
-                  placeholder="Номер квартиры/офис"
+                  className='w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium'
+                  id='apart_ment'
+                  name='apart_ment'
+                  type='text'
+                  placeholder='Номер квартиры/офис'
                   value={apart_mentState}
                   onChange={(e: any) => setApart_ment(e.target.value)}
                 />
                 <input
-                  className="w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium"
-                  id="home_phone"
-                  name="home_phone"
-                  type="text"
-                  placeholder="Домофон"
+                  className='w-full border border-solid border-[#D2D8DE] rounded-[30px] px-[18px] py-[14px] text-base placeholder:text-[#AAB5C0] font-medium'
+                  id='home_phone'
+                  name='home_phone'
+                  type='text'
+                  placeholder='Домофон'
                   value={home_phoneState}
                   onChange={(e: any) => setHome_phone(e.target.value)}
                 />
@@ -219,19 +219,17 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
               `,
                   }}
                 ></Script> */}
-                <div className="hidden">
+                <div className='hidden'>
                   <YMaps
                     enterprise
-                    query={{ apikey: "18378de5-507b-4d2a-a7c7-ca2fb2be7f0b" }}
-                  >
+                    query={{ apikey: "18378de5-507b-4d2a-a7c7-ca2fb2be7f0b" }}>
                     <Map
-                      className="map-small"
+                      className='map-small'
                       defaultState={{
                         center: [43.2446, 76.9114],
                         zoom: 13,
                         controls: [],
-                      }}
-                    >
+                      }}>
                       <SearchControl
                         options={{ float: "left" }}
                         instanceRef={(ref: any) => {
@@ -245,16 +243,14 @@ export const AddOrEditDelivery: FC<AddOrEditDeliveryProps> = (props) => {
                   <Button
                     theme={ThemeButton.CANCEL}
                     onClick={() => setIsOpen!(false)}
-                    type="button"
-                  >
+                    type='button'>
                     {t("otmena")}
                   </Button>
 
                   <Button
                     onClick={handleSaveAddOrDelivery}
-                    type="submit"
-                    theme={ThemeButton.YELLOW}
-                  >
+                    type='submit'
+                    theme={ThemeButton.YELLOW}>
                     {t("saveMent")}
                   </Button>
                 </div>

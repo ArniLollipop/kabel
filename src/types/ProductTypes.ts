@@ -1,3 +1,5 @@
+/** @format */
+
 interface colorsI {
   color_name: string;
   rgb: string;
@@ -31,6 +33,7 @@ export interface productI {
   subcategory: string;
   colors: colorsI[];
   recommended_products: productI[];
+  subcategory_slug: string | null;
 }
 
 export interface productAnswI {

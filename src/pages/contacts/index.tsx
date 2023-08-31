@@ -1,3 +1,5 @@
+/** @format */
+
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -11,9 +13,7 @@ import {
   IconContactsWa,
 } from "@/assets/icons";
 import { ActiveHeaderPage } from "@/components/header/Header";
-import { MapComponent } from "@/components/map/MapComponent";
 import { useHttp } from "@/hooks/useHttp";
-import { useEffect, useState } from "react";
 const enum endpoints {
   getContacts = "/main/contacts/",
 }
@@ -33,33 +33,30 @@ export interface Coords {
   };
 }
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
-function contactsPage() {
-  const [contacts, setContacts] = useState<any>();
-
-  async function getContacts() {
-    const res = await useHttp().get(`${endpoints.getContacts}`);
-    setContacts(res.data.results);
-  }
-
+function contactsPage(props: any) {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    getContacts();
-  }, []);
 
   return (
     <MainLayout activePage={ActiveHeaderPage.CONTACTS}>
+      <Head>
+        <title>{t("title_contacts")}</title>
+        <meta
+          name='description'
+          content={t("description_contacts") as string}
+        />
+      </Head>
       <div className={cn(cls.contactsPage)}>
         <Title className={cls.contactsPage_title}>{t("list.contacts")}</Title>
         <div className={cls.contactsPage_wrapper}>
-          {contacts?.map((el: any) => {
+          {props.contacts?.map((el: any) => {
             return (
               <div className={cls.contactsPage_item}>
                 {/* Map implementation */}
                 <div className={cls.contactsPage_imageWrapper}>
-                  {contacts && (
+                  {props.contacts && (
                     // <MapComponent
                     //   coords={{ lat: el.x_coordinate, lon: el.y_coordinate }}
                     // />
@@ -69,8 +66,7 @@ function contactsPage() {
                         state={{
                           center: [el.x_coordinate, el.y_coordinate],
                           zoom: 13,
-                        }}
-                      >
+                        }}>
                         <Placemark
                           geometry={[el.x_coordinate, el.y_coordinate]}
                         />
@@ -104,11 +100,10 @@ function contactsPage() {
                       className={cn(
                         cls.contactsPage_textItem,
                         cls.contactsPage_mail
-                      )}
-                    >
+                      )}>
                       <IconContactsMail />
                       <div>
-                        <a className={cls.descr} href={"mailto:" + el.mail}>
+                        <a className={cls.descr} href={`mailto:${el.mail}`}>
                           {el.email}
                         </a>
                       </div>
@@ -118,8 +113,7 @@ function contactsPage() {
                       className={cn(
                         cls.contactsPage_textItem,
                         cls.contactsPage_phones
-                      )}
-                    >
+                      )}>
                       <IconContactsPhone />
                       <div>
                         <p className={cls.subtitle}>{t("getZaiavka")}</p>
@@ -127,8 +121,7 @@ function contactsPage() {
                           return (
                             <a
                               className={cls.descr}
-                              href={"tel:" + phone.phone_number}
-                            >
+                              href={"tel:" + phone.phone_number}>
                               {phone.phone_number}
                             </a>
                           );
@@ -158,27 +151,14 @@ function contactsPage() {
   );
 }
 
-// export async function getServerSideProps() {
-//   const res = await useHttp().get(`${endpoints.getContacts}`);
-//   const urlAlmaty = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
-//   const urlAstana = `https://maps.googleapis.com/maps/api/geocode/json?address=${"Тлендиева 94a"}&key=${"AIzaSyAMUNLqIdfEPwq-XpOnlJJK3H2BmVFFf5k"}`;
-//   const resAlmaty = await fetch(urlAlmaty);
-//   const resAstana = await fetch(urlAstana);
-//   const dataAlmaty = await resAlmaty.json();
-//   const dataAstana = await resAstana.json();
-//   if (dataAlmaty.status && dataAstana.status === "OK") {
-//     const coordsAlmaty = dataAlmaty.results[0].geometry.location;
-//     const coordsAstana = dataAstana.results[0].geometry.location;
-//     return {
-//       props: {
-//         coordsAlmaty,
-//         coordsAstana,
-//         contacts: res.data.results,
-//       },
-//     };
-//   } else {
-//     throw new Error("Ошибка при получений кординатов!");
-//   }
-// }
+export async function getServerSideProps() {
+  const res = await useHttp().get(`${endpoints.getContacts}`);
+
+  return {
+    props: {
+      contacts: res.data.results,
+    },
+  };
+}
 
 export default contactsPage;

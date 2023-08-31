@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { useEffect, useState } from "react";
 
@@ -26,7 +28,8 @@ import { useHttp } from "@/hooks/useHttp";
 
 const cn = classNames.bind(cls);
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
 export default function deliveryPage() {
   const { t } = useTranslation();
@@ -73,8 +76,14 @@ export default function deliveryPage() {
   return (
     <CabinetLayout
       activePage={ActiveCabinetPageEnum.DELIVERY}
-      className={cls.delivery}
-    >
+      className={cls.delivery}>
+      <Head>
+        <title>{t("title_cabinet_delivery")}</title>
+        <meta
+          name='description'
+          content={t("description_cabinet_delivery") as string}
+        />
+      </Head>
       {isOpen ? (
         <AddOrEditDelivery
           className={cls.delivery_form}
@@ -89,8 +98,7 @@ export default function deliveryPage() {
               setAddress("");
             }}
             className={cls.delivery_addBtn}
-            theme={ThemeButton.CLEAR}
-          >
+            theme={ThemeButton.CLEAR}>
             <IconCardCounterPlus />
             {t("add")}
           </Button>
@@ -101,15 +109,15 @@ export default function deliveryPage() {
                 <li key={el.id} className={cls.delivery_adressListItem}>
                   <h2>{t("dostavka")}</h2>
                   <span>
-                    <IconCabinetProfile fillColor="#F6BF0C" />
+                    <IconCabinetProfile fillColor='#F6BF0C' />
                     {name}
                   </span>
                   <span>
-                    <IconPhone textColor="#F6BF0C" />
+                    <IconPhone textColor='#F6BF0C' />
                     {el.phone_number}
                   </span>
                   <span>
-                    <IconCabinetDelivery fillColor="#F6BF0C" />
+                    <IconCabinetDelivery fillColor='#F6BF0C' />
                     {el.address}
                   </span>
 
@@ -117,11 +125,10 @@ export default function deliveryPage() {
                     <label
                       onClick={() => handleSetDefault(el.id)}
                       className={cls.delivery_btns_label}
-                      htmlFor=""
-                    >
+                      htmlFor=''>
                       <input
-                        type="radio"
-                        name="default"
+                        type='radio'
+                        name='default'
                         checked={el.is_default}
                       />
                       {t("default")}
@@ -135,8 +142,7 @@ export default function deliveryPage() {
                         cls.delivery_editBtn,
                         cls.delivery_btns_edit
                       )}
-                      theme={ThemeButton.CLEAR}
-                    >
+                      theme={ThemeButton.CLEAR}>
                       <IconCabinetEdit /> {t("update")}
                     </Button>
                     <Button
@@ -147,8 +153,7 @@ export default function deliveryPage() {
                         cls.delivery_removeBtn,
                         cls.delivery_btns_delete
                       )}
-                      theme={ThemeButton.CLEAR}
-                    >
+                      theme={ThemeButton.CLEAR}>
                       {t("delete")}
                     </Button>
                   </div>

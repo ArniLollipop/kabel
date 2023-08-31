@@ -1,10 +1,12 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./OrderHistoryCard.module.scss";
 import { ordersDataI } from "@/data/OrdersData";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
@@ -43,8 +45,7 @@ export const OrderHistoryCard: FC<orderHistoryCardProps> = (props) => {
   return (
     <Link
       href={`/cabinet/orders/${id}`}
-      className={cn(cls.orderHistoryCard, className)}
-    >
+      className={cn(cls.orderHistoryCard, className)}>
       <p className={cls.number}>
         {t("nomerZakaza")}: №{id}
       </p>

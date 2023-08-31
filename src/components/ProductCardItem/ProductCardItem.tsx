@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./ProductCardItem.module.scss";
@@ -16,7 +18,7 @@ import { productI } from "@/types/ProductTypes";
 import { useHttp } from "@/hooks/useHttp";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
@@ -168,14 +170,15 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
   }, [cart]);
 
   function handleClick() {
-    router.push("/catalog/" + props.code);
+    router.push("/catalog/" + props.subcategory_slug + '/' + props.code);
   }
 
   return (
     <li
       onClick={handleClick}
-      className={cn(cls.ProductCardItem, cls[theme], className) + " itemShadow"}
-    >
+      className={
+        cn(cls.ProductCardItem, cls[theme], className) + " itemShadow"
+      }>
       <div className={cls.cardInfoIcons}>
         <IconCardItemDelivery />
         {props.availability === "в наличии" ? (
@@ -187,14 +190,16 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
 
       <Image
         src={props.image || nullImg}
-        alt="product"
+        alt={props.name + "| Almaty Kazkabel"}
         className={cls.cardImg}
         width={137}
         height={137}
       />
 
       <div className={cls.cardInfo}>
-        <Link href={`/catalog/${props.code}`} className={cls.link}>
+        <Link
+          href={`/catalog/${props.subcategory_slug}/${props.code}`}
+          className={cls.link}>
           <h3 className={cls.cardTitle}>
             {/* {props.name.length > 20
               ? `${props.name.slice(0, 17)}...`
@@ -225,8 +230,7 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
           <Button
             onClick={handleAddCart}
             theme={ThemeButton.CARD}
-            className={cls.cardAddBtn}
-          >
+            className={cls.cardAddBtn}>
             {t("toCart")}
           </Button>
         ) : (
@@ -236,31 +240,29 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
               onClick={(e: any) => {
                 cart > 1 && handleMinus(e);
               }}
-              className={cls.cartMinus}
-            >
+              className={cls.cartMinus}>
               <svg
-                width="20"
-                height="2"
-                viewBox="0 0 20 2"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                width='20'
+                height='2'
+                viewBox='0 0 20 2'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'>
                 <path
-                  d="M1 1H19"
-                  stroke="#00ABC2"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
+                  d='M1 1H19'
+                  stroke='#00ABC2'
+                  stroke-width='1.5'
+                  stroke-linecap='round'
                 />
               </svg>
             </button>
-            <div className="flex items-center justify-between">
+            <div className='flex items-center justify-between'>
               <input
                 className={
                   cls.cartCounter + " w-[50px] outline-none border-none"
                 }
                 min={1}
                 max={1000}
-                type="number"
+                type='number'
                 value={cartChange}
                 onChange={(e: any) => {
                   handleChangeCount(e.target.value);
@@ -273,28 +275,26 @@ export const ProductCardItem: FC<ProductCardItemProps> = (props) => {
               onClick={(e: any) => {
                 cart < 1000 && handlePlus(e);
               }}
-              className={cls.cartPlus}
-            >
+              className={cls.cartPlus}>
               <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'>
                 <path
-                  d="M12 5V19"
-                  stroke="#00ABC2"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  d='M12 5V19'
+                  stroke='#00ABC2'
+                  stroke-width='1.5'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
                 />
                 <path
-                  d="M5 12H19"
-                  stroke="#00ABC2"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  d='M5 12H19'
+                  stroke='#00ABC2'
+                  stroke-width='1.5'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
                 />
               </svg>
             </button>

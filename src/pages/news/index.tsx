@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
@@ -20,6 +22,8 @@ import { dateConverter } from "@/helpers/dateConverter";
 const cn = classNames.bind(cls);
 
 import { useTranslation } from "react-i18next";
+import { useHttp } from "@/hooks/useHttp";
+import Head from "next/head";
 
 const params: SwiperProps = {
   breakpoints: {
@@ -53,26 +57,17 @@ interface newsPageI {
   news: newsI[];
 }
 
-export default function newsPage() {
-  const [news, setNews] = useState<any>();
+export default function newsPage(props: any) {
   const { t } = useTranslation();
 
-  async function getNews() {
-    try {
-      const news = await NewsService().getNews();
-      setNews(news);
-    } catch (err) {}
-  }
+  const [swiper, setSwiper] = useState<any>();
 
-  useEffect(() => {
-    getNews();
-  }, []);
-
-  console.log("news is: ", news);
-
-  const [myswiper, setSwiper] = useState<any>();
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
+      <Head>
+        <title>{t("title_news")}</title>
+        <meta name='description' content={t("description_news") as string} />
+      </Head>
       {/* PC implementation */}
       <div className={cn(cls.news)}>
         <Title className={cls.news_title}>
@@ -84,7 +79,7 @@ export default function newsPage() {
             <h3 className={cls.news_innerTitle}>
               {t("lastNews") ? t("lastNews") : ""}
             </h3>
-            {news && (
+            {props && (
               <Swiper
                 className={cls.news_slider}
                 navigation={true}
@@ -118,9 +113,8 @@ export default function newsPage() {
                     spaceBetween: 10,
                     centeredSlides: true,
                   },
-                }}
-              >
-                {news?.map((news: any) => (
+                }}>
+                {props.results?.map((news: any) => (
                   <SwiperSlide className={cls.news_sliderSlide} key={news.id}>
                     <NewsCard
                       className={cls.news_newsCard}
@@ -137,7 +131,7 @@ export default function newsPage() {
 
       {/* MobImplementation */}
       <div className={cls.newsMobile}>
-        {news?.map((news: any) => (
+        {props.results?.map((news: any) => (
           <div key={news.id}>
             <NewsCard
               className={cls.news_newsCardMobile}
@@ -151,10 +145,9 @@ export default function newsPage() {
   );
 }
 
-// export async function getServerSideProps() {
-//   const news = await NewsService().getNews();
-
-//   return {
-//     props: { news },
-//   };
-// }
+export async function getServerSideProps() {
+  const res = await useHttp().get("/news/news/");
+  return {
+    props: res.data,
+  };
+}

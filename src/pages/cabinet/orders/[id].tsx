@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
@@ -15,7 +17,8 @@ import NullImg from "@/assets/images/nullImg.png";
 
 const cn = classNames.bind(cls);
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
 interface OrderCardProps {
   className?: string;
@@ -42,23 +45,25 @@ export default function OrderCard(props: OrderCardProps) {
   return (
     <CabinetLayout
       className={cn(cls.orders)}
-      activePage={ActiveCabinetPageEnum.ORDERS}
-    >
+      activePage={ActiveCabinetPageEnum.ORDERS}>
+      <Head>
+        <title>{t("title_orders")}</title>
+        <meta name='description' content={t("description_orders") as string} />
+      </Head>
       <div className={cls.orders_wrapper}>
-        <Link className={cls.backLink} href="/cabinet/orders">
+        <Link className={cls.backLink} href='/cabinet/orders'>
           <svg
-            width="10"
-            height="18"
-            viewBox="0 0 10 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            width='10'
+            height='18'
+            viewBox='0 0 10 18'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
             <path
-              d="M8.75 16.5L1.25 9L8.75 1.5"
-              stroke="#00ABC2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              d='M8.75 16.5L1.25 9L8.75 1.5'
+              stroke='#00ABC2'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </svg>
         </Link>
@@ -71,7 +76,7 @@ export default function OrderCard(props: OrderCardProps) {
                     <div className={cls.item_box}>
                       <Image
                         src={el.product_info.image || NullImg}
-                        alt="asdasd"
+                        alt={el.product_info.name + "| Almaty Kazkabel"}
                         className={cls.image}
                         width={100}
                         height={100}

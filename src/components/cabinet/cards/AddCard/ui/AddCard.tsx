@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { FC } from "react";
 import { Form, Formik } from "formik";
@@ -43,8 +45,7 @@ export const AddCard: FC<AddCardProps> = (props) => {
           console.log("values is: ", {
             ...values,
           });
-        }}
-      >
+        }}>
         {({ values, touched, errors, handleChange, handleBlur }) => {
           const handleSaveAddOrDelivery = () => {
             const { numberOfCard, dateOfCard, CVV, nameOfCardOwner } = touched;
@@ -69,9 +70,9 @@ export const AddCard: FC<AddCardProps> = (props) => {
                 <InputInstance
                   mask={maskForCreditCard}
                   theme={EInputInstanceTheme.PROFILE}
-                  type="text"
-                  id="numberOfCard"
-                  name="numberOfCard"
+                  type='text'
+                  id='numberOfCard'
+                  name='numberOfCard'
                   placeholder={t("cardNumber") || ""}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -85,10 +86,10 @@ export const AddCard: FC<AddCardProps> = (props) => {
                   <InputInstance
                     mask={maskForDate}
                     theme={EInputInstanceTheme.PROFILE}
-                    type="text"
-                    id="dateOfCard"
-                    name="dateOfCard"
-                    placeholder="MM/YY"
+                    type='text'
+                    id='dateOfCard'
+                    name='dateOfCard'
+                    placeholder='MM/YY'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.dateOfCard}
@@ -100,10 +101,10 @@ export const AddCard: FC<AddCardProps> = (props) => {
                   <InputInstance
                     mask={maskForCVV}
                     theme={EInputInstanceTheme.PROFILE}
-                    type="text"
-                    id="CVV"
-                    name="CVV"
-                    placeholder="CVV"
+                    type='text'
+                    id='CVV'
+                    name='CVV'
+                    placeholder='CVV'
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.CVV}
@@ -115,9 +116,9 @@ export const AddCard: FC<AddCardProps> = (props) => {
 
                 <InputInstance
                   theme={EInputInstanceTheme.PROFILE}
-                  type="text"
-                  id="nameOfCardOwner"
-                  name="nameOfCardOwner"
+                  type='text'
+                  id='nameOfCardOwner'
+                  name='nameOfCardOwner'
                   placeholder={t("maintainerCard") || "Имя владельца карты"}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -131,17 +132,15 @@ export const AddCard: FC<AddCardProps> = (props) => {
                   <Button
                     theme={ThemeButton.CANCEL}
                     onClick={() => setShowAddCard(false)}
-                    type="button"
-                  >
+                    type='button'>
                     {t("otmena")}
                   </Button>
 
                   <Button
                     className={cls.container_CancelBtn}
                     onClick={handleSaveAddOrDelivery}
-                    type="submit"
-                    theme={ThemeButton.YELLOW}
-                  >
+                    type='submit'
+                    theme={ThemeButton.YELLOW}>
                     {t("saveMent")}
                   </Button>
                 </div>

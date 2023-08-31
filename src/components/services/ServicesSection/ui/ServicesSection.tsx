@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames";
@@ -15,7 +17,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 
 // data
 import { ServicesToggleButtons } from "../../ServicesToggleButtons";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 
 let cn = classNames.bind(cls);
@@ -89,8 +91,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
           console.log("values is: ", {
             ...values,
           });
-        }}
-      >
+        }}>
         {({
           values,
           touched,
@@ -132,11 +133,11 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                 <div className={cn(cls.chooseSelectContainer)}>
                   <div>
                     <InputInstance
-                      as="select"
+                      as='select'
                       theme={EInputInstanceTheme.SERVICES}
-                      id="selectOfUsing"
-                      name="selectOfUsing"
-                      placeholder="Например 5"
+                      id='selectOfUsing'
+                      name='selectOfUsing'
+                      placeholder='Например 5'
                       onChange={(e) => {
                         setLocation(e.target.value);
                       }}
@@ -147,8 +148,7 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                       labeltext={
                         t("prokladkaType") || "Выберите  способ прокладки"
                       }
-                      className={cls.weightInput}
-                    >
+                      className={cls.weightInput}>
                       {select1.map(({ title }) => (
                         <option key={title} value={title}>
                           {title === "В воздухе"
@@ -164,19 +164,18 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                   </div>
                   <div>
                     <InputInstance
-                      as="select"
+                      as='select'
                       theme={EInputInstanceTheme.SERVICES}
-                      id="selectOfUsing"
-                      name="selectOfUsing"
-                      placeholder="Например 5"
+                      id='selectOfUsing'
+                      name='selectOfUsing'
+                      placeholder='Например 5'
                       onChange={(e) => setPower(parseFloat(e.target.value))}
                       onBlur={handleBlur}
                       value={power}
                       errors={errors.power}
                       touched={touched.power}
                       labeltext={t("getPower") || "Введите мощность (кВт)"}
-                      className={cls.weightInput}
-                    >
+                      className={cls.weightInput}>
                       {powers?.map((el: number) => {
                         return (
                           <option key={el} value={el}>
@@ -188,17 +187,16 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
                   </div>
                   <div>
                     <InputInstance
-                      as="select"
+                      as='select'
                       theme={EInputInstanceTheme.SERVICES}
-                      id="selectOfUsing"
-                      name="selectOfUsing"
+                      id='selectOfUsing'
+                      name='selectOfUsing'
                       labeltext={
                         t("raschetSechenia") || "Расчет сечения кабеля:"
                       }
                       onChange={(e) => setRes(parseFloat(e.target.value))}
                       value={res}
-                      disabled
-                    >
+                      disabled>
                       <option key={res} value={res}>
                         {res} мм
                         <sup>

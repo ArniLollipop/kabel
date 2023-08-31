@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./CabinetLayout.module.scss";
@@ -21,7 +23,7 @@ import { ThemeButton } from "@/UI/Button/ui/Button";
 import { logOut } from "@/store/slices/AuthSlice";
 import { useAppDispatch } from "@/hooks/store";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { setAmount, setItems } from "@/store/slices/CartSlice";
 import { useHttp } from "@/hooks/useHttp";
 import { toast } from "react-toastify";
@@ -76,35 +78,30 @@ export const Navigation: FC<NavigationProps> = (props) => {
     <nav
       className={cn(cls.nav, className, {
         mobile: theme === ThemeNavigation.MOBILE,
-      })}
-    >
+      })}>
       <div
         onClick={() => setModal(false)}
         className={
           modal
             ? "fixed top-0 left-0 bg-black bg-opacity-40 w-full h-[100vh] z-[1000] transition-all duration-300"
             : "fixed top-0 left-0 bg-transparent bg-opacity-40 w-0 h-[100vh] z-[1000] transition-all duration-300"
-        }
-      ></div>
+        }></div>
       <div
         className={
           modal
             ? cls.modal_inner
             : "fixed top-0 -translate-y-1/2 w-0 -left-[50%] transition-all duration-300"
-        }
-      >
-        <p className="text-center font-semibold text-xl">{t("areYouDown")}</p>
-        <div className="flex items-center gap-[10px] !justify-center">
+        }>
+        <p className='text-center font-semibold text-xl'>{t("areYouDown")}</p>
+        <div className='flex items-center gap-[10px] !justify-center'>
           <button
             onClick={logoutHandler}
-            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
-          >
+            className='bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer'>
             {t("da")}
           </button>
           <button
             onClick={() => setModal(false)}
-            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
-          >
+            className='bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer'>
             {t("net")}
           </button>
         </div>
@@ -115,104 +112,93 @@ export const Navigation: FC<NavigationProps> = (props) => {
           deleteModal
             ? "fixed top-0 left-0 bg-black bg-opacity-40 w-full h-[100vh] z-[1000] transition-all duration-300"
             : "fixed top-0 left-0 bg-transparent bg-opacity-40 w-0 h-[100vh] z-[1000] transition-all duration-300"
-        }
-      ></div>
+        }></div>
       <div
         className={
           deleteModal
             ? cls.modal_inner
             : "fixed top-0 -translate-y-1/2 w-0 -left-[50%] transition-all duration-300"
-        }
-      >
-        <p className="text-center font-semibold text-xl">{t("areYouUdalit")}</p>
-        <div className="flex items-center gap-[10px] !justify-center">
+        }>
+        <p className='text-center font-semibold text-xl'>{t("areYouUdalit")}</p>
+        <div className='flex items-center gap-[10px] !justify-center'>
           <button
             onClick={handleDelete}
-            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
-          >
+            className='bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer'>
             {t("da")}
           </button>
           <button
             onClick={() => setDeleteModal(false)}
-            className="bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer"
-          >
+            className='bg-[#F6BF0C] py-2 px-5 rounded-[5px] border-none text-white mt-4 font-semibold text-lg cursor-pointer'>
             {t("net")}
           </button>
         </div>
       </div>
       <Link
-        href="/cabinet/profile"
+        href='/cabinet/profile'
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.PROFILE,
-        })}
-      >
+        })}>
         <IconCabinetProfile />
         <span>{t("myProfile")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
-        href="/cabinet/orders"
+        href='/cabinet/orders'
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.ORDERS,
-        })}
-      >
+        })}>
         <IconCabinetOrder />
         <span>{t("myOrders")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
-        href="/cabinet/delivery"
+        href='/cabinet/delivery'
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.DELIVERY,
-        })}
-      >
+        })}>
         <IconCabinetDelivery />
         <span>{t("addresses")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
-        href="/cabinet/bonuses"
+        href='/cabinet/bonuses'
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.BONUSES,
-        })}
-      >
+        })}>
         <IconCabinetBonuses />
         <span>{t("bonuses")}</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
-        href="/cabinet/currency"
+        href='/cabinet/currency'
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.CURRENCY,
-        })}
-      >
+        })}>
         <IconCabinetFlag />
         <span>Валюта и ЛБМ</span>
         <IconCabinetArrow />
       </Link>
 
       <Link
-        href="/cabinet/support"
+        href='/cabinet/support'
         className={cn(cls.nav_link, {
           active: activePage === ActiveCabinetPageEnum.SUPPORT,
-        })}
-      >
+        })}>
         <IconCabinetSupport />
         <span>{t("support")}</span>
         <IconCabinetArrow />
       </Link>
 
       <div className={cn(cls.nav_logoutBtnContainer)}>
-        <IconCabinetLogout fillColor="#F6BF0C" />
+        <IconCabinetLogout fillColor='#F6BF0C' />
         <Button
           theme={ThemeButton.CLEAR}
           onClick={() => setModal(true)}
-          className="text-base"
-        >
+          className='text-base'>
           {t("leave")}
         </Button>
       </div>
@@ -220,8 +206,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
       <Button
         className={cn(cls.nav_deleteAccountBtn)}
         theme={ThemeButton.CLEAR}
-        onClick={() => setDeleteModal(true)}
-      >
+        onClick={() => setDeleteModal(true)}>
         {t("deleteAccount")}
       </Button>
     </nav>

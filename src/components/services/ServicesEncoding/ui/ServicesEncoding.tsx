@@ -1,10 +1,12 @@
+/** @format */
+
 import { FC, useState } from "react";
 import classNames from "classnames";
 import cls from "./ServicesEncoding.module.scss";
 import { Form, Formik } from "formik";
 import { InputInstance } from "@/shared/formElements/InputInstance";
 import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import Image from "next/image";
 import ImageMockProduct from "@/assets/images/ImageMockProduct.png";
@@ -39,8 +41,7 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
         }}
         onSubmit={(values) => {
           getEncoding(values.decoding);
-        }}
-      >
+        }}>
         {({
           values,
           touched,
@@ -54,9 +55,9 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
             <Form>
               <InputInstance
                 theme={EInputInstanceTheme.SERVICES}
-                type="text"
-                id="decoding"
-                name="decoding"
+                type='text'
+                id='decoding'
+                name='decoding'
                 placeholder={t("writeCabel") || "Введите марку кабеля"}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -70,7 +71,7 @@ export const ServicesEncoding: FC<ServicesEncodingProps> = (props) => {
                   <div className={cls.encoding}>
                     <Image
                       src={res?.image || nullImg}
-                      alt="asd"
+                      alt={t("alt_decoding") + "| Almaty Kazkabel"}
                       className={cls.encodingImage}
                     />
                     <div>

@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./GetCurrency.module.scss";
@@ -106,8 +108,7 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
           <Link
             target={"_blank"}
             className={cn(cls.metalLink)}
-            href={"https://www.lme.com/en/"}
-          >
+            href={"https://www.lme.com/en/"}>
             LME
           </Link>{" "}
           на <span>{formattedMetalDate}</span>

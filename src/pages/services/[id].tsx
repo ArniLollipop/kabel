@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import Head from "next/head";
 import Link from "next/link";
@@ -21,7 +23,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { ActiveHeaderPage } from "@/components/header/Header";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -40,8 +42,34 @@ export default function Home() {
         className={cn(
           cls.servicesArticleIntro,
           isActive ? cls.active : cls.default
+        )}>
+        {router.pathname.includes("section") && (
+          <Head>
+            <title>{t("title_section")}</title>
+            <meta
+              name='description'
+              content={t("description_section") as string}
+            />
+          </Head>
         )}
-      >
+        {router.pathname.includes("encoding") && (
+          <Head>
+            <title>{t("title_encoding")}</title>
+            <meta
+              name='description'
+              content={t("description_encoding") as string}
+            />
+          </Head>
+        )}
+        {router.pathname.includes("weight") && (
+          <Head>
+            <title>{t("title_weight")}</title>
+            <meta
+              name='description'
+              content={t("description_weight") as string}
+            />
+          </Head>
+        )}
         <Link href={`/services/${link}`}>
           <ArticleIcon
             className={cls.articleIconWidthNHeight}
@@ -62,18 +90,57 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>{t("list.services")}</title>
-        <meta name="description" content="ТОО Almaty Kazkabel | Сервисы" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap"
-        />
-      </Head>
+      {router.query.id?.includes("section") && (
+        <Head>
+          <title>{t("title_section")}</title>
+          <meta
+            name='description'
+            content={t("description_section") as string}
+          />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <link rel='icon' href='/favicon.ico' />
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
+          />
+        </Head>
+      )}
+      {router.query.id?.includes("encoding") && (
+        <Head>
+          <title>{t("title_encoding")}</title>
+          <meta
+            name='description'
+            content={t("description_encoding") as string}
+          />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <link rel='icon' href='/favicon.ico' />
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
+          />
+        </Head>
+      )}
+      {router.query.id?.includes("weight") && (
+        <Head>
+          <title>{t("title_weight")}</title>
+          <meta
+            name='description'
+            content={t("description_weight") as string}
+          />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <link rel='icon' href='/favicon.ico' />
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
+          />
+        </Head>
+      )}
       <MainLayout activePage={ActiveHeaderPage.SERVICES}>
         <ServicesLayout>
           <section className={cn(cls.container)}>

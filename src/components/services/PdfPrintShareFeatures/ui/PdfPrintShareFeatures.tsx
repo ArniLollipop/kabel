@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { FC } from "react";
 import classNames from "classnames";
@@ -6,7 +8,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import "jspdf-autotable";
 import { UserOptions } from "jspdf-autotable";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 // assets
 import cls from "./PdfPrintShareFeatures.module.scss";
@@ -99,11 +101,10 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (
   return (
     <div className={cn(cls.PdfPrintShareFeatures)}>
       <Button
-        type="button"
+        type='button'
         className={cn(cls.pdfBtn)}
         onClick={savePDFPage}
-        theme={ThemeButton.CLEAR}
-      >
+        theme={ThemeButton.CLEAR}>
         {t("savePdf")}
       </Button>
 
@@ -112,11 +113,10 @@ export const PdfPrintShareFeatures: FC<PdfPrintShareFeaturesProps> = (
       </Link>
 
       <Button
-        type="button"
+        type='button'
         className={cn(cls.shareBtn)}
         onClick={sharePage}
-        theme={ThemeButton.CLEAR}
-      >
+        theme={ThemeButton.CLEAR}>
         {t("share")}
       </Button>
     </div>

@@ -1,3 +1,5 @@
+/** @format */
+
 // hooks
 import { FC, useState, useEffect } from "react";
 import { useAppDispatch } from "@/hooks/store";
@@ -25,7 +27,7 @@ import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/Inpu
 import { setUserName, setUserPhone } from "@/store/slices/AuthSlice";
 import { AuthService } from "@/services/Auth.service";
 import { AxiosError } from "axios";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -70,8 +72,7 @@ export const Register: FC<RegisterProps> = (props) => {
           ...values,
           phoneNumber: values.phoneNumber.replace(/\D+/g, ""),
         });
-      }}
-    >
+      }}>
       {({
         values,
         touched,
@@ -87,9 +88,9 @@ export const Register: FC<RegisterProps> = (props) => {
               <>
                 <InputInstance
                   theme={EInputInstanceTheme.AUTH}
-                  type="text"
-                  id="name"
-                  name="name"
+                  type='text'
+                  id='name'
+                  name='name'
                   placeholder={t("name") || "Имя"}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -102,10 +103,10 @@ export const Register: FC<RegisterProps> = (props) => {
                 <InputInstance
                   theme={EInputInstanceTheme.AUTH}
                   mask={maskForPhone}
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  placeholder="+7 (___) ___-__-__"
+                  type='text'
+                  id='phoneNumber'
+                  name='phoneNumber'
+                  placeholder='+7 (___) ___-__-__'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.phoneNumber}
@@ -114,7 +115,7 @@ export const Register: FC<RegisterProps> = (props) => {
                   className={cls.inputPhoneNumber}
                 />
                 <Button
-                  type="submit"
+                  type='submit'
                   theme={ThemeButton.YELLOW}
                   onClick={async () => {
                     try {
@@ -130,8 +131,7 @@ export const Register: FC<RegisterProps> = (props) => {
                       setError(e.response.data.error[0]);
                       console.log(e);
                     }
-                  }}
-                >
+                  }}>
                   {t("code")}
                 </Button>
 

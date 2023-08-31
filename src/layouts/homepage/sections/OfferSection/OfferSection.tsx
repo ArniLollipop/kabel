@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./OfferSection.module.scss";
@@ -55,14 +57,13 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
         <Swiper
           modules={[Autoplay, EffectFade, Pagination]}
           className={cls.slider}
-          effect="fade"
+          effect='fade'
           pagination={{ clickable: true }}
           autoplay
           onSwiper={(swiper) => {
             setSwiper(swiper);
           }}
-          {...params}
-        >
+          {...params}>
           {offers?.map((sect) => {
             const { button_text, button_url, id, image, text, title } = sect;
             return (
@@ -83,7 +84,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
                   src={image}
                   width={1920}
                   height={1080}
-                  alt="Offer img"
+                  alt={(title as string) + "| Almaty Kazkabel"}
                 />
               </SwiperSlide>
             );

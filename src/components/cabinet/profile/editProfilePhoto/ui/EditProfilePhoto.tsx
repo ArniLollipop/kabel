@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -11,6 +13,7 @@ import cls from "./EditProfilePhoto.module.scss";
 import ImageDefaultAvatar from "@/assets/images/ImageDefaultAvatar.png";
 import { EditProfile } from "@/store/slices/ProfileSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
+import { useTranslation } from "react-i18next";
 
 export const EditProfilePhoto = ({
   setFieldValue,
@@ -24,6 +27,7 @@ export const EditProfilePhoto = ({
   const { user: authUser } = useAppSelector((state) => state.AuthSlice);
   const { user: profileUser } = useAppSelector((state) => state.ProfileSlice);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const handleClick = () => {
     hiddenFileInput.current?.click();
@@ -68,7 +72,7 @@ export const EditProfilePhoto = ({
               className={cls.editProfile_avatar}
               // @ts-ignore
               src={previewUrl || profileUser?.avatar || authUser?.avatar}
-              alt="User avatar"
+              alt={t("alt_avatar") + "| Almaty Kazkabel"}
             />
           ) : (
             <Image
@@ -76,24 +80,23 @@ export const EditProfilePhoto = ({
               height={167}
               className={cls.editProfile_avatar}
               src={ImageDefaultAvatar}
-              alt="Default user avatar"
+              alt={t("alt_default_user_avatar") + "| Almaty Kazkabel"}
             />
           )}
           <div className={cls.editProfile_btn}>
             <Button
-              type="button"
+              type='button'
               theme={ThemeButton.CLEAR}
-              onClick={handleClick}
-            >
+              onClick={handleClick}>
               <IconCabinetEditPhoto />
             </Button>
             <input
-              type="file"
-              accept="image/*"
+              type='file'
+              accept='image/*'
               ref={hiddenFileInput}
               onChange={handleFileSelect}
               style={{ display: "none" }}
-              name="img"
+              name='img'
             />
           </div>
         </div>

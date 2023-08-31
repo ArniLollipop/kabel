@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./ServicesSection.module.scss";
@@ -6,7 +8,7 @@ import Image from "next/image";
 import IconServicesCalc from "@/assets/icons/IconServicesCalc.svg";
 import IconServicesCalcWeight from "@/assets/icons/IconServicesCalcWeight.svg";
 import IconServicesDecoding from "@/assets/icons/IconServicesDecoding.svg";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 const cn = classNames.bind(cls);
@@ -26,11 +28,13 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
       <ul className={cls.ServicesSection_list}>
         <li>
           <Link
-            href="/services"
-            className={cls.ServicesSection_item + " itemUp"}
-          >
+            href='/services'
+            className={cls.ServicesSection_item + " itemUp"}>
             <div className={cls.ServicesSection_itemImg}>
-              <Image src={IconServicesCalcWeight} alt="Services icon" />
+              <Image
+                src={IconServicesCalcWeight}
+                alt={t("alt_services_icon") + "| Almaty Kazkabel"}
+              />
             </div>
             <span className={cls.ServicesSection_itemTitle}>
               {t("tableWeight")}
@@ -40,11 +44,13 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 
         <li>
           <Link
-            href="/services"
-            className={cls.ServicesSection_item + " itemUp"}
-          >
+            href='/services'
+            className={cls.ServicesSection_item + " itemUp"}>
             <div className={cls.ServicesSection_itemImg}>
-              <Image src={IconServicesCalc} alt="Services icon" />
+              <Image
+                src={IconServicesCalc}
+                alt={t("alt_services_icon") + "| Almaty Kazkabel"}
+              />
             </div>
             <span className={cls.ServicesSection_itemTitle}>
               {t("raschetCabel")}
@@ -54,11 +60,13 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 
         <li>
           <Link
-            href="/services"
-            className={cls.ServicesSection_item + " itemUp"}
-          >
+            href='/services'
+            className={cls.ServicesSection_item + " itemUp"}>
             <div className={cls.ServicesSection_itemImg}>
-              <Image src={IconServicesDecoding} alt="Services icon" />
+              <Image
+                src={IconServicesDecoding}
+                alt={t("alt_services_icon") + "| Almaty Kazkabel"}
+              />
             </div>
             <span className={cls.ServicesSection_itemTitle}>
               {t("rashifrovka")}

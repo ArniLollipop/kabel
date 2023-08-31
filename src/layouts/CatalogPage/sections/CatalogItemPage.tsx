@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./CatalogItemPage.module.scss";
@@ -173,7 +175,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
   }, [cart]);
 
   function handleClick() {
-    router.push("/catalog/" + props.code);
+    router.push("/catalog/" + props.subcategory_slug + '/' + props.code);
   }
 
   useEffect(() => {
@@ -211,7 +213,9 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 
   function handleCopyToClipboard() {
     navigator.clipboard
-      .writeText(`https://cable.kz/catalog/${props.code}`)
+      .writeText(
+        `https://cable.kz/catalog/${props.subcategory_slug}/${props.code}`
+      )
       .then(() => {
         toast(t("copyOk"), {
           hideProgressBar: true,
@@ -228,10 +232,10 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
     <div className={cn(cls.CatalogItemPage)}>
       <div className={cls.CatalogItemPage_wrapper}>
         <div className={cls.CatalogItemPage_itemCard}>
-          <div className={cls.card}>
-            <h1 className={cls.card_title}>{props.name}</h1>
+          <div className={cls.card} itemScope>
+            <h1 itemProp="name" className={cls.card_title}>{props.name}</h1>
 
-            <span className={cls.card_code}>
+            <span itemProp="code" className={cls.card_code}>
               {t("tovarCode")}: {props.code}
             </span>
 
@@ -240,7 +244,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
               <Image
                 className={cls.card_img}
                 src={props.image || nullImg}
-                alt="Card image"
+                alt={props.name + "| Almaty Kazkabel"}
                 width={500}
                 height={500}
               />
@@ -251,8 +255,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                   className={cn({
                     inStock: props.availability === "в наличии",
                     outStock: props.availability === "под заказ",
-                  })}
-                >
+                  })}>
                   {props.availability === "в наличии" ? (
                     <>
                       <IconCardItemInStock />
@@ -269,7 +272,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 {/* Выбор цветов */}
                 <div className={cls.card_colors}>
                   <h3 className={cls.card_subTitle}>Цвет</h3>
-                  <div className=" flex items-center !justify-normal gap-2 flex-wrap">
+                  <div className=' flex items-center !justify-normal gap-2 flex-wrap'>
                     {props.colors_info.map((el: any) => (
                       <button
                         onClick={() => setImageName(el.color_name)}
@@ -277,15 +280,14 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                           imageName === el.color_name
                             ? "p-1 bg-transparent border border-solid border-black rounded-full overflow-hidden flex items-center !justify-center transition-all duration-300"
                             : "p-1 bg-transparent border border-solid border-[#E1E1E1] rounded-full overflow-hidden flex items-center !justify-center transition-all duration-300"
-                        }
-                      >
+                        }>
                         <Image
                           src={el.image}
-                          alt="image mini"
+                          alt={el.color_name + "| Almaty Kazkabel"}
                           width={35}
                           height={35}
                           key={el.color_name}
-                          className=" rounded-full !h-[35px] !w-[35px] overflow-hidden"
+                          className=' rounded-full !h-[35px] !w-[35px] overflow-hidden'
                         />
                       </button>
                     ))}
@@ -310,21 +312,20 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                               <AccordionHeader className={cls.char_accTitle}>
                                 <span>{t("allCharackteristik")}</span>
                                 <svg
-                                  width="9"
-                                  height="15"
-                                  viewBox="0 0 9 15"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
+                                  width='9'
+                                  height='15'
+                                  viewBox='0 0 9 15'
+                                  fill='none'
+                                  xmlns='http://www.w3.org/2000/svg'
                                   className={cn(cls.char_accIcon, {
                                     char_accIconActive: open,
-                                  })}
-                                >
+                                  })}>
                                   <path
-                                    d="M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619"
-                                    stroke="#00ABC2"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
+                                    d='M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619'
+                                    stroke='#00ABC2'
+                                    strokeWidth='2'
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
                                   />
                                 </svg>
                               </AccordionHeader>
@@ -351,27 +352,28 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                         <AccordionHeader className={cls.char_accTitle}>
                           <span>{t("razvernutOpisanie")}</span>
                           <svg
-                            width="9"
-                            height="15"
-                            viewBox="0 0 9 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                            width='9'
+                            height='15'
+                            viewBox='0 0 9 15'
+                            fill='none'
+                            xmlns='http://www.w3.org/2000/svg'
                             className={cn(cls.char_accIcon, {
                               char_accIconActive: open,
-                            })}
-                          >
+                            })}>
                             <path
-                              d="M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619"
-                              stroke="#00ABC2"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+                              d='M1.56992 13.7962L7.55693 7.78319L1.54396 1.79619'
+                              stroke='#00ABC2'
+                              strokeWidth='2'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                             />
                           </svg>
                         </AccordionHeader>
                         <AccordionBody
-                          className={cn(cls.char_accList, cls.mobileDescr_body)}
-                        >
+                          className={cn(
+                            cls.char_accList,
+                            cls.mobileDescr_body
+                          )}>
                           <p className={cls.card_descr}>{props.description}</p>
                           {renderCharList()}
                         </AccordionBody>
@@ -386,7 +388,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
           <div className={cls.info}>
             <div className={cls.buyActions}>
               <p className={cls.buyActions_discont}>
-                <span className="!text-base">{t("saleFromAll")}</span>
+                <span className='!text-base'>{t("saleFromAll")}</span>
               </p>
 
               <span className={cls.buyActions_price}>{props.cost} ₸</span>
@@ -397,24 +399,22 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                       cart > 1 && handleMinus(e);
                     }}
                     disabled={disabled}
-                    className={cls.cartMinus}
-                  >
+                    className={cls.cartMinus}>
                     <svg
-                      width="20"
-                      height="2"
-                      viewBox="0 0 20 2"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      width='20'
+                      height='2'
+                      viewBox='0 0 20 2'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'>
                       <path
-                        d="M1 1H19"
-                        stroke="#00ABC2"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
+                        d='M1 1H19'
+                        stroke='#00ABC2'
+                        stroke-width='1.5'
+                        stroke-linecap='round'
                       />
                     </svg>
                   </button>
-                  <div className="flex items-center">
+                  <div className='flex items-center'>
                     <input
                       className={
                         cls.cartCounter +
@@ -422,7 +422,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                       }
                       min={1}
                       max={1000}
-                      type="number"
+                      type='number'
                       value={cartChange}
                       onChange={(e: any) => {
                         handleChangeCount(e.target.value);
@@ -435,28 +435,26 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                     onClick={(e: any) => {
                       cart < 1000 && handlePlus(e);
                     }}
-                    className={cls.cartPlus}
-                  >
+                    className={cls.cartPlus}>
                     <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'>
                       <path
-                        d="M12 5V19"
-                        stroke="#00ABC2"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        d='M12 5V19'
+                        stroke='#00ABC2'
+                        stroke-width='1.5'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
                       />
                       <path
-                        d="M5 12H19"
-                        stroke="#00ABC2"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        d='M5 12H19'
+                        stroke='#00ABC2'
+                        stroke-width='1.5'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
                       />
                     </svg>
                   </button>
@@ -465,59 +463,57 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 <Button
                   onClick={handleAddCart}
                   className={cls.buyActions_btn}
-                  theme={ThemeButton.CARD}
-                >
+                  theme={ThemeButton.CARD}>
                   {count > 0 && (
                     <p className={cls.buyActions_btn__count}>{count}</p>
                   )}
                   {t("toCart")}
                   <svg
-                    width="20"
-                    height="22"
-                    viewBox="0 0 20 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                    width='20'
+                    height='22'
+                    viewBox='0 0 20 22'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'>
                     <ellipse
-                      cx="3.25"
-                      cy="18.692"
-                      rx="2.25"
-                      ry="2.21156"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      cx='3.25'
+                      cy='18.692'
+                      rx='2.25'
+                      ry='2.21156'
+                      stroke='white'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     />
                     <ellipse
-                      cx="15.625"
-                      cy="18.692"
-                      rx="2.25"
-                      ry="2.21156"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      cx='15.625'
+                      cy='18.692'
+                      rx='2.25'
+                      ry='2.21156'
+                      stroke='white'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     />
                     <path
-                      d="M15.625 16.4809H3.25V1H1"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      d='M15.625 16.4809H3.25V1H1'
+                      stroke='white'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     />
                     <path
-                      d="M3.25 3.21094L19 4.31672L17.875 12.0572H3.25"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      d='M3.25 3.21094L19 4.31672L17.875 12.0572H3.25'
+                      stroke='white'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
                     />
                   </svg>
                 </Button>
               )}
-              <p className=" text-sm font-medium mt-1 sm:text-base text-center">
+              <p className=' text-sm font-medium mt-1 sm:text-base text-center'>
                 {t("canBuy")}{" "}
-                <span className="text-red-500">
+                <span className='text-red-500'>
                   {props.remains - cartChange} м
                 </span>
               </p>
@@ -526,8 +522,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 <Button
                   className={cls.buyActions_btn + " mt-3"}
                   theme={ThemeButton.CARD}
-                  onClick={() => router.push("/card")}
-                >
+                  onClick={() => router.push("/card")}>
                   {t("toCart")}
                 </Button>
               ) : (
@@ -538,8 +533,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
                 <Button
                   onClick={handleCopyToClipboard}
                   className={cls.secondaryBtn}
-                  theme={ThemeButton.CLEAR}
-                >
+                  theme={ThemeButton.CLEAR}>
                   <IconShare />
                   {t("share")}
                 </Button>

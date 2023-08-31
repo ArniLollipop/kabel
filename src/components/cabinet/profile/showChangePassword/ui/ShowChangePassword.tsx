@@ -1,3 +1,5 @@
+/** @format */
+
 import { FC, useState } from "react";
 import classNames from "classnames";
 import cls from "./ShowChangePassword.module.scss";
@@ -13,7 +15,7 @@ import { InputInstance } from "@/shared/formElements/InputInstance";
 import { EInputInstanceTheme } from "@/shared/formElements/InputInstance/ui/InputInstance";
 import { changePasswordsSchema } from "@/helpers/validation";
 import { ProfileService } from "@/services/Profile.service";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import { toast } from "react-toastify";
 
@@ -57,8 +59,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
           console.log("values is: ", {
             ...values,
           });
-        }}
-      >
+        }}>
         {({ values, touched, errors, handleBlur, handleChange }) => {
           const sendSmsCodeToPhone = async () => {
             try {
@@ -190,21 +191,19 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                 <div className={cn(cls.ShowChangePasswords)}>
                   <ErrorBorder
                     touchedValue={touched.changePassNew}
-                    errorsValue={errors.changePassNew}
-                  >
+                    errorsValue={errors.changePassNew}>
                     <Button
                       theme={ThemeButton.CLEAR}
-                      type="button"
-                      onClick={() => setChangePassNew(!changePassNew)}
-                    >
+                      type='button'
+                      onClick={() => setChangePassNew(!changePassNew)}>
                       {changePassNew ? <ShowPassword /> : <HidePassword />}
                     </Button>
                     <InputInstance
                       password={"password"}
                       theme={EInputInstanceTheme.AUTH}
                       type={changePassNew ? "text" : "password"}
-                      id="changePassNew"
-                      name="changePassNew"
+                      id='changePassNew'
+                      name='changePassNew'
                       placeholder={t("newPass") || "Новый пароль"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -217,21 +216,19 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
 
                   <ErrorBorder
                     touchedValue={touched.changePassConfirm}
-                    errorsValue={errors.changePassConfirm}
-                  >
+                    errorsValue={errors.changePassConfirm}>
                     <Button
                       theme={ThemeButton.CLEAR}
-                      type="button"
-                      onClick={() => setChangePassConfirm(!changePassConfirm)}
-                    >
+                      type='button'
+                      onClick={() => setChangePassConfirm(!changePassConfirm)}>
                       {changePassConfirm ? <ShowPassword /> : <HidePassword />}
                     </Button>
                     <InputInstance
                       password={"password"}
                       theme={EInputInstanceTheme.AUTH}
                       type={changePassConfirm ? "text" : "password"}
-                      id="changePassConfirm"
-                      name="changePassConfirm"
+                      id='changePassConfirm'
+                      name='changePassConfirm'
                       placeholder={t("repeatPass") || "Повторить пароль"}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -247,8 +244,7 @@ export const ShowChangePassword: FC<ShowChangePasswordProps> = (props) => {
                   <Button
                     onClick={changePasswordFinal}
                     theme={ThemeButton.YELLOW}
-                    type="submit"
-                  >
+                    type='submit'>
                     {t("saveMent")}
                   </Button>
                 </div>

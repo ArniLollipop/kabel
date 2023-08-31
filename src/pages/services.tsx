@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import Head from "next/head";
 import classNames from "classnames";
@@ -15,7 +17,7 @@ import { ServicesLayout } from "@/layouts/ServicesLayout";
 import { data } from "@/data/ServicesData";
 import { ActiveHeaderPage } from "@/components/header/Header";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -54,15 +56,18 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{t("list.services")}</title>
-        <meta name="description" content="ТОО Almaty Kazkabel | Сервисы" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <title>{t("title_services")}</title>
+        <meta
+          name='description'
+          content={t("description_services") as string}
+        />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' />
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap"
+          rel='stylesheet'
+          href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
         />
       </Head>
       <MainLayout activePage={ActiveHeaderPage.SERVICES}>

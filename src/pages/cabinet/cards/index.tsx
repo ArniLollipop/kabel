@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import Image from "next/image";
 import { useState } from "react";
@@ -17,7 +19,7 @@ import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
 import { AddCard } from "@/components/cabinet/cards/AddCard";
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 export default function cardsPage() {
   const [showAddCard, setShowAddCard] = useState(false);
@@ -27,8 +29,7 @@ export default function cardsPage() {
   return (
     <CabinetLayout
       className={cls.cards_wrapper}
-      activePage={ActiveCabinetPageEnum.CARDS}
-    >
+      activePage={ActiveCabinetPageEnum.CARDS}>
       {showAddCard ? (
         <AddCard className={cls.form} setShowAddCard={setShowAddCard} />
       ) : (
@@ -36,8 +37,7 @@ export default function cardsPage() {
           <Button
             onClick={() => setShowAddCard(true)}
             className={cls.addBtn}
-            theme={ThemeButton.CLEAR}
-          >
+            theme={ThemeButton.CLEAR}>
             <IconCardCounterPlus />
             {t("add")}
           </Button>
@@ -52,21 +52,26 @@ export default function cardsPage() {
                   <span className={cls.cards_cardNumber}>•••• 7777</span>
 
                   <div className={cls.cards_typeOfPayment}>
-                    <Image src={IconPaymentVisa} alt="Visa" />
-                    <Image src={IconPaymentMC} alt="MC" />
+                    <Image
+                      src={IconPaymentVisa}
+                      alt={"Visa" + "| Almaty Kazkabel"}
+                    />
+                    <Image
+                      src={IconPaymentMC}
+                      alt={"MC" + "| Almaty Kazkabel"}
+                    />
                   </div>
                 </div>
 
                 <div className={cls.cards_btns}>
-                  <label htmlFor="">
-                    <input type="radio" name="card" />
+                  <label htmlFor=''>
+                    <input type='radio' name='card' />
                     {t("default")}
                   </label>
 
                   <Button
                     className={cls.delivery_removeBtn}
-                    theme={ThemeButton.CLEAR}
-                  >
+                    theme={ThemeButton.CLEAR}>
                     {t("delete")}
                   </Button>
                 </div>
@@ -78,20 +83,25 @@ export default function cardsPage() {
                   <span className={cls.cards_cardNumber}>•••• 7777</span>
 
                   <div className={cls.cards_typeOfPayment}>
-                    <Image src={IconPaymentVisa} alt="Visa" />
-                    <Image src={IconPaymentMC} alt="MC" />
+                    <Image
+                      src={IconPaymentVisa}
+                      alt={"Visa" + "| Almaty Kazkabel"}
+                    />
+                    <Image
+                      src={IconPaymentMC}
+                      alt={"MC" + "| Almaty Kazkabel"}
+                    />
                   </div>
                 </div>
 
                 <div className={cls.cards_btns}>
-                  <label htmlFor="">
-                    <input type="radio" name="card" /> {t("default")}
+                  <label htmlFor=''>
+                    <input type='radio' name='card' /> {t("default")}
                   </label>
 
                   <Button
                     className={cls.delivery_removeBtn}
-                    theme={ThemeButton.CLEAR}
-                  >
+                    theme={ThemeButton.CLEAR}>
                     {t("delete")}
                   </Button>
                 </div>

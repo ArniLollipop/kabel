@@ -1,3 +1,5 @@
+/** @format */
+
 // packages
 import { FC, useState } from "react";
 import classNames from "classnames";
@@ -19,7 +21,7 @@ import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import { maskForPhone } from "@/helpers/masks";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { EditProfile } from "@/store/slices/ProfileSlice";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 
 let cn = classNames.bind(cls);
 
@@ -71,8 +73,7 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
             EditProfile({ userId: authUser?.id, values: modifiedValues })
           );
           setShowEditProfile(false);
-        }}
-      >
+        }}>
         {({
           values,
           touched,
@@ -96,9 +97,9 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
                     <div className={cls.userCard_NnLInputs}>
                       <InputInstance
                         theme={EInputInstanceTheme.PROFILE}
-                        type="text"
-                        id="first_name"
-                        name="first_name"
+                        type='text'
+                        id='first_name'
+                        name='first_name'
                         placeholder={t("name") || "Имя"}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -110,10 +111,10 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
 
                       <InputInstance
                         theme={EInputInstanceTheme.PROFILE}
-                        type="text"
-                        id="last_name"
-                        name="last_name"
-                        placeholder="Фамилия"
+                        type='text'
+                        id='last_name'
+                        name='last_name'
+                        placeholder='Фамилия'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.last_name}
@@ -126,10 +127,10 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
                     <div className={cls.userCard_LnEInputs}>
                       <InputInstance
                         theme={EInputInstanceTheme.PROFILE}
-                        type="text"
-                        id="middle_name"
-                        name="middle_name"
-                        placeholder="Отчество"
+                        type='text'
+                        id='middle_name'
+                        name='middle_name'
+                        placeholder='Отчество'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.middle_name}
@@ -140,10 +141,10 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
 
                       <InputInstance
                         theme={EInputInstanceTheme.PROFILE}
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email:"
+                        type='email'
+                        id='email'
+                        name='email'
+                        placeholder='Email:'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.email}
@@ -156,9 +157,8 @@ export const ShowEditProfile: FC<ShowEditProfileProps> = (props) => {
 
                   <Button
                     className={cls.userCard_saveBtn}
-                    type="submit"
-                    theme={ThemeButton.YELLOW}
-                  >
+                    type='submit'
+                    theme={ThemeButton.YELLOW}>
                     {t("saveMent")}
                   </Button>
                 </div>

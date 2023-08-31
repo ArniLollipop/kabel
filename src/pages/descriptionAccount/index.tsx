@@ -1,3 +1,5 @@
+/** @format */
+
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Title } from "@/UI/Title/Title";
@@ -13,9 +15,7 @@ import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 
-export default function DescriptionAccount(props: AboutI) {
-  const { image, text, title, our_goal } = props;
-
+export default function DescriptionAccount() {
   return (
     <MainLayout activePage={ActiveHeaderPage.ABOUT}>
       <div className={cn(cls.about)}>
