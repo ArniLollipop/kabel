@@ -19,6 +19,7 @@ import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { useHttp } from "@/hooks/useHttp";
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 interface CardProps {
   products: productAnswI;
@@ -42,11 +43,19 @@ export default function Card(props: CardProps) {
 
   console.log(props);
 
+  const router = useRouter();
+
   return (
     <MainLayout activePage={ActiveHeaderPage.CATALOG}>
       <Head>
         <title>{t("title_catalog")}</title>
         <meta name='description' content={t("description_catalog") as string} />
+        <meta property='og:title' content={t("title_catalog") as string} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <CatalogPage />
     </MainLayout>

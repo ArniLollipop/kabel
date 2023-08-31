@@ -24,6 +24,7 @@ const cn = classNames.bind(cls);
 import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const params: SwiperProps = {
   breakpoints: {
@@ -62,11 +63,19 @@ export default function newsPage(props: any) {
 
   const [swiper, setSwiper] = useState<any>();
 
+  const router = useRouter();
+
   return (
     <MainLayout activePage={ActiveHeaderPage.NEWS}>
       <Head>
         <title>{t("title_news")}</title>
         <meta name='description' content={t("description_news") as string} />
+        <meta property='og:title' content={t("title_news") as string} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        {/* <meta property='og:image' content={props.newssection_set[0].image} /> */}
       </Head>
       {/* PC implementation */}
       <div className={cn(cls.news)}>

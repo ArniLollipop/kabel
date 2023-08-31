@@ -8,6 +8,7 @@ import { Title } from "@/UI/Title/Title";
 import { useHttp } from "@/hooks/useHttp";
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 function Politics(props: any) {
   const { politics } = props;
@@ -25,6 +26,8 @@ function Politics(props: any) {
   // useEffect(() => {
   //   getPolitics();
   // }, []);
+
+  const router = useRouter();
   return (
     <>
       <MainLayout>
@@ -34,6 +37,17 @@ function Politics(props: any) {
             name='description'
             content={t("description_politics") as string}
           />
+          <meta property='og:title' content={t("title_politics") as string} />
+          <meta
+            property='og:url'
+            content={"https://cable.kz" + router.pathname}
+          />
+          {/* <meta
+            property='og:image'
+            content={
+              "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
+            }
+          /> */}
         </Head>
         <div className={cls.Politics}>
           <Title>{t("footer.politics")}</Title>

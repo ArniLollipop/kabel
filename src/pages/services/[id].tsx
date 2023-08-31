@@ -105,6 +105,17 @@ export default function Home() {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
           />
+          <meta property='og:title' content={t("title_section") as string} />
+          <meta
+            property='og:url'
+            content={"https://cable.kz" + router.pathname}
+          />
+          {/* <meta
+            property='og:image'
+            content={
+              "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
+            }
+          /> */}
         </Head>
       )}
       {router.query.id?.includes("encoding") && (
@@ -122,6 +133,17 @@ export default function Home() {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
           />
+          <meta property='og:title' content={t("title_encoding") as string} />
+          <meta
+            property='og:url'
+            content={"https://cable.kz" + router.pathname}
+          />
+          {/* <meta
+            property='og:image'
+            content={
+              "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
+            }
+          /> */}
         </Head>
       )}
       {router.query.id?.includes("weight") && (
@@ -138,6 +160,11 @@ export default function Home() {
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
+          />
+          <meta property='og:title' content={t("title_weight") as string} />
+          <meta
+            property='og:url'
+            content={"https://cable.kz" + router.pathname}
           />
         </Head>
       )}

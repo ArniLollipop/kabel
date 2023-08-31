@@ -24,6 +24,7 @@ import { ProductService } from "@/services/Product.servise";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 export interface HomeProps {
   offers: offerI[];
@@ -39,12 +40,24 @@ export interface HomeProps {
 
 export default function Home(props: HomeProps) {
   const { t } = useTranslation();
+  const router = useRouter();
 
   return (
     <MainLayout activePage={ActiveHeaderPage.MAIN}>
       <Head>
         <title>{t("title_index")}</title>
         <meta name='description' content={t("description_index") as string} />
+        <meta property='og:title' content={t("title_index") as string} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        {/* <meta
+            property='og:image'
+            content={
+              "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
+            }
+          /> */}
       </Head>
       {props ? (
         <Homepage {...props} />

@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function bonusesPage() {
   const { t } = useTranslation();
@@ -37,6 +38,8 @@ export default function bonusesPage() {
     getBonus();
   }, []);
 
+  const router = useRouter();
+
   return (
     <CabinetLayout
       activePage={ActiveCabinetPageEnum.BONUSES}
@@ -44,6 +47,12 @@ export default function bonusesPage() {
       <Head>
         <title>{t("title_bonus")}</title>
         <meta name='description' content={t("description_bonus") as string} />
+        <meta property='og:title' content={t("title_bonus") as string} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <h3>{t("bonuses")}</h3>
 

@@ -10,17 +10,26 @@ import { AboutService } from "@/services/About.service";
 import { AboutI } from "@/types/AboutTypes";
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
 
 export default function aboutPage(props: AboutI) {
   const { t } = useTranslation();
 
+  const router = useRouter();
+
   return (
     <MainLayout activePage={ActiveHeaderPage.ABOUT}>
       <Head>
         <title>{t("title_about")}</title>
         <meta name='description' content={t("description_about") as string} />
+        <meta property='og:title' content={t("title_about") as string} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        <meta property='og:image' content={props.image} />
       </Head>
       <div className={cn(cls.about)}>
         <Title className={cls.about_title}>{props && props.title}</Title>

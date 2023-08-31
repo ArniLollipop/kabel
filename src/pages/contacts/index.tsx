@@ -35,9 +35,12 @@ export interface Coords {
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 function contactsPage(props: any) {
   const { t } = useTranslation();
+
+  const router = useRouter();
 
   return (
     <MainLayout activePage={ActiveHeaderPage.CONTACTS}>
@@ -47,6 +50,12 @@ function contactsPage(props: any) {
           name='description'
           content={t("description_contacts") as string}
         />
+        <meta property='og:title' content={t("title_contacts") as string} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <div className={cn(cls.contactsPage)}>
         <Title className={cls.contactsPage_title}>{t("list.contacts")}</Title>

@@ -24,6 +24,12 @@ export default function articlePage(props: any) {
       <Head>
         <title>{t("title_news")}</title>
         <meta name='description' content={t("description_news") as string} />
+        <meta property='og:title' content={props?.title} />
+        <meta
+          property='og:url'
+          content={"https://cable.kz" + router.pathname}
+        />
+        <meta property='og:image' content={props.newssection_set[0].image} />
       </Head>
       <div className={cn(cls.articlePage)}>
         <Title className={cls.articlePage_title}>{t("list.news")}</Title>
@@ -52,7 +58,7 @@ export default function articlePage(props: any) {
                       <Image
                         className={cls.articlePage_img}
                         src={image}
-                        alt={image_text_site + "| Almaty Kazkabel"}
+                        alt={id + "| Almaty Kazkabel"}
                         width={1146}
                         height={460}
                       />

@@ -32,6 +32,7 @@ const enum endpoints {
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 interface deliveryProps {
   payment: payDelI;
@@ -64,6 +65,8 @@ export default function delivery(props: any) {
   //   getDelivery();
   // }, []);
 
+  const router = useRouter();
+
   return (
     <>
       <MainLayout activePage={ActiveHeaderPage.PAY_DEL}>
@@ -72,6 +75,17 @@ export default function delivery(props: any) {
           <meta
             name='description'
             content={t("description_delivery") as string}
+          />
+          <meta property='og:title' content={t("title_delivery") as string} />
+          <meta
+            property='og:url'
+            content={"https://cable.kz" + router.pathname}
+          />
+          <meta
+            property='og:image'
+            content={
+              "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImagePayment.86dcbd8e.png&w=640&q=75"
+            }
           />
         </Head>
         {/* PC Layout */}
