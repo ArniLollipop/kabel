@@ -33,27 +33,26 @@ export const NewsCard: FC<NewsCardProps> = (props) => {
 
   return (
     <div className={cn(cls.NewsCard, cls[theme], className)}>
-      <span className={cls.NewsCard_date}>{dateConverter(created_at)}</span>
-      <div className={cls.NewsCard_head}>
-        <Image
-          className={cls.NewsCard_headImg}
-          src={thumbnail}
-          width={80}
-          height={80}
-          alt={title + "| Almaty Kazkabel"}
-        />
-        <Link
-          href={`/news/${id}`}
-          className={cls.NewsCard_headTitle}
-          title={title}>
-          {title?.length > 45 ? `${title.slice(0, 45)}...` : title}
-        </Link>
-      </div>
-      <p className={cls.NewsCard_descr}>
-        {description?.length > 150
-          ? `${description.slice(0, 150)}...`
-          : description}
-      </p>
+      <Link href={`/news/${id}`}>
+        <span className={cls.NewsCard_date}>{dateConverter(created_at)}</span>
+        <div className={cls.NewsCard_head}>
+          <Image
+            className={cls.NewsCard_headImg}
+            src={thumbnail}
+            width={80}
+            height={80}
+            alt={title + "| Almaty Kazkabel"}
+          />
+          <p className={cls.NewsCard_headTitle}>
+            {title?.length > 45 ? `${title.slice(0, 45)}...` : title}
+          </p>
+        </div>
+        <p className={cls.NewsCard_descr}>
+          {description?.length > 150
+            ? `${description.slice(0, 150)}...`
+            : description}
+        </p>
+      </Link>
     </div>
   );
 };

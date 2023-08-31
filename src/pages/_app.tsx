@@ -25,7 +25,7 @@ function App({ Component, pageProps }: AppProps) {
       document.cookie = "i18next=ru";
     }
     if (!localStorage.getItem("user") && router.pathname.includes("cabinet")) {
-      router.push("/auth");
+      router.replace("/auth");
     }
   }, []);
 

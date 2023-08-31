@@ -69,7 +69,7 @@ export const OfferSection: FC<OfferSectionProps> = (props) => {
             return (
               <SwiperSlide key={id}>
                 <div className={cls.offerInner}>
-                  <h1 className={cn(cls.offerTitle, "title")}>{title}</h1>
+                  <h2 className={cn(cls.offerTitle, "title")}>{title}</h2>
 
                   <p className={cls.offerDescr}>{text}</p>
 

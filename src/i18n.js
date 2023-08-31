@@ -14,6 +14,7 @@ i18n
       kz: {
         translation: {
           lang: "KZ",
+          head_lang: "kk",
           header: {
             account: "Жеке кабинет",
             free: "Жеке кабинет",
@@ -186,7 +187,7 @@ i18n
           repeatPass: "Құпиясөзді қайталау",
           maintainerCard: "Несие карточкасын иеленушісінің Аты",
           findAddress: "Картадағы іздеу арқылы мекенжайыңызды табыңыз",
-          findTovar: "Өнім атауы бойынша іздеу",
+          findTovar: "Аты мен өнім коды бойынша іздеу",
           nomerZakaza: "Тапсырыс нөмірі",
           sposobOplata: "Төлем және жеткізу әдісі",
           nalichnimi: "Қолма-қол ақша",
@@ -350,6 +351,7 @@ i18n
       },
       ru: {
         translation: {
+          head_lang: "ru",
           alt_payment_image: "изображение платежа",
           alt_bonus_image: "Картинка бонусов",
           alt_services_icon: "Иконки служб",
@@ -515,7 +517,7 @@ i18n
           repeatPass: "Повторить пароль",
           maintainerCard: "Имя владельца карты",
           findAddress: "Найдите через поиск на карте, ваш адрес",
-          findTovar: "Поиск по имени товара",
+          findTovar: "Поиск по имени и по коду товара",
           header: {
             account: "Личный кабинет",
             free: "Личный кабинет",

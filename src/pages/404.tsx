@@ -9,6 +9,9 @@ function Custom404() {
   return (
     <div>
       <MainLayout activePage={ActiveHeaderPage.MAIN}>
+        <div className=' min-h-[100vh] flex items-center !justify-center w-full'>
+          <h1 className=' text-5xl font-bold text-center'>404</h1>
+        </div>
         <Script id='redirect'>
           {`
             document.location.href="/";
