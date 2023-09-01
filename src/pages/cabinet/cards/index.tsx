@@ -20,6 +20,7 @@ import { ThemeButton } from "@/UI/Button/ui/Button";
 import { AddCard } from "@/components/cabinet/cards/AddCard";
 
 import { useTranslation } from "react-i18next";
+import Head from "next/head";
 
 export default function cardsPage() {
   const [showAddCard, setShowAddCard] = useState(false);
@@ -30,6 +31,9 @@ export default function cardsPage() {
     <CabinetLayout
       className={cls.cards_wrapper}
       activePage={ActiveCabinetPageEnum.CARDS}>
+      <Head>
+        <meta name='robots' content='noindex, noarchive' />
+      </Head>
       {showAddCard ? (
         <AddCard className={cls.form} setShowAddCard={setShowAddCard} />
       ) : (

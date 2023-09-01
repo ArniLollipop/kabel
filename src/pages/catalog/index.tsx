@@ -55,6 +55,8 @@ export default function Card(props: CardProps) {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
+        <meta name='robots' content='noindex, noarchive' />
+        <meta name='robots' content='index, follow, noarchive' />
         {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <CatalogPage />

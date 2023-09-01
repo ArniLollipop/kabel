@@ -83,6 +83,7 @@ export default function deliveryPage() {
           name='description'
           content={t("description_cabinet_delivery") as string}
         />
+        <meta name='robots' content='noindex, noarchive' />
       </Head>
       {isOpen ? (
         <AddOrEditDelivery

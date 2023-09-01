@@ -39,6 +39,7 @@ export default function index(props: ICurrencyNMetalResponse) {
           name='description'
           content={t("description_currency") as string}
         />
+        <meta name='robots' content='noindex, noarchive' />
       </Head>
       <p>{t("london")}</p>
       <div className={cn(cls.currency_header)}>

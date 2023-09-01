@@ -87,6 +87,8 @@ export default function delivery(props: any) {
               "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImagePayment.86dcbd8e.png&w=640&q=75"
             }
           />
+          <meta name='robots' content='noindex, noarchive' />
+          <meta name='robots' content='index, follow, noarchive' />
         </Head>
         {/* PC Layout */}
         <DeliveryLayout

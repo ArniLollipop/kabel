@@ -82,6 +82,7 @@ export default function supportPage() {
       <Head>
         <title>{t("title_support")}</title>
         <meta name='description' content={t("description_support") as string} />
+        <meta name='robots' content='noindex, noarchive' />
       </Head>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <RequestACall setIsOpen={setIsOpen} />

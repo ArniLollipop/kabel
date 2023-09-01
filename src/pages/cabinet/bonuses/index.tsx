@@ -52,6 +52,8 @@ export default function bonusesPage() {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
+        <meta name='robots' content='noindex, noarchive' />
+
         {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <h3>{t("bonuses")}</h3>

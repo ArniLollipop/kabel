@@ -55,6 +55,8 @@ function contactsPage(props: any) {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
+        <meta name='robots' content='noindex, noarchive' />
+        <meta name='robots' content='index, follow, noarchive' />
         {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <div className={cn(cls.contactsPage)}>

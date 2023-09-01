@@ -110,6 +110,8 @@ export default function Home() {
             property='og:url'
             content={"https://cable.kz" + router.pathname}
           />
+          <meta name='robots' content='noindex, noarchive' />
+
           {/* <meta
             property='og:image'
             content={
@@ -138,6 +140,9 @@ export default function Home() {
             property='og:url'
             content={"https://cable.kz" + router.pathname}
           />
+          <meta name='robots' content='noindex, noarchive' />
+          <meta name='robots' content='index, follow, noarchive' />
+
           {/* <meta
             property='og:image'
             content={
@@ -166,6 +171,7 @@ export default function Home() {
             property='og:url'
             content={"https://cable.kz" + router.pathname}
           />
+          <meta name='robots' content='noindex, noarchive' />
         </Head>
       )}
       <MainLayout activePage={ActiveHeaderPage.SERVICES}>

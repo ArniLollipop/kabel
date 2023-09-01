@@ -69,6 +69,7 @@ export default function profilePage() {
       <Head>
         <title>{t("title_profile")}</title>
         <meta name='description' content={t("description_profile") as string} />
+        <meta name='robots' content='noindex, noarchive' />
       </Head>
 
       {showModal && (

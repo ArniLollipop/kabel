@@ -30,6 +30,7 @@ export default function articlePage(props: any) {
           content={"https://cable.kz" + router.pathname}
         />
         <meta property='og:image' content={props.newssection_set[0].image} />
+        <meta name='robots' content='noindex, noarchive' />
       </Head>
       <div className={cn(cls.articlePage)}>
         <Title className={cls.articlePage_title}>{t("list.news")}</Title>

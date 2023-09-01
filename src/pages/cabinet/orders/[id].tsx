@@ -49,6 +49,7 @@ export default function OrderCard(props: OrderCardProps) {
       <Head>
         <title>{t("title_orders")}</title>
         <meta name='description' content={t("description_orders") as string} />
+        <meta name='robots' content='noindex, noarchive' />
       </Head>
       <div className={cls.orders_wrapper}>
         <Link className={cls.backLink} href='/cabinet/orders'>

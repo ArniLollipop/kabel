@@ -19,6 +19,8 @@ export default function Card() {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
+        <meta name='robots' content='noindex, noarchive' />
+        <meta name='robots' content='index, follow, noarchive' />
         {/* <meta
             property='og:image'
             content={
