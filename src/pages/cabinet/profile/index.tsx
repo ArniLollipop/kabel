@@ -36,6 +36,7 @@ import { ProfileService } from "@/services/Profile.service";
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function profilePage() {
   const [showEditProfile, setShowEditProfile] = useState<boolean>(false);
@@ -46,6 +47,8 @@ export default function profilePage() {
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState<any>();
   const { user: authUser } = useAppSelector(state => state.AuthSlice);
+
+  const router = useRouter();
 
   const { t } = useTranslation();
   // DON'T FORGET TO USE GET USER ID IN ORDER TO SHOW EXACT USERS DATA INSTEAD OF USING PROFILE USER OR AUTH USER AND EVERYWHERE YOU HAVE THESE TWO IMPORTS
