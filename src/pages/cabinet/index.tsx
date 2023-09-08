@@ -21,7 +21,7 @@ export default function cabinetPage() {
   return (
     <MainLayout activePage={ActiveHeaderPage.CABINET}>
       <Head>
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
       </Head>
       <div className={cls.cabinet_wrapper}>
         <Navigation className={cls.cabinet} theme={ThemeNavigation.MOBILE} />

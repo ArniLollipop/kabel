@@ -59,7 +59,7 @@ function contactsPage(props: any) {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
 
         {/* <meta property='og:image' content={props.image} /> */}
       </Head>

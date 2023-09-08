@@ -35,7 +35,7 @@ export default function cardsPage() {
       className={cls.cards_wrapper}
       activePage={ActiveCabinetPageEnum.CARDS}>
       <Head>
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
       </Head>
       {showAddCard ? (
         <AddCard className={cls.form} setShowAddCard={setShowAddCard} />

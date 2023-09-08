@@ -42,7 +42,7 @@ export default function index(props: ICurrencyNMetalResponse) {
           name='description'
           content={t("description_currency") as string}
         />
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
       </Head>
       <p>{t("london")}</p>
       <div className={cn(cls.currency_header)}>

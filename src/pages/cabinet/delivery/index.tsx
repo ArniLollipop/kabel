@@ -86,7 +86,7 @@ export default function deliveryPage() {
           name='description'
           content={t("description_cabinet_delivery") as string}
         />
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
       </Head>
       {isOpen ? (
         <AddOrEditDelivery

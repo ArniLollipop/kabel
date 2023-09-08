@@ -71,7 +71,7 @@ export default function profilePage() {
       activePage={ActiveCabinetPageEnum.PROFILE}>
       <Head>
         <title>{t("title_profile")}</title>
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
         <meta name='description' content={t("description_profile") as string} />
       </Head>
 

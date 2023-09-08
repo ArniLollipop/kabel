@@ -87,7 +87,7 @@ export default function delivery(props: any) {
               "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImagePayment.86dcbd8e.png&w=640&q=75"
             }
           />
-          <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+          <link rel='canonical' href={"https://cable.kz" + router.pathname} />
         </Head>
         {/* PC Layout */}
         <DeliveryLayout

@@ -85,7 +85,7 @@ export default function supportPage() {
       <Head>
         <title>{t("title_support")}</title>
         <meta name='description' content={t("description_support") as string} />
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
       </Head>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <RequestACall setIsOpen={setIsOpen} />

@@ -62,7 +62,7 @@ export default function PrintPage() {
           rel='stylesheet'
           href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
         />
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
       </Head>
       <div ref={printRef} className={cn(cls.PrintPage)}>
         <div className={cn(cls.iconContainer)}>

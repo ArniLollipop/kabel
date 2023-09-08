@@ -75,7 +75,7 @@ export default function newsPage(props: any) {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
-        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
 
         {/* <meta property='og:image' content={props.newssection_set[0].image} /> */}
       </Head>
