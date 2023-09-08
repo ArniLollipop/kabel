@@ -45,7 +45,7 @@ export default function profilePage() {
   const [numberOrEmail, setNumberOrEmail] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState<any>();
-  const { user: authUser } = useAppSelector((state) => state.AuthSlice);
+  const { user: authUser } = useAppSelector(state => state.AuthSlice);
 
   const { t } = useTranslation();
   // DON'T FORGET TO USE GET USER ID IN ORDER TO SHOW EXACT USERS DATA INSTEAD OF USING PROFILE USER OR AUTH USER AND EVERYWHERE YOU HAVE THESE TWO IMPORTS
@@ -68,8 +68,8 @@ export default function profilePage() {
       activePage={ActiveCabinetPageEnum.PROFILE}>
       <Head>
         <title>{t("title_profile")}</title>
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
         <meta name='description' content={t("description_profile") as string} />
-        <meta name='robots' content='noindex, noarchive' />
       </Head>
 
       {showModal && (
@@ -97,7 +97,7 @@ export default function profilePage() {
             // @ts-ignore
             avatar: user && user?.avatar,
           }}
-          onSubmit={(values) => {
+          onSubmit={values => {
             console.log("values is: ", {
               ...values,
             });

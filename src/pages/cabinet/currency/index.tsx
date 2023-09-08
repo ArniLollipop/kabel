@@ -16,6 +16,7 @@ import { GetCurrency } from "@/components/GetCurrency/GetCurrency";
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 let cn = classNames.bind(cls);
 
@@ -29,6 +30,8 @@ export default function index(props: ICurrencyNMetalResponse) {
 
   const { t } = useTranslation();
 
+  const router = useRouter();
+
   return (
     <CabinetLayout
       className={cn(cls.currency)}
@@ -39,7 +42,7 @@ export default function index(props: ICurrencyNMetalResponse) {
           name='description'
           content={t("description_currency") as string}
         />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       <p>{t("london")}</p>
       <div className={cn(cls.currency_header)}>

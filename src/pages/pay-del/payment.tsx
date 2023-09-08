@@ -83,7 +83,7 @@ export default function payment(props: any) {
             "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
           }
         />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       {/* PC Layout */}
       <DeliveryLayout

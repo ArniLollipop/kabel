@@ -12,6 +12,7 @@ import Link from "next/link";
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
 
@@ -47,6 +48,8 @@ export default function ordersPage() {
     },
   };
 
+  const router = useRouter();
+
   return (
     <CabinetLayout
       className={cn(cls.orders)}
@@ -54,7 +57,7 @@ export default function ordersPage() {
       <Head>
         <title>{t("title_orders")}</title>
         <meta name='description' content={t("description_orders") as string} />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       <div className={cls.orders_wrapper}>
         <h1 className={cls.orders_title}>{t("myOrders")}</h1>

@@ -48,6 +48,7 @@ export default function Home(props: HomeProps) {
         <title>{t("title_index")}</title>
         <meta name='description' content={t("description_index") as string} />
         <meta property='og:title' content={t("title_index") as string} />
+        <link rel='canonical' href='https://cable.kz/' />
         <meta
           property='og:url'
           content={"https://cable.kz" + router.pathname}
@@ -58,7 +59,6 @@ export default function Home(props: HomeProps) {
               "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
             }
           /> */}
-        <meta name='robots' content='noindex, noarchive' />
       </Head>
       {props ? (
         <Homepage {...props} />

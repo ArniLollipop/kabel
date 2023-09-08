@@ -24,6 +24,7 @@ import { RequestACall } from "@/components/requestCall/RequestACall";
 import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
 
@@ -75,6 +76,8 @@ export default function supportPage() {
     },
   };
 
+  const router = useRouter();
+
   return (
     <CabinetLayout
       className={cls.support}
@@ -82,7 +85,7 @@ export default function supportPage() {
       <Head>
         <title>{t("title_support")}</title>
         <meta name='description' content={t("description_support") as string} />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <RequestACall setIsOpen={setIsOpen} />

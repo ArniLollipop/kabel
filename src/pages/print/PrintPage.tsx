@@ -15,10 +15,13 @@ import cls from "./PrintPage.module.scss";
 import { printData } from "@/data/PrintData";
 
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 let cn = classNames.bind(cls);
 
 export default function PrintPage() {
+  const router = useRouter();
+
   const { t } = useTranslation();
   const printRef = useRef(null);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -59,6 +62,7 @@ export default function PrintPage() {
           rel='stylesheet'
           href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap'
         />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       <div ref={printRef} className={cn(cls.PrintPage)}>
         <div className={cn(cls.iconContainer)}>

@@ -30,6 +30,7 @@ const cn = classNames.bind(cls);
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function deliveryPage() {
   const { t } = useTranslation();
@@ -73,6 +74,8 @@ export default function deliveryPage() {
     getAddresses();
   }, [isOpen]);
 
+  const router = useRouter();
+
   return (
     <CabinetLayout
       activePage={ActiveCabinetPageEnum.DELIVERY}
@@ -83,7 +86,7 @@ export default function deliveryPage() {
           name='description'
           content={t("description_cabinet_delivery") as string}
         />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       {isOpen ? (
         <AddOrEditDelivery

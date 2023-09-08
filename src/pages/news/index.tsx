@@ -75,8 +75,8 @@ export default function newsPage(props: any) {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
-        <meta name='robots' content='noindex, noarchive' />
-        <meta name='robots' content='index, follow, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+
         {/* <meta property='og:image' content={props.newssection_set[0].image} /> */}
       </Head>
       {/* PC implementation */}
@@ -98,7 +98,7 @@ export default function newsPage(props: any) {
                 spaceBetween={50}
                 speed={500}
                 centeredSlides={false}
-                onSwiper={(swiper) => setSwiper(swiper)}
+                onSwiper={swiper => setSwiper(swiper)}
                 modules={[Navigation]}
                 breakpoints={{
                   1500: {

@@ -1,6 +1,7 @@
 /** @format */
 
 import { Html, Head, Main, NextScript } from "next/document";
+import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
 export default function Document() {
@@ -21,7 +22,6 @@ export default function Document() {
           href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap'
           rel='stylesheet'
         />
-        <link rel='canonical' href='https://cable.kz/' />
       </Head>
       <body>
         <noscript>

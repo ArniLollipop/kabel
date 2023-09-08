@@ -39,7 +39,7 @@ export default function item(props: productI) {
           content={"https://cable.kz" + router.pathname}
         />
         <meta property='og:image' content={props.image} />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       <div
         onClick={() => setModal(false)}

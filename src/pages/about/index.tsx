@@ -30,8 +30,7 @@ export default function aboutPage(props: AboutI) {
           content={"https://cable.kz" + router.pathname}
         />
         <meta property='og:image' content={props.image} />
-        <meta name='robots' content='noindex, noarchive' />
-        <meta name='robots' content='index, follow, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       <div className={cn(cls.about)}>
         <Title className={cls.about_title}>{props && props.title}</Title>

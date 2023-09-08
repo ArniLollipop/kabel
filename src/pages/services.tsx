@@ -26,7 +26,7 @@ export default function Home() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  const showArticles = data.map((article) => {
+  const showArticles = data.map(article => {
     const { articleId, title, desc, link, articleIcon: ArticleIcon } = article;
 
     return (
@@ -76,7 +76,8 @@ export default function Home() {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+
 
         {/* <meta
             property='og:image'

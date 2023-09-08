@@ -21,18 +21,21 @@ import { AddCard } from "@/components/cabinet/cards/AddCard";
 
 import { useTranslation } from "react-i18next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function cardsPage() {
   const [showAddCard, setShowAddCard] = useState(false);
 
   const { t } = useTranslation();
 
+  const router = useRouter();
+
   return (
     <CabinetLayout
       className={cls.cards_wrapper}
       activePage={ActiveCabinetPageEnum.CARDS}>
       <Head>
-        <meta name='robots' content='noindex, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
       </Head>
       {showAddCard ? (
         <AddCard className={cls.form} setShowAddCard={setShowAddCard} />

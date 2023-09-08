@@ -42,6 +42,10 @@ function contactsPage(props: any) {
 
   const router = useRouter();
 
+  console.log("====================================");
+  console.log(props);
+  console.log("====================================");
+
   return (
     <MainLayout activePage={ActiveHeaderPage.CONTACTS}>
       <Head>
@@ -55,8 +59,8 @@ function contactsPage(props: any) {
           property='og:url'
           content={"https://cable.kz" + router.pathname}
         />
-        <meta name='robots' content='noindex, noarchive' />
-        <meta name='robots' content='index, follow, noarchive' />
+        <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+
         {/* <meta property='og:image' content={props.image} /> */}
       </Head>
       <div className={cn(cls.contactsPage)}>
@@ -114,7 +118,7 @@ function contactsPage(props: any) {
                       )}>
                       <IconContactsMail />
                       <div>
-                        <a className={cls.descr} href={`mailto:${el.mail}`}>
+                        <a className={cls.descr} href={`mailto:${el.email}`}>
                           {el.email}
                         </a>
                       </div>

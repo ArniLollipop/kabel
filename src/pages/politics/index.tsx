@@ -42,14 +42,14 @@ function Politics(props: any) {
             property='og:url'
             content={"https://cable.kz" + router.pathname}
           />
+          <link rel='canonical' href={"https://cable.kz/" + router.pathname} />
+
           {/* <meta
             property='og:image'
             content={
               "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
             }
           /> */}
-          <meta name='robots' content='index, follow, noarchive' />
-          <meta name='robots' content='noindex, noarchive' />
         </Head>
         <div className={cls.Politics}>
           <Title>{t("footer.politics")}</Title>
