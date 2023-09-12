@@ -17,11 +17,11 @@ const nextConfig = {
     defaultLocale: "ru",
     domains: [
       {
-        domain: "cable.kz/ru",
+        domain: "https://cable.kz/ru",
         defaultLocale: "ru",
       },
       {
-        domain: "cable.kz/kz",
+        domain: "https://cable.kz/kz",
         defaultLocale: "kz",
       },
     ],
