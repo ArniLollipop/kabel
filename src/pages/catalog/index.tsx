@@ -130,8 +130,6 @@ export async function getServerSideProps(ctx: NextPageContext) {
   const categories = await ProductService().getCategories();
   const cores = await ProductService().getCores();
 
-  console.log(products);
-
   return {
     props: { products, categories, cores },
   };

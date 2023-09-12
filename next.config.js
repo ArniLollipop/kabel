@@ -15,6 +15,16 @@ const nextConfig = {
   i18n: {
     locales: ["ru", "kz"],
     defaultLocale: "ru",
+    domains: [
+      {
+        domain: "cable.kz/ru",
+        defaultLocale: "ru",
+      },
+      {
+        domain: "cable.kz/kz",
+        defaultLocale: "kz",
+      },
+    ],
   },
   images: {
     domains: ["api.cable.kz", "kazkabel-back.zoom-app.kz"],
