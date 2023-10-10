@@ -6,17 +6,17 @@ import { useEffect, useState } from "react";
 // assets
 import cls from "./index.module.scss";
 import {
-  IconPhone,
-  IconCardCounterPlus,
-  IconCabinetDelivery,
-  IconCabinetProfile,
-  IconCabinetEdit,
+	IconPhone,
+	IconCardCounterPlus,
+	IconCabinetDelivery,
+	IconCabinetProfile,
+	IconCabinetEdit,
 } from "@/assets/icons";
 
 // components
 import {
-  ActiveCabinetPageEnum,
-  CabinetLayout,
+	ActiveCabinetPageEnum,
+	CabinetLayout,
 } from "@/layouts/CabinetLayot/CabinetLayout";
 import { Button } from "@/UI/Button";
 import { ThemeButton } from "@/UI/Button/ui/Button";
@@ -33,140 +33,154 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 export default function deliveryPage() {
-  const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [addresses, setAddresses] = useState<any>();
-  const [address, setAddress] = useState<any>({});
+	const { t } = useTranslation();
+	const [isOpen, setIsOpen] = useState(false);
+	const [name, setName] = useState("");
+	const [addresses, setAddresses] = useState<any>();
+	const [address, setAddress] = useState<any>({});
 
-  async function getAddresses() {
-    const res = await useHttp().get("users/user_addresses/my_addresses/");
-    setAddresses(res.data.results);
-  }
+	async function getAddresses() {
+		const res = await useHttp().get("users/user_addresses/my_addresses/");
+		setAddresses(res.data.results);
+	}
 
-  async function deleteAddress(id: Number) {
-    const res = await useHttp().delete("users/user_addresses/" + id + "/", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-    });
-    getAddresses();
-  }
+	async function deleteAddress(id: Number) {
+		const res = await useHttp().delete("users/user_addresses/" + id + "/", {
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem("access_token"),
+			},
+		});
+		getAddresses();
+	}
 
-  async function handleSetDefault(id: Number) {
-    const res = await useHttp().patch(
-      "users/user_addresses/change_to_default/",
-      { is_default: true, id: id },
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      }
-    );
-    getAddresses();
-  }
+	async function handleSetDefault(id: Number) {
+		const res = await useHttp().patch(
+			"users/user_addresses/change_to_default/",
+			{ is_default: true, id: id },
+			{
+				headers: {
+					Authorization: "Bearer " + localStorage.getItem("access_token"),
+				},
+			}
+		);
+		getAddresses();
+	}
 
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const temp = JSON.parse(localStorage.getItem("user") || "");
-      setName(temp?.first_name + " " + temp?.last_name);
-    }
-    getAddresses();
-  }, [isOpen]);
+	useEffect(() => {
+		if (localStorage.getItem("user")) {
+			const temp = JSON.parse(localStorage.getItem("user") || "");
+			setName(temp?.first_name + " " + temp?.last_name);
+		}
+		getAddresses();
+	}, [isOpen]);
 
-  const router = useRouter();
+	const router = useRouter();
 
-  return (
-    <CabinetLayout
-      activePage={ActiveCabinetPageEnum.DELIVERY}
-      className={cls.delivery}>
-      <Head>
-        <title>{t("title_cabinet_delivery")}</title>
-        <meta
-          name='description'
-          content={t("description_cabinet_delivery") as string}
-        />
-        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
-      </Head>
-      {isOpen ? (
-        <AddOrEditDelivery
-          className={cls.delivery_form}
-          setIsOpen={setIsOpen}
-          {...address}
-        />
-      ) : (
-        <>
-          <Button
-            onClick={() => {
-              setIsOpen(true);
-              setAddress("");
-            }}
-            className={cls.delivery_addBtn}
-            theme={ThemeButton.CLEAR}>
-            <IconCardCounterPlus />
-            {t("add")}
-          </Button>
+	return (
+		<CabinetLayout
+			activePage={ActiveCabinetPageEnum.DELIVERY}
+			className={cls.delivery}>
+			<Head>
+				<title>{t("title_cabinet_delivery")}</title>
+				<meta
+					name='description'
+					content={t("description_cabinet_delivery") as string}
+				/>
+				<meta name='og:title' content={t("title_cabinet_delivery") as string} />
+				<meta
+					name='og:description'
+					content={t("description_cabinet_delivery") as string}
+				/>
+				<meta property='og:image' content={"https://cable.kz/Logo.svg"} />
 
-          <ul className={cls.delivery_adressList}>
-            {addresses?.map((el: any) => {
-              return (
-                <li key={el.id} className={cls.delivery_adressListItem}>
-                  <h2>{t("dostavka")}</h2>
-                  <span>
-                    <IconCabinetProfile fillColor='#F6BF0C' />
-                    {name}
-                  </span>
-                  <span>
-                    <IconPhone textColor='#F6BF0C' />
-                    {el.phone_number}
-                  </span>
-                  <span>
-                    <IconCabinetDelivery fillColor='#F6BF0C' />
-                    {el.address}
-                  </span>
+				<meta itemProp='name' content={t("title_cabinet_delivery") as string} />
+				<meta
+					itemProp='description'
+					content={t("description_cabinet_delivery") as string}
+				/>
+				<meta itemProp='image' content='https://cable.kz/Logo.svg' />
 
-                  <div className={cls.delivery_btns}>
-                    <label
-                      onClick={() => handleSetDefault(el.id)}
-                      className={cls.delivery_btns_label}
-                      htmlFor=''>
-                      <input
-                        type='radio'
-                        name='default'
-                        checked={el.is_default}
-                      />
-                      {t("default")}
-                    </label>
-                    <Button
-                      onClick={() => {
-                        setIsOpen(true);
-                        setAddress(el);
-                      }}
-                      className={cn(
-                        cls.delivery_editBtn,
-                        cls.delivery_btns_edit
-                      )}
-                      theme={ThemeButton.CLEAR}>
-                      <IconCabinetEdit /> {t("update")}
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        deleteAddress(el.id);
-                      }}
-                      className={cn(
-                        cls.delivery_removeBtn,
-                        cls.delivery_btns_delete
-                      )}
-                      theme={ThemeButton.CLEAR}>
-                      {t("delete")}
-                    </Button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
-    </CabinetLayout>
-  );
+				<link rel='canonical' href={"https://cable.kz" + router.pathname} />
+			</Head>
+			{isOpen ? (
+				<AddOrEditDelivery
+					className={cls.delivery_form}
+					setIsOpen={setIsOpen}
+					{...address}
+				/>
+			) : (
+				<>
+					<Button
+						onClick={() => {
+							setIsOpen(true);
+							setAddress("");
+						}}
+						className={cls.delivery_addBtn}
+						theme={ThemeButton.CLEAR}>
+						<IconCardCounterPlus />
+						{t("add")}
+					</Button>
+
+					<ul className={cls.delivery_adressList}>
+						{addresses?.map((el: any) => {
+							return (
+								<li key={el.id} className={cls.delivery_adressListItem}>
+									<h2>{t("dostavka")}</h2>
+									<span>
+										<IconCabinetProfile fillColor='#F6BF0C' />
+										{name}
+									</span>
+									<span>
+										<IconPhone textColor='#F6BF0C' />
+										{el.phone_number}
+									</span>
+									<span>
+										<IconCabinetDelivery fillColor='#F6BF0C' />
+										{el.address}
+									</span>
+
+									<div className={cls.delivery_btns}>
+										<label
+											onClick={() => handleSetDefault(el.id)}
+											className={cls.delivery_btns_label}
+											htmlFor=''>
+											<input
+												type='radio'
+												name='default'
+												checked={el.is_default}
+											/>
+											{t("default")}
+										</label>
+										<Button
+											onClick={() => {
+												setIsOpen(true);
+												setAddress(el);
+											}}
+											className={cn(
+												cls.delivery_editBtn,
+												cls.delivery_btns_edit
+											)}
+											theme={ThemeButton.CLEAR}>
+											<IconCabinetEdit /> {t("update")}
+										</Button>
+										<Button
+											onClick={() => {
+												deleteAddress(el.id);
+											}}
+											className={cn(
+												cls.delivery_removeBtn,
+												cls.delivery_btns_delete
+											)}
+											theme={ThemeButton.CLEAR}>
+											{t("delete")}
+										</Button>
+									</div>
+								</li>
+							);
+						})}
+					</ul>
+				</>
+			)}
+		</CabinetLayout>
+	);
 }

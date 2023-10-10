@@ -25,71 +25,77 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
+import { NextPageContext } from "next";
 
 export interface HomeProps {
-  offers: offerI[];
-  currency: ICurrencyResult;
-  aboutInfo: AboutI;
-  categories: categoryI[];
-  sertificates: sertificateI[];
-  adventages: adventagesI[];
-  news: newsI[];
-  currencyRes: ICurrencyResult;
-  metalRes: IMetalResponse;
+	offers: offerI[];
+	currency: ICurrencyResult;
+	aboutInfo: AboutI;
+	categories: categoryI[];
+	sertificates: sertificateI[];
+	adventages: adventagesI[];
+	news: newsI[];
+	currencyRes: ICurrencyResult;
+	metalRes: IMetalResponse;
 }
 
 export default function Home(props: HomeProps) {
-  const { t } = useTranslation();
-  const router = useRouter();
+	const { t } = useTranslation();
+	const router = useRouter();
 
-  return (
-    <MainLayout activePage={ActiveHeaderPage.MAIN}>
-      <Head>
-        <title>{t("title_index")}</title>
-        <meta name='description' content={t("description_index") as string} />
-        <meta property='og:title' content={t("title_index") as string} />
-        <link rel='canonical' href='https://cable.kz/' />
-        <meta
-          property='og:url'
-          content={"https://cable.kz" + router.pathname}
-        />
-        {/* <meta
-            property='og:image'
-            content={
-              "https://cable.kz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImageDelivery.675cc87e.png&w=640&q=75"
-            }
-          /> */}
-      </Head>
-      {props ? (
-        <Homepage {...props} />
-      ) : (
-        <div className='flex items-center !justify-center w-full h-[100vh]'>
-          <div className='loading'></div>
-        </div>
-      )}
-    </MainLayout>
-  );
+	return (
+		<MainLayout activePage={ActiveHeaderPage.MAIN}>
+			<Head>
+				<title>{t("title_index")}</title>
+				<meta name='description' content={t("description_index") as string} />
+				<meta property='og:title' content={t("title_index") as string} />
+				<link rel='canonical' href='https://cable.kz/' />
+				<meta
+					property='og:url'
+					content={"https://cable.kz" + router.pathname}
+				/>
+				<meta property='og:image' content={"https://cable.kz/Logo.svg"} />
+				<meta
+					property='og:description'
+					content={t("description_index") as string}
+				/>
+				<meta itemProp='name' content={t("title_index") as string} />
+				<meta
+					itemProp='description'
+					content={t("description_index") as string}
+				/>
+				<meta itemProp='image' content='https://cable.kz/Logo.svg' />
+			</Head>
+			{props ? (
+				<Homepage {...props} />
+			) : (
+				<div className='flex items-center !justify-center w-full h-[100vh]'>
+					<div className='loading'></div>
+				</div>
+			)}
+		</MainLayout>
+	);
 }
 
-export async function getServerSideProps() {
-  const offers = await OfferService().getOffers();
-  const aboutInfo = await AboutService().getAboutInfo();
-  const categories = await ProductService().getCategories();
-  const sertificates = await SertificateService().getSertificate();
-  const adventages = await AdventagesService().getAdventages();
-  const news = await NewsService().getNews();
-  const currencyRes = await GetCurrencyService().getCurrency();
-  const metalRes = await GetCurrencyService().getMetal();
-  return {
-    props: {
-      offers,
-      aboutInfo,
-      categories,
-      sertificates,
-      adventages,
-      news,
-      currencyRes,
-      metalRes,
-    },
-  };
+export async function getServerSideProps(ctx: NextPageContext) {
+	const offers = await OfferService(ctx).getOffers();
+	const aboutInfo = await AboutService(ctx).getAboutInfo();
+	const categories = await ProductService(ctx).getCategories();
+	const sertificates = await SertificateService(ctx).getSertificate();
+	const adventages = await AdventagesService(ctx).getAdventages();
+	const news = await NewsService(ctx).getNews();
+	const currencyRes = await GetCurrencyService(ctx).getCurrency();
+	const metalRes = await GetCurrencyService(ctx).getMetal();
+	return {
+		props: {
+			offers,
+			aboutInfo,
+			categories,
+			sertificates,
+			adventages,
+			news,
+			currencyRes,
+			metalRes,
+		},
+	};
 }

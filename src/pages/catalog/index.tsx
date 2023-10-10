@@ -8,10 +8,10 @@ import { ProductService } from "@/services/Product.servise";
 import { categoriesAnswI, coresI, productAnswI } from "@/types/ProductTypes";
 import { useAppDispatch } from "@/hooks/store";
 import {
-  setProducts,
-  setCategories,
-  setCores,
-  setPage,
+	setProducts,
+	setCategories,
+	setCores,
+	setPage,
 } from "@/store/slices/ProductSlice";
 import { NextPageContext } from "next/types";
 import nookies from "nookies";
@@ -22,115 +22,130 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 
 interface CardProps {
-  products: productAnswI;
-  categories: categoriesAnswI;
-  cores: coresI;
+	products: productAnswI;
+	categories: categoriesAnswI;
+	cores: coresI;
 }
 
 export default function Card(props: CardProps) {
-  const { categories, products, cores } = props;
+	const { categories, products, cores } = props;
 
-  const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  useEffect(() => {
-    dispatch(setProducts(products));
-    dispatch(setPage(products.count_pages));
-    dispatch(setCategories(categories));
-    dispatch(setCores(cores));
-  }, [products, categories, cores]);
+	useEffect(() => {
+		dispatch(setProducts(products));
+		dispatch(setPage(products.count_pages));
+		dispatch(setCategories(categories));
+		dispatch(setCores(cores));
+	}, [products, categories, cores]);
 
-  console.log(props);
+	console.log(props);
 
-  const router = useRouter();
+	const router = useRouter();
 
-  return (
-    <MainLayout activePage={ActiveHeaderPage.CATALOG}>
-      <Head>
-        <title>{t("title_catalog")}</title>
-        <meta name='description' content={t("description_catalog") as string} />
-        <meta property='og:title' content={t("title_catalog") as string} />
-        <meta
-          property='og:url'
-          content={"https://cable.kz" + router.pathname}
-        />
-        <link rel='canonical' href={"https://cable.kz" + router.pathname} />
+	return (
+		<MainLayout activePage={ActiveHeaderPage.CATALOG}>
+			<Head>
+				<title>{t("title_catalog")}</title>
+				<meta name='description' content={t("description_catalog") as string} />
+				<meta property='og:title' content={t("title_catalog") as string} />
+				<meta
+					property='og:url'
+					content={"https://cable.kz" + router.pathname}
+				/>
+				<link rel='canonical' href={"https://cable.kz" + router.pathname} />
 
-        {/* <meta property='og:image' content={props.image} /> */}
-      </Head>
-      <CatalogPage />
-    </MainLayout>
-  );
+				<meta itemProp='name' content={t("title_catalog") as string} />
+				<meta
+					itemProp='description'
+					content={t("description_catalog") as string}
+				/>
+
+				{/* <meta property='og:image' content={props.image} /> */}
+			</Head>
+			<CatalogPage />
+		</MainLayout>
+	);
 }
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  let products;
+	let products;
 
-  if (nookies.get(ctx).queries) {
-    let fromCookie;
-    fromCookie = JSON.parse(nookies.get(ctx).queries);
+	if (nookies.get(ctx).queries) {
+		let fromCookie;
+		fromCookie = JSON.parse(nookies.get(ctx).queries);
 
-    let subcategoryQuery = "?";
-    let sectionQuery = "";
-    let core_numberQuery = "";
-    let orderingQuery = "";
-    let availabilityQuery = "";
+		let subcategoryQuery = "?";
+		let sectionQuery = "";
+		let core_numberQuery = "";
+		let orderingQuery = "";
+		let availabilityQuery = "";
 
-    if (fromCookie.subcategory.length > 0) {
-      fromCookie.subcategory.forEach((el: any) => {
-        subcategoryQuery += `&subcategory=${el}`;
-      });
-    } else {
-      subcategoryQuery = "?";
-    }
+		if (fromCookie.subcategory.length > 0) {
+			fromCookie.subcategory.forEach((el: any) => {
+				subcategoryQuery += `&subcategory=${el}`;
+			});
+		} else {
+			subcategoryQuery = "?";
+		}
 
-    if (fromCookie.section.length > 0) {
-      fromCookie.section.forEach((el: any) => {
-        sectionQuery += `&section=${el}`;
-      });
-    } else {
-      sectionQuery = "";
-    }
+		if (fromCookie.section.length > 0) {
+			fromCookie.section.forEach((el: any) => {
+				sectionQuery += `&section=${el}`;
+			});
+		} else {
+			sectionQuery = "";
+		}
 
-    if (fromCookie.core_number.length > 0) {
-      fromCookie.core_number.forEach((el: any) => {
-        core_numberQuery += `&core_number=${el}`;
-      });
-    } else {
-      core_numberQuery = "";
-    }
+		if (fromCookie.core_number.length > 0) {
+			fromCookie.core_number.forEach((el: any) => {
+				core_numberQuery += `&core_number=${el}`;
+			});
+		} else {
+			core_numberQuery = "";
+		}
 
-    if (fromCookie.ordering.length > 0) {
-      orderingQuery += `&ordering=${fromCookie.ordering}`;
-    } else {
-      orderingQuery = "";
-    }
+		if (fromCookie.ordering.length > 0) {
+			orderingQuery += `&ordering=${fromCookie.ordering}`;
+		} else {
+			orderingQuery = "";
+		}
 
-    if (fromCookie.availability.length > 0) {
-      availabilityQuery += `&availability=${fromCookie.availability}`;
-    } else {
-      availabilityQuery = "";
-    }
+		if (fromCookie.availability.length > 0) {
+			availabilityQuery += `&availability=${fromCookie.availability}`;
+		} else {
+			availabilityQuery = "";
+		}
 
-    const res = await useHttp(ctx).get(
-      "/products/products/" +
-        subcategoryQuery +
-        sectionQuery +
-        core_numberQuery +
-        orderingQuery +
-        availabilityQuery
-    );
-    products = res.data;
-  } else {
-    const res = await useHttp(ctx).get("/products/products/");
-    products = res.data;
-  }
+		const res = await useHttp(ctx).get(
+			"/products/products/" +
+				subcategoryQuery +
+				sectionQuery +
+				core_numberQuery +
+				orderingQuery +
+				availabilityQuery,
+			{
+				headers: {
+					"Accept-Language": ctx?.locale || "ru",
+				},
+			}
+		);
+		products = res.data;
+	} else {
+		const res = await useHttp(ctx).get("/products/products/", {
+			headers: {
+				"Accept-Language": ctx?.locale || "ru",
+			},
+		});
+		products = res.data;
+	}
 
-  const categories = await ProductService().getCategories();
-  const cores = await ProductService().getCores();
+	const categories = await ProductService().getCategories();
+	const cores = await ProductService().getCores();
 
-  return {
-    props: { products, categories, cores },
-  };
+	return {
+		props: { products, categories, cores },
+	};
 }

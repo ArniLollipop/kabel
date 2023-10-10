@@ -5,10 +5,10 @@ import classNames from "classnames/bind";
 import cls from "./FilterSection.module.scss";
 import { Button, ThemeButton } from "@/UI/Button/ui/Button";
 import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionItem,
+	Accordion,
+	AccordionBody,
+	AccordionHeader,
+	AccordionItem,
 } from "react-headless-accordion";
 import { useAppSelector, useAppDispatch } from "@/hooks/store";
 import { Field, Form, Formik } from "formik";
@@ -26,372 +26,379 @@ import { useHttp } from "@/hooks/useHttp";
 const cn = classNames.bind(cls);
 
 interface FilterSectionProps {
-  className?: string;
-  isOpened?: boolean;
-  closeFilters?: Dispatch<SetStateAction<boolean>>;
+	className?: string;
+	isOpened?: boolean;
+	closeFilters?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const FilterSection: FC<FilterSectionProps> = (props) => {
-  const { t } = useTranslation();
-  const { isOpened, closeFilters } = props;
-  const [categories, setCategories] = useState<any>([]);
-  const { cores, products, stateForQueris } = useAppSelector(
-    (state) => state.ProductSlice
-  );
+	const { t } = useTranslation();
+	const { isOpened, closeFilters } = props;
+	const [categories, setCategories] = useState<any>([]);
+	const { cores, products, stateForQueris } = useAppSelector(
+		(state) => state.ProductSlice
+	);
 
-  const [checkedFilters, setCheckedFilters] = useState<any>({
-    subcategory: [],
-    section: [],
-    core_number: [],
-    availability: "",
-    ordering: "",
-  });
+	const [checkedFilters, setCheckedFilters] = useState<any>({
+		subcategory: [],
+		section: [],
+		core_number: [],
+		availability: "",
+		ordering: "",
+	});
 
-  async function handleGetFilters() {
-    if (parseCookies().queries) {
-      setCheckedFilters(await JSON.parse(parseCookies().queries));
-    }
-  }
+	async function handleGetFilters() {
+		if (parseCookies().queries) {
+			setCheckedFilters(await JSON.parse(parseCookies().queries));
+		}
+	}
 
-  const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-  interface sortI {
-    availability: "Все" | "в наличии" | "под заказ" | "";
-    checkedCors: string[];
-    categories: string[];
-    sortWidget: "-cost" | "cost";
-    sectionCors: string[];
-  }
+	interface sortI {
+		availability: "Все" | "в наличии" | "под заказ" | "";
+		checkedCors: string[];
+		categories: string[];
+		sortWidget: "-cost" | "cost";
+		sectionCors: string[];
+	}
 
-  const submitHandler = async (value: sortI) => {
-    const { availability, categories, checkedCors, sortWidget } = value;
+	const submitHandler = async (value: sortI) => {
+		const { availability, categories, checkedCors, sortWidget } = value;
 
-    const core_number = [
-      ...new Set(checkedCors.map((el) => el.slice(0, el.indexOf("x")))),
-    ];
-    const section = [
-      ...new Set(
-        checkedCors.map((el) => el.slice(el.indexOf("x") + 1, el.length))
-      ),
-    ];
+		const core_number = [
+			...new Set(checkedCors.map((el) => el.slice(0, el.indexOf("x")))),
+		];
+		const section = [
+			...new Set(
+				checkedCors.map((el) => el.slice(el.indexOf("x") + 1, el.length))
+			),
+		];
 
-    const coresQuery = queriesGenerator(core_number, "core_number");
-    const sectionsQuery = queriesGenerator(section, "section");
-    const categoriesQuery = queriesGenerator(categories, "subcategory");
-    const availabilityQuery =
-      availability === "Все" ? "" : `availability=${availability}`;
-    const sortQuery = `&ordering=${sortWidget}`;
+		const coresQuery = queriesGenerator(core_number, "core_number");
+		const sectionsQuery = queriesGenerator(section, "section");
+		const categoriesQuery = queriesGenerator(categories, "subcategory");
+		const availabilityQuery =
+			availability === "Все" ? "" : `availability=${availability}`;
+		const sortQuery = `&ordering=${sortWidget}`;
 
-    const queries = `?${coresQuery}${sectionsQuery}${categoriesQuery}${availabilityQuery}${sortQuery}`;
+		const queries = `?${coresQuery}${sectionsQuery}${categoriesQuery}${availabilityQuery}${sortQuery}`;
 
-    const cookieQuery = {
-      subcategory: categories,
-      section: section,
-      core_number: core_number,
-      availability: availability === "Все" ? "" : availability,
-      ordering: sortWidget,
-    };
+		const cookieQuery = {
+			subcategory: categories,
+			section: section,
+			core_number: core_number,
+			availability: availability === "Все" ? "" : availability,
+			ordering: sortWidget,
+		};
 
-    setCookie(null, "queries", JSON.stringify(cookieQuery), {
-      maxAge: 30 * 24 * 60 * 60,
-    });
-    const res = await ProductService().getProducts();
-    dispatch(setPage(res.count_pages));
-    dispatch(setProducts(res));
-    document.querySelector("#items")?.scrollIntoView({ behavior: "smooth" });
-  };
+		setCookie(null, "queries", JSON.stringify(cookieQuery), {
+			maxAge: 30 * 24 * 60 * 60,
+		});
+		const res = await ProductService().getProducts();
+		dispatch(setPage(res.count_pages));
+		dispatch(setProducts(res));
+		document.querySelector("#items")?.scrollIntoView({ behavior: "smooth" });
+	};
 
-  useEffect(() => {
-    handleGetFilters();
-    console.log("Зашел");
-  }, [stateForQueris]);
+	useEffect(() => {
+		handleGetFilters();
+		console.log("Зашел");
+	}, [stateForQueris]);
 
-  function getCors() {
-    let temp = [""];
-    checkedFilters.core_number.map((el: string, index: number) => {
-      temp.push(`${el}x${checkedFilters.section[index]}`);
-    });
-    return temp;
-  }
+	function getCors() {
+		let temp = [""];
+		checkedFilters.core_number.map((el: string, index: number) => {
+			temp.push(`${el}x${checkedFilters.section[index]}`);
+		});
+		return temp;
+	}
 
-  async function getCategories() {
-    try {
-      let res = await useHttp().get("products/categories/");
-      setCategories(res.data.results);
-    } catch (err) {}
-  }
+	async function getCategories() {
+		try {
+			let res = await useHttp().get("products/categories/");
+			setCategories(res.data.results);
+		} catch (err) {}
+	}
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+	useEffect(() => {
+		getCategories();
+	}, []);
 
-  return (
-    <div className={cn(cls.FilterSection, { visible: isOpened })}>
-      <Formik
-        enableReinitialize={true}
-        initialValues={
-          checkedFilters && {
-            availability: checkedFilters ? checkedFilters.availability : "",
-            checkedCors: checkedFilters ? getCors() : [],
-            categories: checkedFilters ? checkedFilters.subcategory : [],
-            sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
-          }
-        }
-        onSubmit={(values: sortI) => submitHandler(values)}>
-        {({ isSubmitting, values }) => (
-          <Form>
-            {/* Header of Filters */}
-            <div className={cls.header} id='top'>
-              <span>
-                {products?.count || "Нет"} {t("tovars")}
-              </span>
+	return (
+		<div className={cn(cls.FilterSection, { visible: isOpened })}>
+			<Formik
+				itemScope
+				itemType='https://schema.org/Offer'
+				enableReinitialize={true}
+				initialValues={
+					checkedFilters && {
+						availability: checkedFilters ? checkedFilters.availability : "",
+						checkedCors: checkedFilters ? getCors() : [],
+						categories: checkedFilters ? checkedFilters.subcategory : [],
+						sortWidget: checkedFilters ? checkedFilters.ordering : "cost",
+					}
+				}
+				onSubmit={(values: sortI) => submitHandler(values)}>
+				{({ isSubmitting, values }) => (
+					<Form>
+						{/* Header of Filters */}
+						<div className={cls.header} id='top'>
+							<span itemProp='numberOfItems'>
+								{products?.count || "Нет"} {t("tovars")}
+							</span>
 
-              <div className={cls.mainBtns}>
-                <Button
-                  theme={ThemeButton.YELLOW}
-                  className={cls.resetBtn}
-                  type='button'
-                  onClick={async () => {
-                    values.availability = "Все";
-                    values.categories = [];
-                    values.checkedCors = [];
-                    values.sortWidget = "cost";
-                    const res = await useHttp().get("products/products/");
-                    setCheckedFilters({
-                      subcategory: [],
-                      section: [],
-                      core_number: [],
-                      availability: "",
-                      ordering: "",
-                    });
-                    setCookie(
-                      null,
-                      "queries",
-                      JSON.stringify({
-                        subcategory: [],
-                        section: [],
-                        core_number: [],
-                        availability: "",
-                        ordering: "",
-                      }),
-                      {
-                        maxAge: 30 * 24 * 60 * 60,
-                      }
-                    );
-                    dispatch(setPage(res.data.count_pages));
-                    dispatch(setProducts(res.data));
-                  }}>
-                  {t("clear")}
-                </Button>
-              </div>
-            </div>
+							<div className={cls.mainBtns}>
+								<Button
+									theme={ThemeButton.YELLOW}
+									className={cls.resetBtn}
+									type='button'
+									onClick={async () => {
+										values.availability = "Все";
+										values.categories = [];
+										values.checkedCors = [];
+										values.sortWidget = "cost";
+										const res = await useHttp().get("products/products/");
+										setCheckedFilters({
+											subcategory: [],
+											section: [],
+											core_number: [],
+											availability: "",
+											ordering: "",
+										});
+										setCookie(
+											null,
+											"queries",
+											JSON.stringify({
+												subcategory: [],
+												section: [],
+												core_number: [],
+												availability: "",
+												ordering: "",
+											}),
+											{
+												maxAge: 30 * 24 * 60 * 60,
+											}
+										);
+										dispatch(setPage(res.data.count_pages));
+										dispatch(setProducts(res.data));
+									}}>
+									{t("clear")}
+								</Button>
+							</div>
+						</div>
 
-            {/* Sort by */}
-            <SortByWidget />
+						{/* Sort by */}
+						<SortByWidget />
 
-            {/* Availability filters */}
-            <div className={cls.availability}>
-              <h3 className={cn(cls.availability_title, cls.filterTitle)}>
-                {t("nalichie")}
-              </h3>
+						{/* Availability filters */}
+						<div className={cls.availability}>
+							<h3 className={cn(cls.availability_title, cls.filterTitle)}>
+								{t("nalichie")}
+							</h3>
 
-              <RadioInstance
-                name='availability'
-                value=''
-                id='all'
-                text={t("all") || "Все"}
-                className={cls.FilterSection_radio}
-                checked={
-                  // checkedFilters.availability === "" ||
-                  values.availability === ""
-                }
-              />
-              <RadioInstance
-                name='availability'
-                value='в наличии'
-                id='inStock'
-                text={t("estUNas") || "В наличии"}
-                className={cls.FilterSection_radio}
-                checked={
-                  // checkedFilters.availability === "в наличии" ||
-                  values.availability === "в наличии"
-                }
-              />
-              <RadioInstance
-                name='availability'
-                value='под заказ'
-                id='underOrder'
-                text={t("podZakaz") || "Под заказ"}
-                className={cls.FilterSection_radio}
-                checked={
-                  // checkedFilters.availability === "под заказ" ||
-                  values.availability === "под заказ"
-                }
-              />
-            </div>
+							<RadioInstance
+								itemProp='availability'
+								name='availability'
+								value=''
+								id='all'
+								text={t("all") || "Все"}
+								className={cls.FilterSection_radio}
+								checked={
+									// checkedFilters.availability === "" ||
+									values.availability === ""
+								}
+							/>
+							<RadioInstance
+								itemProp='availability'
+								name='availability'
+								value='в наличии'
+								id='inStock'
+								text={t("estUNas") || "В наличии"}
+								className={cls.FilterSection_radio}
+								checked={
+									// checkedFilters.availability === "в наличии" ||
+									values.availability === "в наличии"
+								}
+							/>
+							<RadioInstance
+								itemProp='availability'
+								name='availability'
+								value='под заказ'
+								id='underOrder'
+								text={t("podZakaz") || "Под заказ"}
+								className={cls.FilterSection_radio}
+								checked={
+									// checkedFilters.availability === "под заказ" ||
+									values.availability === "под заказ"
+								}
+							/>
+						</div>
 
-            {/* Categories filters */}
-            <div className={cls.product}>
-              <h3 className={cn(cls.product_title, cls.filterTitle)}>
-                {t("list.product")}
-              </h3>
+						{/* Categories filters */}
+						<div className={cls.product}>
+							<h3 className={cn(cls.product_title, cls.filterTitle)}>
+								{t("list.product")}
+							</h3>
 
-              <Accordion className={cls.filtersAcc} alwaysOpen={true}>
-                {/* Categories */}
-                <>
-                  {categories &&
-                    categories?.map((cat: any, i: number) => (
-                      <AccordionItem isActive={true} key={cat.name}>
-                        {({ open }: { open: boolean }) => (
-                          <>
-                            <AccordionHeader
-                              as='div'
-                              className={cn(cls.filtersAcc_title, {
-                                filtersAcc_titleActive: open,
-                              })}>
-                              <h3 className={cls.accTitle}>{cat.name}</h3>
-                              <svg
-                                className={cn(cls.filtersAcc_arrow, {
-                                  filtersAcc_arrowActive: open,
-                                })}
-                                width='15'
-                                height='9'
-                                viewBox='0 0 15 9'
-                                fill='none'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <path
-                                  d='M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562'
-                                  strokeWidth='2'
-                                  strokeLinecap='round'
-                                  strokeLinejoin='round'
-                                />
-                              </svg>
-                            </AccordionHeader>
+							<Accordion className={cls.filtersAcc} alwaysOpen={true}>
+								{/* Categories */}
+								<>
+									{categories &&
+										categories?.map((cat: any, i: number) => (
+											<AccordionItem isActive={true} key={cat.name}>
+												{({ open }: { open: boolean }) => (
+													<>
+														<AccordionHeader
+															as='div'
+															className={cn(cls.filtersAcc_title, {
+																filtersAcc_titleActive: open,
+															})}>
+															<h3 itemProp='category' className={cls.accTitle}>
+																{cat.name}
+															</h3>
+															<svg
+																className={cn(cls.filtersAcc_arrow, {
+																	filtersAcc_arrowActive: open,
+																})}
+																width='15'
+																height='9'
+																viewBox='0 0 15 9'
+																fill='none'
+																xmlns='http://www.w3.org/2000/svg'>
+																<path
+																	d='M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562'
+																	strokeWidth='2'
+																	strokeLinecap='round'
+																	strokeLinejoin='round'
+																/>
+															</svg>
+														</AccordionHeader>
 
-                            <AccordionBody
-                              className={cn(cls.filtersAcc_body, {
-                                filtersAcc_bodyActive: open,
-                              })}
-                              as='ul'>
-                              {cat.subcategory_set.map((subcat: any) => (
-                                <li
-                                  className={cls.filtersAcc_item}
-                                  key={subcat.name}>
-                                  <CheckBoxInstance
-                                    value={subcat.name}
-                                    name='categories'
-                                    id={subcat.name}
-                                    text={subcat.name}
-                                    className={cls.filtersAcc_itemInput}
-                                    checked={
-                                      // checkedFilters.subcategory.includes(
-                                      //   subcat.name
-                                      // ) ||
-                                      values.categories.includes(subcat.name)
-                                    }
-                                  />
-                                </li>
-                              ))}
-                            </AccordionBody>
-                          </>
-                        )}
-                      </AccordionItem>
-                    ))}
+														<AccordionBody
+															className={cn(cls.filtersAcc_body, {
+																filtersAcc_bodyActive: open,
+															})}
+															as='ul'>
+															{cat.subcategory_set.map((subcat: any) => (
+																<li
+																	className={cls.filtersAcc_item}
+																	key={subcat.name}>
+																	<CheckBoxInstance
+																		value={subcat.name}
+																		name='categories'
+																		id={subcat.name}
+																		text={subcat.name}
+																		className={cls.filtersAcc_itemInput}
+																		checked={
+																			// checkedFilters.subcategory.includes(
+																			//   subcat.name
+																			// ) ||
+																			values.categories.includes(subcat.name)
+																		}
+																	/>
+																</li>
+															))}
+														</AccordionBody>
+													</>
+												)}
+											</AccordionItem>
+										))}
 
-                  {/* Сечение */}
-                  <AccordionItem isActive={true}>
-                    {({ open }: { open: boolean }) => (
-                      <>
-                        <AccordionHeader
-                          className={cn(
-                            cls.filtersAcc_title,
-                            cls.filtersAcc_titleCross
-                          )}
-                          as='div'>
-                          <h3 className={cls.accTitle}>{t("sechenie")} </h3>
-                          <svg
-                            className={cn(cls.filtersAcc_arrow, {
-                              filtersAcc_arrowActive: open,
-                            })}
-                            width='15'
-                            height='9'
-                            viewBox='0 0 15 9'
-                            fill='none'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path
-                              d='M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562'
-                              stroke='#39424b'
-                              strokeWidth='2'
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                            />
-                          </svg>
-                        </AccordionHeader>
+									{/* Сечение */}
+									<AccordionItem isActive={true}>
+										{({ open }: { open: boolean }) => (
+											<>
+												<AccordionHeader
+													className={cn(
+														cls.filtersAcc_title,
+														cls.filtersAcc_titleCross
+													)}
+													as='div'>
+													<h3 className={cls.accTitle}>{t("sechenie")} </h3>
+													<svg
+														className={cn(cls.filtersAcc_arrow, {
+															filtersAcc_arrowActive: open,
+														})}
+														width='15'
+														height='9'
+														viewBox='0 0 15 9'
+														fill='none'
+														xmlns='http://www.w3.org/2000/svg'>
+														<path
+															d='M13.0129 7.00535L7.00781 1.01049L1.01295 7.01562'
+															stroke='#39424b'
+															strokeWidth='2'
+															strokeLinecap='round'
+															strokeLinejoin='round'
+														/>
+													</svg>
+												</AccordionHeader>
 
-                        <AccordionBody
-                          className={cn(cls.filtersAcc_body, {
-                            filtersAcc_bodyActive: open,
-                          })}
-                          as='ul'>
-                          {cores ? (
-                            Object.keys(cores).map((core) => (
-                              <ul
-                                className={cls.filtersAcc_coreSect}
-                                key={core}>
-                                {cores[core].map((coreSect) => (
-                                  <li
-                                    className={cls.filtersAcc_coreSectItem}
-                                    key={`${core}x${coreSect}`}
-                                    data-sub={`${core}x${coreSect}`}>
-                                    <CheckBoxInstance
-                                      text={`${core}x${coreSect}`}
-                                      name='checkedCors'
-                                      value={`${core}x${coreSect}`}
-                                      id='coreItem'
-                                      checked={
-                                        // (checkedFilters.core_number.includes(
-                                        //   core
-                                        // ) &&
-                                        //   checkedFilters.section.includes(
-                                        //     coreSect
-                                        //   )) ||
-                                        values.checkedCors.includes(
-                                          `${core}x${coreSect}`
-                                        )
-                                      }
-                                    />
-                                  </li>
-                                ))}
-                              </ul>
-                            ))
-                          ) : (
-                            <></>
-                          )}
-                        </AccordionBody>
-                      </>
-                    )}
-                  </AccordionItem>
-                </>
-              </Accordion>
-            </div>
+												<AccordionBody
+													className={cn(cls.filtersAcc_body, {
+														filtersAcc_bodyActive: open,
+													})}
+													as='ul'>
+													{cores ? (
+														Object.keys(cores).map((core) => (
+															<ul
+																className={cls.filtersAcc_coreSect}
+																key={core}>
+																{cores[core].map((coreSect) => (
+																	<li
+																		className={cls.filtersAcc_coreSectItem}
+																		key={`${core}x${coreSect}`}
+																		data-sub={`${core}x${coreSect}`}>
+																		<CheckBoxInstance
+																			text={`${core}x${coreSect}`}
+																			name='checkedCors'
+																			value={`${core}x${coreSect}`}
+																			id='coreItem'
+																			checked={
+																				// (checkedFilters.core_number.includes(
+																				//   core
+																				// ) &&
+																				//   checkedFilters.section.includes(
+																				//     coreSect
+																				//   )) ||
+																				values.checkedCors.includes(
+																					`${core}x${coreSect}`
+																				)
+																			}
+																		/>
+																	</li>
+																))}
+															</ul>
+														))
+													) : (
+														<></>
+													)}
+												</AccordionBody>
+											</>
+										)}
+									</AccordionItem>
+								</>
+							</Accordion>
+						</div>
 
-            {/* Submit Btns */}
-            <div className={cls.submitBtns}>
-              <Button
-                className={cls.submitBtn}
-                theme={ThemeButton.BLUE}
-                type='submit'
-                disabled={isSubmitting}
-                onClick={() => closeFilters && closeFilters(false)}>
-                {t("aprove2")}
-              </Button>
-              <a href='#top' className={cls.anchorUp}>
-                {t("toUp")}
-              </a>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
-  );
+						{/* Submit Btns */}
+						<div className={cls.submitBtns}>
+							<Button
+								className={cls.submitBtn}
+								theme={ThemeButton.BLUE}
+								type='submit'
+								disabled={isSubmitting}
+								onClick={() => closeFilters && closeFilters(false)}>
+								{t("aprove2")}
+							</Button>
+							<a href='#top' className={cls.anchorUp}>
+								{t("toUp")}
+							</a>
+						</div>
+					</Form>
+				)}
+			</Formik>
+		</div>
+	);
 };

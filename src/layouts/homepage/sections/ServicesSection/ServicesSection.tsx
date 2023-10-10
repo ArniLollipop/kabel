@@ -14,66 +14,72 @@ import Link from "next/link";
 const cn = classNames.bind(cls);
 
 interface ServicesSectionProps {
-  className?: string;
+	className?: string;
 }
 
 export const ServicesSection: FC<ServicesSectionProps> = (props) => {
-  const { className } = props;
-  const { t } = useTranslation();
+	const { className } = props;
+	const { t } = useTranslation();
 
-  return (
-    <section className={cn(cls.ServicesSection)}>
-      <Title className={cls.ServicesSection_title}>{t("list.services")}</Title>
+	return (
+		<section
+			itemScope
+			itemType='http://schema.org/ItemList'
+			className={cn(cls.ServicesSection)}>
+			<Title className={cls.ServicesSection_title}>{t("list.services")}</Title>
 
-      <ul className={cls.ServicesSection_list}>
-        <li>
-          <Link
-            href='/services'
-            className={cls.ServicesSection_item + " itemUp"}>
-            <div className={cls.ServicesSection_itemImg}>
-              <Image
-                src={IconServicesCalcWeight}
-                alt={t("alt_services_icon") + "| Almaty Kazkabel"}
-              />
-            </div>
-            <span className={cls.ServicesSection_itemTitle}>
-              {t("tableWeight")}
-            </span>
-          </Link>
-        </li>
+			<ul className={cls.ServicesSection_list}>
+				<li>
+					<Link
+						href='/services'
+						className={cls.ServicesSection_item + " itemUp"}>
+						<div className={cls.ServicesSection_itemImg}>
+							<Image
+								itemProp='image'
+								src={IconServicesCalcWeight}
+								alt={t("alt_services_icon") + "| Almaty Kazkabel"}
+							/>
+						</div>
+						<span itemProp='name' className={cls.ServicesSection_itemTitle}>
+							{t("tableWeight")}
+						</span>
+					</Link>
+				</li>
 
-        <li>
-          <Link
-            href='/services'
-            className={cls.ServicesSection_item + " itemUp"}>
-            <div className={cls.ServicesSection_itemImg}>
-              <Image
-                src={IconServicesCalc}
-                alt={t("alt_services_icon") + "| Almaty Kazkabel"}
-              />
-            </div>
-            <span className={cls.ServicesSection_itemTitle}>
-              {t("raschetCabel")}
-            </span>
-          </Link>
-        </li>
+				<li>
+					<Link
+						href='/services'
+						className={cls.ServicesSection_item + " itemUp"}>
+						<div className={cls.ServicesSection_itemImg}>
+							<Image
+								itemProp='image'
+								src={IconServicesCalc}
+								alt={t("alt_services_icon") + "| Almaty Kazkabel"}
+							/>
+						</div>
+						<span itemProp='name' className={cls.ServicesSection_itemTitle}>
+							{t("raschetCabel")}
+						</span>
+					</Link>
+				</li>
 
-        <li>
-          <Link
-            href='/services'
-            className={cls.ServicesSection_item + " itemUp"}>
-            <div className={cls.ServicesSection_itemImg}>
-              <Image
-                src={IconServicesDecoding}
-                alt={t("alt_services_icon") + "| Almaty Kazkabel"}
-              />
-            </div>
-            <span className={cls.ServicesSection_itemTitle}>
-              {t("rashifrovka")}
-            </span>
-          </Link>
-        </li>
-      </ul>
-    </section>
-  );
+				<li>
+					<Link
+						href='/services'
+						className={cls.ServicesSection_item + " itemUp"}>
+						<div className={cls.ServicesSection_itemImg}>
+							<Image
+								itemProp='image'
+								src={IconServicesDecoding}
+								alt={t("alt_services_icon") + "| Almaty Kazkabel"}
+							/>
+						</div>
+						<span itemProp='name' className={cls.ServicesSection_itemTitle}>
+							{t("rashifrovka")}
+						</span>
+					</Link>
+				</li>
+			</ul>
+		</section>
+	);
 };

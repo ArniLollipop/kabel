@@ -1,124 +1,134 @@
+/** @format */
+
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-gap: 25px;
-  max-width: 1440px;
-  height: auto;
-  margin: 80px auto;
-  padding: 90px 39px;
-  background-color: var(--services-bg-color);
-  border-radius: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-gap: 25px;
+	max-width: 1440px;
+	height: auto;
+	margin: 80px auto;
+	padding: 90px 39px;
+	background-color: var(--services-bg-color);
+	border-radius: 20px;
 
-  .backBtn {
-    display: none;
-  }
+	.backBtn {
+		display: none;
+	}
 
-  .serviceArticleIntroContainer {
-    display: block;
-    padding: 8px;
-    width: 100%;
-    max-width: 376px;
-    height: fit-content;
-    border-radius: 15px;
-    background-color: var(--color-bg-white);
-    grid-column: span 1 / span 1;
+	.serviceArticleIntroContainer {
+		display: block;
+		padding: 8px;
+		width: 100%;
+		max-width: 376px;
+		height: fit-content;
+		border-radius: 15px;
+		background-color: var(--color-bg-white);
+		grid-column: span 1 / span 1;
 
-    .servicesArticleIntro {
-      width: 100%;
-      padding: 13px 25px;
-      border-radius: 10px;
-      background-repeat: no-repeat;
-      background-position: 15px 15%;
-      background-size: 25px 30px;
+		.servicesArticleIntro {
+			width: 100%;
+			padding: 13px 25px;
+			border-radius: 10px;
+			background-repeat: no-repeat;
+			background-position: 15px 15%;
+			background-size: 25px 30px;
 
-      svg {
-        &:last-child {
-          margin-left: auto;
-        }
-      }
+			svg {
+				&:last-child {
+					margin-left: auto;
+				}
+			}
 
-      a {
-        display: flex;
-        align-items: center;
-      }
+			a {
+				display: flex;
+				align-items: center;
+			}
 
-      h2 {
-        font-weight: 500;
-        font-size: var(--font-size-small);
-        color: #37454e;
-        margin: 0 50px 0 20px;
-      }
+			h2 {
+				font-weight: 500;
+				font-size: var(--font-size-small);
+				color: #37454e;
+				margin: 0 50px 0 20px;
+			}
+			h1 {
+				font-weight: 600;
+				font-size: var(--font-size-small);
+				color: #37454e;
+				margin: 0 50px 0 20px;
+			}
 
-      .articleIconWidthNHeight {
-        width: 35px;
-        height: 35px;
-      }
-    }
+			.articleIconWidthNHeight {
+				width: 35px;
+				height: 35px;
+			}
+		}
 
-    .active {
-      background-color: var(--color-accent);
+		.active {
+			background-color: var(--color-accent);
 
-      h2 {
-        color: var(--color-bg-white);
-      }
-    }
+			h2,
+			h1 {
+				color: var(--color-bg-white);
+			}
+		}
 
-    .default {
-      h2 {
-        color: #37454e;
-      }
-    }
-  }
+		.default {
+			h2,
+			h1 {
+				color: #37454e;
+			}
+		}
+	}
 
-  .serviceArticleIntroContent {
-    grid-column: span 2 / span 2;
-    width: 100%;
-    height: auto;
-    padding: 30px;
-    background-color: var(--color-bg-white);
-    border-radius: 20px;
-    @media (max-width: 1024px) {
-      padding: 20px;
-    }
-    @media (max-width: 640px) {
-      padding: 10px;
-    }
-  }
+	.serviceArticleIntroContent {
+		grid-column: span 2 / span 2;
+		width: 100%;
+		height: auto;
+		padding: 30px;
+		background-color: var(--color-bg-white);
+		border-radius: 20px;
+		@media (max-width: 1024px) {
+			padding: 20px;
+		}
+		@media (max-width: 640px) {
+			padding: 10px;
+		}
+	}
 }
 
 @media (max-width: 1250px) {
-  .container {
-    grid-template-columns: 1fr;
+	.container {
+		grid-template-columns: 1fr;
 
-    .serviceArticleIntroContainer {
-      width: 40%;
-    }
-  }
+		.serviceArticleIntroContainer {
+			width: 40%;
+		}
+	}
 }
 
 @media (max-width: 1024px) {
-  .container {
-    grid-template-columns: 1fr;
-    padding: 20px;
-    margin: 0 0 20px 0;
-    background-color: var(--color-bg-white);
+	.container {
+		grid-template-columns: 1fr;
+		padding: 20px;
+		margin: 0 0 20px 0;
+		background-color: var(--color-bg-white);
 
-    .backBtn {
-      display: block;
-    }
+		.backBtn {
+			display: block;
+		}
 
-    .servicesArticleIntro {
-      display: none;
-    }
+		.servicesArticleIntro {
+			display: none;
+		}
 
-    .serviceArticleIntroContent {
-      background-color: var(--services-bg-color);
-    }
-  }
+		.serviceArticleIntroContent {
+			background-color: var(--services-bg-color);
+		}
+	}
 }
 
 @media (max-width: 420px) {
-  .container {
-    padding: 15px 10px;
-  }
+	.container {
+		padding: 15px 10px;
+	}
 }
