@@ -28,6 +28,7 @@ const nextConfig = {
 			},
 		],
 	},
+
 	images: {
 		domains: ["api.cable.kz", "kazkabel-back.zoom-app.kz"],
 		remotePatterns: [

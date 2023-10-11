@@ -29,8 +29,13 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 			<Title className={cls.ServicesSection_title}>{t("list.services")}</Title>
 
 			<ul className={cls.ServicesSection_list}>
-				<li>
+				<li
+					itemProp='itemListElement'
+					itemScope
+					itemType='https://schema.org/ListItem'>
 					<Link
+						itemScope
+						itemType='http://schema.org/Service'
 						href='/services'
 						className={cls.ServicesSection_item + " itemUp"}>
 						<div className={cls.ServicesSection_itemImg}>
@@ -46,8 +51,13 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 					</Link>
 				</li>
 
-				<li>
+				<li
+					itemProp='itemListElement'
+					itemScope
+					itemType='https://schema.org/ListItem'>
 					<Link
+						itemScope
+						itemType='http://schema.org/Service'
 						href='/services'
 						className={cls.ServicesSection_item + " itemUp"}>
 						<div className={cls.ServicesSection_itemImg}>
@@ -63,8 +73,13 @@ export const ServicesSection: FC<ServicesSectionProps> = (props) => {
 					</Link>
 				</li>
 
-				<li>
+				<li
+					itemProp='itemListElement'
+					itemScope
+					itemType='https://schema.org/ListItem'>
 					<Link
+						itemScope
+						itemType='http://schema.org/Service'
 						href='/services'
 						className={cls.ServicesSection_item + " itemUp"}>
 						<div className={cls.ServicesSection_itemImg}>

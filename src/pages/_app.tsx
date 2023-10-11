@@ -22,19 +22,19 @@ function App({ Component, pageProps }: AppProps) {
 			localStorage.removeItem("access_token");
 			localStorage.removeItem("refresh_token");
 		}
-		if (router.pathname.includes("kz")) {
-			changeLanguage("kz");
-			useHttp().interceptors.request.use((config) => {
-				config.headers["Accept-Language"] = "kz";
-				return config;
-			});
-		} else {
-			changeLanguage("ru");
-			useHttp().interceptors.request.use((config) => {
-				config.headers["Accept-Language"] = "ru";
-				return config;
-			});
-		}
+		// if (router.pathname.includes("kz")) {
+		// 	changeLanguage("kz");
+		// 	useHttp().interceptors.request.use((config) => {
+		// 		config.headers["Accept-Language"] = "kz";
+		// 		return config;
+		// 	});
+		// } else {
+		// 	changeLanguage("ru");
+		// 	useHttp().interceptors.request.use((config) => {
+		// 		config.headers["Accept-Language"] = "ru";
+		// 		return config;
+		// 	});
+		// }
 		if (!localStorage.getItem("user") && router.pathname.includes("cabinet")) {
 			router.replace("/auth");
 		}

@@ -694,19 +694,23 @@ i18n
 				},
 			},
 		},
-		// fallbackLng: "ru",
+		// lng: "ru",
+		debug: false,
+		fallbackLng: "ru",
 		whitelist: ["kz", "ru"],
 		debug: false,
-		// detection: {
-		// 	order: ["localstorage", "cookie"],
-		// 	caches: ["localstorage", "cookie"],
-		// },
-		browserLanguageDetection: true, // <---
-		serverLanguageDetection: true,
-		// interpollation: {
-		// 	escapeValue: false,
-		// },
-		// initImmediate: true,
+		detection: {
+			order: ["localstorage", "cookie"],
+			caches: ["localstorage", "cookie"],
+		},
+		interpollation: {
+			escapeValue: false,
+		},
+		devIndicators: {
+			autoPrerender: false,
+		},
+		browserLanguageDetection: false, // <---
+		serverLanguageDetection: false, // <---
 	});
 
 export default i18n;

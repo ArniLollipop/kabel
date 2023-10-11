@@ -76,8 +76,10 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
 						<IconCurrencyRUS />
 					)}
 					<div className={cn(cls.currencyIntroData)}>
-						<span className={cls.currencyName}>{item}</span>
-						<span className={cls.currencyValue}>
+						<span itemProp='name' className={cls.currencyName}>
+							{item}
+						</span>
+						<span itemProp='priceCurrency' className={cls.currencyValue}>
 							{currency[item as keyof typeof currency]}
 						</span>
 					</div>
@@ -87,7 +89,10 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
 	}
 
 	return (
-		<section className={cn(cls.GetCurrency)}>
+		<section
+			itemScope
+			itemType='https://schema.org/TradeAction'
+			className={cn(cls.GetCurrency)}>
 			<div className={cn(cls.GetCurrency_currencyContainer, className)}>
 				<div className={cn(cls.dateContainer)}>
 					<p>
@@ -97,7 +102,10 @@ export const GetCurrency: FC<GetCurrencyProps> = (props) => {
 					<p>{formattedDate}</p>
 				</div>
 				<div className={cn(cls.currencyWrapper)}>{currencyItems}</div>
-				<Link target={"_blank"} href={"https://www.nationalbank.kz/ru"}>
+				<Link
+					itemProp='url'
+					target={"_blank"}
+					href={"https://www.nationalbank.kz/ru"}>
 					nationalbank.kz
 				</Link>
 			</div>

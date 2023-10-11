@@ -15,44 +15,60 @@ import { useTranslation } from "react-i18next";
 
 const cn = classNames.bind(cls);
 interface ProductsSectionProps {
-  categories: categoryI[];
+	categories: categoryI[];
 }
 
 export const ProductsSection: FC<ProductsSectionProps> = (props) => {
-  const [categories, setCategories] = useState<any>([]);
-  const { t } = useTranslation();
+	const [categories, setCategories] = useState<any>([]);
+	const { t } = useTranslation();
 
-  async function getCategories() {
-    try {
-      const res = await useHttp().get("products/categories/");
-      setCategories(res.data.results);
-    } catch {}
-  }
+	async function getCategories() {
+		try {
+			const res = await useHttp().get("products/categories/");
+			setCategories(res.data.results);
+		} catch {}
+	}
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+	useEffect(() => {
+		getCategories();
+	}, []);
 
-  return (
-    <section className={cn(cls.ProductsSection)}>
-      <Title className={cls.ProductsSection_title}>{t("list.product")}</Title>
+	return (
+		<section className={cn(cls.ProductsSection)}>
+			<Title className={cls.ProductsSection_title}>{t("list.product")}</Title>
 
-      <ul className={cls.ProductsSection_list}>
-        {categories?.map((cat: any, index: number) => (
-          <li className={cls.ProductsSection_item + " scale"} key={cat.name}>
-            <Link href='/catalog' className={cls.ProductsSection_link}>
-              <Image
-                src={cat.image}
-                alt={t("product_image" + (index + 1)) + "| Almaty Kazkabel"}
-                className={cls.ProductsSection_img}
-                width={390}
-                height={290}
-              />
-              <p className={cls.ProductsSection_imgDescr}>{cat.name}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
+			<ul
+				itemScope
+				itemProp='https://schema.org/ItemList'
+				className={cls.ProductsSection_list}>
+				{categories?.map((cat: any, index: number) => (
+					<li
+						itemProp='itemListElement'
+						itemScope
+						itemType='https://schema.org/ListItem'
+						className={cls.ProductsSection_item + " scale"}
+						key={cat.name}>
+						<Link
+							itemProp='url'
+							itemScope
+							itemType='https://schema.org/ItemList'
+							href='/catalog'
+							className={cls.ProductsSection_link}>
+							<Image
+								itemProp='image'
+								src={cat.image}
+								alt={t("product_image" + (index + 1)) + "| Almaty Kazkabel"}
+								className={cls.ProductsSection_img}
+								width={390}
+								height={290}
+							/>
+							<p itemProp='name' className={cls.ProductsSection_imgDescr}>
+								{cat.name}
+							</p>
+						</Link>
+					</li>
+				))}
+			</ul>
+		</section>
+	);
 };
