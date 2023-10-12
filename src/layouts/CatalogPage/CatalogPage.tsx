@@ -7,6 +7,7 @@ import { FilterSection } from "./sections/FilterSection/FilterSection";
 import { GoodsListSection } from "./sections/GoodsListSection/GoodsListSection";
 import { useRouter } from "next/router";
 import { useHttp } from "@/hooks/useHttp";
+import { Title } from "@/UI/Title/Title";
 
 const cn = classNames.bind(cls);
 
@@ -37,6 +38,12 @@ export const CatalogPage: FC<CatalogPageProps> = (props) => {
 
 	return (
 		<div className={cn(cls.CatalogPage)}>
+			<div className={cls.CatalogPage_title}>
+				<Title h1={true} className={cls.about_title}>
+					Каталог
+				</Title>
+			</div>
+
 			<div
 				itemScope
 				itemType='https://schema.org/ItemList'

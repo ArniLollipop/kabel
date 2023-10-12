@@ -279,9 +279,15 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 								{/* Выбор цветов */}
 								<div className={cls.card_colors}>
 									<h3 className={cls.card_subTitle}>Цвет</h3>
-									<div className=' flex items-center !justify-normal gap-2 flex-wrap'>
+									<div
+										itemScope
+										itemType='https://schema.org/ItemList'
+										className=' flex items-center !justify-normal gap-2 flex-wrap'>
 										{props.colors_info.map((el: any) => (
 											<button
+												itemProp='itemListElement'
+												itemScope
+												itemType='https://schema.org/Property'
 												onClick={() => setImageName(el.color_name)}
 												className={
 													imageName === el.color_name
@@ -289,6 +295,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 														: "p-1 bg-transparent border border-solid border-[#E1E1E1] rounded-full overflow-hidden flex items-center !justify-center transition-all duration-300"
 												}>
 												<Image
+													itemProp='image'
 													src={el.image}
 													alt={el.color_name + "| Almaty Kazkabel"}
 													width={35}

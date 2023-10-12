@@ -32,13 +32,16 @@ export default function item(props: productI) {
 		<MainLayout activePage={ActiveHeaderPage.CATALOG}>
 			<Head>
 				<title>
-					{props.name + "купить оптом и в розницу | Almaty Kazkabel "}
+					{props.name + " купить оптом и в розницу | Almaty Kazkabel "}
 				</title>
 				<meta
 					name='description'
 					content={`${props.name} купить c доставкой по Алматы и Казахстану. ➤ Продукция от производителя ✓ cable.kz. Удобные способы оплаты и доставки. ☎ детали по номеру: +7 700 301 47 98 | Almaty Kazkabel `}
 				/>
-				<meta property='og:title' content={props.name} />
+				<meta
+					property='og:title'
+					content={props.name + " купить оптом и в розницу | Almaty Kazkabel"}
+				/>
 				<meta
 					property='og:url'
 					content={"https://cable.kz" + router.pathname}
@@ -48,7 +51,7 @@ export default function item(props: productI) {
 
 				<meta
 					itemProp='name'
-					content={props.name + "купить оптом и в розницу | Almaty Kazkabel "}
+					content={props.name + " купить оптом и в розницу | Almaty Kazkabel "}
 				/>
 				<meta
 					itemProp='description'

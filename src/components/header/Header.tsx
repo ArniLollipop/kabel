@@ -143,25 +143,33 @@ export const Header: FC<HeaderProps> = (props) => {
 							</button>
 						</li>
 
-						<li className={cls.contacts_list_contacts}>
+						<li
+							itemScope
+							itemType='http://schema.org/Organization'
+							className={cls.contacts_list_contacts}>
 							<a href='tel:8 800 070 47 98' className={cls["main-phone"]}>
 								<IconPhone className={cls["icon"]} />
-								<span className={cls["phone"]}>8 800 070 47 98</span>
+								<span itemProp='telephone' className={cls["phone"]}>
+									8 800 070 47 98
+								</span>
 							</a>
 
 							<a
+								itemProp='telephone'
 								href='tel:+77273014798'
 								className={(cls["phone"], cls["phone-secondary"])}>
 								+7 727 301 47 98
 							</a>
 
 							<a
+								itemProp='telephone'
 								href='tel:+77273554798'
 								className={(cls["phone"], cls["phone-secondary"])}>
 								+7 727 355 47 98
 							</a>
 
 							<a
+								itemProp='telephone'
 								href='https://wa.me/77003014798'
 								target='_blank'
 								className={(cls["phone"], cls["phone-secondary"])}>
@@ -248,8 +256,11 @@ export const Header: FC<HeaderProps> = (props) => {
 						</li>
 					</ul>
 
-					<nav className={cls.nav}>
-						<Link href='/' className={cls.nav_linkLogo}>
+					<nav
+						itemScope
+						itemType='https://schema.org/SiteNavigationElement'
+						className={cls.nav}>
+						<Link itemType='url' href='/' className={cls.nav_linkLogo}>
 							<IconLogo className={cls.nav_logo} />
 						</Link>
 
@@ -258,13 +269,14 @@ export const Header: FC<HeaderProps> = (props) => {
 								className={cn(cls.nav_list_item, {
 									active: activePage === ActiveHeaderPage.ABOUT,
 								})}>
-								<Link href='/about'>
+								<Link itemType='url' href='/about'>
 									{t("list.company") ? t("list.company") : ""}
 									{}
 								</Link>
 							</li>
 							<li className={cn(cls.nav_list_item, cls.catalogLink)}>
 								<Link
+									itemType='url'
 									onMouseEnter={() => setActiveCat(categories[0].name || "")}
 									href='/catalog'
 									className='peer'>
@@ -282,6 +294,7 @@ export const Header: FC<HeaderProps> = (props) => {
 										<nav className={cls.hovered_nav}>
 											{categories?.map((cat: any) => (
 												<Link
+													itemType='url'
 													onClick={() => {
 														localStorage.setItem(
 															"cat",
@@ -321,6 +334,7 @@ export const Header: FC<HeaderProps> = (props) => {
 														})}>
 														{cat.subcategory_set.map((subcat: any) => (
 															<Link
+																itemType='url'
 																onClick={() => {
 																	dispatch(setQuery(subcat.name));
 																	setCookie(
@@ -354,7 +368,7 @@ export const Header: FC<HeaderProps> = (props) => {
 								className={cn(cls.nav_list_item, {
 									active: activePage === ActiveHeaderPage.SERVICES,
 								})}>
-								<Link href='/services'>
+								<Link itemType='url' href='/services'>
 									{t("list.services") ? t("list.services") : ""}
 
 									{}
@@ -365,7 +379,7 @@ export const Header: FC<HeaderProps> = (props) => {
 								className={cn(cls.nav_list_item, {
 									active: activePage === ActiveHeaderPage.NEWS,
 								})}>
-								<Link href='/news'>
+								<Link itemType='url' href='/news'>
 									{t("list.news") ? t("list.news") : ""}
 
 									{}
@@ -376,7 +390,7 @@ export const Header: FC<HeaderProps> = (props) => {
 								className={cn(cls.nav_list_item, {
 									active: activePage === ActiveHeaderPage.PAY_DEL,
 								})}>
-								<Link href='/pay-del/payment'>
+								<Link itemType='url' href='/pay-del/payment'>
 									{t("list.payment") ? t("list.payment") : ""}
 
 									{}
@@ -387,7 +401,7 @@ export const Header: FC<HeaderProps> = (props) => {
 								className={cn(cls.nav_list_item, {
 									active: activePage === ActiveHeaderPage.CONTACTS,
 								})}>
-								<Link href='/contacts'>
+								<Link itemType='url' href='/contacts'>
 									{t("list.contacts") ? t("list.contacts") : ""}
 
 									{}
@@ -407,6 +421,7 @@ export const Header: FC<HeaderProps> = (props) => {
 										searchRes?.map((el: any) => {
 											return (
 												<Link
+													itemType='url'
 													href={
 														"/catalog/" + el.subcategory_slug + "/" + el.code
 													}
