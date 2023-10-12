@@ -45,12 +45,16 @@ export default function aboutPage(props: AboutI) {
 				/>
 				<meta itemProp='image' content={props.image} />
 			</Head>
-			<div className={cn(cls.about)}>
-				<Title h1={true} className={cls.about_title}>
+			<div
+				itemScope
+				itemType='https://schema.org/AboutPage'
+				className={cn(cls.about)}>
+				<Title itemProp='name' h1={true} className={cls.about_title}>
 					{props && props.title}
 				</Title>
 				<div className={cls.about_wrapper}>
 					<Image
+						itemProp='image'
 						className={cls.about_img}
 						src={props && props.image}
 						alt={props.title + "| Almaty Kazkabel"}
@@ -59,10 +63,12 @@ export default function aboutPage(props: AboutI) {
 					/>
 
 					<div
+						itemProp='text'
 						className={cls.about_text}
 						dangerouslySetInnerHTML={{ __html: props && props.text }}
 					/>
 					<p
+						itemProp='description'
 						className={cls.about_accent}
 						dangerouslySetInnerHTML={{ __html: props && props.our_goal }}></p>
 				</div>
@@ -73,8 +79,6 @@ export default function aboutPage(props: AboutI) {
 
 export async function getServerSideProps(ctx: NextPageContext) {
 	const res = await AboutService(ctx).getAboutInfo();
-
-	console.log(res);
 
 	return {
 		props: res,

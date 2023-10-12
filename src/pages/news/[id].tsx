@@ -32,23 +32,37 @@ export default function articlePage(props: any) {
 				<meta property='og:image' content={props.newssection_set[0].image} />
 				<meta name='og:description' content={t("description_news") as string} />
 				<link rel='canonical' href={"https://cable.kz" + router.pathname} />
+				<meta itemProp='name' content={t("title_news") as string} />
+				<meta
+					itemProp='description'
+					content={t("description_news") as string}
+				/>
+				<meta itemProp='image' content='https://cable.kz/Logo.svg' />
 			</Head>
-			<div className={cn(cls.articlePage)}>
+			<div
+				itemScope
+				itemType='https://schema.org/NewsArticle'
+				className={cn(cls.articlePage)}>
 				<Title className={cls.articlePage_title}>{t("list.news")}</Title>
 
 				<div className={cls.articlePage_wrapper}>
 					<div className={cls.articlePage_content}>
-						<h3 className={cls.articlePage_artTitle}>{props?.title}</h3>
+						<h3 itemProp='name' className={cls.articlePage_artTitle}>
+							{props?.title}
+						</h3>
 
 						{props?.newssection_set.length === 0 && (
 							<>
 								<Image
+									itemProp='image'
 									src={props.thumbnail}
 									alt={props?.title + "| Almaty Kazkabel"}
 									width={1146}
 									height={460}
 									className={cls.articlePage_imgEmpty}></Image>
-								<p className={cls.articlePage_text}>{props?.description}</p>
+								<p itemProp='description' className={cls.articlePage_text}>
+									{props?.description}
+								</p>
 							</>
 						)}
 
@@ -58,6 +72,7 @@ export default function articlePage(props: any) {
 									<section key={id}>
 										{image && (
 											<Image
+												itemProp='image'
 												className={cls.articlePage_img}
 												src={image}
 												alt={id + "| Almaty Kazkabel"}
@@ -66,11 +81,13 @@ export default function articlePage(props: any) {
 											/>
 										)}
 										<div
+											itemProp='articleBody'
 											className={cls.articlePage_img__text}
 											dangerouslySetInnerHTML={{
 												__html: image_text_site,
 											}}></div>
 										<div
+											itemProp='articleBody'
 											className={cn(cls.articlePage_text, {
 												marked: is_marked,
 											})}

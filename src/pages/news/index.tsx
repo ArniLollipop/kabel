@@ -104,6 +104,8 @@ export default function newsPage(props: any) {
 						</h2>
 						{props && (
 							<Swiper
+								itemScope
+								itemType='http://schema.org/ItemList'
 								className={cls.news_slider}
 								navigation={true}
 								loop={false}
@@ -138,7 +140,12 @@ export default function newsPage(props: any) {
 									},
 								}}>
 								{props.results?.map((news: any) => (
-									<SwiperSlide className={cls.news_sliderSlide} key={news.id}>
+									<SwiperSlide
+										itemProp='itemListElement'
+										itemScope
+										itemType='https://schema.org/ListItem'
+										className={cls.news_sliderSlide}
+										key={news.id}>
 										<NewsCard
 											className={cls.news_newsCard}
 											theme={ThemeNewsCard.WHITE_BG}

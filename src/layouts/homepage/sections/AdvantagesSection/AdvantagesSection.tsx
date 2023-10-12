@@ -55,11 +55,15 @@ export const AdvantagesSection: FC<AdvantagesSectionProps> = (props) => {
 			<Swiper itemScope itemType='http://schema.org/ItemList' {...params}>
 				{adventages?.map(({ advantage, icon, id }, i) => (
 					<SwiperSlide
+						itemProp='itemListElement'
 						itemScope
-						itemType='https://schema.org/Article'
+						itemType='https://schema.org/ListItem'
 						className={cls.AdvantagesSection_sliderItem}
 						key={id}>
-						<li className={cls.AdvantagesSection_item}>
+						<li
+							itemScope
+							itemType='https://schema.org/Article'
+							className={cls.AdvantagesSection_item}>
 							<span className={cls.AdvantagesSection_itemStep}>
 								{i + 1 > 9 ? i + 1 : `0${i + 1}`}
 							</span>
