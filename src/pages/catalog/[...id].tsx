@@ -49,7 +49,12 @@ export default function item(props: productI) {
 				<meta property='og:image' content={props.image} />
 				<link
 					rel='canonical'
-					href={"https://cable.kz/" + props.subcategory_slug + "/" + props.code}
+					href={
+						"https://cable.kz/catalog/" +
+						props.subcategory_slug +
+						"/" +
+						props.code
+					}
 				/>
 
 				<meta
