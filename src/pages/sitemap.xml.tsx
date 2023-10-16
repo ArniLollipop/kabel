@@ -32,7 +32,10 @@ async function generateSitemap(): Promise<string> {
 				return `
           <url>
             <loc>${
-							"https://cable.kz/" + page.subcategory_slug + "/" + page.code
+							"https://cable.kz/catalog/" +
+							page.subcategory_slug +
+							"/" +
+							page.code
 						}</loc>
             <lastmod>2023-08-31T10:38:12+00:00</lastmod>
             <priority>1.00</priority>

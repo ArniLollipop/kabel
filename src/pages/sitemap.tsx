@@ -25,7 +25,9 @@ export async function getServerSideProps() {
 	pages.data.map((page: any) => {
 		first += `
   <li>
-    <a href="${"https://cable.kz/" + page.subcategory_slug + "/" + page.code}">
+    <a href="${
+			"https://cable.kz/catalog/" + page.subcategory_slug + "/" + page.code
+		}">
       ${"/" + page.subcategory_slug + "/" + page.code}
     </a>
   </li>`;
