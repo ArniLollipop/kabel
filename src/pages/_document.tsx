@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
 import { useEffect } from "react";
+import Script from "next/script";
 
 export default function Document(props: any) {
 	const { t } = useTranslation();
@@ -25,6 +26,18 @@ export default function Document(props: any) {
 					rel='stylesheet'
 				/>
 				<meta property='og:type' content={"website"} />
+				{/* <Script src='https://example.com/script.js' /> */}
+				<script
+					id='Google Tag manager'
+					dangerouslySetInnerHTML={{
+						__html: `
+						(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+						new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+						j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+						'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+						})(window,document,'script','dataLayer','GTM-WL848M3');
+					`,
+					}}></script>
 			</Head>
 			<body>
 				<noscript>

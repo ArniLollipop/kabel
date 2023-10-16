@@ -25,13 +25,10 @@ export default function articlePage(props: any) {
 				<title>{t("title_news")}</title>
 				<meta name='description' content={t("description_news") as string} />
 				<meta property='og:title' content={props?.title} />
-				<meta
-					property='og:url'
-					content={"https://cable.kz" + router.pathname}
-				/>
+				<meta property='og:url' content={"https://cable.kz/news/" + props.id} />
 				<meta property='og:image' content={props.newssection_set[0].image} />
 				<meta name='og:description' content={t("description_news") as string} />
-				<link rel='canonical' href={"https://cable.kz" + router.pathname} />
+				<link rel='canonical' href={"https://cable.kz/news/" + props.id} />
 				<meta itemProp='name' content={t("title_news") as string} />
 				<meta
 					itemProp='description'
