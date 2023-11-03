@@ -26,6 +26,7 @@ import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { setQuery } from "@/store/slices/ProductSlice";
+import LogoImg from "@/assets/LOGO_KAZKABEL_KZ.png";
 
 const cn = classNames.bind(cls);
 
@@ -124,14 +125,22 @@ export const Header: FC<HeaderProps> = (props) => {
 	return (
 		<div className={cls.Header} onClick={() => setResultOpen(false)}>
 			<div className='w-full bg-white'>
-				<div className={cls.Header_wrapper}>
+				<div
+					itemScope
+					itemType='http://schema.org/Organization'
+					className={cls.Header_wrapper}>
 					<ul className={cls.contacts_list}>
 						<li className={cls.contacts_list_mobileLogo}>
-							<Link href='/'>
+							<Link itemType='url' href='/'>
 								<IconLogo
 									width='150'
 									height='100'
 									className='h-[50px] overflow-hidden'
+								/>
+								<Image
+									src={LogoImg}
+									alt='Logo | Almaty Kazkabel'
+									style={{ display: "none" }}
 								/>
 							</Link>
 						</li>
@@ -143,10 +152,13 @@ export const Header: FC<HeaderProps> = (props) => {
 							</button>
 						</li>
 
-						<li
-							itemScope
-							itemType='http://schema.org/Organization'
-							className={cls.contacts_list_contacts}>
+						<li>
+							<p itemType='name' style={{ display: "none" }}>
+								Almaty Kazkabel
+							</p>
+						</li>
+
+						<li className={cls.contacts_list_contacts}>
 							<a href='tel:8 800 070 47 98' className={cls["main-phone"]}>
 								<IconPhone className={cls["icon"]} />
 								<span itemProp='telephone' className={cls["phone"]}>
@@ -310,7 +322,7 @@ export const Header: FC<HeaderProps> = (props) => {
 															? cls.hovered_navLink + " bg-[#f6bf0c]"
 															: cls.hovered_navLink
 													}
-													href={"/catalog"}
+													href={"/catalog?id=" + cat.id}
 													onMouseEnter={() => setActiveCat(cat.name)}
 													key={cat.name}>
 													<Image
@@ -351,7 +363,7 @@ export const Header: FC<HeaderProps> = (props) => {
 																	setActiveCat("");
 																}}
 																className={cls.hovered_contentLink}
-																href={`/catalog`}
+																href={`/catalog/` + subcat.slug}
 																key={subcat.name}>
 																{subcat.name}
 															</Link>

@@ -32,7 +32,7 @@ export const NewsCard: FC<NewsCardProps> = (props) => {
 	} = props;
 
 	return (
-		<Link href={`/news/${id}`}>
+		<Link itemType='position' href={`/news/${id}`}>
 			<link itemProp='url' href={"https://cable.kz/news/" + id} />
 			<div className={cn(cls.NewsCard, cls[theme], className)}>
 				<span className={cls.NewsCard_date}>{dateConverter(created_at)}</span>

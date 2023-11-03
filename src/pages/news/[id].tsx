@@ -40,13 +40,15 @@ export default function articlePage(props: any) {
 				itemScope
 				itemType='https://schema.org/NewsArticle'
 				className={cn(cls.articlePage)}>
-				<Title className={cls.articlePage_title}>{t("list.news")}</Title>
+				<Title h1={true} className={cls.articlePage_title}>
+					{props?.title}
+				</Title>
 
 				<div className={cls.articlePage_wrapper}>
 					<div className={cls.articlePage_content}>
-						<h3 itemProp='name' className={cls.articlePage_artTitle}>
+						{/* <h3 itemProp='name' className={cls.articlePage_artTitle}>
 							{props?.title}
-						</h3>
+						</h3> */}
 
 						{props?.newssection_set.length === 0 && (
 							<>
@@ -101,12 +103,21 @@ export default function articlePage(props: any) {
 
 export async function getServerSideProps(ctx: NextPageContext) {
 	const { id } = ctx.query;
-	const res = await useHttp().get(`news/news/${id}/`, {
-		headers: {
-			"Accept-Language": ctx?.locale || "ru",
-		},
-	});
-	return {
-		props: res.data,
-	};
+	try {
+		const res = await useHttp().get(`news/news/${id}/`, {
+			headers: {
+				"Accept-Language": ctx?.locale || "ru",
+			},
+		});
+		return {
+			props: res.data,
+		};
+	} catch (error) {
+		return {
+			redirect: {
+				destination: "/news",
+				permanent: false,
+			},
+		};
+	}
 }

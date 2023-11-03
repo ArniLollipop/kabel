@@ -237,14 +237,14 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
 
 						{/* Categories filters */}
 						<div className={cls.product}>
-							<h3 className={cn(cls.product_title, cls.filterTitle)}>
+							{/* <h3 className={cn(cls.product_title, cls.filterTitle)}>
 								{t("list.product")}
-							</h3>
+							</h3> */}
 
 							<Accordion className={cls.filtersAcc} alwaysOpen={true}>
 								{/* Categories */}
 								<>
-									{categories &&
+									{/* {categories &&
 										categories?.map((cat: any, i: number) => (
 											<AccordionItem isActive={true} key={cat.name}>
 												{({ open }: { open: boolean }) => (
@@ -303,7 +303,7 @@ export const FilterSection: FC<FilterSectionProps> = (props) => {
 													</>
 												)}
 											</AccordionItem>
-										))}
+										))} */}
 
 									{/* Сечение */}
 									<AccordionItem isActive={true}>

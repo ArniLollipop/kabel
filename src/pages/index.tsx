@@ -26,6 +26,7 @@ import Head from "next/head";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { NextPageContext } from "next";
+import { useHttp } from "@/hooks/useHttp";
 
 export interface HomeProps {
 	offers: offerI[];
@@ -39,7 +40,7 @@ export interface HomeProps {
 	metalRes: IMetalResponse;
 }
 
-export default function Home(props: HomeProps) {
+export default function Home(props: any) {
 	const { t } = useTranslation();
 	const router = useRouter();
 
@@ -78,6 +79,7 @@ export default function Home(props: HomeProps) {
 }
 
 export async function getServerSideProps(ctx: NextPageContext) {
+	const meta = await useHttp().get("main/seo/?name=/");
 	const offers = await OfferService(ctx).getOffers();
 	const aboutInfo = await AboutService(ctx).getAboutInfo();
 	const categories = await ProductService(ctx).getCategories();
@@ -96,6 +98,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
 			news,
 			currencyRes,
 			metalRes,
+			meta: meta.data,
 		},
 	};
 }

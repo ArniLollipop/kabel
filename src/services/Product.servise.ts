@@ -12,6 +12,7 @@ import { useHttp } from "@/hooks/useHttp";
 import { AxiosResponse } from "axios";
 import { NextPageContext } from "next";
 import nookies from "nookies";
+import { useRouter } from "next/router";
 
 const enum endpoints {
 	getCategories = "/products/categories/",
@@ -31,6 +32,12 @@ export const ProductService = (
 ): ProductServiceResponseI => {
 	const getProducts = async (queries: any): Promise<productAnswI> => {
 		let fromCookie;
+
+		const router = useRouter();
+
+		console.log("====================================");
+		console.log(router.basePath);
+		console.log("====================================");
 
 		if (nookies.get(ctx).queries) {
 			fromCookie = JSON.parse(nookies.get(ctx).queries);

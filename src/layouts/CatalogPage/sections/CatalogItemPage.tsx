@@ -411,7 +411,7 @@ export const CatalogItemPage: FC<CatalogItemPageProps> = (props) => {
 								itemProp='offers'
 								className={cls.buyActions_price}
 								itemScope
-								itemType='https://schema.org/Offer'>
+								itemType='https://schema.org/Offers'>
 								<span itemProp='price'> {props.cost}</span>{" "}
 								<span itemProp='priceCurrency'>₸</span>
 							</p>

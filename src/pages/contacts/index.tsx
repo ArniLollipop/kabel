@@ -94,10 +94,7 @@ function contactsPage(props: any) {
 								itemType='https://schema.org/ListItem'
 								className={cls.contactsPage_item}>
 								{/* Map implementation */}
-								<div
-									itemScope
-									itemType='http://schema.org/Organization'
-									className={cls.contactsPage_imageWrapper}>
+								<div className={cls.contactsPage_imageWrapper}>
 									{props.contacts && (
 										// <MapComponent
 										//   coords={{ lat: el.x_coordinate, lon: el.y_coordinate }}

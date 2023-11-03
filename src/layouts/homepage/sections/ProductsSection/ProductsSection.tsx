@@ -18,30 +18,22 @@ interface ProductsSectionProps {
 	categories: categoryI[];
 }
 
-export const ProductsSection: FC<ProductsSectionProps> = (props) => {
-	const [categories, setCategories] = useState<any>([]);
+export const ProductsSection: FC<any> = (props) => {
 	const { t } = useTranslation();
 
-	async function getCategories() {
-		try {
-			const res = await useHttp().get("products/categories/");
-			setCategories(res.data.results);
-		} catch {}
-	}
-
-	useEffect(() => {
-		getCategories();
-	}, []);
+	const { categories, isCatalog } = props;
 
 	return (
 		<section className={cn(cls.ProductsSection)}>
-			<Title className={cls.ProductsSection_title}>{t("list.product")}</Title>
+			{isCatalog && (
+				<Title className={cls.ProductsSection_title}>{t("list.product")}</Title>
+			)}
 
 			<ul
 				itemScope
 				itemProp='https://schema.org/ItemList'
 				className={cls.ProductsSection_list}>
-				{categories?.map((cat: any, index: number) => (
+				{categories.results?.map((cat: any, index: number) => (
 					<li
 						itemProp='itemListElement'
 						itemScope
@@ -52,7 +44,7 @@ export const ProductsSection: FC<ProductsSectionProps> = (props) => {
 							itemProp='url'
 							itemScope
 							itemType='https://schema.org/ItemList'
-							href='/catalog'
+							href={"/catalog?id=" + cat.id}
 							className={cls.ProductsSection_link}>
 							<Image
 								itemProp='image'

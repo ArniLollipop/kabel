@@ -149,7 +149,7 @@ export default function Home() {
 					<meta property='og:title' content={t("title_section") as string} />
 					<meta
 						property='og:url'
-						content={"https://cable.kz" + router.pathname}
+						content={"https://cable.kz/" + router.query.id}
 					/>
 					<meta property='og:image' content={"https://cable.kz/Logo.svg"} />
 
@@ -196,11 +196,11 @@ export default function Home() {
 					<meta property='og:title' content={t("title_encoding") as string} />
 					<meta
 						property='og:url'
-						content={"https://cable.kz" + router.pathname}
+						content={"https://cable.kz/" + router.query.id}
 					/>
 					<meta property='og:image' content={"https://cable.kz/Logo.svg"} />
 
-					<link rel='canonical' href={"https://cable.kz" + router.pathname} />
+					<link rel='canonical' href={"https://cable.kz/" + router.query.id} />
 
 					{/* <meta
             property='og:image'
@@ -239,7 +239,7 @@ export default function Home() {
 					<meta property='og:title' content={t("title_weight") as string} />
 					<meta
 						property='og:url'
-						content={"https://cable.kz" + router.pathname}
+						content={"https://cable.kz/" + router.query.id}
 					/>
 					<meta property='og:image' content={"https://cable.kz/Logo.svg"} />
 				</Head>

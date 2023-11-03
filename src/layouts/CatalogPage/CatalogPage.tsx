@@ -22,13 +22,13 @@ export const CatalogPage: FC<CatalogPageProps> = (props) => {
 
 	async function changeStatus() {
 		const res = await useHttp().get(
-			`/orders/orders/order_pay_status/?id=${router.query.id}`
+			`/orders/orders/order_pay_status/?id=${router.query.order_id}`
 		);
 		window.location.href = "https://cable.kz/catalog";
 	}
 
 	useEffect(() => {
-		if (router.query.id) {
+		if (router.query.order_id) {
 			changeStatus();
 			// console.log(router.query.order_id);
 		}

@@ -15,6 +15,7 @@ import { setPage, setProducts } from "@/store/slices/ProductSlice";
 import { useTranslation } from "react-i18next";
 import { useHttp } from "@/hooks/useHttp";
 import { parseCookies } from "nookies";
+import { useRouter } from "next/router";
 
 const cn = classNames.bind(cls);
 
@@ -30,6 +31,8 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
 	const dispatch = useAppDispatch();
 	const [productsState, setProductState] = useState<any>();
 	const { products, pages } = useAppSelector((state) => state.ProductSlice);
+
+	const router = useRouter();
 
 	const { t } = useTranslation();
 
@@ -57,7 +60,9 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
 
 				if (fromCookie.subcategory.length > 0) {
 					fromCookie.subcategory.forEach((el: any) => {
-						subcategoryQuery += `&subcategory=${el}`;
+						subcategoryQuery += `&subcategory=${
+							Array.isArray(router.query.id) && router.query.id[0]
+						}`;
 					});
 				} else {
 					subcategoryQuery = "?";

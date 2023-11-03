@@ -147,6 +147,7 @@ export default function newsPage(props: any) {
 										className={cls.news_sliderSlide}
 										key={news.id}>
 										<NewsCard
+										
 											className={cls.news_newsCard}
 											theme={ThemeNewsCard.WHITE_BG}
 											{...news}

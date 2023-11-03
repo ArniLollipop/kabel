@@ -13,6 +13,7 @@ import { appWithTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useHttp } from "@/hooks/useHttp";
 import { changeLanguage } from "i18next";
+import { NextPageContext } from "next";
 
 function App({ Component, pageProps }: AppProps) {
 	const router = useRouter();

@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import { changeLanguage } from "i18next";
 import { useEffect } from "react";
 import Script from "next/script";
+import { NextPageContext } from "next";
+import { useHttp } from "@/hooks/useHttp";
 
 export default function Document(props: any) {
 	const { t } = useTranslation();
