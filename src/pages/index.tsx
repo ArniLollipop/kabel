@@ -1,5 +1,3 @@
-/** @format */
-
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { Homepage } from "@/layouts/homepage/Homepage";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -12,7 +10,6 @@ import { offerI } from "@/types/OfferTypes";
 import { ICurrencyResponse, IMetalResponse } from "@/types/GetCurrencyTypes";
 import { ICurrencyResult } from "@/types/GetCurrencyTypes";
 import { adventagesI } from "@/types/AdventagesTypes";
-
 // Services
 import { AdventagesService } from "@/services/Adventages.servise";
 import { NewsService } from "@/services/News.service";
@@ -43,6 +40,8 @@ export interface HomeProps {
 export default function Home(props: any) {
 	const { t } = useTranslation();
 	const router = useRouter();
+
+	console.log(props.meta);
 
 	return (
 		<MainLayout activePage={ActiveHeaderPage.MAIN}>
@@ -88,6 +87,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
 	const news = await NewsService(ctx).getNews();
 	const currencyRes = await GetCurrencyService(ctx).getCurrency();
 	const metalRes = await GetCurrencyService(ctx).getMetal();
+
 	return {
 		props: {
 			offers,

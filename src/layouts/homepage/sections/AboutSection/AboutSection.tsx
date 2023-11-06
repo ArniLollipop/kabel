@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC } from "react";
 import classNames from "classnames/bind";
 import cls from "./AboutSection.module.scss";

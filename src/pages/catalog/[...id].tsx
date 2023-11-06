@@ -200,73 +200,65 @@ export async function getServerSideProps(ctx: NextPageContext) {
 	} else if (Array.isArray(id) && id.length == 1) {
 		let products;
 
-		if (nookies.get(ctx).queries) {
-			let fromCookie;
-			fromCookie = JSON.parse(nookies.get(ctx).queries);
+		let fromCookie;
+		fromCookie = JSON.parse(nookies.get(ctx).queries || "{}");
 
-			let subcategoryQuery = "?";
-			let sectionQuery = "";
-			let core_numberQuery = "";
-			let orderingQuery = "";
-			let availabilityQuery = "";
+		let subcategoryQuery = "?";
+		let sectionQuery = "";
+		let core_numberQuery = "";
+		let orderingQuery = "";
+		let availabilityQuery = "";
 
-			if (fromCookie.subcategory.length > 0) {
-				fromCookie.subcategory.forEach((el: any) => {
-					subcategoryQuery += `&subcategory=${category_slug}`;
-				});
-			} else {
-				subcategoryQuery = "?";
-			}
+		subcategoryQuery += `subcategory=${category_slug}`;
 
-			if (fromCookie.section.length > 0) {
-				fromCookie.section.forEach((el: any) => {
-					sectionQuery += `&section=${el}`;
-				});
-			} else {
-				sectionQuery = "";
-			}
-
-			if (fromCookie.core_number.length > 0) {
-				fromCookie.core_number.forEach((el: any) => {
-					core_numberQuery += `&core_number=${el}`;
-				});
-			} else {
-				core_numberQuery = "";
-			}
-
-			if (fromCookie.ordering.length > 0) {
-				orderingQuery += `&ordering=${fromCookie.ordering}`;
-			} else {
-				orderingQuery = "";
-			}
-
-			if (fromCookie.availability.length > 0) {
-				availabilityQuery += `&availability=${fromCookie.availability}`;
-			} else {
-				availabilityQuery = "";
-			}
-
-			const res = await useHttp(ctx).get(
-				"/products/products/" +
-					subcategoryQuery +
-					sectionQuery +
-					core_numberQuery +
-					orderingQuery +
-					availabilityQuery,
-				{
-					headers: {
-						"Accept-Language": ctx?.locale || "ru",
-					},
-				}
-			);
-			products = res.data;
-			const categories = await ProductService().getCategories();
-			const cores = await ProductService().getCores();
-
-			return {
-				props: { products, categories, cores },
-			};
+		if (fromCookie.section && fromCookie.section.length > 0) {
+			fromCookie.section.forEach((el: any) => {
+				sectionQuery += `&section=${el}`;
+			});
+		} else {
+			sectionQuery = "";
 		}
+
+		if (fromCookie.core_number && fromCookie.core_number.length > 0) {
+			fromCookie.core_number.forEach((el: any) => {
+				core_numberQuery += `&core_number=${el}`;
+			});
+		} else {
+			core_numberQuery = "";
+		}
+
+		if (fromCookie.ordering && fromCookie.ordering.length > 0) {
+			orderingQuery += `&ordering=${fromCookie.ordering}`;
+		} else {
+			orderingQuery = "";
+		}
+
+		if (fromCookie.availability && fromCookie.availability.length > 0) {
+			availabilityQuery += `&availability=${fromCookie.availability}`;
+		} else {
+			availabilityQuery = "";
+		}
+
+		const res = await useHttp(ctx).get(
+			"/products/products/" +
+				subcategoryQuery +
+				sectionQuery +
+				core_numberQuery +
+				orderingQuery +
+				availabilityQuery,
+			{
+				headers: {
+					"Accept-Language": ctx?.locale || "ru",
+				},
+			}
+		);
+		products = res.data;
+		const categories = await ProductService().getCategories();
+		const cores = await ProductService().getCores();
+
+		return {
+			props: { products, categories, cores },
+		};
 	} else {
 		const prodId = typeof id === "string" ? id : Array.isArray(id) ? id[1] : "";
 		const product = await ProductService(ctx).getProductById(prodId);
