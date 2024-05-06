@@ -1,5 +1,3 @@
-/** @format */
-
 import { CardPage } from "@/layouts/CardPage/CardPage";
 import { MainLayout } from "@/layouts/MainLayout";
 import Head from "next/head";

@@ -1,5 +1,3 @@
-/** @format */
-
 import { MainLayout } from "@/layouts/MainLayout";
 import { FC, useEffect, useState } from "react";
 import cls from "./politics.module.scss";

@@ -1,5 +1,3 @@
-/** @format */
-
 import { useHttp } from "@/hooks/useHttp";
 import { GetServerSideProps } from "next";
 

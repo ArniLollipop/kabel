@@ -1,5 +1,3 @@
-/** @format */
-
 import { MainLayout } from "@/layouts/MainLayout";
 import cls from "./index.module.scss";
 import { useTranslation } from "react-i18next";

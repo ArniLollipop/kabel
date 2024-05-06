@@ -1,5 +1,3 @@
-/** @format */
-
 import classNames from "classnames";
 import cls from "./index.module.scss";
 import {

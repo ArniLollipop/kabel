@@ -1,5 +1,3 @@
-/** @format */
-
 // packages
 import Head from "next/head";
 import classNames from "classnames";

@@ -41,8 +41,6 @@ export default function Home(props: any) {
 	const { t } = useTranslation();
 	const router = useRouter();
 
-	console.log(props.meta);
-
 	return (
 		<MainLayout activePage={ActiveHeaderPage.MAIN}>
 			<Head>

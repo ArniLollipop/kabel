@@ -1,5 +1,3 @@
-/** @format */
-
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { MainLayout } from "@/layouts/MainLayout";
 import { ProductService } from "@/services/Product.servise";

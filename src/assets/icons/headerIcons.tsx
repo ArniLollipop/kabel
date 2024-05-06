@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, SVGProps } from "react";
 import classNames from "classnames";
 import cls from "./IconCard.module.scss";

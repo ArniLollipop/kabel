@@ -1,5 +1,3 @@
-/** @format */
-
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Title } from "@/UI/Title/Title";
@@ -49,7 +47,7 @@ export default function aboutPage(props: AboutI) {
 				itemScope
 				itemType='https://schema.org/AboutPage'
 				className={cn(cls.about)}>
-				<Title itemProp='name' h1={true} className={cls.about_title}>
+				<Title itemProp='name' h1={false} className={cls.about_title}>
 					{props && props.title}
 				</Title>
 				<div className={cls.about_wrapper}>

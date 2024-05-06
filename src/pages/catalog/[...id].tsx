@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, useEffect, useState } from "react";
 import { CatalogItemPage } from "@/layouts/CatalogPage/sections/CatalogItemPage";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -30,6 +28,8 @@ import {
 export default function item(props: any) {
 	const { categories, products, cores } = props;
 
+	console.log(products);
+
 	const dispatch = useAppDispatch();
 
 	const { t } = useTranslation();
@@ -39,6 +39,8 @@ export default function item(props: any) {
 	const [modal, setModal] = useState<boolean>(
 		router.query.modal ? true : false
 	);
+
+	console.log(props);
 
 	useEffect(() => {
 		if (products && categories && cores) {
@@ -103,9 +105,9 @@ export default function item(props: any) {
 					<meta property='og:title' content={t("title_catalog") as string} />
 					<meta
 						property='og:url'
-						content={"https://cable.kz" + router.pathname}
+						content={"https://cable.kz/" + router.query.id}
 					/>
-					<link rel='canonical' href={"https://cable.kz" + router.pathname} />
+					<link rel='canonical' href={"https://cable.kz/" + router.query.id} />
 
 					<meta itemProp='name' content={t("title_catalog") as string} />
 					<meta
@@ -165,7 +167,7 @@ export default function item(props: any) {
 				</div>
 			</div>
 			{products && cores && categories ? (
-				<CatalogPage />
+				<CatalogPage title={products.sub_category_name} />
 			) : (
 				<div className={cls.cardItem}>
 					<div className={cls.cardItem_wrapper}>
@@ -208,24 +210,25 @@ export async function getServerSideProps(ctx: NextPageContext) {
 		let core_numberQuery = "";
 		let orderingQuery = "";
 		let availabilityQuery = "";
+		let sections = "";
 
 		subcategoryQuery += `subcategory=${category_slug}`;
 
-		if (fromCookie.section && fromCookie.section.length > 0) {
-			fromCookie.section.forEach((el: any) => {
-				sectionQuery += `&section=${el}`;
-			});
-		} else {
-			sectionQuery = "";
-		}
+		// if (fromCookie.section && fromCookie.section.length > 0) {
+		// 	fromCookie.section.forEach((el: any) => {
+		// 		sectionQuery += `&section=${el}`;
+		// 	});
+		// } else {
+		// 	sectionQuery = "";
+		// }
 
-		if (fromCookie.core_number && fromCookie.core_number.length > 0) {
-			fromCookie.core_number.forEach((el: any) => {
-				core_numberQuery += `&core_number=${el}`;
-			});
-		} else {
-			core_numberQuery = "";
-		}
+		// if (fromCookie.core_number && fromCookie.core_number.length > 0) {
+		// 	fromCookie.core_number.forEach((el: any) => {
+		// 		core_numberQuery += `&core_number=${el}`;
+		// 	});
+		// } else {
+		// 	core_numberQuery = "";
+		// }
 
 		if (fromCookie.ordering && fromCookie.ordering.length > 0) {
 			orderingQuery += `&ordering=${fromCookie.ordering}`;
@@ -239,13 +242,22 @@ export async function getServerSideProps(ctx: NextPageContext) {
 			availabilityQuery = "";
 		}
 
+		if (fromCookie.sections && fromCookie.sections.length > 0) {
+			let temp = "";
+			fromCookie.sections.map((el: any) => {
+				if (el.length >= 2) temp += `${el},`;
+			});
+			sections = "&sections=" + temp.slice(0, temp.length - 1);
+		}
+
 		const res = await useHttp(ctx).get(
 			"/products/products/" +
 				subcategoryQuery +
 				sectionQuery +
 				core_numberQuery +
 				orderingQuery +
-				availabilityQuery,
+				availabilityQuery +
+				sections,
 			{
 				headers: {
 					"Accept-Language": ctx?.locale || "ru",
@@ -255,6 +267,8 @@ export async function getServerSideProps(ctx: NextPageContext) {
 		products = res.data;
 		const categories = await ProductService().getCategories();
 		const cores = await ProductService().getCores();
+
+		console.log(res.data);
 
 		return {
 			props: { products, categories, cores },

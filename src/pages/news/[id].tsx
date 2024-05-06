@@ -1,5 +1,3 @@
-/** @format */
-
 import classNames from "classnames/bind";
 import cls from "./article.module.scss";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -22,18 +20,15 @@ export default function articlePage(props: any) {
 	return (
 		<MainLayout activePage={ActiveHeaderPage.NEWS}>
 			<Head>
-				<title>{t("title_news")}</title>
-				<meta name='description' content={t("description_news") as string} />
+				<title>{props?.title}</title>
+				<meta name='description' content={props?.description} />
 				<meta property='og:title' content={props?.title} />
 				<meta property='og:url' content={"https://cable.kz/news/" + props.id} />
 				<meta property='og:image' content={props.newssection_set[0].image} />
-				<meta name='og:description' content={t("description_news") as string} />
+				<meta name='og:description' content={props?.description} />
 				<link rel='canonical' href={"https://cable.kz/news/" + props.id} />
-				<meta itemProp='name' content={t("title_news") as string} />
-				<meta
-					itemProp='description'
-					content={t("description_news") as string}
-				/>
+				<meta itemProp='name' content={props?.title} />
+				<meta itemProp='description' content={props?.description} />
 				<meta itemProp='image' content='https://cable.kz/Logo.svg' />
 			</Head>
 			<div

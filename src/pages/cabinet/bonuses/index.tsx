@@ -1,5 +1,3 @@
-/** @format */
-
 import cls from "./index.module.scss";
 
 import {

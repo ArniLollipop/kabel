@@ -5,22 +5,21 @@ import classNames from "classnames/bind";
 
 const cn = classNames.bind(cls);
 interface CheckBoxInstanceProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  text: string;
-  name: string;
-  id: string;
-  value: string;
+	className?: string;
+	text: string;
+	name: string;
+	id: string;
+	value: string;
 }
 
 export const CheckBoxInstance: FC<CheckBoxInstanceProps> = (props) => {
-  const { id, name, text, className, value } = props;
+	const { id, name, text, className, value, checked } = props;
 
-  return (
-    <label className={cn(cls.control, cls.control_checkbox, className)}>
-      {text}
-
-      <Field type="checkbox" {...props} />
-      <div className={cls.control_indicator}></div>
-    </label>
-  );
+	return (
+		<label className={cn(cls.control, cls.control_checkbox, className)}>
+			{text}
+			<Field type='checkbox' {...props} />
+			<div className={cls.control_indicator}></div>
+		</label>
+	);
 };

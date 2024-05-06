@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./CatalogPage.module.scss";
@@ -13,13 +11,13 @@ const cn = classNames.bind(cls);
 
 interface CatalogPageProps {
 	className?: string;
+	title?: string;
 }
 
 export const CatalogPage: FC<CatalogPageProps> = (props) => {
-	const { className } = props;
+	const { className, title } = props;
 
 	const router = useRouter();
-
 	async function changeStatus() {
 		const res = await useHttp().get(
 			`/orders/orders/order_pay_status/?id=${router.query.order_id}`
@@ -39,8 +37,8 @@ export const CatalogPage: FC<CatalogPageProps> = (props) => {
 	return (
 		<div className={cn(cls.CatalogPage)}>
 			<div className={cls.CatalogPage_title}>
-				<Title h1={true} className={cls.about_title}>
-					Каталог
+				<Title id='top' h1={true} className={cls.about_title}>
+					{title || "Каталог"}
 				</Title>
 			</div>
 

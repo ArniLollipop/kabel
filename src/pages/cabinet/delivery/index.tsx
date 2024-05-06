@@ -1,5 +1,3 @@
-/** @format */
-
 // packages
 import { useEffect, useState } from "react";
 

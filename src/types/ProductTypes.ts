@@ -1,72 +1,70 @@
-/** @format */
-
 interface colorsI {
-  color_name: string;
-  rgb: string;
-  image: string;
+	color_name: string;
+	rgb: string;
+	image: string;
 }
 
 interface characteristicsI {
-  id: number;
-  key: string;
-  value: string;
+	id: number;
+	key: string;
+	value: string;
 }
 
 interface colorsI {
-  color_name: string;
-  image: string;
+	color_name: string;
+	image: string;
 }
 
 export interface productI {
-  code: number;
-  colors_info: colorsI[];
-  characteristics_info: characteristicsI[];
-  name: string;
-  cost: number;
-  remains: number;
-  image: string;
-  availability: "в наличии" | "под заказ";
-  description: string | null;
-  is_active: boolean;
-  core_number: number;
-  section: number;
-  subcategory: string;
-  colors: colorsI[];
-  recommended_products: productI[];
-  subcategory_slug: string | null;
+	code: number;
+	colors_info: colorsI[];
+	characteristics_info: characteristicsI[];
+	name: string;
+	cost: number;
+	remains: number;
+	image: string;
+	availability: "в наличии" | "под заказ";
+	description: string | null;
+	is_active: boolean;
+	core_number: number;
+	section: number;
+	subcategory: string;
+	colors: colorsI[];
+	recommended_products: productI[];
+	subcategory_slug: string | null;
 }
 
 export interface productAnswI {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  count_pages: number | 0;
-  results: productI[];
+	count: number;
+	next: string | null;
+	previous: string | null;
+	count_pages: number | 0;
+	results: productI[];
 }
 
 interface subcategorySetI {
-  name: string;
-  category: string;
+	name: string;
+	category: string;
 }
 
 export interface categoryI {
-  name: "";
-  subcategory_set: subcategorySetI[];
-  icon: "";
-  image: "";
+	name: "";
+	subcategory_set: subcategorySetI[];
+	icon: "";
+	image: "";
 }
 
 export interface categoriesAnswI {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: categoryI[];
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: categoryI[];
 }
 
 export interface coresI {
-  [key: string]: number[];
+	[key: string]: number[];
 }
 
 export interface coresAnswI {
-  result: coresI;
+	result: coresI;
 }

@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
@@ -147,7 +145,6 @@ export default function newsPage(props: any) {
 										className={cls.news_sliderSlide}
 										key={news.id}>
 										<NewsCard
-										
 											className={cls.news_newsCard}
 											theme={ThemeNewsCard.WHITE_BG}
 											{...news}

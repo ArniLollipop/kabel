@@ -1,5 +1,3 @@
-/** @format */
-
 // packages
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";

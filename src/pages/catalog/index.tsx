@@ -1,5 +1,3 @@
-/** @format */
-
 import { useEffect, useState } from "react";
 import { ActiveHeaderPage } from "@/components/header/Header";
 import { CatalogPage } from "@/layouts/CatalogPage/CatalogPage";

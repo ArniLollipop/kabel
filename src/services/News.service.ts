@@ -1,5 +1,3 @@
-/** @format */
-
 import { useHttp } from "@/hooks/useHttp";
 import { NextPageContext } from "next";
 import { newsI, NewsResponseI } from "@/types/NewsTypes";

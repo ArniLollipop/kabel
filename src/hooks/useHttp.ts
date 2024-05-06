@@ -1,5 +1,3 @@
-/** @format */
-
 import nookies from "nookies";
 import { userI } from "@/types/AuthTypes";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";

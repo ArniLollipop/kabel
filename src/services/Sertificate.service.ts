@@ -1,5 +1,3 @@
-/** @format */
-
 import { useHttp } from "@/hooks/useHttp";
 import { NextPageContext } from "next";
 import { sertificateAnswsI, sertificateI } from "@/types/SertificateTypes";

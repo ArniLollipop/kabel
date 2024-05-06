@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, useEffect, useState } from "react";
 import cls from "./Header.module.scss";
 import {

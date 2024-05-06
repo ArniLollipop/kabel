@@ -1,5 +1,3 @@
-/** @format */
-
 import { useHttp } from "@/hooks/useHttp";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, ReactNode } from "react";
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";

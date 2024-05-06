@@ -1,5 +1,3 @@
-/** @format */
-
 import classNames from "classnames/bind";
 import cls from "./index.module.scss";
 import { MainLayout } from "@/layouts/MainLayout";

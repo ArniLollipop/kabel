@@ -1,5 +1,3 @@
-/** @format */
-
 import {
 	productAnswI,
 	categoriesAnswI,
@@ -33,12 +31,6 @@ export const ProductService = (
 	const getProducts = async (queries: any): Promise<productAnswI> => {
 		let fromCookie;
 
-		const router = useRouter();
-
-		console.log("====================================");
-		console.log(router.basePath);
-		console.log("====================================");
-
 		if (nookies.get(ctx).queries) {
 			fromCookie = JSON.parse(nookies.get(ctx).queries);
 
@@ -47,14 +39,9 @@ export const ProductService = (
 			let core_numberQuery = "";
 			let orderingQuery = "";
 			let availabilityQuery = "";
+			let sections = "";
 
-			if (fromCookie.subcategory.length > 0) {
-				fromCookie.subcategory.forEach((el: any) => {
-					subcategoryQuery += `&subcategory=${el}`;
-				});
-			} else {
-				subcategoryQuery = "?";
-			}
+			subcategoryQuery += `subcategory=${fromCookie.subcategory || ""}`;
 
 			if (fromCookie.section.length > 0) {
 				fromCookie.section.forEach((el: any) => {
@@ -83,6 +70,13 @@ export const ProductService = (
 			} else {
 				availabilityQuery = "";
 			}
+			if (fromCookie.sections && fromCookie.sections.length > 0) {
+				let temp = "";
+				fromCookie.sections.map((el: any) => {
+					if (el.length >= 2) temp += `${el},`;
+				});
+				sections = "&sections=" + temp.slice(0, temp.length - 1);
+			}
 
 			const res = await useHttp(ctx).get<productAnswI>(
 				endpoints.getProducts +
@@ -90,7 +84,8 @@ export const ProductService = (
 					sectionQuery +
 					core_numberQuery +
 					orderingQuery +
-					availabilityQuery,
+					availabilityQuery +
+					sections,
 				{
 					headers: {
 						"Accept-Language": ctx?.locale || "ru",

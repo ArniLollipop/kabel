@@ -1,248 +1,248 @@
 @import "/src//styles/globalMixins.scss";
 
 .FilterSection {
-  background-color: var(--color-bg-white);
-  height: 100%;
-  width: 100%;
-  border-radius: 15px;
-  padding: 30px 30px 55px 15px;
-  position: sticky;
-  top: 15px;
+	background-color: var(--color-bg-white);
+	height: 100%;
+	width: 100%;
+	border-radius: 15px;
+	padding: 30px 30px 55px 15px;
+	position: sticky;
+	top: 15px;
 
-  display: flex;
-  flex-direction: column;
-  max-height: 1470px;
+	display: flex;
+	flex-direction: column;
+	max-height: 1470px;
 
-  .submitBtn {
-    margin: 0 auto;
+	.submitBtn {
+		margin: 0 auto;
 
-    @include adaptive-size(85, 10, margin-bottom);
-    @include adaptive-size(50, 10, margin-top);
-    padding: 8px 12px;
-    border-radius: 15px;
-    font-weight: 400;
-    font-size: 16px;
-    text-transform: capitalize;
-    text-align: center;
-  }
+		@include adaptive-size(85, 10, margin-bottom);
+		@include adaptive-size(50, 10, margin-top);
+		padding: 8px 12px;
+		border-radius: 15px;
+		font-weight: 400;
+		font-size: 16px;
+		text-transform: capitalize;
+		text-align: center;
+	}
 
-  &_radio:not(:last-child) {
-    margin-bottom: 15px;
-  }
+	&_radio:not(:last-child) {
+		margin-bottom: 15px;
+	}
 }
 
 .filterTitle {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 18px;
-  color: #39424b;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 18px;
+	color: #39424b;
 }
 
 .filtersAcc {
-  &_title {
-    width: 101%;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 16px;
-    color: #39424b;
-    transition: all 0.3ms ease;
+	&_title {
+		width: 101%;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 16px;
+		color: #39424b;
+		transition: all 0.3ms ease;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 
-    h3 {
-      font-weight: inherit;
-      font-size: inherit;
-      line-height: inherit;
-      color: inherit;
-      text-align: left;
-    }
-  }
+		h3 {
+			font-weight: inherit;
+			font-size: inherit;
+			line-height: inherit;
+			color: inherit;
+			text-align: left;
+		}
+	}
 
-  &_titleActive {
-    color: var(--color-accent);
-  }
+	&_titleActive {
+		color: var(--color-accent);
+	}
 
-  &_titleCross {
-    margin-top: 40px;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 18px;
-    color: #39424b;
-  }
+	&_titleCross {
+		margin-top: 40px;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 18px;
+		color: #39424b;
+	}
 
-  &_arrow {
-    stroke: #39424b;
-    width: 12px;
-    height: 6px;
-    transition: all 0.3s ease;
-  }
+	&_arrow {
+		stroke: #39424b;
+		width: 12px;
+		height: 6px;
+		transition: all 0.3s ease;
+	}
 
-  &_arrowActive {
-    stroke: var(--color-accent);
-    transform: rotate(180deg);
-  }
+	&_arrowActive {
+		stroke: var(--color-accent);
+		transform: rotate(180deg);
+	}
 
-  &_body {
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
+	&_body {
+		&::-webkit-scrollbar {
+			width: 4px;
+		}
 
-    &::-webkit-scrollbar-track {
-      background: #dee2eb;
-      border-radius: 15px;
-    }
+		&::-webkit-scrollbar-track {
+			background: #dee2eb;
+			border-radius: 15px;
+		}
 
-    &::-webkit-scrollbar-thumb {
-      background: #8991a5;
-      border-radius: 15px;
-    }
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+		&::-webkit-scrollbar-thumb {
+			background: #8991a5;
+			border-radius: 15px;
+		}
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 
-  &_bodyActive {
-    overflow-y: auto !important;
-    max-height: 145px !important;
-    // margin-bottom: 25px;
-  }
+	&_bodyActive {
+		overflow-y: auto !important;
+		max-height: 300px !important;
+		// margin-bottom: 25px;
+	}
 
-  &_item {
-    transition: all 0.3s ease;
+	&_item {
+		transition: all 0.3s ease;
 
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
+		&:not(:last-child) {
+			margin-bottom: 15px;
+		}
 
-    &:hover {
-      color: var(--color-accent);
-    }
-  }
+		&:hover {
+			color: var(--color-accent);
+		}
+	}
 
-  &_coreSect {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 10px;
-    row-gap: 10px;
+	&_coreSect {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		column-gap: 10px;
+		row-gap: 10px;
 
-    &:not(:last-child) {
-      padding: 15px 0;
-    }
+		&:not(:last-child) {
+			padding: 15px 0;
+		}
 
-    &:last-child {
-      padding-top: 15px;
-    }
-  }
+		&:last-child {
+			padding-top: 15px;
+		}
+	}
 
-  &_coreSectItem {
-    transition: all 0.3s ease;
+	&_coreSectItem {
+		transition: all 0.3s ease;
 
-    &:hover {
-      color: var(--color-accent);
-    }
-  }
+		&:hover {
+			color: var(--color-accent);
+		}
+	}
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 25px;
 
-  span {
-    font-size: 20px;
-    font-weight: 500;
-  }
+	span {
+		font-size: 20px;
+		font-weight: 500;
+	}
 
-  .mainBtns {
-    display: flex;
-    gap: 15px;
-  }
+	.mainBtns {
+		display: flex;
+		gap: 15px;
+	}
 
-  .resetBtn {
-    padding: 8px 20px;
-    border-radius: 15px;
-  }
+	.resetBtn {
+		padding: 8px 20px;
+		border-radius: 15px;
+	}
 }
 
 .availability {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 60px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 60px;
 
-  &_title {
-    margin-bottom: 20px;
-  }
+	&_title {
+		margin-bottom: 20px;
+	}
 
-  &_inputGroup {
-    display: flex;
-    gap: 25px;
-    align-items: center;
+	&_inputGroup {
+		display: flex;
+		gap: 25px;
+		align-items: center;
 
-    &:not(:last-child) {
-      margin-bottom: 25px;
-    }
-  }
+		&:not(:last-child) {
+			margin-bottom: 25px;
+		}
+	}
 }
 
 .product {
-  &_title {
-    margin-bottom: 20px;
-  }
+	&_title {
+		margin-bottom: 20px;
+	}
 }
 
 .anchorUp {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-  color: var(--color-accent);
-  text-align: center;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 28px;
+	color: var(--color-accent);
+	text-align: center;
 
-  @media (max-width: 1024px) {
-    display: none;
-  }
+	@media (max-width: 1024px) {
+		display: none;
+	}
 }
 
 .submitBtns {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 @media (max-width: 1024px) {
-  .mockBtn {
-    display: block;
-  }
+	.mockBtn {
+		display: block;
+	}
 
-  .FilterSection {
-    pointer-events: none;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    transition: all 0.3s ease;
-    overflow-y: scroll;
-    padding-top: 100px;
+	.FilterSection {
+		pointer-events: none;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		transition: all 0.3s ease;
+		overflow-y: scroll;
+		padding-top: 100px;
 
-    &.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
-  }
+		&.visible {
+			opacity: 1;
+			pointer-events: all;
+		}
+	}
 }
 
 @media (max-width: 1400px) and (min-width: 1024px) {
-  .header {
-    flex-direction: column;
-    gap: 25px;
-  }
+	.header {
+		flex-direction: column;
+		gap: 25px;
+	}
 
-  .mainBtns {
-    justify-content: space-between;
-    width: 100%;
-  }
+	.mainBtns {
+		justify-content: space-between;
+		width: 100%;
+	}
 }

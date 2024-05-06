@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./OfferSection.module.scss";

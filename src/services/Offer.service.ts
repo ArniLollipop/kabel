@@ -1,5 +1,3 @@
-/** @format */
-
 import { useHttp } from "@/hooks/useHttp";
 import { AxiosResponse } from "axios";
 import { NextPageContext } from "next";

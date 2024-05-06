@@ -1,5 +1,3 @@
-/** @format */
-
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListSection.module.scss";
@@ -57,32 +55,27 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
 				let core_numberQuery = "";
 				let orderingQuery = "";
 				let availabilityQuery = "";
+				let sections = "";
 
-				if (fromCookie.subcategory.length > 0) {
-					fromCookie.subcategory.forEach((el: any) => {
-						subcategoryQuery += `&subcategory=${
-							Array.isArray(router.query.id) && router.query.id[0]
-						}`;
-					});
-				} else {
-					subcategoryQuery = "?";
-				}
+				subcategoryQuery += `&subcategory=${
+					Array.isArray(router.query.id) ? router.query.id[0] : router.query.id
+				}`;
 
-				if (fromCookie.section.length > 0) {
-					fromCookie.section.forEach((el: any) => {
-						sectionQuery += `&section=${el}`;
-					});
-				} else {
-					sectionQuery = "";
-				}
+				// if (fromCookie.section.length > 0) {
+				// 	fromCookie.section.forEach((el: any) => {
+				// 		sectionQuery += `&section=${el}`;
+				// 	});
+				// } else {
+				// 	sectionQuery = "";
+				// }
 
-				if (fromCookie.core_number.length > 0) {
-					fromCookie.core_number.forEach((el: any) => {
-						core_numberQuery += `&core_number=${el}`;
-					});
-				} else {
-					core_numberQuery = "";
-				}
+				// if (fromCookie.core_number.length > 0) {
+				// 	fromCookie.core_number.forEach((el: any) => {
+				// 		core_numberQuery += `&core_number=${el}`;
+				// 	});
+				// } else {
+				// 	core_numberQuery = "";
+				// }
 
 				if (fromCookie.ordering.length > 0) {
 					orderingQuery += `&ordering=${fromCookie.ordering}`;
@@ -95,6 +88,13 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
 				} else {
 					availabilityQuery = "";
 				}
+				if (fromCookie.sections && fromCookie.sections.length > 0) {
+					let temp = "";
+					fromCookie.sections.map((el: any) => {
+						if (el.length >= 2) temp += `${el},`;
+					});
+					sections = "&sections=" + temp.slice(0, temp.length - 1);
+				}
 
 				const res = await useHttp().get(
 					"/products/products/" +
@@ -103,6 +103,7 @@ export const GoodsListSection: FC<GoodsListSectionProps> = (props) => {
 						core_numberQuery +
 						orderingQuery +
 						availabilityQuery +
+						sections +
 						`&page=${JSON.stringify(e.selected + 1)}`
 				);
 				products = res.data;

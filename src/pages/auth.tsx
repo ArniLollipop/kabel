@@ -1,5 +1,3 @@
-/** @format */
-
 import Head from "next/head";
 import { MainLayout } from "@/layouts/MainLayout";
 import { Authorization } from "@/components/authorization/Authorization";

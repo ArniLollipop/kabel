@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, useEffect, useState, useTransition } from "react";
 import classNames from "classnames/bind";
 import cls from "./GoodsListItem.module.scss";

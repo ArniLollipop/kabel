@@ -1,5 +1,3 @@
-/** @format */
-
 import { FC, PropsWithChildren } from "react";
 import { Title } from "@/UI/Title/Title";
 import classNames from "classnames";
